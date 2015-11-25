@@ -63,4 +63,11 @@ public class PaperNavService extends BaseService<PaperCategory,Long>
 		Gson gson = new Gson();  
 		return gson.toJson(pcList);
 	}
+
+	public String getNavDataJson(Map m) 
+	{
+		List<Map<String,String>> list = paperCategoryDao.getNavDataJson(m);
+		Gson gson = new Gson();  
+		return gson.toJson(list);
+	}
 }

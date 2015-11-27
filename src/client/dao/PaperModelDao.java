@@ -2,6 +2,9 @@ package client.dao;
 
 import gwen.devwork.BaseDao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import client.entity.PaperModel;
@@ -13,5 +16,10 @@ public class PaperModelDao extends BaseDao<PaperModel,Long>
 	public Class getEntityClass()
 	{
 		return PaperModel.class;
+	}
+	
+	public List<Map<String, String>> getMapList(Map m) 
+	{
+		return this.getSqlSession().selectList(getStatementName("getMapList"), m);
 	}
 }

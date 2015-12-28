@@ -17,7 +17,13 @@ public class PaperImage1Service extends BaseService<PaperImage1,Long>
 	private PaperImage1Dao dao;
 
 	@Override
-	public BaseDao<PaperImage1,Long> getEntityDao() {
+	public BaseDao<PaperImage1,Long> getEntityDao() 
+	{
 		return dao;
+	}
+	
+	public PaperImage1 getByPidAndMaxSort(Long pid)
+	{
+		return dao.getByPidAndMaxSort(pid);
 	}
 }

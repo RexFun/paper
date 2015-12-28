@@ -32,5 +32,6 @@ public class ClientPaperModelAction extends BaseAction<Map<String,String>>
 		Map m = getReq().getParameterValueMap(false, true);
 		resultList = service.getMapList(m);
 		print(new Gson().toJson(resultList));
+		System.out.println(new Gson().toJson(resultList));
 	}
 }

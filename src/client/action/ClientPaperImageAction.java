@@ -52,6 +52,17 @@ public class ClientPaperImageAction extends BaseAction<PaperImage>
 		sender.close();
 	}
 	
+	@Action(value="getPaperImageByPidAndMaxSort")
+	public void getPaperImageByPidAndMaxSort() throws IOException 
+	{
+		po1 = service1.getByPidAndMaxSort(getReq().getLong("pid"));
+		ServletOutputStream sender = getBaseResp().getOutputStream();
+		getBaseResp().setContentType("application/octet-stream");
+		sender.write(po1.getImage());
+		sender.flush();
+		sender.close();
+	}
+	
 	@Action(value="getPaperImagePage")
 	public void getPaperImagePage() 
 	{

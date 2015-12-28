@@ -18,5 +18,9 @@
 	<select id="getById" resultMap="result">
 		select <include refid="columns"/> from paper_image where id = #{id}
 	</select>
+	
+	<select id="getByPidAndMaxSort" resultMap="result">
+		select <include refid="columns"/> from paper_image t where t.sort = (select max(t.sort) from paper_image t where t.pid = #{pid});
+	</select>
 
 </mapper>  

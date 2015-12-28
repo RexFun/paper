@@ -15,4 +15,9 @@ public class PaperImage1Dao extends BaseDao<PaperImage1,Long>
 	{
 		return PaperImage1.class;
 	}
+	
+	public PaperImage1 getByPidAndMaxSort(Long pid)
+	{
+		return (PaperImage1) this.getSqlSession().selectOne(getStatementName("getByPidAndMaxSort"), pid);
+	}
 }

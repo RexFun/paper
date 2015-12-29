@@ -58,6 +58,10 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 		return this.getSqlSession().selectList(getStatementName("get"), m);
 	}
 	
+	public List getMap(Map m){
+		return this.getSqlSession().selectList(getStatementName("getMap"), m);
+	}
+	
 	public int getCount(Map m){
 		return (Integer) this.getSqlSession().selectOne(getStatementName("getCount"), m);
 	}
@@ -82,5 +86,13 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 		m.put("pagesize", pageSize);
 		List result = get(m);
 		return new Page<T>(curPage, countPage, countPageEach, pageSize, result);
+	}
+	
+	public List getMapPage(Map m)
+	{
+		m.put("rownum", Integer.valueOf(m.get("rownum").toString()));
+		m.put("pagesize", Integer.valueOf(m.get("pagesize").toString()));
+		List result = getMap(m);
+		return result;
 	}
 }

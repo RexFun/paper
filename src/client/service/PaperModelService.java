@@ -22,9 +22,4 @@ public class PaperModelService extends BaseService<PaperModel,Long>
 	public BaseDao<PaperModel,Long> getEntityDao() {
 		return paperModelDao;
 	}
-	
-
-	public List<Map<String, String>> getMapList(Map m) {
-		return paperModelDao.getMapList(m);
-	}
 }

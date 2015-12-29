@@ -1,6 +1,8 @@
 package client.action;
 
 import gwen.devwork.BaseAction;
+
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
 
+import client.entity.PaperModel;
 import client.service.PaperModelService;
 
 
@@ -21,16 +24,16 @@ import client.service.PaperModelService;
 @ParentPackage(value="struts-default")
 @Namespace("/client/papermodel")
 //@InterceptorRefs(value={ @InterceptorRef("myStack") })
-public class ClientPaperModelAction extends BaseAction<Map<String,String>>
+public class ClientPaperModelAction extends BaseAction<PaperModel>
 {
 	@Autowired
 	private PaperModelService service;
 
-	@Action(value="getByPid")
-	public void getByPid() 
+	@Action(value="getPageByPid")
+	public void getPageByPid() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);
-		resultList = service.getMapList(m);
+		List<Map<String,String>> resultList = service.getMapPage(m);
 		print(new Gson().toJson(resultList));
 		System.out.println(new Gson().toJson(resultList));
 	}

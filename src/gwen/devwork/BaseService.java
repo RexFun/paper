@@ -42,4 +42,8 @@ public abstract class BaseService<T,PK>
 	public Page<T> getPage(int countPageEach, Map m){
 		return getEntityDao().getPage(countPageEach, m);
 	}
+	
+	public List getMapPage(Map m){
+		return getEntityDao().getMapPage(m);
+	}
 }

@@ -18,8 +18,4 @@ public class PaperModelDao extends BaseDao<PaperModel,Long>
 		return PaperModel.class;
 	}
 	
-	public List<Map<String, String>> getMapList(Map m) 
-	{
-		return this.getSqlSession().selectList(getStatementName("getMapList"), m);
-	}
 }

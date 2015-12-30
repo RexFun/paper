@@ -49,7 +49,7 @@
 		<include refid="dynamicWhere" /> order by sort 
 		<include refid="page" />
 	</select>
-	<select id="getMapList" resultType="java.util.HashMap">
+	<select id="getMap" resultType="java.util.HashMap">
 		select <include refid="columns"/> from paper_model
 		<include refid="dynamicWhere" /> order by sort 
 		<include refid="page" />

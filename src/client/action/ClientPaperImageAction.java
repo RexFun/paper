@@ -4,6 +4,7 @@ import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -44,6 +45,7 @@ public class ClientPaperImageAction extends BaseAction<PaperImage>
 	@Action(value="getPaperImageById")
 	public void getPaperImageById() throws IOException 
 	{
+		System.out.println("in getPaperImageById");
 		po1 = service1.getById(getReq().getLong("id"));
 		ServletOutputStream sender = getBaseResp().getOutputStream();
 		getBaseResp().setContentType("application/octet-stream");
@@ -63,27 +65,12 @@ public class ClientPaperImageAction extends BaseAction<PaperImage>
 		sender.close();
 	}
 	
-	@Action(value="getPaperImagePage")
-	public void getPaperImagePage() 
+	@Action(value="getPageByPid")
+	public void getPageByPid() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);
-		m.put("page", getReq().getInt("page", 1));
-		m.put("pageSize", getReq().getInt("pageSize", 5));
-		page = service.getPage(5, m);
-		pageNav = new PageNav<PaperImage>(getReq(), page);
-		resultList = pageNav.getResult();
-		Gson gson = new Gson();
-		print("json="+gson.toJson(resultList)+"&page="+page.getCurPage());
+		List<Map<String,String>> resultList = service.getMapPage(m);
+		print(new Gson().toJson(resultList));
+		System.out.println(new Gson().toJson(resultList));
 	}
-	
-	@Action(value="getPaperImagesByPid")
-	public void getPaperImagesByPid() 
-	{
-		Map m = getReq().getParameterValueMap(false, true);
-		resultList = service.get(m);
-		Gson gson = new Gson();
-		print("json="+gson.toJson(resultList));
-	}
-	
-	
 }

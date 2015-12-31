@@ -51,6 +51,11 @@
 		<include refid="dynamicWhere" /> order by sort
 		<include refid="page" />
 	</select>
+	<select id="getMap" resultType="java.util.HashMap">
+		select <include refid="columns"/> from paper_image
+		<include refid="dynamicWhere" /> order by sort 
+		<include refid="page" />
+	</select>
 	
 	<select id="getCount" resultType="int">
 		select count(1) from paper_image

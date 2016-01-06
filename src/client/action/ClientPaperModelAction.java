@@ -33,7 +33,7 @@ public class ClientPaperModelAction extends BaseAction<PaperModel>
 	public void getPageByPid() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);
-		List<Map<String,String>> resultList = service.getMapPage(m);
+		List<Map<String,String>> resultList = service.getMapJoinCategoryPage(m);
 		print(new Gson().toJson(resultList));
 		System.out.println(new Gson().toJson(resultList));
 	}

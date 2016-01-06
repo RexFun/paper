@@ -19,7 +19,13 @@ public class PaperModelService extends BaseService<PaperModel,Long>
 	private PaperModelDao paperModelDao;
 
 	@Override
-	public BaseDao<PaperModel,Long> getEntityDao() {
+	public BaseDao<PaperModel,Long> getEntityDao() 
+	{
 		return paperModelDao;
+	}
+	
+	public List getMapJoinCategoryPage(Map m)
+	{
+		return paperModelDao.getMapJoinCategoryPage(m);
 	}
 }

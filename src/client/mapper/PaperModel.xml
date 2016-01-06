@@ -26,7 +26,7 @@
 	</resultMap>
   	
 	<sql id="columns">
-		ID, PID, NAME, SORT
+		t.ID, t.PID, t.NAME, t.SORT
 	</sql>
 	
 	<sql id="page">
@@ -35,23 +35,28 @@
 	
 	<sql id="dynamicWhere">
 		<where>
-			<if test="pid != null"> and PID = #{pid} </if>
-			<if test="name != null"> and NAME like concat('%',#{name},'%') </if>
+			<if test="pid != null"> and t.PID = #{pid} </if>
+			<if test="name != null"> and t.NAME like concat('%',#{name},'%') </if>
 		</where>
 	</sql>	
 	
 	<select id="getById" resultMap="result">
-		select <include refid="columns"/> from paper_model where id = #{id}
+		select <include refid="columns"/> from paper_model t where t.id = #{id}
 	</select>
 	
 	<select id="get" resultType="list" resultMap="result">
-		select <include refid="columns"/> from paper_model
-		<include refid="dynamicWhere" /> order by sort 
+		select <include refid="columns"/> from paper_model t
+		<include refid="dynamicWhere" /> order by t.sort 
 		<include refid="page" />
 	</select>
 	<select id="getMap" resultType="java.util.HashMap">
-		select <include refid="columns"/> from paper_model
-		<include refid="dynamicWhere" /> order by sort 
+		select <include refid="columns"/> from paper_model t
+		<include refid="dynamicWhere" /> order by t.sort 
+		<include refid="page" />
+	</select>
+	<select id="getMapJoinCategory" resultType="java.util.HashMap">
+		select <include refid="columns"/>, t1.NAME NAV_NAME from paper_model t join paper_category t1 on t.pid = t1.id
+		<include refid="dynamicWhere" /> order by t.sort 
 		<include refid="page" />
 	</select>
 	

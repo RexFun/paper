@@ -73,4 +73,13 @@ public class ClientPaperImageAction extends BaseAction<PaperImage>
 		print(new Gson().toJson(resultList));
 		System.out.println(new Gson().toJson(resultList));
 	}
+	
+	@Action(value="getListByPid")
+	public void getListByPid() 
+	{
+		Map m = getReq().getParameterValueMap(false, true);
+		List<Map<String,String>> resultList = service.getMap(m);
+		print(new Gson().toJson(resultList));
+		System.out.println(new Gson().toJson(resultList));
+	}
 }

@@ -29,6 +29,10 @@ public abstract class BaseService<T,PK>
 		return getEntityDao().get(m);
 	}
 	
+	public List getMap(Map m) {
+		return getEntityDao().getMap(m);
+	}
+	
 	public int getCount(Map m) {
 		return getEntityDao().getCount(m);
 	}

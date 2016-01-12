@@ -19,6 +19,6 @@ public class PaperCategoryDao extends BaseDao<PaperCategory,Long>
 	
 	public List<Map<String, String>> getNavDataJson(Map m) 
 	{
-		return this.getSqlSession().selectList(getStatementName("getMap"), m);
+		return this.getSqlSession().selectList(getStatementName("getNavMap"), m);
 	}
 }

@@ -28,14 +28,14 @@ ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message} <!-- 输出异常信息 -
  --%>
 <body>
 <form name="loginForm" action ="${pageContext.request.contextPath}/auth/login.action" method="POST">
-<table>
+<table align="center" border="0" style=" border:1px solid #000000;" cellpadding="0" cellspacing="1">
 	<tr>
 		<td>用户：</td>
 		<td><input type ='text' name='user.account' value="admin"></td>
 	</tr>
 	<tr>
 		<td>密码：</td>
-		<td><input type ='password' name='user.password' value="admin"></td>
+		<td><input type ='password' name='user.password'></td>
 	</tr>
 	<tr>
 		<td><input name ="reset" type="reset"></td>

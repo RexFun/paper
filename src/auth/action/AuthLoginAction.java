@@ -36,7 +36,7 @@ public class AuthLoginAction extends BaseAction<Auth>
 	@Override
 	public String execute() throws Exception 
 	{
-		if (user.getAccount().equals("admin") && user.getPassword().equals("admin")) {
+		if (user.getAccount().equals("admin") && user.getPassword().equals("52@linyanfun")) {
 			getSession().setAttribute(SessionName_LoginUser, user);
 			return "success";
 		} else {

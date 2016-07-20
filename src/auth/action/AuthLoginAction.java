@@ -5,7 +5,6 @@ import gwen.devwork.BaseAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -30,17 +29,27 @@ public class AuthLoginAction extends BaseAction<Auth>
 		this.user = user;
 	}
 
-	@Action(value = "login", results = {
-			@Result(name = "success", location = "/index.jsp"),
-			@Result(name = "error", location = "/login.jsp") })
-	@Override
-	public String execute() throws Exception 
+	@Action(value = "login")
+	public void login()
 	{
-		if (user.getAccount().equals("admin") && user.getPassword().equals("52@linyanfun")) {
-			getSession().setAttribute(SessionName_LoginUser, user);
-			return "success";
-		} else {
-			return "error";
+		try 
+		{
+			if (user.getAccount().equals("admin") && user.getPassword().equals("52@linyanfun")) 
+			{
+				getSession().setAttribute(SessionName_LoginUser, user);
+				getResultData().setSuccess(true);
+			}
+			else 
+			{
+				getResultData().setSuccess(false);
+				getResultData().setMsg("账号或密码错误");
+			}
 		}
+		catch (Exception e)
+		{
+			getResultData().setSuccess(false);
+			getResultData().setMsg(e.getMessage());
+		}
+		returnJSON(getResultData());
 	}
 }

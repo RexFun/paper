@@ -8,12 +8,10 @@ String path = request.getContextPath();
 <html>
 <head>
 <title></title>
-<style type="text/css">
-.listTable {border:none;background:gray}/*数据表格*/
-.listTable tr {padding:0px 2px 0px 2px;}
-.listTable td {background-color:#ffffff;color:#2b3e44;word-wrap:break-word;word-break:break-all;}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
 <script type="text/javascript">
@@ -33,6 +31,11 @@ $(function(){
 </script>
 </head>
 <body>
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">2013</a></li>
+  <li class="active">十一月</li>
+</ol>
 <h1>纸模分类管理</h1>
 <hr>
 <a name="a_add" href="addPaperCategory1.action">新增</a>
@@ -42,8 +45,8 @@ $(function(){
 <input type="submit" id="submit_query" value="查询"/>
 </form>
 <form id="form_del" action="delPaperCategory.action" method="post">
-<table border="0" cellspacing="1" cellpadding="0" class="listTable">
-	<tr class="list_title">
+<table class="table table-striped table-hover">
+	<tr>
 		<td style="width:2%"><input id="ckb_all" type="checkbox"/></td>
 		<td>主键</td>
 		<td>分类名</td>

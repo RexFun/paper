@@ -12,6 +12,10 @@ String path = request.getContextPath();
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+/* 
+if (window != top) top.location.href = location.href;  
+ */
+if (window.top != window.self) window.top.location.href = window.self.location.href;
 $(function(){
 	$("#loginForm").submit(function(event) {
 		event.preventDefault();

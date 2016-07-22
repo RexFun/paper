@@ -80,10 +80,10 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	{
 		Map m = getReq().getParameterValueMap(false, true);
 		m.put("page", getReq().getInt("page", 1));
-		m.put("pageSize", getReq().getInt("pageSize", 10));
+		m.put("pageSize", getReq().getInt("pageSize", 5));
 		
 		page = service.getPage(5, m);
-		pageNav = new PageNav<PaperCategory>(getReq(), page);
+		pageNav = new PageNav<PaperCategory>(getReq(), page, "5,10,20");
 		resultList = pageNav.getResult();
 		return "success";
 	}

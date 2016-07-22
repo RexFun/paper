@@ -24,32 +24,44 @@ $(function(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
-	$("a[name='a_del']").click(function(){
+	$("button[name='b_add']").click(function(){
+		location.href = "addPaperCategory1.action";
+	});
+	$("button[name='b_del']").click(function(){
 		$("#form_del").submit();
+	});
+	$("button[name='b_query']").click(function(){
+		$("#form_query").submit();
 	});
 });
 </script>
 </head>
 <body>
+<!-- title -->
 <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">2013</a></li>
-  <li class="active">十一月</li>
+  <li class="active">类别管理</li>
 </ol>
-<h1>纸模分类管理</h1>
+<!-- toolbar -->
+<div class="btn-group">
+<button type="button" class="btn btn-success" name="b_add">新增</button>
+<button type="button" class="btn btn-danger" name="b_del">删除</button>
+<button type="button" class="btn btn-primary" name="b_query" >查询</button>
+</div>
 <hr>
-<a name="a_add" href="addPaperCategory1.action">新增</a>
-<a name="a_del" href="javascript:void(0);">删除</a>
-<form id="from_query" action="getPaperCategorys.action" method="post">
-分类名：<input type="text" name="name">
-<input type="submit" id="submit_query" value="查询"/>
+<!-- queryForm -->
+<form role="form" class="form-inline" id="form_query" action="getPaperCategorys.action" method="post">
+<div class="form-group">
+	 <label for="name">类别名：</label><input type="text" class="form-control" name="name" />
+</div>
 </form>
+<hr>
+<!-- list -->
 <form id="form_del" action="delPaperCategory.action" method="post">
 <table class="table table-striped table-hover">
 	<tr>
 		<td style="width:2%"><input id="ckb_all" type="checkbox"/></td>
 		<td>主键</td>
-		<td>分类名</td>
+		<td>类别名</td>
 		<td>排序号</td>
 		<td>操作</td>
 	</tr>
@@ -69,8 +81,8 @@ $(function(){
 </table>
 <input name="page" type="hidden" value="${page.curPage}" />
 </form>
-<table border="0" cellspacing="0" cellpadding="0" class="bottomTable">
-	<tr><td>${pageNav.pageHtml}</td></tr>
-</table>
+<div align="right">
+${pageNav.pageHtml}
+</div>
 </body>
 </html>

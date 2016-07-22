@@ -34,7 +34,7 @@ public class AuthLoginAction extends BaseAction<Auth>
 	{
 		try 
 		{
-			if (user.getAccount().equals("admin") && user.getPassword().equals("52@linyanfun")) 
+			if (user.getAccount().equals("admin") && user.getPassword().equals("")) 
 			{
 				getSession().setAttribute(SessionName_LoginUser, user);
 				getResultData().setSuccess(true);

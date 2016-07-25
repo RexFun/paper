@@ -27,7 +27,7 @@ function jumpToUrl(url)
 <nav class="pushy pushy-left">
 <ul>
     <li class="pushy-link"><a href="#" onclick="jumpToUrl('<%=catpath%>')">类别管理</a></li>
-    <li class="pushy-link"><a href="#" onclick="jumpToUrl('<%=modelpath%>')">内容管理</a></li>
+    <li class="pushy-link"><a href="#" onclick="jumpToUrl('<%=modelpath%>')">模型管理</a></li>
     <li class="pushy-link"><a href="#">用户管理</a></li>
 </ul>
 </nav>

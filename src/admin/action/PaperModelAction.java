@@ -16,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import admin.entity.PaperCategory;
 import admin.entity.PaperModel;
+import admin.service.PaperCategoryService;
 import admin.service.PaperModelService;
 
 
@@ -31,6 +34,8 @@ public class PaperModelAction extends BaseAction<PaperModel>
 {
 	@Autowired
 	private PaperModelService service;
+	@Autowired
+	private PaperCategoryService catService;
 	//实体类
 	private PaperModel po;
 	public PaperModel getPo() {return po;}
@@ -85,8 +90,10 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		
 		page = service.getPage(5, m);
 		pageNav = new PageNav<PaperModel>(getReq(), page);
-		resultList = pageNav.getResult();
-		put("pid",getReq().getLong("pid"));
+		
+		getResult().put("pid", m.get("pid"));
+		getResult().put("catList", catService.get(null));
+		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}
 }

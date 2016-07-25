@@ -10,7 +10,9 @@ String path = request.getContextPath();
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="<%=path%>/js/jquery/jquery-ui.min.css"/>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
@@ -24,10 +26,20 @@ $(function(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
-	$("a[name='a_del']").click(function(){
+/* 	$("a[name='a_del']").click(function(){
+		$("#form_del").submit();
+	}); */
+	$("button[name='b_add']").click(function(){
+		location.href = "addPaperImage1.action?pid=${pid}&ppid=${ppid}";
+	});
+	$("button[name='b_del']").click(function(){
 		$("#form_del").submit();
 	});
-	$("a[name='a_updSort']").click(function(){
+/* 	$("button[name='b_query']").click(function(){
+		$("#form_query").submit();
+	}); */
+	$("button[name='b_updSort']").click(function(){
+/* 	$("a[name='a_updSort']").click(function(){ */
 		var idArr = [];   
 		var i = 0;   
 		$("input[name='hidden_id']").each(function(){
@@ -51,6 +63,9 @@ $(function(){
 		    }  
 		});
 	});
+	$("button[name='b_back']").click(function(){
+		location.href = "../papermodel/getPaperModels.action";
+	});
 	$("input[name='btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();
 		var _sort = $(this).siblings("input[name='text_sort']").val();
@@ -62,14 +77,22 @@ $(function(){
 </script>
 </head>
 <body>
-<a name="a_add" href="addPaperImage1.action?pid=${pid}&ppid=${ppid}">新增</a>
-<a name="a_del" href="javascript:void(0);">删除</a>
-<a name="a_updSort" href="javascript:void(0);">修改排序</a>
-<a name="a_back" href="../papermodel/getPaperModels.action?pid=${ppid}">返回</a>
-
+<!-- title -->
+<ol class="breadcrumb">
+	<li><a href="../papermodel/getPaperModels.action">模型管理</a></li>
+	<li class="active">图片管理</li>
+</ol>
+<!-- toolbar -->
+<div class="btn-group">
+<button type="button" class="btn btn-default" name="b_add">新增</button>
+<button type="button" class="btn btn-default" name="b_del">删除</button>
+<button type="button" class="btn btn-default" name="b_updSort" >修改排序</button>
+<button type="button" class="btn btn-default" name="b_back" >返回</button>
+</div>
+<hr>
 <form id="form_del" action="delPaperImage.action" method="post">
-<table border="0" cellspacing="1" cellpadding="0" class="listTable">
-	<tr class="list_title">
+<table class="table table-striped table-hover">
+	<tr>
 		<td style="width:2%"><input id="ckb_all" type="checkbox"/></td>
 		<td>主键</td>
 		<td>外键</td>
@@ -77,18 +100,18 @@ $(function(){
 		<td>图片</td>
 		<td>操作</td>
 	</tr>	
-	<s:iterator var="po" value="resultList">
+	<s:iterator var="o" value="result.data.resultList">
 	<tr>
-		<td><input name="keyIndex" type="checkbox" value="${po.id}"/></td>
-		<td>${po.id}</td>
-		<td>${po.pid}</td>
+		<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
+		<td>${o.id}</td>
+		<td>${o.pid}</td>
 		<td>
-			<input type="hidden" name="hidden_id" value="${po.id}" style="width:50px"/>
-			<input type="text" name="text_sort" value="${po.sort}" style="width:50px"/>
+			<input type="hidden" name="hidden_id" value="${o.id}" style="width:50px"/>
+			<input type="text" name="text_sort" value="${o.sort}" style="width:50px"/>
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
-		<td><img src="<%=path%>/share/data/img.jsp?id=${po.id}" alt="图片" style="width:100px;height:100px"/></td>
-		<td><a name="a_getById" href="getPaperImageById.action?id=${po.id}">明细</a></td>
+		<td><img src="<%=path%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/></td>
+		<td><a name="a_getById" href="getPaperImageById.action?id=${o.id}">明细</a></td>
 	</tr>
 	</s:iterator>
 </table>

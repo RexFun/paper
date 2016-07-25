@@ -37,19 +37,19 @@ public class AuthLoginAction extends BaseAction<Auth>
 			if (user.getAccount().equals("admin") && user.getPassword().equals("")) 
 			{
 				getSession().setAttribute(SessionName_LoginUser, user);
-				getResultData().setSuccess(true);
+				getResult().setSuccess(true);
 			}
 			else 
 			{
-				getResultData().setSuccess(false);
-				getResultData().setMsg("账号或密码错误");
+				getResult().setSuccess(false);
+				getResult().setMsg("账号或密码错误");
 			}
 		}
 		catch (Exception e)
 		{
-			getResultData().setSuccess(false);
-			getResultData().setMsg(e.getMessage());
+			getResult().setSuccess(false);
+			getResult().setMsg(e.getMessage());
 		}
-		returnJSON(getResultData());
+		returnJSON(getResult());
 	}
 }

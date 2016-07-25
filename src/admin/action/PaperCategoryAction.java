@@ -84,7 +84,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 		
 		page = service.getPage(5, m);
 		pageNav = new PageNav<PaperCategory>(getReq(), page, "5,10,20");
-		resultList = pageNav.getResult();
+		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}
 }

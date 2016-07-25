@@ -43,9 +43,9 @@ $(function(){
 </ol>
 <!-- toolbar -->
 <div class="btn-group">
-<button type="button" class="btn btn-success" name="b_add">新增</button>
-<button type="button" class="btn btn-danger" name="b_del">删除</button>
-<button type="button" class="btn btn-primary" name="b_query" >查询</button>
+<button type="button" class="btn btn-default" name="b_add">新增</button>
+<button type="button" class="btn btn-default" name="b_del">删除</button>
+<button type="button" class="btn btn-default" name="b_query" >查询</button>
 </div>
 <hr>
 <!-- queryForm -->
@@ -65,16 +65,16 @@ $(function(){
 		<td>排序号</td>
 		<td>操作</td>
 	</tr>
-	<s:iterator var="d" value="resultList">
+	<s:iterator var="o" value="result.data.resultList">
 	<tr>
-		<td><input name="keyIndex" type="checkbox" value="${d.id}"/></td>
-		<td>${d.id}</td>
-		<td>${d.name}</td>
-		<td>${d.sort}</td>
+		<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
+		<td>${o.id}</td>
+		<td>${o.name}</td>
+		<td>${o.sort}</td>
 		<td>
-			<a name="a_upd" href="updPaperCategory1.action?id=${d.id}">修改</a>
-			<a name="a_getById" href="getPaperCategoryById.action?id=${d.id}">明细</a>
-			<a name="a_getPaperModelsByPid" href="../papermodel/getPaperModels.action?pid=${d.id}">模型管理</a>
+			<a name="a_upd" href="updPaperCategory1.action?id=${o.id}">修改</a>
+			<a name="a_getById" href="getPaperCategoryById.action?id=${o.id}">明细</a>
+			<%-- <a name="a_getPaperModelsByPid" href="../papermodel/getPaperModels.action?pid=${d.id}">模型管理</a> --%>
 		</td>
 	</tr>
 	</s:iterator>

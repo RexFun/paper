@@ -8,7 +8,10 @@ String path = request.getContextPath();
 <html>
 <head>
 <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
 <script type="text/javascript">
@@ -20,13 +23,17 @@ $gwen.form.callback = function(){
 </script>
 </head>
 <body>
-<h1>修改纸模分类</h1>
-<hr>
-<form id="dataForm" action="updPaperCategory2.action" method="post">
-分类名：<input type="text" name="po.name" value="${po.name}"><br>
-排序号：<input type="text" name="po.sort" value="${po.sort}"><br>
-<input type="hidden" name="po.id" value="${po.id}">
-<input type="submit" id="dataFormSave" value="修改" />
+<!-- title -->
+<ol class="breadcrumb">
+	<li><a href="getPaperCategorys.action">类别管理</a></li>
+	<li class="active">修改</li>
+</ol>
+<!-- form -->
+<form id="dataForm" role="form" action="updPaperCategory2.action" method="post">
+	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" name="po.name" value="${po.name}"/></div>
+	<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.sort" value="${po.sort}"/></div>
+	<input type="hidden" name="po.id" value="${po.id}">
+	<button type="submit" class="btn btn-default" id="dataFormSave">保存</button>
 </form>
 </body>
 </html>

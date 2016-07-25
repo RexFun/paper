@@ -120,9 +120,10 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		
 		page = service.getPage(5, m);
 		pageNav = new PageNav<PaperImage>(getReq(), page, "5,10,20");
-		resultList = pageNav.getResult();
+		
 		put("pid", getReq().getLong("pid"));
 		put("ppid", getReq().getLong("ppid"));
+		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}
 }

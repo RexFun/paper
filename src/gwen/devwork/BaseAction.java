@@ -38,14 +38,14 @@ public abstract class BaseAction<T> extends ActionSupport
 	}
 	
 	//返回值对象
-	protected ResultData resultData;
-	public ResultData getResultData()
+	protected Result result;
+	public Result getResult()
 	{
-		if (resultData == null)
+		if (result == null)
 		{
-			resultData = new ResultData();
+			result = new Result();
 		}
-		return resultData;
+		return result;
 	}
 
 	//返回值集合

@@ -9,7 +9,6 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
-		<!-- 4.0.8.RELEASE 4.1.9.RELEASE -->
 		<struts2.version>2.5.2</struts2.version>
 		<spring.version>4.3.1.RELEASE</spring.version>
 		<mybatis.version>3.4.1</mybatis.version>

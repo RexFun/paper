@@ -35,8 +35,8 @@
 	
 	<sql id="dynamicWhere">
 		<where>
-			<if test="pid != null"> and PID = #{pid} </if>
-			<if test="name != null"> and NAME like concat('%',#{name},'%') </if>
+			<if test="pid != null and pid != ''"> and PID = #{pid} </if>
+			<if test="name != null and name != ''"> and NAME like concat('%',#{name},'%') </if>
 		</where>
 	</sql>	
 	

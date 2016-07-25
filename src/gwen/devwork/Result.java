@@ -3,7 +3,7 @@ package gwen.devwork;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultData 
+public class Result 
 {
 	private boolean success;
 	private String msg;

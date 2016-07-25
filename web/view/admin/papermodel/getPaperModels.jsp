@@ -8,12 +8,10 @@ String path = request.getContextPath();
 <html>
 <head>
 <title></title>
-<style type="text/css">
-.listTable {border:none;background:gray}/*数据表格*/
-.listTable tr {padding:0px 2px 0px 2px;}
-.listTable td {background-color:#ffffff;color:#2b3e44;word-wrap:break-word;word-break:break-all;}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
 <script type="text/javascript">
@@ -65,8 +63,8 @@ $(function(){
 <input name="page" type="hidden" value="${page.curPage}" />
 <input name="pid" type="hidden" value="${pid}" />
 </form>
-<table border="0" cellspacing="0" cellpadding="0" class="bottomTable">
-	<tr><td>${pageNav.pageHtml}</td></tr>
-</table>
+<div align="right">
+${pageNav.pageHtml}
+</div>
 </body>
 </html>

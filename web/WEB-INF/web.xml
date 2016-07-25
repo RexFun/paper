@@ -27,7 +27,7 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:config/applicationContext-*.xml</param-value>
+		<param-value>classpath:config/applicationContext-common.xml</param-value>
 	</context-param>
 	
 	<listener>
@@ -60,8 +60,9 @@
 	<!-- struts2 -->
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
 		<!-- 
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 		<init-param>  
 		    <param-name>actionPackages</param-name>  
 		    <param-value>com.jialin.action</param-value>  

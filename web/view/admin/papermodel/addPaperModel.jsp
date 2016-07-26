@@ -1,16 +1,7 @@
- <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%
-String path = request.getContextPath();
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<title></title>
-<script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/common/inc_ctx.jsp"%>
+<%@ include file="/common/inc_css.jsp"%>
+<%@ include file="/common/inc_js.jsp"%>
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){

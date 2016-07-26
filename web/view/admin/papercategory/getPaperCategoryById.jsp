@@ -1,18 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%
-String path = request.getContextPath();
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
-<script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=path%>/js/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="<%=path%>/js/gwen/form.js"></script>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/common/inc_ctx.jsp"%>
+<%@ include file="/common/inc_css.jsp"%>
+<%@ include file="/common/inc_js.jsp"%>
 </head>
 <body>
 <!-- title -->

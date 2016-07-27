@@ -134,8 +134,7 @@ public class PageNav<T>
 		strHtml.append(getForm());
 		
 		//组件1->页码按钮------------------------------------
-		strHtml.append("<div class=\"col-md-10 column\" style=\"margin:1px\">");
-		strHtml.append("<table>");
+		strHtml.append("<table style=\"display:inline;margin:1px\">");
 		strHtml.append("<tr>");
 		strHtml.append("<td>");
 		strHtml.append("<ul class=\"pagination\" style=\"display:inline\">");
@@ -151,12 +150,10 @@ public class PageNav<T>
 		strHtml.append("</td>");
 		strHtml.append("</tr>");
 		strHtml.append("</table>");
-		strHtml.append("</div>");
 		//------------------------------------
 		
 		//组件2->每页N条，输入页码跳转------------------------------------
-		strHtml.append("<div class=\"col-md-2 column\" style=\"margin:1px\">");
-		strHtml.append("<table>");
+		strHtml.append("<table style=\"display:inline;margin:1px\">");
 		strHtml.append("<tr>");
 		//每页N条------------------------------------
 		strHtml.append("<td>");
@@ -184,7 +181,6 @@ public class PageNav<T>
 				+ "</td>");
 		strHtml.append("</tr>");
 		strHtml.append("</table>");
-		strHtml.append("</div>");
 		//------------------------------------
 		return strHtml.toString();
 		

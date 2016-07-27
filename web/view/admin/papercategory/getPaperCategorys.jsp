@@ -40,15 +40,15 @@ $(function(){
 </div>
 <!-- data list
 ======================================================================================================= -->
-<form id="form_del" action="delPaperCategory.action" method="post">
-<table class="table table-striped table-hover">
+<form style="padding-top:10px;padding-bottom:10px" id="form_del" action="delPaperCategory.action" method="post">
+<table data-toggle="table" data-striped="true" onload="this.height=mainFrame.document.body.scrollHeight" >
 	<thead>
 	<tr>
-		<td style="width:2%"><input id="ckb_all" type="checkbox"/></td>
-		<td>主键</td>
-		<td>类别名</td>
-		<td>排序号</td>
-		<td>操作</td>
+		<th style="width:2%"><input id="ckb_all" type="checkbox"/></th>
+		<th data-sortable="true">主键</th>
+		<th data-sortable="true">类别名</th>
+		<th data-sortable="true">排序号</th>
+		<th>操作</td>
 	</tr>
 	</thead>
 	<tbody>
@@ -69,7 +69,7 @@ $(function(){
 </table>
 <input name="page" type="hidden" value="${page.curPage}" />
 </form>
-<div align="right">
+<div>
 ${pageNav.pageHtml}
 </div>
 <!-- query form modal

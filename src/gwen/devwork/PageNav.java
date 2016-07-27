@@ -11,6 +11,8 @@ public class PageNav<T>
 //	private String pageName;
 	private String pageSizeListStr;
 	private boolean isOutForm = false;
+	private static String LABEL_PAGE_LAST = "<";
+	private static String LABEL_PAGE_NEXT = ">";
 	private static String PAGEFORMID = "gwenPageForm";
 	private String formId = PAGEFORMID;
 	private String formString = "";
@@ -43,12 +45,9 @@ public class PageNav<T>
 					+ "};"
 					+ "\n"
 					+ "$(function(){"
-					+ "		$(\"#dropSelectorMenu li\").click(function(){"
-					+ "			$(\"#dropSelectorBtn\").html($(this).children().html()+\" <span class='caret'></span>\");"
-					+ "			$(this).addClass(\"active\");"
-					+ "			$(this).siblings().removeClass(\"active\");"
+					+ "		$(\"#pageSizeSelector\").change(function(){"
 					+ "			$(\"#"+formId+"_page\").val(1);"
-					+ "			$(\"#"+formId+"_pageSize\").val($(this).children().html());"
+					+ "			$(\"#"+formId+"_pageSize\").val($(this).val());"
 					+ "			$(\"#"+formId+"\").submit();"
 					+ "		});"
 					+ "		$(\"#pageGo\").click(function(){"
@@ -133,11 +132,13 @@ public class PageNav<T>
 		
 		int startPage = 0,endPage = 0;
 		strHtml.append(getForm());
+		
+		//组件1->页码按钮------------------------------------
+		strHtml.append("<div class=\"col-md-10 column\" style=\"margin:1px\">");
 		strHtml.append("<table>");
 		strHtml.append("<tr>");
-		//------------------------------------
 		strHtml.append("<td>");
-		strHtml.append("<ul class=\"pagination\" style=\"margin-top:25px;margin-right:2px\">");
+		strHtml.append("<ul class=\"pagination\" style=\"display:inline\">");
 		if(countPageEach % 2 == 0)
 		{ //每次显示页数为偶数			
 			even(curPage,countPage,countPageEach,strHtml,startPage,endPage);
@@ -148,36 +149,43 @@ public class PageNav<T>
 		}
 		strHtml.append("</ul>");
 		strHtml.append("</td>");
+		strHtml.append("</tr>");
+		strHtml.append("</table>");
+		strHtml.append("</div>");
 		//------------------------------------
+		
+		//组件2->每页N条，输入页码跳转------------------------------------
+		strHtml.append("<div class=\"col-md-2 column\" style=\"margin:1px\">");
+		strHtml.append("<table>");
+		strHtml.append("<tr>");
+		//每页N条------------------------------------
 		strHtml.append("<td>");
-		strHtml.append(""
-				+ "<div id=\"dropSelector\" class=\"btn-group dropup\">"
-				+ "<button id=\"dropSelectorBtn\" type=\"button\" class=\"btn  btn-primary dropdown-toggle\" data-toggle=\"dropdown\">"
-				+ page.getPageSize() + " <span class=\"caret\"></span>"
-				+ "</button>"
-				+ "<ul id=\"dropSelectorMenu\" class=\"dropdown-menu\" role=\"menu\">");
+	 	strHtml.append("<select class=\"form-control\" id=\"pageSizeSelector\">");
 		String[] pageSizeArr = pageSizeListStr.split(",");
 	    for(int i=0; i<pageSizeArr.length; i++)
 	    {
 	    	int pageSize = Integer.valueOf(pageSizeArr[i]);
 			if(pageSize == page.getPageSize())
-				strHtml.append("<li class=\"active\"><a href=\"#\">"+pageSize+"</a></li>");
+				strHtml.append("<option selected=\"selected\" value=\""+pageSize+"\">"+pageSize+"</option>");
 			else
-				strHtml.append("<li><a href=\"#\">"+pageSize+"</a></li>");
+				strHtml.append("<option value=\""+pageSize+"\">"+pageSize+"</option>");
 		}
-		strHtml.append("</ul>");
-		strHtml.append("</div>");
+	    strHtml.append("</select>");
 		strHtml.append("</td>");
-		//------------------------------------
+		//输入页码跳转------------------------------------
 		strHtml.append(""
 				+ "<td>"
-				+ "<div class=\"form-inline\">"
-				+ "<label for=\"pageTo\">转到第</label><input type=\"text\" class=\"form-control\" id=\"pageTo\" name=\"pageTo\" style=\"width:50px\"/>页"
+				+ "<input type=\"text\" class=\"form-control\" id=\"pageTo\" name=\"pageTo\" style=\"width:35px;text-align:center\" value=\""+curPage+"\"/>"
+				+ "</td>"
+				+ "");
+		strHtml.append(""
+				+ "<td>"
 				+ "<button type=\"button\" class=\"btn  btn-primary\" id=\"pageGo\">GO</button>"
-				+ "</div>"
 				+ "</td>");
 		strHtml.append("</tr>");
 		strHtml.append("</table>");
+		strHtml.append("</div>");
+		//------------------------------------
 		return strHtml.toString();
 		
 	}
@@ -192,7 +200,7 @@ public class PageNav<T>
 		{
 			if(curPage>1)
 			{
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			}
 			for(int i=1;i<=countPage;i++){
 				if(curPage==i)
@@ -204,7 +212,7 @@ public class PageNav<T>
 			}
 			if(curPage<countPage)
 			{
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			}
 		}
 		/*样式②*/
@@ -222,7 +230,7 @@ public class PageNav<T>
 			}
 			else if(curPage>1 && curPage<countPageEach)
 			{//上一页 1 2 3 【4】 5  ... 16 下一页
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 				startPage=1;
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
@@ -237,7 +245,7 @@ public class PageNav<T>
 			}
 			strHtml.append("<li>...</li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式③ 上一页 1 ... 3 4 【5】 6 7  ... 16 下一页*/
 		else if(curPage>(countPageEach/2)+2 && curPage <= (countPage - countPageEach+1))
@@ -249,7 +257,7 @@ public class PageNav<T>
 				endPage=countPage;
 			}
 
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
@@ -263,7 +271,7 @@ public class PageNav<T>
 			}
 			strHtml.append("<li>...</li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			
 		}
 		/*样式④ 上一页 1 ... 12 13 14 【15】 16 下一页*/
@@ -271,7 +279,7 @@ public class PageNav<T>
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage;
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
@@ -283,14 +291,14 @@ public class PageNav<T>
 				}
 				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式⑤ 上一页 1 ...12 13 14 15 【16】 */
 		else if(curPage==countPage)
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage-1;
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
@@ -311,7 +319,7 @@ public class PageNav<T>
 		{
 			if(curPage>1)
 			{
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			}
 			for(int i=1;i<=countPage;i++)
 			{
@@ -324,7 +332,7 @@ public class PageNav<T>
 			}
 			if(curPage<countPage)
 			{
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			}
 		}
 		/*样式②*/
@@ -341,7 +349,7 @@ public class PageNav<T>
 			}
 			else if(curPage>1 && curPage<countPageEach)
 			{//上一页 1 2 3 【4】 5  ... 16 下一页
-				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 				startPage=1;
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
@@ -356,7 +364,7 @@ public class PageNav<T>
 			}
 			strHtml.append("<li>...</li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式③ 上一页 1 ... 3 4 【5】 6 7  ... 16 下一页*/
 		else if(curPage>(countPageEach/2)+1 && curPage <= (countPage - countPageEach+1))
@@ -364,7 +372,7 @@ public class PageNav<T>
 			startPage = (curPage - countPageEach / 2) + 1;
 			endPage = curPage + countPageEach / 2 ;
 
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
@@ -378,7 +386,7 @@ public class PageNav<T>
 			}
 			strHtml.append("<li>...</li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			
 		}
 		/*样式④ 上一页 1 ... 12 13 14 【15】 16 下一页*/
@@ -386,7 +394,7 @@ public class PageNav<T>
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage;
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
@@ -398,14 +406,14 @@ public class PageNav<T>
 				}
 				strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">下一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式⑤ 上一页 1 ...12 13 14 15 【16】 */
 		else if(curPage==countPage)
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage-1;
-			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">上一页</a></li>");
+			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			strHtml.append("<li><a onclick=\"$jsgwen.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)

@@ -12,9 +12,6 @@ $(function(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
-/* 	$("a[name='a_del']").click(function(){
-		$("#form_del").submit();
-	}); */
 	$("button[name='b_add']").click(function(){
 		location.href = "addPaperImage1.action?pid=${pid}&ppid=${ppid}";
 	});
@@ -25,7 +22,6 @@ $(function(){
 		$("#form_query").submit();
 	}); */
 	$("button[name='b_updSort']").click(function(){
-/* 	$("a[name='a_updSort']").click(function(){ */
 		var idArr = [];   
 		var i = 0;   
 		$("input[name='hidden_id']").each(function(){
@@ -63,21 +59,25 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
+<!-- title
+======================================================================================================= -->
+<ul class="breadcrumb">
 	<li><a href="../papermodel/getPaperModels.action">模型管理</a></li>
 	<li class="active">图片管理</li>
-</ol>
-<!-- toolbar -->
+</ul>
+<!-- toolbar
+======================================================================================================= -->
 <div class="btn-group">
-<button type="button" class="btn btn-default" name="b_add">新增</button>
-<button type="button" class="btn btn-default" name="b_del">删除</button>
-<button type="button" class="btn btn-default" name="b_updSort" >修改排序</button>
-<button type="button" class="btn btn-default" name="b_back" >返回</button>
+	<button type="button" class="btn btn-default" name="b_add">新增</button>
+	<button type="button" class="btn btn-default" name="b_del">删除</button>
+	<button type="button" class="btn btn-default" name="b_updSort" >修改排序</button>
+	<button type="button" class="btn btn-default" name="b_back" >返回</button>
 </div>
-<hr>
+<!-- data list
+======================================================================================================= -->
 <form id="form_del" action="delPaperImage.action" method="post">
 <table class="table table-striped table-hover">
+	<thead>
 	<tr>
 		<td style="width:2%"><input id="ckb_all" type="checkbox"/></td>
 		<td>主键</td>
@@ -85,7 +85,9 @@ $(function(){
 		<td>排序</td>
 		<td>图片</td>
 		<td>操作</td>
-	</tr>	
+	</tr>
+	</thead>
+	<tbody>
 	<s:iterator var="o" value="result.data.resultList">
 	<tr>
 		<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
@@ -96,10 +98,11 @@ $(function(){
 			<input type="text" name="text_sort" value="${o.sort}" style="width:50px"/>
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
-		<td><img src="<%=path%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/></td>
+		<td><img src="<%=ctx%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/></td>
 		<td><a name="a_getById" href="getPaperImageById.action?id=${o.id}">明细</a></td>
 	</tr>
 	</s:iterator>
+	</tbody>
 </table>
 <input name="page" type="hidden" value="${page.curPage}" />
 <input name="pid" type="hidden" value="${pid}" />

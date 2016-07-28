@@ -1,7 +1,12 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="auth.action.AuthLoginAction"%>
+<%@page import="auth.Auth"%>
 <%
 String catpath = request.getContextPath()+"/admin/papercategory/getPaperCategorys.action";
 String modelpath = request.getContextPath()+"/admin/papermodel/getPaperModels.action";
+
+Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
+String account = o==null?"":((Auth)o).getAccount();
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
@@ -28,10 +33,14 @@ $(function(){
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul id="nav-menu" class="nav navbar-nav">
-					    <li class="active" url=""><a href="#mainFrame">首页</a></li>
-					    <li class="" url="<%=catpath%>"><a href="#mainFrame">类别管理</a></li>
+					    <li class="" url=""><a href="#mainFrame">首页</a></li>
+					    <li class="active" url="<%=catpath%>"><a href="#mainFrame">类别管理</a></li>
 					    <li class="" url="<%=modelpath%>"><a href="#mainFrame">模型管理</a></li>
 					    <li class="" url=""><a href="#mainFrame">用户管理</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><%=account%></a></li>
+						<li><a href="<%=ctx%>/auth/logout.action">登出</a></li>
 					</ul>
 				</div>
 			</nav>

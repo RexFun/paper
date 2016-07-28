@@ -5,6 +5,7 @@ import gwen.devwork.BaseAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -51,5 +52,12 @@ public class AuthLoginAction extends BaseAction<Auth>
 			getResult().setMsg(e.getMessage());
 		}
 		returnJSON(getResult());
+	}
+	
+	@Action(value="logout", results={@Result(name = "success", location = "/login.jsp")})
+	public String logout()
+	{
+		getSession().removeAttribute(SessionName_LoginUser);
+		return SUCCESS;
 	}
 }

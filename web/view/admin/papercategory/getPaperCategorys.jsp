@@ -14,9 +14,14 @@ function initTable(){
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJsonPaperCategorys.action',
-		height:"473",
-		striped:true,
 		sidePagination:"server",
+		toolbar:"#toolbar",
+        showRefresh:true,
+        showToggle:true,
+        showColumns:true,
+        showExport:true,
+		height:"500",
+		striped:true,
 		pagination:true,
 		pageList:"[5,10,20]",
 	    queryParams: function (p) {
@@ -68,6 +73,10 @@ $(function(){
 		location.href = "addPaperCategory1.action";
 	});
 	$("button[name='b_del']").click(function(){
+		if(getIdSelections().length<1) {
+			alert("没选择");
+			return;
+		}
 		$.post("delPaperCategory.action",{id:getIdSelections()},function(data){
 			$("#tb_list").bootstrapTable('refresh');
 		});
@@ -84,19 +93,20 @@ $(function(){
 <!-- title
 ======================================================================================================= -->
 <ul class="breadcrumb">
-	<li class="active">类别管理</li>
+<li class="active">类别管理</li>
 </ul>
 <!-- toolbar
 ======================================================================================================= -->
+<div id="toolbar">
 <div class="btn-group">
-	<button type="button" class="btn btn-default" name="b_add">新增</button>
-	<button type="button" class="btn btn-default" name="b_del">删除</button>
-	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query">查询</button>
+<button type="button" class="btn btn-default" name="b_add"><i class="glyphicon glyphicon-plus"></i></button>
+<button type="button" class="btn btn-default" name="b_del"><i class="glyphicon glyphicon-remove"></i></button>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+</div>
 </div>
 <!-- data list
 ======================================================================================================= -->
-<table id="tb_list">
-</table>
+<table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

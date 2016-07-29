@@ -34,4 +34,15 @@ public class CollectionUtil
 		}
 		return arr;
 	}
+	
+	public static Long[] strToLongArray(String str, String separator)
+	{
+		String[] sArr = str.split(",");
+		Long[] lArr = new Long[sArr.length];
+		for(int i = 0; i<sArr.length; i++)
+		{
+			lArr[i] = Long.valueOf(sArr[i]);
+		}
+		return lArr;
+	}
 }

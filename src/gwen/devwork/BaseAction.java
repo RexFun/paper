@@ -88,9 +88,20 @@ public abstract class BaseAction<T> extends ActionSupport
 		}
 	}
 	
-	public void returnJSON(Object o)
+	public void printJson(Object o)
 	{
 		getBaseResp().setContentType("application/json");
-		print(new Gson().toJson(o));
+		try
+		{
+			if(out == null)
+			{
+				out = getBaseResp().getWriter();
+			}
+			out.print(new Gson().toJson(o));
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

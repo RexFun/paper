@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
+
 import admin.entity.PaperCategory;
 import admin.service.PaperCategoryService;
 
@@ -51,8 +53,14 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="delPaperCategory")
 	public void delPaperCategory() 
 	{
-		service.del(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
-		print("1");
+		try{
+			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
+			getResult().setSuccess(true);
+		}catch(Exception e){
+			getResult().setSuccess(false);
+			getResult().setMsg(e.getMessage());
+		}
+		printJson(getResult());
 	}
 	
 	@Action(value="updPaperCategory1",results={ @Result(name = "success", location = "/view/admin/papercategory/updPaperCategory.jsp")})
@@ -86,5 +94,16 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 		pageNav = new PageNav<PaperCategory>(getReq(), page, "5,10,20");
 		getResult().put("resultList", pageNav.getResult());
 		return "success";
+	}
+	
+	@Action(value="getJsonPaperCategorys")
+	public void getJsonPaperCategorys()
+	{
+		Map m = getReq().getParameterValueMap(false, true);
+		m.put("rownum", Integer.parseInt(m.get("offset").toString()));
+		m.put("pagesize", Integer.parseInt(m.get("limit").toString()));
+		getResult().put("total",service.getCount(m));
+		getResult().put("rows",service.get(m));
+		printJson(getResult().getData());
 	}
 }

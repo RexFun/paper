@@ -51,7 +51,7 @@ public class AuthLoginAction extends BaseAction<Auth>
 			getResult().setSuccess(false);
 			getResult().setMsg(e.getMessage());
 		}
-		returnJSON(getResult());
+		printJson(getResult());
 	}
 	
 	@Action(value="logout", results={@Result(name = "success", location = "/login.jsp")})

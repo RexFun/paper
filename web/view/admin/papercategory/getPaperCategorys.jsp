@@ -5,24 +5,79 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperCategorys.action";
+        $("#tb_list").bootstrapTable('refresh');
 	}
 };
-$(function(){
-	$("#ckb_all").click(function(){
-		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
+/* 初始化列表 */
+function initTable(){
+	$('#tb_list').bootstrapTable({
+		method:'post',
+		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
+	    url: 'getJsonPaperCategorys.action',
+		height:"473",
+		striped:true,
+		sidePagination:"server",
+		pagination:true,
+		pageList:"[5,10,20]",
+	    queryParams: function (p) {
+	    	p.name = $("#name").val();
+            return p;
+	    },
+	    columns:
+	    [
+	     {checkbox:true, align:'center', valign:'middle'},
+	     {title:'ID', field:'id', align:'center', valign:'middle', sortable:true},
+	     {title:'类别名', field:'name', align:'center', valign:'middle', sortable:true},
+	     {title:'排序号', field:'sort', align:'center', valign:'middle', sortable:true},
+	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	    	 events:operateEvents, 
+	    	 formatter:operateFormatter}
+	    ]
 	});
+}
+// 操作列
+function operateFormatter(value, row, index) {
+    return [
+        '<a class="upd" href="javascript:void(0)" title="修改">',
+        '<i class="glyphicon glyphicon-pencil"></i>',
+        '</a>&nbsp&nbsp&nbsp&nbsp',
+        '<a class="getById" href="javascript:void(0)" title="明细">',
+        '<i class="glyphicon glyphicon-info-sign"></i>',
+        '</a>'
+    ].join('');
+}
+// 操作列事件
+window.operateEvents = {
+    'click .upd': function (e, value, row, index) {
+        console.info('You click like action, row: ' + JSON.stringify(row));
+		location.href = "updPaperCategory1.action?id="+row.id;
+    },
+    'click .getById': function (e, value, row, index) {
+		location.href = "getPaperCategoryById.action?id="+row.id;
+    }
+};
+/* 获取列表已选行rowid */
+function getIdSelections() {
+    return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
+        return row.id
+    });
+}
+$(function(){
+	initTable();
 	$("button[name='b_add']").click(function(){
 		location.href = "addPaperCategory1.action";
 	});
 	$("button[name='b_del']").click(function(){
-		$("#form_del").submit();
+		$.post("delPaperCategory.action",{id:getIdSelections()},function(data){
+			$("#tb_list").bootstrapTable('refresh');
+		});
 	});
 	$("button[name='b_query']").click(function(){
 		$('#modal_form_query').modal('hide');
-		$("#form_query").submit();
+        $("#tb_list").bootstrapTable('refresh');
 	});
 });
+
 </script>
 </head>
 <body>
@@ -40,38 +95,8 @@ $(function(){
 </div>
 <!-- data list
 ======================================================================================================= -->
-<form style="padding-top:10px;padding-bottom:10px" id="form_del" action="delPaperCategory.action" method="post">
-<table data-toggle="table" data-striped="true" onload="this.height=mainFrame.document.body.scrollHeight" >
-	<thead>
-	<tr>
-		<th style="width:2%"><input id="ckb_all" type="checkbox"/></th>
-		<th data-sortable="true">主键</th>
-		<th data-sortable="true">类别名</th>
-		<th data-sortable="true">排序号</th>
-		<th>操作</td>
-	</tr>
-	</thead>
-	<tbody>
-		<s:iterator var="o" value="result.data.resultList">
-		<tr>
-			<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
-			<td>${o.id}</td>
-			<td>${o.name}</td>
-			<td>${o.sort}</td>
-			<td>
-				<a name="a_upd" href="updPaperCategory1.action?id=${o.id}">修改</a>
-				<a name="a_getById" href="getPaperCategoryById.action?id=${o.id}">明细</a>
-				<%-- <a name="a_getPaperModelsByPid" href="../papermodel/getPaperModels.action?pid=${d.id}">模型管理</a> --%>
-			</td>
-		</tr>
-		</s:iterator>
-	</tbody>
+<table id="tb_list">
 </table>
-<input name="page" type="hidden" value="${page.curPage}" />
-</form>
-<div>
-${pageNav.pageHtml}
-</div>
 <!-- query form modal
 ======================================================================================================= -->
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -83,11 +108,15 @@ ${pageNav.pageHtml}
 			</div>
 			<div class="modal-body">
 				<!-- queryForm -->
-				<form role="form" class="form-inline" id="form_query" action="getPaperCategorys.action" method="post">
+				<!-- 
+				<form role="form" class="form-inline" id="form_query" action="getJsonPaperCategorys.action" method="post">
+				 -->
 				<div class="form-group">
-					 <label for="name">类别名：</label><input type="text" class="form-control" name="name" />
+					 <label for="name">类别名：</label><input type="text" class="form-control" id="name" name="name" value=""/>
 				</div>
+				<!-- 
 				</form>
+				 -->
 			</div>
 			<div class="modal-footer">
 			   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

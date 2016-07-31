@@ -5,19 +5,32 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperModels.action?pid=${pid}";
+		location.href = "getPaperModels.action";
 	}
 };
 </script>
 </head>
 <body>
-<h1>新增纸模型</h1>
-<hr>
+<!-- title -->
+<ol class="breadcrumb">
+	<li><a href="getPaperModels.action">模型管理</a></li>
+	<li class="active">新增</li>
+</ol>
+<!-- form -->
 <form id="dataForm" action="addPaperModel2.action" method="post">
-分类名：<input type="text" name="po.name"/><br>
-排序号：<input type="text" name="po.sort"/><br>
-<input type="hidden" name="po.pid" value="${pid}"/>
-<input type="submit" id="dataFormSave" value="增加" />
+<div class="form-group">
+	<label for="pid">类别名：</label>
+ 	<select class="form-control" id="pid" name="po.pid">
+		<option value="">请选择</option>
+		<s:iterator var="po" value="result.data.catList">
+		<option value="${po.id}">${po.name}</option>
+		</s:iterator>
+	</select>
+</div>
+<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control" name="po.name" /></div>
+<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.sort" /></div>
+<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
 </body>
 </html>

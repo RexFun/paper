@@ -20,7 +20,8 @@ $gwen.form.callback = function(){
 <form id="dataForm" role="form" action="addPaperCategory2.action" method="post">
 	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" name="po.name" /></div>
 	<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.sort" /></div>
-	<button type="submit" class="btn btn-default" id="dataFormSave">保存</button>
+	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
 </body>
 </html>

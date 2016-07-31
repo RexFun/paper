@@ -4,7 +4,12 @@
 <%@ include file="/common/inc_js.jsp"%>
 </head>
 <body>
-<h1>纸模明细</h1>
+<!-- title -->
+<ol class="breadcrumb">
+	<li><a href="getPaperModels.action">模型管理</a></li>
+	<li class="active">明细</li>
+</ol>
+<!-- form -->
 <hr>
 外键：${po.pid}<br>
 分类名：${po.name}<br>

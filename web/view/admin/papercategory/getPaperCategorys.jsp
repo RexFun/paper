@@ -43,18 +43,17 @@ function initTable(){
 // 操作列
 function operateFormatter(value, row, index) {
     return [
-        '<a class="upd" href="javascript:void(0)" title="修改">',
-        '<i class="glyphicon glyphicon-pencil"></i>',
-        '</a>&nbsp&nbsp&nbsp&nbsp',
-        '<a class="getById" href="javascript:void(0)" title="明细">',
+        '<button type="button" class="btn btn-default upd">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+        '</button>&nbsp&nbsp&nbsp&nbsp',
+        '<button type="button" class="btn btn-default getById">',
         '<i class="glyphicon glyphicon-info-sign"></i>',
-        '</a>'
+        '</button>'
     ].join('');
 }
 // 操作列事件
 window.operateEvents = {
     'click .upd': function (e, value, row, index) {
-        console.info('You click like action, row: ' + JSON.stringify(row));
 		location.href = "updPaperCategory1.action?id="+row.id;
     },
     'click .getById': function (e, value, row, index) {
@@ -86,7 +85,6 @@ $(function(){
         $("#tb_list").bootstrapTable('refresh');
 	});
 });
-
 </script>
 </head>
 <body>
@@ -109,6 +107,7 @@ $(function(){
 <table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
+<form>
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -118,23 +117,19 @@ $(function(){
 			</div>
 			<div class="modal-body">
 				<!-- queryForm -->
-				<!-- 
-				<form role="form" class="form-inline" id="form_query" action="getJsonPaperCategorys.action" method="post">
-				 -->
 				<div class="form-group">
 					 <label for="name">类别名：</label><input type="text" class="form-control" id="name" name="name" value=""/>
 				</div>
-				<!-- 
-				</form>
-				 -->
 			</div>
 			<div class="modal-footer">
-			   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			   <button type="button" class="btn btn-primary" name="b_query">确定</button>
+			   <button type="reset" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i></button>
+			   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+			   <button type="button" class="btn btn-primary" name="b_query"><i class="glyphicon glyphicon-ok"></i></button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+</form>
 </body>
 </html>
 

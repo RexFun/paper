@@ -44,7 +44,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value = "addPaperModel1", results={@Result(name = "success", location = "/view/admin/papermodel/addPaperModel.jsp")})
 	public String addPaperModel1() 
 	{
-		put("pid",getReq().getLong("pid"));
+		getResult().put("catList", catService.get(null));
 		return "success";
 	}
 	@Action(value = "addPaperModel2")
@@ -57,14 +57,21 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="delPaperModel")
 	public void delPaperModel()
 	{
-		service.del(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
-		print("1");
+		try{
+			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
+			getResult().setSuccess(true);
+		}catch(Exception e){
+			getResult().setSuccess(false);
+			getResult().setMsg(e.getMessage());
+		}
+		printJson(getResult());
 	}
 	
 	@Action(value="updPaperModel1",results={@Result(name = "success", location = "/view/admin/papermodel/updPaperModel.jsp")})
 	public String updPaperModel1() 
 	{
 		po = service.getById(getReq().getLong("id"));
+		getResult().put("catList", catService.get(null));
 		return "success";
 	}
 	@Action(value="updPaperModel2")
@@ -95,5 +102,16 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		getResult().put("catList", catService.get(null));
 		getResult().put("resultList", pageNav.getResult());
 		return "success";
+	}
+	
+	@Action(value="getJsonPaperModels")
+	public void getJsonPaperModels()
+	{
+		Map m = getReq().getParameterValueMap(false, true);
+		m.put("rownum", Integer.parseInt(m.get("offset").toString()));
+		m.put("pagesize", Integer.parseInt(m.get("limit").toString()));
+		getResult().put("total",service.getCount(m));
+		getResult().put("rows",service.get(m));
+		printJson(getResult().getData());
 	}
 }

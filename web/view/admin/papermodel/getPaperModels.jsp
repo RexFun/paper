@@ -5,24 +5,92 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperModels.action?pid=${pid}";
+        $("#tb_list").bootstrapTable('refresh');
 	}
 };
-$(function(){
-	$("#pid").val("${result.data.pid}");
-	
-	$("#ckb_all").click(function(){
-		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
+/* 初始化列表 */
+function initTable(){
+	$('#tb_list').bootstrapTable({
+		method:'post',
+		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
+	    url: 'getJsonPaperModels.action',
+		sidePagination:"server",
+		toolbar:"#toolbar",
+        showRefresh:true,
+        showToggle:true,
+        showColumns:true,
+        showExport:true,
+		height:"500",
+		striped:true,
+		pagination:true,
+		pageList:"[5,10,20]",
+	    queryParams: function (p) {
+	    	p.name = $("#name").val();
+	    	p.pid = $("#pid").val();
+            return p;
+	    },
+	    columns:
+	    [
+	     {checkbox:true, align:'center', valign:'middle'},
+	     {title:'ID', field:'id', align:'center', valign:'middle', sortable:true},
+	     {title:'PID', field:'pid', align:'center', valign:'middle', sortable:true},
+	     {title:'模型名', field:'name', align:'center', valign:'middle', sortable:true},
+	     {title:'排序号', field:'sort', align:'center', valign:'middle', sortable:true},
+	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	    	 events:operateEvents, 
+	    	 formatter:operateFormatter}
+	    ]
 	});
+}
+// 操作列
+function operateFormatter(value, row, index) {
+    return [
+        '<button type="button" class="btn btn-default upd">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+        '</button>&nbsp&nbsp&nbsp&nbsp',
+        '<button type="button" class="btn btn-default getById">',
+        '<i class="glyphicon glyphicon-info-sign"></i>',
+        '</button>&nbsp&nbsp&nbsp&nbsp',
+        '<button type="button" class="btn btn-default getImages">',
+        '<i class="glyphicon glyphicon-picture"></i>',
+        '</button>'
+    ].join('');
+}
+// 操作列事件
+window.operateEvents = {
+    'click .upd': function (e, value, row, index) {
+		location.href = "updPaperModel1.action?id="+row.id;
+    },
+    'click .getById': function (e, value, row, index) {
+		location.href = "getPaperModelById.action?id="+row.id;
+    },
+    'click .getImages': function (e, value, row, index) {
+		location.href = "../paperimage/getPaperImages.action?pid="+row.id+"&ppid="+row.pid;
+    }
+};
+/* 获取列表已选行rowid */
+function getIdSelections() {
+    return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
+        return row.id
+    });
+}
+$(function(){
+	initTable();
 	$("button[name='b_add']").click(function(){
 		location.href = "addPaperModel1.action";
 	});
 	$("button[name='b_del']").click(function(){
-		$("#form_del").submit();
+		if(getIdSelections().length<1) {
+			alert("没选择");
+			return;
+		}
+		$.post("delPaperModel.action",{id:getIdSelections()},function(data){
+			$("#tb_list").bootstrapTable('refresh');
+		});
 	});
 	$("button[name='b_query']").click(function(){
 		$('#modal_form_query').modal('hide');
-		$("#form_query").submit();
+        $("#tb_list").bootstrapTable('refresh');
 	});
 });
 </script>
@@ -31,53 +99,23 @@ $(function(){
 <!-- title
 ======================================================================================================= -->
 <ul class="breadcrumb">
-  <li class="active">模型管理</li>
+<li class="active">模型管理</li>
 </ul>
 <!-- toolbar
 ======================================================================================================= -->
+<div id="toolbar">
 <div class="btn-group">
-	<button type="button" class="btn btn-default" name="b_add">新增</button>
-	<button type="button" class="btn btn-default" name="b_del">删除</button>
-	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query">查询</button>
+<button type="button" class="btn btn-default" name="b_add"><i class="glyphicon glyphicon-plus"></i></button>
+<button type="button" class="btn btn-default" name="b_del"><i class="glyphicon glyphicon-remove"></i></button>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+</div>
 </div>
 <!-- data list
 ======================================================================================================= -->
-<form style="padding-top:10px;padding-bottom:10px" id="form_del" action="delPaperModel.action" method="post">
-<table data-toggle="table" data-striped="true" onload="this.height=mainFrame.document.body.scrollHeight" >
-	<thead>
-	<tr>
-		<th style="width:2%"><input id="ckb_all" type="checkbox"/></th>
-		<th data-sortable="true">主键</th>
-		<th data-sortable="true">外键</th>
-		<th data-sortable="true">模型名</th>
-		<th data-sortable="true">排序号</th>
-		<th>操作</th>
-	</tr>
-	</thead>
-	<tbody>
-	<s:iterator var="o" value="result.data.resultList">
-	<tr>
-		<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
-		<td>${o.id}</td>
-		<td>${o.pid}</td>
-		<td>${o.name}</td>
-		<td>${o.sort}</td>
-		<td>
-			<a name="a_upd" href="updPaperModel1.action?id=${o.id}">修改</a>
-			<a name="a_getById" href="getPaperModelById.action?id=${o.id}">明细</a>
-			<a name="a_getPaperImagesByPid" href="../paperimage/getPaperImages.action?pid=${o.id}&ppid=${o.pid}">图片管理</a>
-		</td>
-	</tr>
-	</s:iterator>
-	</tbody>
-</table>
-<input name="page" type="hidden" value="${page.curPage}" />
-</form>
-<div>
-${pageNav.pageHtml}
-</div>
+<table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
+<form>
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -87,7 +125,6 @@ ${pageNav.pageHtml}
 			</div>
 			<div class="modal-body">
 				<!-- queryForm -->
-				<form role="form" id="form_query" action="getPaperModels.action" method="post">
 				<div class="form-group">
 					<label for="pid">类别名：</label>
 				 	<select class="form-control" id="pid" name="pid">
@@ -100,14 +137,15 @@ ${pageNav.pageHtml}
 				<div class="form-group">
 					<label for="name">模型名：</label><input type="text" class="form-control" name="name" />
 				</div>
-				</form>
 			</div>
 			<div class="modal-footer">
-			   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			   <button type="button" class="btn btn-primary" name="b_query">确定</button>
+			   <button type="reset" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i></button>
+			   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+			   <button type="button" class="btn btn-primary" name="b_query"><i class="glyphicon glyphicon-ok"></i></button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+</form>
 </body>
 </html>

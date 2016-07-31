@@ -39,8 +39,8 @@ $(function(){
 					    <li class="" url=""><a href="#mainFrame">用户管理</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><%=account%></a></li>
-						<li><a href="<%=ctx%>/auth/logout.action">登出</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-user"></i><%=account%></a></li>
+						<li><a href="<%=ctx%>/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i>登出</a></li>
 					</ul>
 				</div>
 			</nav>

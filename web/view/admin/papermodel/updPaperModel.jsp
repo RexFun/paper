@@ -9,7 +9,7 @@ $gwen.form.callback = function(){
 	}
 };
 $(function(){
-	$("#pid").val("${po.pid}");
+	$("#pid").val("${po.m.pid}");
 });
 </script>
 </head>
@@ -23,16 +23,16 @@ $(function(){
 <form id="dataForm" action="updPaperModel2.action" method="post">
 <div class="form-group">
 	<label for="pid">类别名：</label>
- 	<select class="form-control" id="pid" name="po.pid">
+ 	<select class="form-control" id="pid" name="po.m.pid">
 		<option value="">请选择</option>
-		<s:iterator var="o" value="result.data.catList">
-		<option value="${o.id}">${o.name}</option>
+		<s:iterator var="c" value="result.data.catList">
+		<option value="${c.id}">${c.name}</option>
 		</s:iterator>
 	</select>
 </div>
-<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control" name="po.name" value="${po.name}" /></div>
-<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.sort" value="${po.sort}" /></div>
-<input type="hidden" name="po.id" value="${po.id}">
+<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control" name="po.m.name" value="${po.m.name}" /></div>
+<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.m.sort" value="${po.m.sort}" /></div>
+<input type="hidden" name="po.m.id" value="${po.m.id}">
 <button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
 <button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>

@@ -107,7 +107,6 @@ $(function(){
 <table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
-<form>
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -129,7 +128,6 @@ $(function(){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-</form>
 </body>
 </html>
 

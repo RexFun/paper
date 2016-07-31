@@ -1,34 +1,16 @@
 package admin.entity;
 
+import java.util.HashMap;
+
 public class PaperModel 
 {
-	private Long id;
-	private Long pid;
-	private String name;
-	private int sort;
-	
-	public Long getId() {
-		return id;
+	HashMap<String, Object> m;
+
+	public HashMap<String, Object> getM() {
+		return m;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getPid() {
-		return pid;
-	}
-	public void setPid(Long pid) {
-		this.pid = pid;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getSort() {
-		return sort;
-	}
-	public void setSort(int sort) {
-		this.sort = sort;
+
+	public void setM(HashMap<String, Object> m) {
+		this.m = m;
 	}
 }

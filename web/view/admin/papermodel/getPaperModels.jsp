@@ -32,10 +32,11 @@ function initTable(){
 	    columns:
 	    [
 	     {checkbox:true, align:'center', valign:'middle'},
-	     {title:'ID', field:'id', align:'center', valign:'middle', sortable:true},
-	     {title:'PID', field:'pid', align:'center', valign:'middle', sortable:true},
-	     {title:'模型名', field:'name', align:'center', valign:'middle', sortable:true},
-	     {title:'排序号', field:'sort', align:'center', valign:'middle', sortable:true},
+	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
+	     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true, visible:false},
+	     {title:'类别名', field:'m.catname', align:'center', valign:'middle', sortable:true},
+	     {title:'模型名', field:'m.name', align:'center', valign:'middle', sortable:true},
+	     {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true},
 	     {title:'操作', field:'operate', align:'center', valign:'middle', 
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter}
@@ -59,19 +60,19 @@ function operateFormatter(value, row, index) {
 // 操作列事件
 window.operateEvents = {
     'click .upd': function (e, value, row, index) {
-		location.href = "updPaperModel1.action?id="+row.id;
+		location.href = "updPaperModel1.action?id="+row.m.id;
     },
     'click .getById': function (e, value, row, index) {
-		location.href = "getPaperModelById.action?id="+row.id;
+		location.href = "getPaperModelById.action?id="+row.m.id;
     },
     'click .getImages': function (e, value, row, index) {
-		location.href = "../paperimage/getPaperImages.action?pid="+row.id+"&ppid="+row.pid;
+		location.href = "../paperimage/getPaperImages.action?pid="+row.m.id+"&ppid="+row.m.pid;
     }
 };
 /* 获取列表已选行rowid */
 function getIdSelections() {
     return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-        return row.id
+        return row.m.id
     });
 }
 $(function(){
@@ -115,7 +116,6 @@ $(function(){
 <table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
-<form>
 <div id="modal_form_query" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -129,13 +129,13 @@ $(function(){
 					<label for="pid">类别名：</label>
 				 	<select class="form-control" id="pid" name="pid">
 						<option value="">请选择</option>
-						<s:iterator var="po" value="result.data.catList">
-						<option value="${po.id}">${po.name}</option>
+						<s:iterator var="c" value="result.data.catList">
+						<option value="${c.id}">${c.name}</option>
 						</s:iterator>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="name">模型名：</label><input type="text" class="form-control" name="name" />
+					<label for="name">模型名：</label><input type="text" class="form-control" id="name" name="name" />
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -146,6 +146,5 @@ $(function(){
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-</form>
 </body>
 </html>

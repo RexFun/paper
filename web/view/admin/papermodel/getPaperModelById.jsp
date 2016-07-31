@@ -11,8 +11,8 @@
 </ol>
 <!-- form -->
 <hr>
-外键：${po.pid}<br>
-分类名：${po.name}<br>
-排序号：${po.sort}<br>
+外键：${po.m.pid}<br>
+分类名：${po.m.name}<br>
+排序号：${po.m.sort}<br>
 </body>
 </html>

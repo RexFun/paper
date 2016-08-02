@@ -46,7 +46,7 @@ $(function(){
 		});
 	});
 	$("button[name='b_back']").click(function(){
-		location.href = "../papermodel/getPaperModels.action";
+		location.href = "../papermodel/get.action";
 	});
 	$("input[name='btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();
@@ -62,7 +62,7 @@ $(function(){
 <!-- title
 ======================================================================================================= -->
 <ul class="breadcrumb">
-	<li><a href="../papermodel/getPaperModels.action">模型管理</a></li>
+	<li><a href="../papermodel/get.action">模型管理</a></li>
 	<li class="active">图片管理</li>
 </ul>
 <!-- toolbar

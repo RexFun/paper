@@ -11,14 +11,14 @@ $gwen.form.callback = function(){
 /* 初始化toolbar */
 function initToolbar() {
 	$("#b_add").click(function(){
-		location.href = "addPaperModel1.action";
+		location.href = "add1.action";
 	});
 	$("#b_del").click(function(){
 		if(getIdSelections().length<1) {
 			alert("没选择");
 			return;
 		}
-		$.post("delPaperModel.action",{id:getIdSelections()},function(data){
+		$.post("del.action",{id:getIdSelections()},function(data){
 			$("#tb_list").bootstrapTable('refresh');
 		});
 	});
@@ -28,7 +28,7 @@ function initTable(){
 	$('#tb_list').bootstrapTable({
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
-	    url: 'getJsonPaperModels.action',
+	    url: 'getJson.action',
 		sidePagination:"server",
 		toolbar:"#toolbar",
         showRefresh:true,
@@ -77,10 +77,10 @@ function operateFormatter(value, row, index) {
 // 操作列事件
 window.operateEvents = {
     'click .upd': function (e, value, row, index) {
-		location.href = "updPaperModel1.action?id="+row.m.id;
+		location.href = "upd1.action?id="+row.m.id;
     },
     'click .getById': function (e, value, row, index) {
-		location.href = "getPaperModelById.action?id="+row.m.id;
+		location.href = "getById.action?id="+row.m.id;
     },
     'click .getImages': function (e, value, row, index) {
 		location.href = "../paperimage/getPaperImages.action?pid="+row.m.id+"&ppid="+row.m.pid;
@@ -146,7 +146,7 @@ $(function() {
 				 	<select class="form-control" id="f_pid">
 						<option value="">请选择</option>
 						<s:iterator var="c" value="result.data.catList">
-						<option value="${c.id}">${c.name}</option>
+						<option value="${c.m.id}">${c.m.name}</option>
 						</s:iterator>
 					</select>
 				</div>

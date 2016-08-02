@@ -2,8 +2,8 @@
 <%@page import="auth.action.AuthLoginAction"%>
 <%@page import="auth.Auth"%>
 <%
-String catpath = request.getContextPath()+"/admin/papercategory/getPaperCategorys.action";
-String modelpath = request.getContextPath()+"/admin/papermodel/getPaperModels.action";
+String catpath = request.getContextPath()+"/admin/papercategory/get.action";
+String modelpath = request.getContextPath()+"/admin/papermodel/get.action";
 
 Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
 String account = o==null?"":((Auth)o).getAccount();

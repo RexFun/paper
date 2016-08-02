@@ -6,7 +6,7 @@
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="getPaperCategorys.action">类别管理</a></li>
+	<li><a href="get.action">类别管理</a></li>
 	<li class="active">明细</li>
 </ol>
 <div class="container-fluid">

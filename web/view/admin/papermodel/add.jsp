@@ -5,7 +5,7 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperModels.action";
+		location.href = "get.action";
 	}
 };
 </script>
@@ -13,17 +13,17 @@ $gwen.form.callback = function(){
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="getPaperModels.action">模型管理</a></li>
+	<li><a href="get.action">模型管理</a></li>
 	<li class="active">新增</li>
 </ol>
 <!-- form -->
-<form id="dataForm" action="addPaperModel2.action" method="post">
+<form id="dataForm" action="add2.action" method="post">
 <div class="form-group">
 	<label for="pid">类别名：</label>
  	<select class="form-control" id="pid" name="po.m.pid">
 		<option value="">请选择</option>
 		<s:iterator var="c" value="result.data.catList">
-		<option value="${c.id}">${c.name}</option>
+		<option value="${c.m.id}">${c.m.name}</option>
 		</s:iterator>
 	</select>
 </div>

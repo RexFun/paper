@@ -6,7 +6,7 @@
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="getPaperModels.action">模型管理</a></li>
+	<li><a href="get.action">模型管理</a></li>
 	<li class="active">明细</li>
 </ol>
 <!-- form -->

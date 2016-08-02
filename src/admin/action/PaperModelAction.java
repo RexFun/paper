@@ -24,7 +24,6 @@ import admin.service.PaperModelService;
 @Scope("prototype")
 @ParentPackage(value="struts-default")
 @Namespace("/admin/papermodel")
-//@InterceptorRefs(value={ @InterceptorRef("myStack") })
 public class PaperModelAction extends BaseAction<PaperModel>
 {
 	@Autowired
@@ -36,21 +35,21 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	public PaperModel getPo() {return po;}
 	public void setPo(PaperModel po) {this.po = po;}
 	
-	@Action(value = "addPaperModel1", results={@Result(name = "success", location = "/view/admin/papermodel/addPaperModel.jsp")})
-	public String addPaperModel1() 
+	@Action(value = "add1", results={@Result(name = "success", location = "/view/admin/papermodel/add.jsp")})
+	public String add1() 
 	{
 		getResult().put("catList", catService.get(null));
 		return "success";
 	}
-	@Action(value = "addPaperModel2")
-	public void addPaperModel2() 
+	@Action(value = "add2")
+	public void add2() 
 	{
 		service.add(po);
 		print("1");
 	}
 	
-	@Action(value="delPaperModel")
-	public void delPaperModel()
+	@Action(value="del")
+	public void del()
 	{
 		try{
 			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
@@ -62,29 +61,29 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		printJson(getResult());
 	}
 	
-	@Action(value="updPaperModel1",results={@Result(name = "success", location = "/view/admin/papermodel/updPaperModel.jsp")})
-	public String updPaperModel1() 
+	@Action(value="upd1",results={@Result(name = "success", location = "/view/admin/papermodel/upd.jsp")})
+	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		getResult().put("catList", catService.get(null));
 		return "success";
 	}
-	@Action(value="updPaperModel2")
-	public void updPaperModel2() 
+	@Action(value="upd2")
+	public void upd2() 
 	{
 		service.upd(po);
 		print("1");
 	}
 
-	@Action(value="getPaperModelById",results={@Result(name = "success", location = "/view/admin/papermodel/getPaperModelById.jsp")})
-	public String getPaperModelById() 
+	@Action(value="getById",results={@Result(name = "success", location = "/view/admin/papermodel/getById.jsp")})
+	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="getPaperModels", results={@Result(name = "success", location = "/view/admin/papermodel/getPaperModels.jsp")})
-	public String getPaperModels() 
+	@Action(value="get", results={@Result(name = "success", location = "/view/admin/papermodel/get.jsp")})
+	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);
 		m.put("page", getReq().getInt("page", 1));
@@ -99,8 +98,8 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		return "success";
 	}
 	
-	@Action(value="getJsonPaperModels")
-	public void getJsonPaperModels()
+	@Action(value="getJson")
+	public void getJson()
 	{
 		Map m = getReq().getParameterValueMap(false, true);
 		m.put("rownum", Integer.parseInt(m.get("offset").toString()));

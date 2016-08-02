@@ -1,16 +1,7 @@
 package admin.entity;
 
-import java.util.HashMap;
+import gwen.devwork.BaseModel;
 
-public class PaperModel 
+public class PaperModel extends BaseModel 
 {
-	HashMap<String, Object> m;
-
-	public HashMap<String, Object> getM() {
-		return m;
-	}
-
-	public void setM(HashMap<String, Object> m) {
-		this.m = m;
-	}
 }

@@ -13,8 +13,8 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<dl class="dl-horizontal">
-				<dt>类别名：</dt><dd>${po.name}</dd>
-				<dt>排序号：</dt><dd>${po.sort}</dd>
+				<dt>类别名：</dt><dd>${po.m.name}</dd>
+				<dt>排序号：</dt><dd>${po.m.sort}</dd>
 			</dl>
 		</div>
 	</div>

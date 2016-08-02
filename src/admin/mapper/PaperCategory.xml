@@ -4,7 +4,7 @@
 <mapper namespace="admin.entity.PaperCategory">
       <!-- 自动生成id策略 -->
     <insert id="add" parameterType="admin.entity.PaperCategory" useGeneratedKeys="true" keyProperty="id">  
-       	insert into paper_category(name,sort) values (#{name},#{sort})  
+       	insert into paper_category(name,sort) values (#{m.name},#{m.sort})  
     </insert>  
 	
 	<delete id="del" parameterType="admin.entity.PaperCategory">
@@ -13,15 +13,15 @@
 	
 	<update id="upd" parameterType="admin.entity.PaperCategory">
 		update paper_category set
-		  name = #{name},
-		  sort = #{sort}
-		where id = #{id}
+		  name = #{m.name},
+		  sort = #{m.sort}
+		where id = #{m.id}
 	</update>
   	
 	<resultMap type="admin.entity.PaperCategory" id="result">
-		<id property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="sort" column="sort"/>
+		<id property="m.id" column="id"/>
+		<result property="m.name" column="name"/>
+		<result property="m.sort" column="sort"/>
 	</resultMap>
   	
 	<sql id="columns">

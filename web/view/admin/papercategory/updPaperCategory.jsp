@@ -18,9 +18,9 @@ $gwen.form.callback = function(){
 </ol>
 <!-- form -->
 <form id="dataForm" role="form" action="updPaperCategory2.action" method="post">
-	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" name="po.name" value="${po.name}"/></div>
-	<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.sort" value="${po.sort}"/></div>
-	<input type="hidden" name="po.id" value="${po.id}">
+	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" id="name" name="po.m.name" value="${po.m.name}"/></div>
+	<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control" id="sort" name="po.m.sort" value="${po.m.sort}"/></div>
+	<input type="hidden" name="po.m.id" value="${po.m.id}">
 	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
 	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>

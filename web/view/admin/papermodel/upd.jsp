@@ -5,7 +5,7 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperModels.action";
+		location.href = "get.action";
 	}
 };
 $(function(){
@@ -16,22 +16,22 @@ $(function(){
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="getPaperModels.action">模型管理</a></li>
+	<li><a href="get.action">模型管理</a></li>
 	<li class="active">修改</li>
 </ol>
 <!-- form -->
-<form id="dataForm" action="updPaperModel2.action" method="post">
+<form id="dataForm" action="upd2.action" method="post">
 <div class="form-group">
 	<label for="pid">类别名：</label>
  	<select class="form-control" id="pid" name="po.m.pid">
 		<option value="">请选择</option>
 		<s:iterator var="c" value="result.data.catList">
-		<option value="${c.id}">${c.name}</option>
+		<option value="${c.m.id}">${c.m.name}</option>
 		</s:iterator>
 	</select>
 </div>
-<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control" name="po.m.name" value="${po.m.name}" /></div>
-<div class="form-group"><label for="name">排序号：</label><input type="text" class="form-control" name="po.m.sort" value="${po.m.sort}" /></div>
+<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control" id="name" name="po.m.name" value="${po.m.name}" /></div>
+<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control" id="sort" name="po.m.sort" value="${po.m.sort}" /></div>
 <input type="hidden" name="po.m.id" value="${po.m.id}">
 <button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
 <button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>

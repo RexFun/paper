@@ -6,15 +6,15 @@
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="getPaperCategorys.action">类别管理</a></li>
+	<li><a href="get.action">类别管理</a></li>
 	<li class="active">明细</li>
 </ol>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
 			<dl class="dl-horizontal">
-				<dt>类别名：</dt><dd>${po.name}</dd>
-				<dt>排序号：</dt><dd>${po.sort}</dd>
+				<dt>类别名：</dt><dd>${po.m.name}</dd>
+				<dt>排序号：</dt><dd>${po.m.sort}</dd>
 			</dl>
 		</div>
 	</div>

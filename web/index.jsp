@@ -50,7 +50,7 @@ $(function(){
 	========================================================= -->
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-			<iframe id="mainFrame" name="mainFrame" src="<%=catpath%>" width="100%" onload="this.height=mainFrame.document.body.scrollHeight" frameborder="0" scrolling="no"></iframe>
+			<iframe id="mainFrame" name="mainFrame" src="<%=catpath%>" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="no"></iframe>
 		</div>
 	</div>
 </div>

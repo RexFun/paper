@@ -3,6 +3,11 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 <script type="text/javascript">
+$gwen.form.callback = function(){
+	if($gwen.result.type == 1){
+		location.href = "getPaperImages.action?pid=${pid}&ppid=${ppid}";
+	}
+};
 $(function(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
@@ -11,9 +16,9 @@ $(function(){
 		location.href = "addPaperImage1.action?pid=${pid}&ppid=${ppid}";
 	});
 	$("button[name='b_del']").click(function(){
-		$("#form_del").submit();
+		if(confirm("确认删除？")) $("#form_del").submit();
 	});
-	$("button[name='b_updSort']").click(function(){
+	$("button[name='b_updSortBatch']").click(function(){
 		var idArr = [];   
 		var i = 0;   
 		$("input[name='hidden_id']").each(function(){
@@ -62,7 +67,7 @@ $(function(){
 <div class="btn-group">
 	<button type="button" class="btn btn-default" name="b_add">新增</button>
 	<button type="button" class="btn btn-default" name="b_del">删除</button>
-	<button type="button" class="btn btn-default" name="b_updSort" >修改排序号</button>
+	<button type="button" class="btn btn-default" name="b_updSortBatch" >修改排序号</button>
 	<button type="button" class="btn btn-default" name="b_back" >返回</button>
 </div>
 <!-- data list

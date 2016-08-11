@@ -55,6 +55,9 @@ $(function(){
 			  window.location.reload();
 		});
 	});
+	$(".getById").click(function(){
+		location.href = "getPaperImageById.action?id="+$(this).attr("id");
+	});
 });
 </script>
 </head>
@@ -99,7 +102,7 @@ $(function(){
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
 		<td><img src="<%=ctx%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/></td>
-		<td><a name="a_getById" href="getPaperImageById.action?id=${o.id}">明细</a></td>
+		<td><button type="button" class="btn btn-default getById" id="${o.id}"><i class="glyphicon glyphicon-info-sign"></i></button></td>
 	</tr>
 	</s:iterator>
 	</tbody>

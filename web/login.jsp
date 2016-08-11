@@ -8,9 +8,9 @@ String path = request.getContextPath();
 <head>
 <title>登录</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%=path%>/js/bootstrap/css/bootstrap.min.css"/>
-<script type="text/javascript" src="<%=path%>/js/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/js/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=path%>/lib/bs/css/bootstrap.min.css"/>
+<script type="text/javascript" src="<%=path%>/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=path%>/lib/bs/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 /* 
 if (window != top) top.location.href = location.href;  

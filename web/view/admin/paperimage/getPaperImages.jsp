@@ -3,11 +3,6 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 <script type="text/javascript">
-$gwen.form.callback = function(){
-	if($gwen.result.type == 1){
-		location.href = "getPaperImages.action?pid=${pid}&ppid=${ppid}";
-	}
-};
 $(function(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
@@ -18,9 +13,6 @@ $(function(){
 	$("button[name='b_del']").click(function(){
 		$("#form_del").submit();
 	});
-/* 	$("button[name='b_query']").click(function(){
-		$("#form_query").submit();
-	}); */
 	$("button[name='b_updSort']").click(function(){
 		var idArr = [];   
 		var i = 0;   
@@ -55,9 +47,6 @@ $(function(){
 			  window.location.reload();
 		});
 	});
-	$(".getById").click(function(){
-		location.href = "getPaperImageById.action?id="+$(this).attr("id");
-	});
 });
 </script>
 </head>
@@ -73,7 +62,7 @@ $(function(){
 <div class="btn-group">
 	<button type="button" class="btn btn-default" name="b_add">新增</button>
 	<button type="button" class="btn btn-default" name="b_del">删除</button>
-	<button type="button" class="btn btn-default" name="b_updSort" >修改排序</button>
+	<button type="button" class="btn btn-default" name="b_updSort" >修改排序号</button>
 	<button type="button" class="btn btn-default" name="b_back" >返回</button>
 </div>
 <!-- data list
@@ -85,9 +74,8 @@ $(function(){
 		<th style="width:2%"><input id="ckb_all" type="checkbox"/></th>
 		<th data-sortable="true">主键</th>
 		<th data-sortable="true">外键</th>
-		<th data-sortable="true">排序</th>
+		<th data-sortable="true">排序号</th>
 		<th>图片</th>
-		<th>操作</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -101,8 +89,11 @@ $(function(){
 			<input type="text" name="text_sort" value="${o.sort}" style="width:50px"/>
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
-		<td><img src="<%=ctx%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/></td>
-		<td><button type="button" class="btn btn-default getById" id="${o.id}"><i class="glyphicon glyphicon-info-sign"></i></button></td>
+		<td>
+			<a href="getPaperImageById.action?id=${o.id}&pid=${pid}&ppid=${ppid}">
+			<img src="<%=ctx%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/>
+			</a>
+		</td>
 	</tr>
 	</s:iterator>
 	</tbody>

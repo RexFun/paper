@@ -45,7 +45,7 @@ $(function(){
 ======================================================================================================= -->
 <ul class="breadcrumb">
 	<li><a href="../papermodel/get.action">模型管理</a></li>
-	<li><a href="getPaperImages.action?pid=${pid}&ppid=${ppid}">图片管理</a></li>
+	<li><a href="getPaperImages.action?pid=${pid}&ppid=${ppid}">图片管理 - ${modelName}</a></li>
 	<li class="active">上传图片</li>
 </ul>
 <!-- upload input

@@ -1,10 +1,5 @@
 package admin.action;
 
-import gwen.devwork.BaseAction;
-import gwen.devwork.PageNav;
-import gwen.util.CollectionUtil;
-import gwen.util.FileUtil;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +17,11 @@ import org.springframework.stereotype.Controller;
 
 import admin.entity.PaperImage;
 import admin.service.PaperImageService;
+import admin.service.PaperModelService;
+import gwen.devwork.BaseAction;
+import gwen.devwork.PageNav;
+import gwen.util.CollectionUtil;
+import gwen.util.FileUtil;
 
 
 @SuppressWarnings("serial")
@@ -34,6 +34,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 {
 	@Autowired
 	private PaperImageService service;
+	@Autowired
+	private PaperModelService modelService;
 	//Model
 	private PaperImage po;
 	public PaperImage getPaperImage() { return po; }
@@ -57,6 +59,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	{
 		put("pid",getReq().getLong("pid"));
 		put("ppid",getReq().getLong("ppid"));
+		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));
 		return "success";
 	}
 	@Action(value="addPaperImage2")
@@ -68,8 +71,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 //			FileUtils.copyFile(myFile.get(i), new File("d:/uploadtemp/", myFileFileName.get(i)));
 			//保存到db
 			po = new PaperImage();
-			po.getM().put("pid", getReq().getLong("pid"));
-			po.getM().put("image", FileUtil.getToByte(myFile.get(i)));
+			po.set("pid", getReq().getLong("pid"));
+			po.set("image", FileUtil.getToByte(myFile.get(i)));
 			poList.add(po);
 		}
 		service.addBatch(poList);
@@ -82,8 +85,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		long id = getReq().getLong("id");
 		int sort = getReq().getInt("sort", 0);
 		po = new PaperImage();
-		po.getM().put("id",id);
-		po.getM().put("sort",sort);
+		po.set("id",id);
+		po.set("sort",sort);
 		service.updSortById(po);
 		print("1");
 	}
@@ -108,8 +111,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	{
 		po = service.getById(getReq().getLong("id"));
 		put("po",po);
-		put("pid",getReq().getLong("pid"));
 		put("ppid",getReq().getLong("ppid"));
+		put("modelName", modelService.getById(po.getLong("pid")).get("name"));
 		return "success";
 	}
 
@@ -125,6 +128,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		
 		put("pid", getReq().getLong("pid"));
 		put("ppid", getReq().getLong("ppid"));
+		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));
 		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}

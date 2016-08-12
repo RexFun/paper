@@ -4,7 +4,7 @@ long id = req.getLong("id",0);
 if(id > 0)
 {
 	byte[] po = null;
-	po = (byte[])MyFactory.getPaperImageService().getById(id).getM().get("image");
+	po = MyFactory.getPaperImageService().getById(id).getByteArray("image");
 	ServletOutputStream sender = response.getOutputStream();
 	response.setContentType("application/octet-stream");
 	sender.write(po);

@@ -60,7 +60,7 @@ $(function(){
 ======================================================================================================= -->
 <ul class="breadcrumb">
 	<li><a href="../papermodel/get.action">模型管理</a></li>
-	<li class="active">图片管理</li>
+	<li class="active">图片管理 - ${modelName}</li>
 </ul>
 <!-- toolbar
 ======================================================================================================= -->
@@ -95,7 +95,7 @@ $(function(){
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
 		<td>
-			<a href="getPaperImageById.action?id=${o.m.id}&pid=${pid}&ppid=${ppid}">
+			<a href="getPaperImageById.action?id=${o.m.id}&ppid=${ppid}">
 			<img src="<%=ctx%>/share/data/img.jsp?id=${o.m.id}" alt="图片" style="width:100px;height:100px"/>
 			</a>
 		</td>

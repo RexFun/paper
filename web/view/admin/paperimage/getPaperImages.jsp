@@ -86,17 +86,17 @@ $(function(){
 	<tbody>
 	<s:iterator var="o" value="result.data.resultList">
 	<tr>
-		<td><input name="keyIndex" type="checkbox" value="${o.id}"/></td>
-		<td>${o.id}</td>
-		<td>${o.pid}</td>
+		<td><input name="keyIndex" type="checkbox" value="${o.m.id}"/></td>
+		<td>${o.m.id}</td>
+		<td>${o.m.pid}</td>
 		<td>
-			<input type="hidden" name="hidden_id" value="${o.id}" style="width:50px"/>
-			<input type="text" name="text_sort" value="${o.sort}" style="width:50px"/>
+			<input type="hidden" name="hidden_id" value="${o.m.id}" style="width:50px"/>
+			<input type="text" name="text_sort" value="${o.m.sort}" style="width:50px"/>
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
 		<td>
-			<a href="getPaperImageById.action?id=${o.id}&pid=${pid}&ppid=${ppid}">
-			<img src="<%=ctx%>/share/data/img.jsp?id=${o.id}" alt="图片" style="width:100px;height:100px"/>
+			<a href="getPaperImageById.action?id=${o.m.id}&pid=${pid}&ppid=${ppid}">
+			<img src="<%=ctx%>/share/data/img.jsp?id=${o.m.id}" alt="图片" style="width:100px;height:100px"/>
 			</a>
 		</td>
 	</tr>

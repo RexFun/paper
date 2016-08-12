@@ -8,6 +8,7 @@ public abstract class BaseModel
 
 	public HashMap<String, Object> getM() 
 	{
+		m = m==null?new HashMap<String, Object>():m;
 		return m;
 	}
 

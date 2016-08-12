@@ -41,8 +41,8 @@ public class PaperImageService extends BaseService<PaperImage,Long>
 		for(int i=0; i<ids.length; i++)
 		{
 			PaperImage po = new PaperImage();
-			po.setId(ids[i]);
-			po.setSort(sorts[i]);
+			po.getM().put("id",ids[i]);
+			po.getM().put("sort",sorts[i]);
 			dao.updSortById(po);
 		}
 	}

@@ -68,8 +68,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 //			FileUtils.copyFile(myFile.get(i), new File("d:/uploadtemp/", myFileFileName.get(i)));
 			//保存到db
 			po = new PaperImage();
-			po.setPid(getReq().getLong("pid"));
-			po.setImage(FileUtil.getToByte(myFile.get(i)));
+			po.getM().put("pid", getReq().getLong("pid"));
+			po.getM().put("image", FileUtil.getToByte(myFile.get(i)));
 			poList.add(po);
 		}
 		service.addBatch(poList);
@@ -82,8 +82,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		long id = getReq().getLong("id");
 		int sort = getReq().getInt("sort", 0);
 		po = new PaperImage();
-		po.setId(id);
-		po.setSort(sort);
+		po.getM().put("id",id);
+		po.getM().put("sort",sort);
 		service.updSortById(po);
 		print("1");
 	}

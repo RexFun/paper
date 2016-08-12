@@ -11,6 +11,6 @@
 	<li><a href="getPaperImages.action?pid=${pid}&ppid=${ppid}">图片管理</a></li>
 	<li class="active">明细</li>
 </ul>
-<img src="<%=ctx%>/share/data/img.jsp?id=${po.id}" alt="图片"/>
+<img src="<%=ctx%>/share/data/img.jsp?id=${po.m.id}" alt="图片"/>
 </body>
 </html>

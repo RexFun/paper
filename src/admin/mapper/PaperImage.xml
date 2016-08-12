@@ -4,7 +4,7 @@
 <mapper namespace="admin.entity.PaperImage">
       <!-- 自动生成id策略 -->
     <insert id="add" parameterType="admin.entity.PaperImage" useGeneratedKeys="true" keyProperty="id">  
-       	insert into paper_image(pid,name,sort,image) values (#{pid},#{name},#{sort},#{image})  
+       	insert into paper_image(pid,name,sort,image,url) values (#{m.pid},#{m.name},#{m.sort},#{m.image},#{m.url})  
     </insert>  
 	
 	<delete id="del" parameterType="admin.entity.PaperImage">
@@ -13,28 +13,30 @@
 	
 	<update id="upd" parameterType="admin.entity.PaperImage">
 		update paper_image 
-		   set pid = #{pid},
-			   name = #{name},
-			   sort = #{sort}
-		 where id = #{id}
+		   set pid = #{m.pid},
+			   name = #{m.name},
+			   sort = #{m.sort},
+			   url = #{m.url},
+		 where id = #{m.id}
 	</update>
 	
 	<update id="updSortById" parameterType="admin.entity.PaperImage">
 		update paper_image 
-		   set sort = #{sort}
-		 where id = #{id}
+		   set sort = #{m.sort}
+		 where id = #{m.id}
 	</update>
   	
 	<resultMap type="admin.entity.PaperImage" id="result">
-		<id property="id" column="id"/>
-		<result property="pid" column="pid"/>
-		<result property="name" column="name"/>
-		<result property="sort" column="sort"/>
-		<result property="image" column="image"/>
+		<id property="m.id" column="id"/>
+		<result property="m.pid" column="pid"/>
+		<result property="m.name" column="name"/>
+		<result property="m.sort" column="sort"/>
+		<result property="m.image" column="image"/>
+		<result property="m.url" column="url"/>
 	</resultMap>
   	
 	<sql id="columns">
-		ID, PID, NAME, SORT, IMAGE
+		ID, PID, NAME, SORT, IMAGE, URL
 	</sql>
 	
 	<sql id="page">

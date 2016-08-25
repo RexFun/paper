@@ -96,8 +96,10 @@ $(function(){
 		</td>
 		<td>
 			<a href="getPaperImageById.action?id=${o.m.id}&ppid=${ppid}">
-			<img src="<%=ctx%>/share/data/img.jsp?id=${o.m.id}" alt="图片" style="width:100px;height:100px"/>
+			<img src="http://localhost:8383/${o.m.url}" alt="图片" style="width:100px;height:100px"/>
+<%-- 			<img src="<%=ctx%>/share/data/img.jsp?id=${o.m.id}" alt="图片" style="width:100px;height:100px"/> --%>
 			</a>
+			${o.m.url}
 		</td>
 	</tr>
 	</s:iterator>

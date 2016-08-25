@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.InterceptorRefs;
@@ -15,7 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.github.stuxuhai.jpinyin.PinyinFormat;
+import com.github.stuxuhai.jpinyin.PinyinHelper;
+
 import admin.entity.PaperImage;
+import admin.service.PaperCategoryService;
 import admin.service.PaperImageService;
 import admin.service.PaperModelService;
 import gwen.devwork.BaseAction;
@@ -36,6 +42,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	private PaperImageService service;
 	@Autowired
 	private PaperModelService modelService;
+	@Autowired
+	private PaperCategoryService catService;
 	//Model
 	private PaperImage po;
 	public PaperImage getPaperImage() { return po; }
@@ -67,12 +75,31 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	{
 		List<PaperImage> poList = new ArrayList<PaperImage>();
 		for(int i=0; i<myFile.size(); i++){
+			String __imgName = UUID.randomUUID().toString();
 			//保存到硬盘
-//			FileUtils.copyFile(myFile.get(i), new File("d:/uploadtemp/", myFileFileName.get(i)));
+			FileUtils.copyFile(myFile.get(i), new File("/Users/mac373/paper_images"
+														+"/"+PinyinHelper.convertToPinyinString((String) catService.getById(getReq().getLong("ppid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
+														+"/"+PinyinHelper.convertToPinyinString((String) modelService.getById(getReq().getLong("pid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER), 
+														__imgName));
+//			FileUtils.copyFile(myFile.get(i), new File(getReq().getContextPath()
+//					+"/upload/"
+//					+"/"+catService.getById(getReq().getLong("ppid")).get("name")
+//					+"/"+modelService.getById(getReq().getLong("pid")).get("name"), 
+//					myFileFileName.get(i)));
 			//保存到db
 			po = new PaperImage();
 			po.set("pid", getReq().getLong("pid"));
 			po.set("image", FileUtil.getToByte(myFile.get(i)));
+			po.set("url", getReq().getContextPath()
+					+"/image"
+					+"/"+PinyinHelper.convertToPinyinString((String) catService.getById(getReq().getLong("ppid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
+					+"/"+PinyinHelper.convertToPinyinString((String) modelService.getById(getReq().getLong("pid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
+					+"/"+__imgName);
+//			po.set("url", getReq().getContextPath()
+//					+"/upload/"
+//					+"/"+catService.getById(getReq().getLong("ppid")).get("name")
+//					+"/"+modelService.getById(getReq().getLong("pid")).get("name")
+//					+"/"+myFileFileName.get(i));
 			poList.add(po);
 		}
 		service.addBatch(poList);

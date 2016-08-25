@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#myFile").fileinput({
-	    uploadUrl: "addPaperImage2.action?pid=${pid}", // server upload action
+	    uploadUrl: "addPaperImage2.action?pid=${pid}&ppid=${ppid}", // server upload action
 	    allowedFileExtensions : ['jpg', 'png','gif'],
 	    uploadAsync: false,
 	    minFileCount: 1,

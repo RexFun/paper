@@ -28,6 +28,7 @@ import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
 import gwen.util.CollectionUtil;
 import gwen.util.FileUtil;
+import gwen.util.UniqueId;
 
 
 @SuppressWarnings("serial")
@@ -75,7 +76,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	{
 		List<PaperImage> poList = new ArrayList<PaperImage>();
 		for(int i=0; i<myFile.size(); i++){
-			String __imgName = UUID.randomUUID().toString();
+			String __imgName = UniqueId.genGuid();
 			//保存到硬盘
 			FileUtils.copyFile(myFile.get(i), new File("/Users/mac373/paper_images"
 														+"/"+PinyinHelper.convertToPinyinString((String) catService.getById(getReq().getLong("ppid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)

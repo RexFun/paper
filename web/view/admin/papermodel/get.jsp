@@ -83,7 +83,7 @@ window.operateEvents = {
 		location.href = "getById.action?id="+row.m.id;
     },
     'click .getImages': function (e, value, row, index) {
-		location.href = "../paperimage/getPaperImages.action?pid="+row.m.id+"&ppid="+row.m.pid;
+		location.href = "../paperimage/get.action?pid="+row.m.id+"&ppid="+row.m.pid;
     }
 };
 // 获取列表已选行rowid

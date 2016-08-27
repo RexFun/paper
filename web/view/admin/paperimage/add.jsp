@@ -7,11 +7,11 @@
 <script type="text/javascript">
 $(function(){
 	$("#myFile").fileinput({
-	    uploadUrl: "addPaperImage2.action?pid=${pid}&ppid=${ppid}", // server upload action
+	    uploadUrl: "add2.action?pid=${pid}&ppid=${ppid}", // server upload action
 	    allowedFileExtensions : ['jpg', 'png','gif'],
 	    uploadAsync: false,
 	    minFileCount: 1,
-	    maxFileCount: 5
+	    maxFileCount: 10
 	}).on('filebatchpreupload', function(event, data, id, index) {
 	    $('#kv-success-2').html('<h4>Upload Status</h4><ul></ul>').hide();
 	}).on('filebatchuploaderror', function(event, data, msg) {
@@ -35,7 +35,7 @@ $(function(){
 	    $('#kv-success-2 ul').append(out);
 	    $('#kv-success-2').show();
 	    alert("上传图片成功！");
-		location.href = "getPaperImages.action?pid=${pid}&ppid=${ppid}";
+		location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	});
 });
 </script>
@@ -45,7 +45,7 @@ $(function(){
 ======================================================================================================= -->
 <ul class="breadcrumb">
 	<li><a href="../papermodel/get.action">模型管理</a></li>
-	<li><a href="getPaperImages.action?pid=${pid}&ppid=${ppid}">图片管理 - ${modelName}</a></li>
+	<li><a href="get.action?pid=${pid}&ppid=${ppid}">图片管理 - ${modelName}</a></li>
 	<li class="active">上传图片</li>
 </ul>
 <!-- upload input

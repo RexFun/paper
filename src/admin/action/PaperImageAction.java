@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.convention.annotation.Action;
@@ -17,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.github.stuxuhai.jpinyin.PinyinFormat;
-import com.github.stuxuhai.jpinyin.PinyinHelper;
-
 import admin.entity.PaperImage;
 import admin.service.PaperCategoryService;
 import admin.service.PaperImageService;
@@ -27,7 +23,7 @@ import admin.service.PaperModelService;
 import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
 import gwen.util.CollectionUtil;
-import gwen.util.FileUtil;
+import gwen.util.PropertiesUtil;
 import gwen.util.UniqueId;
 
 
@@ -63,44 +59,26 @@ public class PaperImageAction extends BaseAction<PaperImage>
     public List<String> getMyFileContentType() { return myFileContentType; }
 	public void setMyFileContentType(List<String> myFileContentType) { this.myFileContentType = myFileContentType; }
 	
-	@Action(value="addPaperImage1",results={ @Result(name = "success", location = "/view/admin/paperimage/addPaperImage.jsp")})
-	public String addPaperImage1() 
+	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/paperimage/add.jsp")})
+	public String add1() 
 	{
 		put("pid",getReq().getLong("pid"));
 		put("ppid",getReq().getLong("ppid"));
 		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));
 		return "success";
 	}
-	@Action(value="addPaperImage2")
-	public void addPaperImage2() throws Exception
+	@Action(value="add2")
+	public void add2() throws Exception
 	{
 		List<PaperImage> poList = new ArrayList<PaperImage>();
 		for(int i=0; i<myFile.size(); i++){
 			String __imgName = UniqueId.genGuid();
 			//保存到硬盘
-			FileUtils.copyFile(myFile.get(i), new File("/Users/mac373/paper_images"
-														+"/"+PinyinHelper.convertToPinyinString((String) catService.getById(getReq().getLong("ppid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
-														+"/"+PinyinHelper.convertToPinyinString((String) modelService.getById(getReq().getLong("pid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER), 
-														__imgName));
-//			FileUtils.copyFile(myFile.get(i), new File(getReq().getContextPath()
-//					+"/upload/"
-//					+"/"+catService.getById(getReq().getLong("ppid")).get("name")
-//					+"/"+modelService.getById(getReq().getLong("pid")).get("name"), 
-//					myFileFileName.get(i)));
+			FileUtils.copyFile(myFile.get(i), new File(PropertiesUtil.getImageUploadPath(), __imgName));
 			//保存到db
 			po = new PaperImage();
 			po.set("pid", getReq().getLong("pid"));
-			po.set("image", FileUtil.getToByte(myFile.get(i)));
-			po.set("url", getReq().getContextPath()
-					+"/image"
-					+"/"+PinyinHelper.convertToPinyinString((String) catService.getById(getReq().getLong("ppid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
-					+"/"+PinyinHelper.convertToPinyinString((String) modelService.getById(getReq().getLong("pid")).get("name"), "", PinyinFormat.WITH_TONE_NUMBER)
-					+"/"+__imgName);
-//			po.set("url", getReq().getContextPath()
-//					+"/upload/"
-//					+"/"+catService.getById(getReq().getLong("ppid")).get("name")
-//					+"/"+modelService.getById(getReq().getLong("pid")).get("name")
-//					+"/"+myFileFileName.get(i));
+			po.set("url", __imgName);
 			poList.add(po);
 		}
 		service.addBatch(poList);
@@ -127,15 +105,15 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		print("1");
 	}
 	
-	@Action(value="delPaperImage")
-	public void delPaperImage() 
+	@Action(value="del")
+	public void del() 
 	{
 		service.del(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
 		print("1");
 	}
 
-	@Action(value="getPaperImageById",results={ @Result(name = "success", location = "/view/admin/paperimage/getPaperImageById.jsp")})
-	public String getPaperImageById() 
+	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/paperimage/getById.jsp")})
+	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		put("po",po);
@@ -144,8 +122,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		return "success";
 	}
 
-	@Action(value="getPaperImages",results={ @Result(name = "success", location = "/view/admin/paperimage/getPaperImages.jsp")})
-	public String getPaperImages() 
+	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/paperimage/get.jsp")})
+	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);
 		m.put("page", getReq().getInt("page", 1));

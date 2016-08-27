@@ -1,7 +1,11 @@
+<%@ page import="gwen.util.PropertiesUtil" %>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String ctx = request.getContextPath();
+String imagePath = PropertiesUtil.getImagePath();
+request.setAttribute("ctx", ctx);
+request.setAttribute("imagePath", imagePath);
 %>
 <!DOCTYPE html>
 <html>

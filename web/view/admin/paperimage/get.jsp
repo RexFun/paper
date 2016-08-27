@@ -3,9 +3,10 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 <script type="text/javascript">
+
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "getPaperImages.action?pid=${pid}&ppid=${ppid}";
+		location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	}
 };
 $(function(){
@@ -13,7 +14,7 @@ $(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
 	$("button[name='b_add']").click(function(){
-		location.href = "addPaperImage1.action?pid=${pid}&ppid=${ppid}";
+		location.href = "add1.action?pid=${pid}&ppid=${ppid}";
 	});
 	$("button[name='b_del']").click(function(){
 		if(confirm("确认删除？")) $("#form_del").submit();
@@ -72,7 +73,7 @@ $(function(){
 </div>
 <!-- data list
 ======================================================================================================= -->
-<form style="padding-top:10px;padding-bottom:10px" id="form_del" action="delPaperImage.action" method="post">
+<form style="padding-top:10px;padding-bottom:10px" id="form_del" action="del.action" method="post">
 <table data-toggle="table" data-striped="true" onload="this.height=mainFrame.document.body.scrollHeight" >
 	<thead>
 	<tr>
@@ -95,11 +96,9 @@ $(function(){
 			<input type="button" name="btn_upd" value="修改"/>
 		</td>
 		<td>
-			<a href="getPaperImageById.action?id=${o.m.id}&ppid=${ppid}">
-			<img src="http://localhost:8383/${o.m.url}" alt="图片" style="width:100px;height:100px"/>
-<%-- 			<img src="<%=ctx%>/share/data/img.jsp?id=${o.m.id}" alt="图片" style="width:100px;height:100px"/> --%>
+			<a href="getById.action?id=${o.m.id}&ppid=${ppid}">
+			<img src="${imagePath}${o.m.url}" alt="图片" style="width:100px;height:100px"/>
 			</a>
-			${o.m.url}
 		</td>
 	</tr>
 	</s:iterator>

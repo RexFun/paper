@@ -18,6 +18,7 @@ function initToolbar() {
 			alert("没选择");
 			return;
 		}
+		if(!confirm("确认删除？")) return;
 		$.post("del.action",{id:getIdSelections()},function(data){
 			$("#tb_list").bootstrapTable('refresh');
 		});

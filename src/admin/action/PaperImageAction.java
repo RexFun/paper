@@ -1,7 +1,6 @@
 package admin.action;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import admin.entity.PaperImage;
-import admin.service.PaperCategoryService;
 import admin.service.PaperImageService;
 import admin.service.PaperModelService;
 import gwen.devwork.BaseAction;
@@ -40,8 +38,6 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	private PaperImageService service;
 	@Autowired
 	private PaperModelService modelService;
-	@Autowired
-	private PaperCategoryService catService;
 	//Model
 	private PaperImage po;
 	public PaperImage getPaperImage() { return po; }
@@ -126,7 +122,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/paperimage/get.jsp")})
 	public String get() 
 	{
-		Map m = getReq().getParameterValueMap(false, true);
+		Map<String, Object> m = getReq().getParameterValueMap(false, true);
 		m.put("page", getReq().getInt("page", 1));
 		m.put("pageSize", getReq().getInt("pageSize", 5));
 		

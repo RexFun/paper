@@ -52,7 +52,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	public void del()
 	{
 		try{
-			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
+			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
 			getResult().setSuccess(true);
 		}catch(Exception e){
 			getResult().setSuccess(false);
@@ -85,7 +85,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="get", results={@Result(name = "success", location = "/view/admin/papermodel/get.jsp")})
 	public String get() 
 	{
-		Map m = getReq().getParameterValueMap(false, true);
+		Map<String, Object> m = getReq().getParameterValueMap(false, true);
 		m.put("page", getReq().getInt("page", 1));
 		m.put("pageSize", getReq().getInt("pageSize", 10));
 		
@@ -101,7 +101,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="getJson")
 	public void getJson()
 	{
-		Map m = getReq().getParameterValueMap(false, true);
+		Map<String, Object> m = getReq().getParameterValueMap(false, true);
 		m.put("rownum", Integer.parseInt(m.get("offset").toString()));
 		m.put("pagesize", Integer.parseInt(m.get("limit").toString()));
 		getResult().put("total",service.getCount(m));

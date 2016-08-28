@@ -2,7 +2,6 @@ package admin.service;
 
 import gwen.devwork.BaseDao;
 import gwen.devwork.BaseService;
-import gwen.util.CollectionUtil;
 import gwen.util.PropertiesUtil;
 
 import java.io.File;
@@ -43,7 +42,8 @@ public class PaperImageService extends BaseService<PaperImage,Long>
 			// 删除图片文件
 			for(int i=0; i<ids.length; i++)
 			{
-				FileUtils.forceDelete(new File(PropertiesUtil.getImageUploadPath()+dao.getById(ids[i]).getString("url")));
+				File f = new File(PropertiesUtil.getImageUploadPath()+dao.getById(ids[i]).getString("url"));
+				if(f.exists()) FileUtils.forceDelete(f);
 			}
 			// 删除表记录
 			super.del(ids);

@@ -47,10 +47,13 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="del")
 	public void del() 
 	{
-		try{
-			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
+		try
+		{
+			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
 			getResult().setSuccess(true);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			getResult().setSuccess(false);
 			getResult().setMsg(e.getMessage());
 		}

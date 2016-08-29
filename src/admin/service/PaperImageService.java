@@ -35,23 +35,16 @@ public class PaperImageService extends BaseService<PaperImage,Long>
 		}
 	}
 	
-	public void delBatch(Long[] ids)
+	public void delBatch(Long[] ids) throws IOException
 	{
-		try 
+		// 删除图片文件
+		for(int i=0; i<ids.length; i++)
 		{
-			// 删除图片文件
-			for(int i=0; i<ids.length; i++)
-			{
-				File f = new File(PropertiesUtil.getImageUploadPath()+dao.getById(ids[i]).getString("url"));
-				if(f.exists()) FileUtils.forceDelete(f);
-			}
-			// 删除表记录
-			super.del(ids);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			File f = new File(PropertiesUtil.getImageUploadPath()+dao.getById(ids[i]).getString("url"));
+			if(f.exists()) FileUtils.forceDelete(f);
 		}
+		// 删除表记录
+		super.del(ids);
 	}
 	
 	public void updSortById(PaperImage po)

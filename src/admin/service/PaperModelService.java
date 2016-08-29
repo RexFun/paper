@@ -32,28 +32,21 @@ public class PaperModelService extends BaseService<PaperModel,Long>
 		return paperModelDao;
 	}
 	
-	public void delBatch(Long[] ids)
+	public void delBatch(Long[] ids) throws IOException
 	{
 		Map<String, Object> m = new HashMap<String, Object>();
 		m.put("pids", ids);
 		List<PaperImage> paperImages = imgDao.get(m);
 		if (paperImages.size() == 0) return;
-		try 
+		// 批量物理删除图片文件
+		for(PaperImage po : paperImages)
 		{
-			// 批量物理删除图片文件
-			for(PaperImage po : paperImages)
-			{
-				File f = new File(PropertiesUtil.getImageUploadPath()+po.getString("url"));
-				if(f.exists()) FileUtils.forceDelete(f);
-			}
-			// 删除图片数据库记录
-			imgDao.delByPids(m);
-			// 删除模型
-			super.del(ids);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			File f = new File(PropertiesUtil.getImageUploadPath()+po.getString("url"));
+			if(f.exists()) FileUtils.forceDelete(f);
 		}
+		// 删除图片数据库记录
+		imgDao.delByPids(ids);
+		// 删除模型
+		super.del(ids);
 	}
 }

@@ -1,6 +1,7 @@
 package admin.action;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -105,8 +106,18 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	@Action(value="del")
 	public void del() 
 	{
-		service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
-		print("1");
+		String __tag = "1";
+		try 
+		{
+			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
+			__tag = "1";
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			__tag = "0";
+		}
+		print(__tag);
 	}
 
 	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/paperimage/getById.jsp")})

@@ -51,10 +51,13 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="del")
 	public void del()
 	{
-		try{
+		try
+		{
 			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
 			getResult().setSuccess(true);
-		}catch(Exception e){
+		}
+		catch(Exception e)
+		{
 			getResult().setSuccess(false);
 			getResult().setMsg(e.getMessage());
 		}

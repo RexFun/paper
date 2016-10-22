@@ -1,10 +1,13 @@
 package client.entity;
 
+import gwen.util.PropertiesUtil;
+
 public class PaperImage 
 {
 	private Long id;
 	private Long pid;
 	private String name;
+	private String url;
 	private int sort;
 	private long datasize;
 	
@@ -31,6 +34,12 @@ public class PaperImage
 	}
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = PropertiesUtil.getImagePath()+url;
 	}
 	public long getDatasize(){
 		return datasize;

@@ -49,7 +49,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	{
 		try
 		{
-			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
+			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
 			getResult().setSuccess(true);
 		}
 		catch(Exception e)

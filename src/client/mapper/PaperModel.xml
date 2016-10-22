@@ -55,7 +55,12 @@
 		<include refid="page" />
 	</select>
 	<select id="getMapJoinCategory" resultType="java.util.HashMap">
-		select <include refid="columns"/>, t1.NAME NAV_NAME from paper_model t join paper_category t1 on t.pid = t1.id
+		select <include refid="columns"/>, t1.NAME NAV_NAME, t2.URL IMAGE_URL 
+		  from paper_model t 
+		 inner join paper_category t1 
+		 		 on t.pid = t1.id
+		  left join (select tt.id,tt.pid,tt.url,max(tt.sort) from paper.paper_image tt group by tt.pid) t2
+		         on t.id = t2.pid
 		<include refid="dynamicWhere" /> order by t.sort 
 		<include refid="page" />
 	</select>

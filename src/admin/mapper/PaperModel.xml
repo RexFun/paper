@@ -10,12 +10,6 @@
 	<delete id="del" parameterType="admin.entity.PaperModel">
 		delete from paper_model where id = #{id}
 	</delete>
-	<delete id="delByPids" parameterType="admin.entity.PaperModel">
-	    delete from paper_model where pid in
-	    <foreach collection="pids" index="index" item="item" open="(" separator="," close=")">   
-	      #{item}   
-	    </foreach>  
-	 </delete>
 	
 	<update id="upd" parameterType="admin.entity.PaperModel">
 		update paper_model set
@@ -48,12 +42,6 @@
 		<where>
 			<if test="pid != null and pid != ''"> and t.PID = #{pid} </if>
 			<if test="name != null and name != ''"> and t.NAME like concat('%',#{name},'%') </if>
-			<if test="pids != null and pids != ''">
-				and PID in 
-			    <foreach collection="pids" index="index" item="item" open="(" separator="," close=")">   
-			      #{item}   
-			    </foreach>  
-			</if>
 		</where>
 	</sql>	
 	

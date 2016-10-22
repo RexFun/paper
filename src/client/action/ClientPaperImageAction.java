@@ -1,9 +1,9 @@
 package client.action;
 
-import gwen.devwork.BaseAction;
-import gwen.devwork.PageNav;
-
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -16,12 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
+
 import client.entity.PaperImage;
 import client.entity.PaperImage1;
 import client.service.PaperImage1Service;
 import client.service.PaperImageService;
-
-import com.google.gson.Gson;
+import gwen.devwork.BaseAction;
+import gwen.util.PropertiesUtil;
 
 @SuppressWarnings("serial")
 @Controller
@@ -41,29 +43,6 @@ public class ClientPaperImageAction extends BaseAction<PaperImage>
 	private PaperImage1 po1;
 	public PaperImage1 getPaperImage1() { return po1; }
 	public void setPaperImage1(PaperImage1 po1) { this.po1 = po1; }
-	
-	@Action(value="getPaperImageById")
-	public void getPaperImageById() throws IOException 
-	{
-		System.out.println("in getPaperImageById");
-		po1 = service1.getById(getReq().getLong("id"));
-		ServletOutputStream sender = getBaseResp().getOutputStream();
-		getBaseResp().setContentType("application/octet-stream");
-		sender.write(po1.getImage());
-		sender.flush();
-		sender.close();
-	}
-	
-	@Action(value="getPaperImageByPidAndMaxSort")
-	public void getPaperImageByPidAndMaxSort() throws IOException 
-	{
-		po1 = service1.getByPidAndMaxSort(getReq().getLong("pid"));
-		ServletOutputStream sender = getBaseResp().getOutputStream();
-		getBaseResp().setContentType("application/octet-stream");
-		sender.write(po1.getImage());
-		sender.flush();
-		sender.close();
-	}
 	
 	@Action(value="getPageByPid")
 	public void getPageByPid() 

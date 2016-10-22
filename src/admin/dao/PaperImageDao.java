@@ -1,6 +1,5 @@
 package admin.dao;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -22,10 +21,8 @@ public class PaperImageDao extends BaseDao<PaperImage,Long>
 		this.getSqlSession().update(getStatementName("updSortById"), po);
 	}
 	
-	public void delByPids(Long[] pids)
+	public void delByPids(Map<String, Object> m)
 	{
-		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("pids", pids);
 		this.getSqlSession().update(getStatementName("delByPids"), m);
 	}
 }

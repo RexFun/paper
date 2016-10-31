@@ -115,8 +115,8 @@ $(function(){
 					<li class="active" url=""><a href="#"><i class="fa fa-home"></i>主页
 					</a></li>
 					<li url="<%=catpath%>"><a href="#"><i class="fa fa-glass"></i>类别管理</a></li>
-					<li url="<%=modelpath%>"><a href="#"><i class="fa fa-file-image-o"></i>模型管理</a><span class="jquery-accordion-menu-label"> 12 </span></li>
-					<li><a href="#"><i class="fa fa-cog"></i>系统管理 </a>
+					<li url="<%=modelpath%>"><a href="#"><i class="fa fa-file-image-o"></i>模型管理</a></li>
+					<li><a href="#"><i class="fa fa-cog"></i>系统管理 </a><span class="jquery-accordion-menu-label"> 4 </span>
 						<ul class="submenu">
 							<li url="${ctx}/admin/sysmenu/get.action"><a href="#">菜单管理 </a></li>
 							<li url="${ctx}/admin/syspermit/get.action"><a href="#">权限管理 </a></li>

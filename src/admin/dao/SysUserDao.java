@@ -1,0 +1,17 @@
+package admin.dao;
+
+import org.springframework.stereotype.Repository;
+
+import admin.entity.SysUser;
+import gwen.devwork.BaseDao;
+
+
+@Repository("sysUserDao")
+public class SysUserDao extends BaseDao<SysUser,Long>
+{
+	@Override
+	public Class getEntityClass()
+	{
+		return SysUser.class;
+	}
+}

@@ -4,7 +4,7 @@
 <mapper namespace="admin.entity.SysRole">
       <!-- 自动生成id策略 -->
     <insert id="add" parameterType="admin.entity.SysRole" useGeneratedKeys="true" keyProperty="id">  
-       	insert into sys_role(tc_code,  tc_name) values (#{m.tc_code}, #{m.tc_name})  
+       	insert into sys_role(tc_code, tc_name) values (#{m.tc_code}, #{m.tc_name})  
     </insert>  
 	
 	<delete id="del" parameterType="admin.entity.SysRole">

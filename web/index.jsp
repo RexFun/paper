@@ -11,34 +11,34 @@ String account = o==null?"":((Auth)o).getAccount();
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-	<!-- navsidebar -->
-	<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/default.css">
-	<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/styles.css">
-	<!-- accordion-menu -->
-	<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/htmleaf-demo.css">
-	<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/jquery-accordion-menu.css"/>
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
-	<style type="text/css">
-	    .content{width:300px;}
-		.filterinput{
-			background-color:rgba(249, 244, 244, 0);
-			border-radius:15px;
-			width:90%;
-			height:30px;
-			border:thin solid #FFF;
-			text-indent:0.5em;
-			font-weight:bold;
-			color:#FFF;
-		}
-		#demo-list a{
-			overflow:hidden;
-			text-overflow:ellipsis;
-			-o-text-overflow:ellipsis;
-			white-space:nowrap;
-			width:100%;
-		}
-	</style>
+<!-- navsidebar -->
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/default.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/styles.css">
+<!-- accordion-menu -->
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/htmleaf-demo.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/jquery-accordion-menu.css"/>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
+<style type="text/css">
+    .content{width:300px;}
+	.filterinput{
+		background-color:rgba(249, 244, 244, 0);
+		border-radius:15px;
+		width:90%;
+		height:30px;
+		border:thin solid #FFF;
+		text-indent:0.5em;
+		font-weight:bold;
+		color:#FFF;
+	}
+	#demo-list a{
+		overflow:hidden;
+		text-overflow:ellipsis;
+		-o-text-overflow:ellipsis;
+		white-space:nowrap;
+		width:100%;
+	}
+</style>
 <script src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
@@ -118,16 +118,10 @@ $(function(){
 					<li url="<%=modelpath%>"><a href="#"><i class="fa fa-file-image-o"></i>模型管理</a><span class="jquery-accordion-menu-label"> 12 </span></li>
 					<li><a href="#"><i class="fa fa-cog"></i>系统管理 </a>
 						<ul class="submenu">
-							<li><a href="#">菜单管理 </a></li>
-							<li><a href="#">权限管理 </a></li>
-							<li><a href="#">角色管理 </a></li>
-							<li><a href="#">用户管理 </a>
-								<ul class="submenu">
-									<li><a href="#">Graphics </a></li>
-									<li><a href="#">Vectors </a></li>
-									<li><a href="#">Photoshop </a></li>
-									<li><a href="#">Fonts </a></li>
-								</ul></li>
+							<li url="${ctx}/admin/sysmenu/get.action"><a href="#">菜单管理 </a></li>
+							<li url="${ctx}/admin/syspermit/get.action"><a href="#">权限管理 </a></li>
+							<li url="${ctx}/admin/sysrole/get.action"><a href="#">角色管理 </a></li>
+							<li url="${ctx}/admin/sysuser/get.action"><a href="#">用户管理 </a></li>
 						</ul>
 					</li>
 				</ul>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+  
+<mapper namespace="admin.entity.SysPermit">
+      <!-- 自动生成id策略 -->
+    <insert id="add" parameterType="admin.entity.SysPermit" useGeneratedKeys="true" keyProperty="id">  
+       	insert into sys_permit(pid, 
+	       					   tc_code, 
+	       					   tc_name, 
+	       					   tc_type) 
+       	values (<choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>null,</otherwise></choose>
+       			#{m.tc_code},
+       			#{m.tc_name},
+       			<choose><when test="m.tc_type != null and m.tc_type != ''">#{m.tc_type}</when><otherwise>null</otherwise></choose>)  
+    </insert>  
+	
+	<delete id="del" parameterType="admin.entity.SysPermit">
+		delete from sys_permit where id = #{id}
+	</delete>
+	
+	<update id="upd" parameterType="admin.entity.SysPermit">
+		update sys_permit set
+		  	   pid = <choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>null,</otherwise></choose>
+		  	   tc_code = #{m.tc_code},
+		  	   tc_name = #{m.tc_name},
+		  	   tc_type = <choose><when test="m.tc_type != null and m.tc_type != ''">#{m.tc_type}</when><otherwise>null</otherwise></choose>
+		 where id = #{m.id}
+	</update>
+  	
+	<resultMap type="admin.entity.SysPermit" id="result">
+		<id property="m.id" column="id"/>
+		<result property="m.pid" column="pid"/>
+		<result property="m.tc_code" column="tc_code"/>
+		<result property="m.tc_name" column="tc_name"/>
+		<result property="m.tc_type" column="tc_type"/>
+	</resultMap>
+  	
+	<sql id="columns">
+		ID, PID, TC_CODE, TC_NAME, TC_TYPE
+	</sql>
+	
+	<sql id="page">
+		<if test="rownum!=null and pagesize!=null"> limit #{rownum}, #{pagesize} </if>
+	</sql>
+	
+	<sql id="dynamicWhere">
+		<where>
+			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
+		</where>
+	</sql>	
+	
+	<select id="getById" resultMap="result">
+		select <include refid="columns"/> from sys_permit where id = #{id}
+	</select>
+	
+	<select id="get" resultType="list" resultMap="result">
+		select <include refid="columns"/> from sys_permit
+		<include refid="dynamicWhere" /> order by 1
+		<include refid="page" />
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(1) from sys_permit
+		<include refid="dynamicWhere" />
+	</select>
+</mapper>  

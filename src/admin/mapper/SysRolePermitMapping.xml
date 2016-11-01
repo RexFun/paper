@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+  
+<mapper namespace="admin.entity.SysRolePermitMapping">
+      <!-- 自动生成id策略 -->
+    <insert id="add" parameterType="admin.entity.SysRolePermitMapping" useGeneratedKeys="true" keyProperty="id">  
+       	insert into sys_role_permit_mapping(tc_sys_role_id, tc_sys_permit_id) values (#{m.tc_sys_role_id}, #{m.tc_sys_permit_id})  
+    </insert>  
+	
+	<delete id="del" parameterType="admin.entity.SysRolePermitMapping">
+		delete from sys_role_permit_mapping where id = #{id}
+	</delete>
+	
+	<delete id="delByRoleId" parameterType="admin.entity.SysRolePermitMapping">
+		delete from sys_role_permit_mapping where tc_sys_role_id = #{tc_sys_role_id}
+	</delete>
+	
+	<update id="upd" parameterType="admin.entity.SysRolePermitMapping">
+		update sys_role_permit_mapping set
+		  	   tc_sys_role_id = #{m.tc_sys_role_id},
+		  	   tc_sys_permit_id = #{m.tc_sys_permit_id}
+		 where id = #{m.id}
+	</update>
+  	
+	<resultMap type="admin.entity.SysRolePermitMapping" id="result">
+		<id property="m.id" column="id"/>
+		<result property="m.tc_sys_role_id" column="tc_sys_role_id"/>
+		<result property="m.tc_sys_permit_id" column="tc_sys_permit_id"/>
+	</resultMap>
+  	
+	<sql id="columns">
+		ID, TC_SYS_ROLE_ID, TC_SYS_PERMIT_ID
+	</sql>
+	
+	<sql id="page">
+		<if test="rownum!=null and pagesize!=null"> limit #{rownum}, #{pagesize} </if>
+	</sql>
+	
+	<sql id="dynamicWhere">
+		<where>
+			<if test="tc_sys_role_id != null and tc_sys_role_id != ''"> and TC_SYS_ROLE_ID = #{tc_sys_role_id} </if>
+		</where>
+	</sql>	
+	
+	<select id="getById" resultMap="result">
+		select <include refid="columns"/> from sys_role_permit_mapping where id = #{id}
+	</select>
+	
+	<select id="get" resultType="list" resultMap="result">
+		select <include refid="columns"/> from sys_role_permit_mapping
+		<include refid="dynamicWhere" /> order by 1
+		<include refid="page" />
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(1) from sys_role_permit_mapping
+		<include refid="dynamicWhere" />
+	</select>
+</mapper>  

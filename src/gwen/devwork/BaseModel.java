@@ -4,6 +4,15 @@ import java.util.HashMap;
 
 public abstract class BaseModel 
 {
+	Long id; // 用于insert、update、delete操作后返回主键ID
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	HashMap<String, Object> m;
 
 	public HashMap<String, Object> getM() 

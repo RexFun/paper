@@ -9,7 +9,7 @@
        						 tc_name, 
        						 tc_url, 
        						 tc_sys_permit_id) 
-       	values (<choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>null,</otherwise></choose>
+       	values (<choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>0,</otherwise></choose>
        			#{m.tc_code},
        			#{m.tc_name},
        			#{m.tc_url},
@@ -22,7 +22,7 @@
 	
 	<update id="upd" parameterType="admin.entity.SysMenu">
 		update sys_menu set
-		  pid = <choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>null,</otherwise></choose>
+		  pid = <choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>0,</otherwise></choose>
 		  tc_code = #{m.tc_code},
 		  tc_name = #{m.tc_name},
 		  tc_url = #{m.tc_url},

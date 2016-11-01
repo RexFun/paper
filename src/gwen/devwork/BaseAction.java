@@ -1,9 +1,7 @@
 package gwen.devwork;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,7 +70,7 @@ public abstract class BaseAction<T> extends ActionSupport
 		getReq().setAttribute(key, value);
 	}
 	
-	public void print(String s)
+	public void print(Object o)
 	{
 		try
 		{
@@ -80,7 +78,7 @@ public abstract class BaseAction<T> extends ActionSupport
 			{
 				out = getBaseResp().getWriter();
 			}
-			out.print(s);
+			out.print(o);
 		}
 		catch(Exception ex)
 		{

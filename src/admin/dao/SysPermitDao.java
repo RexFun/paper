@@ -1,5 +1,8 @@
 package admin.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import admin.entity.SysPermit;
@@ -13,5 +16,10 @@ public class SysPermitDao extends BaseDao<SysPermit,Long>
 	public Class getEntityClass()
 	{
 		return SysPermit.class;
+	}
+	
+	public List getByRoleId(Map<String, Object> m)
+	{
+		return this.getSqlSession().selectList(getStatementName("getByRoleId"), m);
 	}
 }

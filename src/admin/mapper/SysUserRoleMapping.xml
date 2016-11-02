@@ -11,6 +11,14 @@
 		delete from sys_user_role_mapping where id = #{id}
 	</delete>
 	
+	<delete id="delByUserId" parameterType="admin.entity.SysUserRoleMapping">
+		delete from sys_user_role_mapping where tc_sys_user_id = #{tc_sys_user_id}
+	</delete>
+	
+	<delete id="delByRoleId" parameterType="admin.entity.SysUserRoleMapping">
+		delete from sys_user_role_mapping where tc_sys_role_id = #{tc_sys_role_id}
+	</delete>
+	
 	<update id="upd" parameterType="admin.entity.SysUserRoleMapping">
 		update sys_user_role_mapping set
 		  	   tc_sys_user_id = #{m.tc_sys_user_id},
@@ -37,7 +45,18 @@
 			<if test="tc_sys_user_id != null and tc_sys_user_id != ''"> and TC_SYS_USER_ID = #{tc_sys_user_id} </if>
 			<if test="tc_sys_role_id != null and tc_sys_role_id != ''"> and TC_SYS_ROLE_ID = #{tc_sys_role_id} </if>
 		</where>
-	</sql>	
+	</sql>
+	
+	<select id="getRoleIdsByUserId" resultType="String">
+		select t.tc_sys_role_ids from 
+		(
+			select tt.tc_sys_user_id, 
+				   group_concat(tt.tc_sys_role_id) as tc_sys_role_ids
+			  from sys_user_role_mapping tt 
+			 group by tt.tc_sys_user_id
+		) t 
+		where t.tc_sys_user_id = #{tc_sys_user_id}
+	</select>
 	
 	<select id="getById" resultMap="result">
 		select <include refid="columns"/> from sys_user_role_mapping where id = #{id}

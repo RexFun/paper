@@ -19,12 +19,6 @@ public class SysRolePermitMappingService extends BaseService<SysRolePermitMappin
 		return sysRolePermitMappingDao;
 	}
 	
-	@Override
-	public void add(SysRolePermitMapping po)
-	{
-		sysRolePermitMappingDao.add(po);
-	}
-	
 	public void delByRoleId(Long roleId)
 	{
 		sysRolePermitMappingDao.delByRoleId(roleId);

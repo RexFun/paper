@@ -15,6 +15,10 @@
 		delete from sys_role_permit_mapping where tc_sys_role_id = #{tc_sys_role_id}
 	</delete>
 	
+	<delete id="delByPermitId" parameterType="admin.entity.SysRolePermitMapping">
+		delete from sys_role_permit_mapping where tc_sys_permit_id = #{tc_sys_permit_id}
+	</delete>
+	
 	<update id="upd" parameterType="admin.entity.SysRolePermitMapping">
 		update sys_role_permit_mapping set
 		  	   tc_sys_role_id = #{m.tc_sys_role_id},
@@ -40,7 +44,18 @@
 		<where>
 			<if test="tc_sys_role_id != null and tc_sys_role_id != ''"> and TC_SYS_ROLE_ID = #{tc_sys_role_id} </if>
 		</where>
-	</sql>	
+	</sql>
+	
+	<select id="getPermitIdsByRoleId" resultType="String">
+		select t.tc_sys_permit_ids from 
+		(
+			select tt.tc_sys_role_id, 
+				   group_concat(tt.tc_sys_permit_id) as tc_sys_permit_ids
+			  from sys_role_permit_mapping tt 
+			 group by tt.tc_sys_role_id
+		) t 
+		where t.tc_sys_role_id = #{tc_sys_role_id}
+	</select>
 	
 	<select id="getById" resultMap="result">
 		select <include refid="columns"/> from sys_role_permit_mapping where id = #{id}

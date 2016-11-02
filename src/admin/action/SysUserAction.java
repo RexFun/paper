@@ -1,5 +1,8 @@
 package admin.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -10,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import admin.entity.SysRole;
 import admin.entity.SysUser;
+import admin.service.SysRoleService;
 import admin.service.SysUserService;
 import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
@@ -26,6 +31,9 @@ public class SysUserAction extends BaseAction<SysUser>
 {
 	@Autowired
 	private SysUserService service;
+	@Autowired
+	private SysRoleService roleService;
+	
 	//实体类
 	private SysUser po;
 	public SysUser getPo() {return po;}
@@ -101,5 +109,42 @@ public class SysUserAction extends BaseAction<SysUser>
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());
+	}
+	
+	@Action(value="getRoleTreeNodes")
+	public void getRoleTreeNodes()
+	{
+		List<SysRole> resultData = roleService.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(SysRole o : resultData)
+		{
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
+	}
+	
+	@Action(value="getRoleTreeNodesByUser")
+	public void getRoleTreeNodesByUser()
+	{
+		Map m = new HashMap();
+		m.put("tc_sys_user_id", getReq().getLong("id"));
+		List<SysRole> userRoleData = roleService.getByUserId(m);
+		List<SysRole> roleData = roleService.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		
+		for(int i=0; i<roleData.size(); i++)
+		{
+			SysRole o = roleData.get(i);
+			for(int j=0; j<userRoleData.size(); j++)
+			{
+				SysRole o1 = userRoleData.get(j);
+				if(o.getLong("id") == o1.getLong("id"))
+				{
+					o.set("checked", true);
+				}
+			}
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
 	}
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import admin.entity.SysPermit;
 import admin.entity.SysRole;
 import admin.service.SysPermitService;
-import admin.service.SysRolePermitMappingService;
 import admin.service.SysRoleService;
 import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
@@ -34,8 +33,6 @@ public class SysRoleAction extends BaseAction<SysRole>
 	private SysRoleService service;
 	@Autowired
 	private SysPermitService permitService;
-	@Autowired
-	private SysRolePermitMappingService sysRolePermitMappingService;
 	
 	//实体类
 	private SysRole po;

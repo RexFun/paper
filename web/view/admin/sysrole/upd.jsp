@@ -71,7 +71,7 @@ $gwen.form.callback = function(){
 	<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}"/></div>
 	<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}"/></div>
 	<input type="hidden" name="po.m.id" value="${po.m.id}">
-	<input type="hidden" id="tc_sys_permit_ids" name="po.m.tc_sys_permit_ids" value="">
+	<input type="hidden" id="tc_sys_permit_ids" name="po.m.tc_sys_permit_ids" value="${po.m.tc_sys_permit_ids}">
 	<div><ul id="permitTree" class="ztree"></ul></div>
 	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
 	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>

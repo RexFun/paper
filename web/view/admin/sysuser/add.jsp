@@ -36,7 +36,7 @@ var setting =
 	},
 	callback: {
 		onCheck: function (event, treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("roleTree")
+			var zTree = $.fn.zTree.getZTreeObj("roleTree");
 		    var nodes = zTree.getCheckedNodes(true);
 	    	var ids = [];
 	    	for(var i=0; i<nodes.length; i++) {
@@ -49,6 +49,15 @@ var setting =
 // zTree的初始化
 $(function(){
     zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
+    // 全选/全不选
+    $("#chkAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("roleTree");
+        if($(this).prop("checked")==true){
+        	zTree.checkAllNodes(true);
+        }else{
+        	zTree.checkAllNodes(false);
+        }
+    });
 });
 /**********************************************************/
 /* 界面回调函数 */
@@ -66,16 +75,33 @@ $gwen.form.callback = function(){
 	<li><a href="get.action">用户管理</a></li>
 	<li class="active">新增</li>
 </ol>
-<!-- form -->
-<form id="dataForm" role="form" action="add2.action" method="post">
-	<div class="form-group"><label for="tc_code">用户代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
-	<div class="form-group"><label for="tc_name">用户名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
-	<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" /></div>
-	<div class="form-group"><label for="tc_password">用户密码：</label><input type="text" class="form-control" id="tc_password" name="po.m.tc_password" /></div>
-	<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="">
-	<div><ul id="roleTree" class="ztree"></ul></div>
-	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
-</form>
+<div class="container">
+	<div class="row clearfix">
+		<!-- left
+		========================================================= -->
+		<div class="col-md-6 column">
+			<!-- form -->
+			<form id="dataForm" role="form" action="add2.action" method="post">
+				<div class="form-group"><label for="tc_code">用户代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
+				<div class="form-group"><label for="tc_name">用户名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
+				<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" /></div>
+				<div class="form-group"><label for="tc_password">用户密码：</label><input type="text" class="form-control" id="tc_password" name="po.m.tc_password" /></div>
+				<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="">
+				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+			</form>
+		</div>
+		<!-- right
+		========================================================= -->
+		<div class="col-md-6 column">
+			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
+				<div style="margin-left:10px">
+					<input type="checkbox" id="chkAll"/><label for="chkAll">全选</label>
+				</div>
+				<ul id="roleTree" class="ztree"></ul>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

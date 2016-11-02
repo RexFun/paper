@@ -58,17 +58,21 @@ $(function(){
 	<li><a href="get.action">角色管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-6 column">
 			<dl class="dl-horizontal">
 				<dt>角色ID：</dt><dd>${po.m.id}</dd>
 				<dt>角色代号：</dt><dd>${po.m.tc_code}</dd>
 				<dt>角色名称：</dt><dd>${po.m.tc_name}</dd>
 			</dl>
 		</div>
+		<div class="col-md-6 column">
+			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
+				<ul id="permitTree" class="ztree"></ul>
+			</div>
+		</div>
 	</div>
 </div>
-<div><ul id="permitTree" class="ztree"></ul></div>
 </body>
 </html>

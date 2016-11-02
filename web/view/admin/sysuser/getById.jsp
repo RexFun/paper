@@ -58,9 +58,9 @@ $(function(){
 	<li><a href="get.action">用户管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-6 column">
 			<dl class="dl-horizontal">
 				<dt>用户ID：</dt><dd>${po.m.id}</dd>
 				<dt>用户代号：</dt><dd>${po.m.tc_code}</dd>
@@ -70,8 +70,12 @@ $(function(){
 				<dt>创建时间：</dt><dd>${po.m.tc_add_time}</dd>
 			</dl>
 		</div>
+		<div class="col-md-6 column">
+			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
+				<ul id="roleTree" class="ztree"></ul>
+			</div>
+		</div>
 	</div>
 </div>
-<div><ul id="roleTree" class="ztree"></ul></div>
 </body>
 </html>

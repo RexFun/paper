@@ -1,5 +1,7 @@
 package admin.action;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -101,5 +103,17 @@ public class SysPermitAction extends BaseAction<SysPermit>
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());
+	}
+	
+	@Action(value="getPermitTreeNodes")
+	public void getPermitTreeNodes()
+	{
+		List<SysPermit> resultData = service.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(SysPermit o : resultData)
+		{
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
 	}
 }

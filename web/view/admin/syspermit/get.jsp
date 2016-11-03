@@ -2,6 +2,55 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/ztree/css/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="${ctx}/lib/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript">
+/**********************************************************/
+/* zTree配置 */
+/**********************************************************/
+// zTree 的参数配置
+var zTreeObj;
+var setting = 
+{
+	check: 
+	{
+		enable: true
+	},
+	async: 
+	{
+		enable: true,
+		url:"getPermitTreeNodes.action"
+	},
+	data: 
+	{
+		key: 
+		{
+			name:"tc_name"
+		},
+		simpleData: 
+		{
+			idKey:"id",
+			pIdKey:"pid",
+			enable: true
+		}
+	},
+	callback: {
+	}
+};
+// zTree的初始化
+$(function(){
+    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
+});
+</script>
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
@@ -120,7 +169,23 @@ $(function() {
 </div>
 <!-- data list
 ======================================================================================================= -->
-<table id="tb_list"></table>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-10 column">
+			<fieldset>
+			<legend>权限列表</legend>
+				<table id="tb_list"></table>
+			</fieldset>
+		</div>
+		<div class="col-md-2 column">
+			<fieldset>
+			<legend>预览</legend>
+				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+				<ul id="permitTree" class="ztree"></ul>
+			</fieldset>
+		</div>
+	</div>
+</div>
 <!-- query form modal
 ======================================================================================================= -->
 <form id="form_query">

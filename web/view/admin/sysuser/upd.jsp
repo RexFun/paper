@@ -49,6 +49,15 @@ var setting =
 // zTree的初始化
 $(function(){
     zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("roleTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
     // 全选/全不选
     $("#chkAll").click(function(){
     	var zTree = $.fn.zTree.getZTreeObj("roleTree");
@@ -75,6 +84,35 @@ $gwen.form.callback = function(){
 	<li><a href="get.action">用户管理</a></li>
 	<li class="active">修改</li>
 </ol>
+<!-- form -->
+<form id="dataForm" role="form" action="upd2.action" method="post">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-6 column">
+			<fieldset>
+			<legend>基础信息</legend>
+				<div class="form-group"><label for="tc_code">用户代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}"/></div>
+				<div class="form-group"><label for="tc_name">用户名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}"/></div>
+				<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" value="${po.m.tc_email}"/></div>
+				<div class="form-group"><label for="tc_password">用户密码：</label><input type="text" class="form-control" id="tc_password" name="po.m.tc_password" value="${po.m.tc_password}"/></div>
+				<input type="hidden" name="po.m.id" value="${po.m.id}">
+				<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="${po.m.tc_sys_role_ids}">
+				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+			</fieldset>
+		</div>
+		<div class="col-md-6 column">
+			<fieldset>
+			<legend>权限</legend>
+				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+				<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
+				<ul id="roleTree" class="ztree"></ul>
+			</fieldset>
+		</div>
+	</div>
+</div>
+</form>
+<%-- 
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
@@ -93,12 +131,14 @@ $gwen.form.callback = function(){
 		<div class="col-md-6 column">
 			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
 				<div style="margin-left:10px">
-					<input type="checkbox" id="chkAll" value=""/><label for="chkAll">全选</label>
+					<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+					<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
 				</div>
 				<ul id="roleTree" class="ztree"></ul>
 			</div>
 		</div>
 	</div>
 </div>
+ --%>
 </body>
 </html>

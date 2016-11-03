@@ -49,6 +49,15 @@ var setting =
 // zTree的初始化
 $(function(){
     zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("roleTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
 });
 </script>
 </head>
@@ -61,19 +70,24 @@ $(function(){
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
-			<dl class="dl-horizontal">
-				<dt>用户ID：</dt><dd>${po.m.id}</dd>
-				<dt>用户代号：</dt><dd>${po.m.tc_code}</dd>
-				<dt>用户名称：</dt><dd>${po.m.tc_name}</dd>
-				<dt>用户邮箱：</dt><dd>${po.m.tc_email}</dd>
-				<dt>用户密码：</dt><dd>${po.m.tc_password}</dd>
-				<dt>创建时间：</dt><dd>${po.m.tc_add_time}</dd>
-			</dl>
+			<fieldset>
+			<legend>基础信息</legend>
+				<dl class="dl-horizontal">
+					<dt>用户ID：</dt><dd>${po.m.id}</dd>
+					<dt>用户代号：</dt><dd>${po.m.tc_code}</dd>
+					<dt>用户名称：</dt><dd>${po.m.tc_name}</dd>
+					<dt>用户邮箱：</dt><dd>${po.m.tc_email}</dd>
+					<dt>用户密码：</dt><dd>${po.m.tc_password}</dd>
+					<dt>创建时间：</dt><dd>${po.m.tc_add_time}</dd>
+				</dl>
+			</fieldset>
 		</div>
 		<div class="col-md-6 column">
-			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
+			<fieldset>
+			<legend>权限</legend>
+				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 				<ul id="roleTree" class="ztree"></ul>
-			</div>
+			</fieldset>
 		</div>
 	</div>
 </div>

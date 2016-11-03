@@ -49,6 +49,15 @@ var setting =
 // zTree的初始化
 $(function(){
     zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
 });
 </script>
 </head>
@@ -68,9 +77,11 @@ $(function(){
 			</dl>
 		</div>
 		<div class="col-md-6 column">
-			<div style="border:solid 1px gray;margin:10px 0px 10px 0px">
+			<fieldset>
+			<legend>权限</legend>
+				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 				<ul id="permitTree" class="ztree"></ul>
-			</div>
+			</fieldset>
 		</div>
 	</div>
 </div>

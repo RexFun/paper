@@ -1,5 +1,8 @@
 package admin.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -11,7 +14,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import admin.entity.SysMenu;
+import admin.entity.SysPermit;
 import admin.service.SysMenuService;
+import admin.service.SysPermitService;
 import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
 import gwen.util.CollectionUtil;
@@ -26,6 +31,8 @@ public class SysMenuAction extends BaseAction<SysMenu>
 {
 	@Autowired
 	private SysMenuService service;
+	@Autowired
+	private SysPermitService permitService;
 	//实体类
 	private SysMenu po;
 	public SysMenu getPo() {return po;}
@@ -101,5 +108,37 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());
+	}
+	
+	@Action(value="getPermitTreeNodes")
+	public void getPermitTreeNodes()
+	{
+		List<SysPermit> resultData = permitService.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(SysPermit o : resultData)
+		{
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
+	}
+	
+	@Action(value="getPermitTreeNodesByMenu")
+	public void getPermitTreeNodesByMenu()
+	{
+		po = service.getById(getReq().getLong("id"));
+		
+		List<SysPermit> permitData = permitService.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		
+		for(int i=0; i<permitData.size(); i++)
+		{
+			SysPermit o = permitData.get(i);
+			if(po.getM().containsKey("tc_sys_permit_id") && o.getLong("id") == po.getLong("tc_sys_permit_id"))
+			{
+				o.set("checked", true);
+			}
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
 	}
 }

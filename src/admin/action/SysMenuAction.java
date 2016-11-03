@@ -1,7 +1,6 @@
 package admin.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,6 +107,18 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());
+	}
+	
+	@Action(value="getMenuTreeNodes")
+	public void getMenuTreeNodes()
+	{
+		List<SysMenu> resultData = service.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(SysMenu o : resultData)
+		{
+			treeNodes.add(o.getM());
+		}
+		printJson(treeNodes);
 	}
 	
 	@Action(value="getPermitTreeNodes")

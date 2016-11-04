@@ -12,9 +12,13 @@
 var zTreeObj;
 var setting = 
 {
+	view: 
+	{
+		selectedMulti: false
+	},
 	check: 
 	{
-		enable: true
+		enable: false
 	},
 	async: 
 	{

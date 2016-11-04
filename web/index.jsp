@@ -1,12 +1,14 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="auth.action.AuthLoginAction"%>
+<%@page import="admin.entity.SysUser"%>
 <%@page import="auth.Auth"%>
 <%
 String catpath = request.getContextPath()+"/admin/papercategory/get.action";
 String modelpath = request.getContextPath()+"/admin/papermodel/get.action";
 
 Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
-String account = o==null?"":((Auth)o).getAccount();
+String account = o==null?"":((SysUser)o).getString("tc_code");
+String menuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_UserMenuTreeNodes);
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
@@ -41,6 +43,20 @@ String account = o==null?"":((Auth)o).getAccount();
 </style>
 <script src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+function drawNavMenu(){
+	var menuTreeJson = <%=menuTreeNodes%>;
+	console.info(menuTreeJson);
+/* 	for(var i=0; i<menuTreeJson.length; i++){
+		var o = menuTreeJson[i];
+		if(o.pid==0){
+			$("#url-list").append("<li url=\""+o.tc_url+"\"><a href=\"#\">"+o.tc_name+" </a></li>");
+		}else if(o.p){
+			$("#url-list").append("<li url=\""+o.tc_url+"\"><a href=\"#\">"+o.tc_name+" </a></li>");
+		}
+	} */
+}
+
 $(function(){
 	/* navsidebar */
 	$('.openMdNav').click(function () {
@@ -50,6 +66,7 @@ $(function(){
 	    $(this).toggleClass('open');
 	});
 	/* accordion-menu */
+	drawNavMenu();
 	$("#jquery-accordion-menu").jqueryAccordionMenu();
 
 	//列表项背景颜色切换
@@ -64,6 +81,7 @@ $(function(){
 		$(this).siblings().removeClass("active");
 		if(typeof($(this).attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).attr("url"));
+			alert($("#mainFrame").attr("src"));
 			$('.openMdNav').click();
 		}
 	});
@@ -112,8 +130,7 @@ $(function(){
 			<div id="jquery-accordion-menu" class="jquery-accordion-menu skyblue">
 				<div class="jquery-accordion-menu-header" id="form"></div>
 				<ul id="url-list">
-					<li class="active" url=""><a href="#"><i class="fa fa-home"></i>主页
-					</a></li>
+					<li class="active" url=""><a href="#"><i class="fa fa-home"></i>主页</a></li>
 					<li url="<%=catpath%>"><a href="#"><i class="fa fa-glass"></i>类别管理</a></li>
 					<li url="<%=modelpath%>"><a href="#"><i class="fa fa-file-image-o"></i>模型管理</a></li>
 					<li><a href="#"><i class="fa fa-cog"></i>系统管理 </a><span class="jquery-accordion-menu-label"> 4 </span>
@@ -158,39 +175,5 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<%-- 
-<div class="container">
-	<!-- 导航
-	========================================================= -->
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">后台管理系统</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul id="nav-menu" class="nav navbar-nav">
-					    <li class="" url=""><a href="#mainFrame">首页</a></li>
-					    <li class="active" url="<%=catpath%>"><a href="#mainFrame">类别管理</a></li>
-					    <li class="" url="<%=modelpath%>"><a href="#mainFrame">模型管理</a></li>
-					    <li class="" url=""><a href="#mainFrame">用户管理</a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><i class="glyphicon glyphicon-user"></i><%=account%></a></li>
-						<li><a href="<%=ctx%>/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i>登出</a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
-	<!-- 主界面
-	========================================================= -->
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<iframe id="mainFrame" name="mainFrame" src="<%=catpath%>" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="no"></iframe>
-		</div>
-	</div>
-</div>
- --%>
 </body>
 </html>

@@ -22,7 +22,7 @@ $(function(){
 		var url = $("#loginForm").attr('action');
 		$.post(
 			url, 
-			{'user.account':$("#inputAccount").val(),'user.password':$("#inputPassword").val()},
+			{'auth.account':$("#inputAccount").val(),'auth.password':$("#inputPassword").val()},
 		  	function(data) {
 				if(data.success){
 					location.href = "<%=path%>/index.jsp";
@@ -44,13 +44,13 @@ $(function(){
 				<div class="form-group">
 					 <label for="inputAccount" class="col-sm-2 control-label">账号</label>
 					<div class="col-sm-10">	
-						<input type ='text' value="admin" class="form-control input-lg" id="inputAccount" name='user.account'/>
+						<input type ='text' value="admin" class="form-control input-lg" id="inputAccount" name='auth.account'/>
 					</div>
 				</div>
 				<div class="form-group">
 					 <label for="inputPassword" class="col-sm-2 control-label">密码</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control input-lg" id="inputPassword" name='user.password'/>
+						<input type="password" class="form-control input-lg" id="inputPassword" name='auth.password'/>
 					</div>
 				</div>
 				<div class="form-group">

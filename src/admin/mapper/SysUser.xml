@@ -42,6 +42,7 @@
 			<if test="tc_code != null and tc_code != ''"> and TC_CODE like concat('%',#{tc_code},'%') </if>
 			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
 			<if test="tc_email != null and tc_email != ''"> and TC_EMAIL like concat('%',#{tc_email},'%') </if>
+			<if test="login_account != null and login_account != ''"> and (TC_CODE = #{login_account} or TC_NAME = #{login_account} or TC_EMAIL = #{login_account})</if>
 		</where>
 	</sql>	
 	

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import admin.entity.SysUser;
 import auth.action.AuthLoginAction;
 
 public class AuthFilter implements Filter 
@@ -51,9 +52,10 @@ public class AuthFilter implements Filter
 //				res.sendRedirect(req.getContextPath() + "/login.html");
 //				return;
 //			}
-			Auth model = (Auth) req.getSession().getAttribute(AuthLoginAction.SessionName_LoginUser);
+			
+			SysUser model = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_LoginUser);
 			//没有登录
-			if (model == null || model.getAccount() == null)
+			if (model == null || model.getString("tc_code") == null)
 			{
 				res.sendRedirect(req.getContextPath() + "/login.jsp");
 				return;

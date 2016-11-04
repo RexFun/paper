@@ -1,15 +1,23 @@
 package auth.action;
 
-import gwen.devwork.BaseAction;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
+
+import admin.entity.SysUser;
+import admin.service.SysMenuService;
+import admin.service.SysUserService;
 import auth.Auth;
+import gwen.devwork.BaseAction;
 
 @SuppressWarnings("serial")
 @Controller
@@ -18,16 +26,22 @@ import auth.Auth;
 @Namespace("/auth")
 public class AuthLoginAction extends BaseAction<Auth> 
 {
-	public static final String SessionName_LoginUser = "COMMON_LOGIN_USER";
+	@Autowired
+	private SysUserService service;
+	@Autowired
+	private SysMenuService menuService;
 	
-	private Auth user;
-	public Auth getUser() 
+	public static final String SessionName_LoginUser = "COMMON_LOGIN_USER";
+	public static final String SessionName_UserMenuTreeNodes = "COMMON_USER_MENU_TREE_NODES";
+	
+	private Auth auth;
+	public Auth getAuth() 
 	{
-		return user;
+		return auth;
 	}
-	public void setUser(Auth user) 
+	public void setAuth(Auth auth) 
 	{
-		this.user = user;
+		this.auth = auth;
 	}
 
 	@Action(value = "login")
@@ -35,15 +49,19 @@ public class AuthLoginAction extends BaseAction<Auth>
 	{
 		try 
 		{
-			if (user.getAccount().equals("admin") && user.getPassword().equals("")) 
-			{
-				getSession().setAttribute(SessionName_LoginUser, user);
-				getResult().setSuccess(true);
-			}
-			else 
+			Map m = new HashMap();
+			m.put("login_account", auth.getAccount());
+			if(service.getCount(m)<1)
 			{
 				getResult().setSuccess(false);
-				getResult().setMsg("账号或密码错误");
+				getResult().setMsg("账号不存在");
+			}
+			else
+			{
+				SysUser u = (SysUser)service.get(m).get(0);
+				getSession().setAttribute(SessionName_LoginUser, u);
+				getSession().setAttribute(SessionName_UserMenuTreeNodes, new Gson().toJson(menuService.getByUserId(u.getLong("id"))));
+				getResult().setSuccess(true);
 			}
 		}
 		catch (Exception e)

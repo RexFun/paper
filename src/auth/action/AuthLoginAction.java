@@ -18,6 +18,7 @@ import admin.service.SysMenuService;
 import admin.service.SysUserService;
 import auth.Auth;
 import gwen.devwork.BaseAction;
+import gwen.util.EncryptionUtil;
 
 @SuppressWarnings("serial")
 @Controller
@@ -59,9 +60,17 @@ public class AuthLoginAction extends BaseAction<Auth>
 			else
 			{
 				SysUser u = (SysUser)service.get(m).get(0);
-				getSession().setAttribute(SessionName_LoginUser, u);
-				getSession().setAttribute(SessionName_UserMenuTreeNodes, new Gson().toJson(menuService.getByUserId(u.getLong("id"))));
-				getResult().setSuccess(true);
+				if(!EncryptionUtil.getMD5(auth.getPassword()).equals(u.getString("tc_password")))
+				{
+					getResult().setSuccess(false);
+					getResult().setMsg("密码不正确");
+				}
+				else
+				{
+					getSession().setAttribute(SessionName_LoginUser, u);
+					getSession().setAttribute(SessionName_UserMenuTreeNodes, new Gson().toJson(menuService.getByUserId(u.getLong("id"))));
+					getResult().setSuccess(true);
+				}
 			}
 		}
 		catch (Exception e)

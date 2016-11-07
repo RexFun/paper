@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.SysUserDao;
 import admin.dao.SysUserRoleMappingDao;
-import admin.entity.SysRole;
 import admin.entity.SysUser;
 import admin.entity.SysUserRoleMapping;
 import gwen.devwork.BaseDao;
 import gwen.devwork.BaseService;
 import gwen.util.CollectionUtil;
+import gwen.util.EncryptionUtil;
 
 @Service("sysUserService")
 public class SysUserService extends BaseService<SysUser,Long>
@@ -29,6 +29,7 @@ public class SysUserService extends BaseService<SysUser,Long>
 	public void add(SysUser po)
 	{
 		// 插入系统用户表
+		po.set("tc_password", EncryptionUtil.getMD5(po.getString("tc_password")));
 		sysUserDao.add(po);
 		// 插入系统角色权限表
 		if (po.get("tc_sys_role_ids").toString().length()<1) return;

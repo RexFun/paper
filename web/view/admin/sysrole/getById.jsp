@@ -70,11 +70,9 @@ $(function(){
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
-			<dl class="dl-horizontal">
-				<dt>角色ID：</dt><dd>${po.m.id}</dd>
-				<dt>角色代号：</dt><dd>${po.m.tc_code}</dd>
-				<dt>角色名称：</dt><dd>${po.m.tc_name}</dd>
-			</dl>
+			<div class="form-group"><label for="id">角色ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
+			<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
+			<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 		</div>
 		<div class="col-md-6 column">
 			<fieldset>

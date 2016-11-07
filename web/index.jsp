@@ -3,12 +3,9 @@
 <%@page import="admin.entity.SysUser"%>
 <%@page import="auth.Auth"%>
 <%
-String catpath = request.getContextPath()+"/admin/papercategory/get.action";
-String modelpath = request.getContextPath()+"/admin/papermodel/get.action";
-
 Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
 String account = o==null?"":((SysUser)o).getString("tc_code");
-String menuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_UserMenuTreeNodes);
+String navMenuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_UserMenuTreeNodes);
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
@@ -33,7 +30,7 @@ String menuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_
 		font-weight:bold;
 		color:#FFF;
 	}
-	#demo-list a{
+	#nav-menu-list a{
 		overflow:hidden;
 		text-overflow:ellipsis;
 		-o-text-overflow:ellipsis;
@@ -43,20 +40,6 @@ String menuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_
 </style>
 <script src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
-
-function drawNavMenu(){
-	var menuTreeJson = <%=menuTreeNodes%>;
-	console.info(menuTreeJson);
-/* 	for(var i=0; i<menuTreeJson.length; i++){
-		var o = menuTreeJson[i];
-		if(o.pid==0){
-			$("#url-list").append("<li url=\""+o.tc_url+"\"><a href=\"#\">"+o.tc_name+" </a></li>");
-		}else if(o.p){
-			$("#url-list").append("<li url=\""+o.tc_url+"\"><a href=\"#\">"+o.tc_name+" </a></li>");
-		}
-	} */
-}
-
 $(function(){
 	/* navsidebar */
 	$('.openMdNav').click(function () {
@@ -66,26 +49,81 @@ $(function(){
 	    $(this).toggleClass('open');
 	});
 	/* accordion-menu */
-	drawNavMenu();
+	var navMenuTreeHtml = new treeMenu(<%=navMenuTreeNodes%>).init(0);
+	$(".jquery-accordion-menu-header").after(navMenuTreeHtml);
 	$("#jquery-accordion-menu").jqueryAccordionMenu();
 
 	//列表项背景颜色切换
-	$("#demo-list li").click(function(){
-		$("#demo-list li.active").removeClass("active")
+	$("#nav-menu-list li").click(function(){
+		$("#nav-menu-list li.active").removeClass("active")
 		$(this).addClass("active");
 	});
 	
 	//
-	$("#url-list li").click(function(){
+	$("#nav-menu-list li").click(function(){
 		$(this).addClass("active");
 		$(this).siblings().removeClass("active");
 		if(typeof($(this).attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).attr("url"));
-			alert($("#mainFrame").attr("src"));
 			$('.openMdNav').click();
 		}
 	});
 });
+</script>
+<script type="text/javascript">
+/*******************************
+ * treeMenu 用于生成HTML菜单元素
+ *******************************/
+function treeMenu(a){
+    this.tree=a||[];
+    this.groups={};
+};
+// 扩展原型方法
+treeMenu.prototype={
+   	/*
+     * 初始化
+	 * pid : json对象中的pid值，默认传0
+	 */
+    init:function(pid){
+        this.group();
+        return this.getDom(pid,this.groups[pid]);
+    },
+    /*
+     * 按pid为key分类存放菜单数组，如：Object {0: Array[3], 3: Array[1]}
+     */
+    group:function(){
+        for(var i=0;i<this.tree.length;i++){
+            if(this.groups[this.tree[i].pid]){
+                this.groups[this.tree[i].pid].push(this.tree[i]);
+            }else{
+                this.groups[this.tree[i].pid]=[];
+                this.groups[this.tree[i].pid].push(this.tree[i]);
+            }
+        }
+    },
+    /*
+     * 递归遍历生成菜单元素
+     * k : this.groups对象的key值(以pid为key)
+     * a : this.groups对象的value值(数组类型)
+    */
+    getDom:function(k,a){
+        if(!a){return ""}
+        var html = "\n<ul id=\"nav-menu-list\">\n";
+        html += "<li url=\"${ctx}/home.jsp\"><a href=\"#\"><i class=\"fa fa-cog\"></i>首页 </a>";
+        if(k>0) html = "\n<ul class=\"submenu\">\n";
+        for(var i=0;i<a.length;i++){
+        	if(a[i].tc_url != "")
+				html += "<li url=\"${ctx}"+a[i].tc_url+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
+            else
+				html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
+            		
+            html += this.getDom(a[i].id,this.groups[a[i].id]);
+            html += "</li>\n";
+        };
+        html += '</ul>\n';
+        return html;
+    }
+};
 </script>
 <script type="text/javascript">
 	(function($) {
@@ -119,7 +157,7 @@ $(function(){
 			});
 		}
 		$(function() {
-			filterList($("#form"), $("#demo-list"));
+			filterList($("#form"), $("#nav-menu-list"));
 		});
 		})(jQuery);
 </script>
@@ -129,19 +167,6 @@ $(function(){
 		<div class="content">
 			<div id="jquery-accordion-menu" class="jquery-accordion-menu skyblue">
 				<div class="jquery-accordion-menu-header" id="form"></div>
-				<ul id="url-list">
-					<li class="active" url=""><a href="#"><i class="fa fa-home"></i>主页</a></li>
-					<li url="<%=catpath%>"><a href="#"><i class="fa fa-glass"></i>类别管理</a></li>
-					<li url="<%=modelpath%>"><a href="#"><i class="fa fa-file-image-o"></i>模型管理</a></li>
-					<li><a href="#"><i class="fa fa-cog"></i>系统管理 </a><span class="jquery-accordion-menu-label"> 4 </span>
-						<ul class="submenu">
-							<li url="${ctx}/admin/sysmenu/get.action"><a href="#">菜单管理 </a></li>
-							<li url="${ctx}/admin/syspermit/get.action"><a href="#">权限管理 </a></li>
-							<li url="${ctx}/admin/sysrole/get.action"><a href="#">角色管理 </a></li>
-							<li url="${ctx}/admin/sysuser/get.action"><a href="#">用户管理 </a></li>
-						</ul>
-					</li>
-				</ul>
 				<div class="jquery-accordion-menu-footer">Footer</div>
 			</div>
 		</div>
@@ -171,7 +196,7 @@ $(function(){
 		========================================================= -->
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-				<iframe id="mainFrame" name="mainFrame" src="<%=catpath%>" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="no"></iframe>
+				<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="no"></iframe>
 			</div>
 		</div>
 	</div>

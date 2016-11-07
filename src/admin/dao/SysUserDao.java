@@ -14,4 +14,9 @@ public class SysUserDao extends BaseDao<SysUser,Long>
 	{
 		return SysUser.class;
 	}
+
+	public void updPwd(SysUser po)
+	{
+		this.getSqlSession().update(getStatementName("updPwd"), po);
+	}
 }

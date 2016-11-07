@@ -44,7 +44,7 @@ $(function(){
 				<div class="form-group">
 					 <label for="inputAccount" class="col-sm-2 control-label">账号</label>
 					<div class="col-sm-10">	
-						<input type ='text' value="admin" class="form-control input-lg" id="inputAccount" name='auth.account'/>
+						<input type ='text' value="" class="form-control input-lg" id="inputAccount" name='auth.account'/>
 					</div>
 				</div>
 				<div class="form-group">

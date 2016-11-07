@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.Gson;
+
 import admin.entity.SysRole;
 import admin.entity.SysUser;
 import admin.service.SysRoleService;
@@ -20,6 +22,7 @@ import admin.service.SysUserService;
 import gwen.devwork.BaseAction;
 import gwen.devwork.PageNav;
 import gwen.util.CollectionUtil;
+import gwen.util.EncryptionUtil;
 
 
 @SuppressWarnings("serial")
@@ -79,9 +82,48 @@ public class SysUserAction extends BaseAction<SysUser>
 		service.upd(po);
 		print("1");
 	}
+	
+	@Action(value="updPwd1",results={ @Result(name = "success", location = "/view/admin/sysuser/updPwd.jsp")})
+	public String updPwd1() 
+	{
+		po = service.getById(getReq().getLong("id"));
+		return "success";
+	}
+	@Action(value="updPwd2")
+	public void updPwd2() 
+	{
+		try 
+		{
+			po = service.getById(getReq().getLong("id"));
+			if(!EncryptionUtil.getMD5(getReq().getString("old_password")).equals(po.getString("tc_password")))
+			{
+				getResult().setSuccess(false);
+				getResult().setMsg("原密码不正确");
+			}
+			else
+			{
+				po.set("tc_password", EncryptionUtil.getMD5(getReq().getString("new_password")));
+				service.updPwd(po);
+				getResult().setSuccess(true);
+			}
+		}
+		catch (Exception e)
+		{
+			getResult().setSuccess(false);
+			getResult().setMsg(e.getMessage());
+		}
+		printJson(getResult());
+	}
 
 	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/sysuser/getById.jsp")})
 	public String getById() 
+	{
+		po = service.getById(getReq().getLong("id"));
+		return "success";
+	}
+	
+	@Action(value="getMyInfo",results={ @Result(name = "success", location = "/view/admin/sysuser/getMyInfo.jsp")})
+	public String getMyInfo() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";

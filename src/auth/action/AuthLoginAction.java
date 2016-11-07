@@ -60,6 +60,8 @@ public class AuthLoginAction extends BaseAction<Auth>
 			else
 			{
 				SysUser u = (SysUser)service.get(m).get(0);
+				System.out.println("inputpwd:"+auth.getPassword());
+				System.out.println("userpwd:"+u.getString("tc_password"));
 				if(!EncryptionUtil.getMD5(auth.getPassword()).equals(u.getString("tc_password")))
 				{
 					getResult().setSuccess(false);

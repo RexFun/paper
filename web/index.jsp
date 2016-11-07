@@ -5,6 +5,7 @@
 <%
 Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
 String account = o==null?"":((SysUser)o).getString("tc_code");
+String userId = o==null?"":((SysUser)o).getString("id");
 String navMenuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_UserMenuTreeNodes);
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
@@ -59,7 +60,7 @@ $(function(){
 		$(this).addClass("active");
 	});
 	
-	//
+	//导航菜单单击事件
 	$("#nav-menu-list li").click(function(){
 		$(this).addClass("active");
 		$(this).siblings().removeClass("active");
@@ -67,6 +68,11 @@ $(function(){
 			$("#mainFrame").attr("src",$(this).attr("url"));
 			$('.openMdNav').click();
 		}
+	});
+	
+	//用户下拉菜单单击事件
+	$("#user-dropdown-menu li").click(function(){
+		$("#mainFrame").attr("src",$(this).attr("url"));
 	});
 });
 </script>
@@ -181,12 +187,19 @@ treeMenu.prototype={
 			<div class="col-md-12 column">
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="navbar-header">
-						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">后台管理系统</a>
+						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">后台管理系统</a>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#"><i class="glyphicon glyphicon-user"></i><%=account%></a></li>
-							<li><a href="<%=ctx%>/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i>登出</a></li>
+							<li class="dropdown">
+				                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%=account%> <b class="caret"></b></a>
+				                <ul id="user-dropdown-menu" class="dropdown-menu">
+				                    <li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-file"></i> 个人资料 </a></li>
+				                    <li class="divider"></li>
+				                    <li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock"></i> 修改密码 </a></li>
+				                </ul>
+				            </li>
+							<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
 						</ul>
 					</div>
 				</nav>

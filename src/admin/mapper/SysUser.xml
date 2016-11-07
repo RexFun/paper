@@ -15,7 +15,11 @@
 		update sys_user set
 		  	   tc_code = #{m.tc_code},
 		  	   tc_name = #{m.tc_name},
-		  	   tc_email = #{m.tc_email},
+		  	   tc_email = #{m.tc_email}
+		 where id = #{m.id}
+	</update>
+	<update id="updPwd" parameterType="admin.entity.SysUser">
+		update sys_user set
 		  	   tc_password = #{m.tc_password}
 		 where id = #{m.id}
 	</update>

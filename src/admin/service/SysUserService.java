@@ -73,6 +73,11 @@ public class SysUserService extends BaseService<SysUser,Long>
 		}
 	}
 	
+	public void updPwd(SysUser po)
+	{
+		sysUserDao.updPwd(po);
+	}
+	
 	@Override
 	public SysUser getById(Long id) 
 	{

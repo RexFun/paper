@@ -53,7 +53,7 @@ public class AuthFilter implements Filter
 //				return;
 //			}
 			
-			SysUser model = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_LoginUser);
+			SysUser model = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_CurLoginUser);
 			//没有登录
 			if (model == null || model.getString("tc_code") == null)
 			{

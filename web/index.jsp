@@ -1,12 +1,12 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="auth.action.AuthLoginAction"%>
-<%@page import="admin.entity.SysUser"%>
-<%@page import="auth.Auth"%>
+<%@ page import="auth.action.AuthLoginAction"%>
+<%@ page import="admin.entity.SysUser"%>
+<%@ page import="auth.Auth"%>
 <%
-Object o = session.getAttribute(AuthLoginAction.SessionName_LoginUser);
-String account = o==null?"":((SysUser)o).getString("tc_code");
-String userId = o==null?"":((SysUser)o).getString("id");
-String navMenuTreeNodes = (String)session.getAttribute(AuthLoginAction.SessionName_UserMenuTreeNodes);
+SysUser o = (SysUser)session.getAttribute(AuthLoginAction.SessionName_CurLoginUser);
+String userId = o==null?"":o.getString("id");
+String account = o==null?"":o.getString("tc_code");
+String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
@@ -53,23 +53,16 @@ $(function(){
 	var navMenuTreeHtml = new treeMenu(<%=navMenuTreeNodes%>).init(0);
 	$(".jquery-accordion-menu-header").after(navMenuTreeHtml);
 	$("#jquery-accordion-menu").jqueryAccordionMenu();
-
-	//列表项背景颜色切换
-	$("#nav-menu-list li").click(function(){
-		$("#nav-menu-list li.active").removeClass("active")
-		$(this).addClass("active");
-	});
-	
 	//导航菜单单击事件
 	$("#nav-menu-list li").click(function(){
 		$(this).addClass("active");
 		$(this).siblings().removeClass("active");
+		//$("#nav-menu-list li.active").removeClass("active");
 		if(typeof($(this).attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).attr("url"));
 			$('.openMdNav').click();
 		}
 	});
-	
 	//用户下拉菜单单击事件
 	$("#user-dropdown-menu li").click(function(){
 		$("#mainFrame").attr("src",$(this).attr("url"));
@@ -173,7 +166,7 @@ treeMenu.prototype={
 		<div class="content">
 			<div id="jquery-accordion-menu" class="jquery-accordion-menu skyblue">
 				<div class="jquery-accordion-menu-header" id="form"></div>
-				<div class="jquery-accordion-menu-footer">Footer</div>
+				<div class="jquery-accordion-menu-footer"></div>
 			</div>
 		</div>
 	</nav>
@@ -192,7 +185,7 @@ treeMenu.prototype={
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 						<c:choose>
-						<c:when test="${sessionScope.COMMON_LOGIN_USER==null}">
+						<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
 							<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
 						</c:when> 
 						<c:otherwise>

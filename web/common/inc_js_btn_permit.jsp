@@ -1,0 +1,22 @@
+<script type="text/javascript">
+/* 初始化按钮权限 
+ * btnPermitArr : ${sessionScope.CUR_LOGIN_USER.m.btn_permit_json}
+ * */
+function initBtnPermit() {
+	var btnPermitArr = ${sessionScope.CUR_LOGIN_USER.m.btn_permit_json};
+	if(btnPermitArr.length>0){
+		$.each($("[pbtnId^='pbtn_']"),function(i,o) {
+			for(var j=0; j<btnPermitArr.length; j++) {
+				if($(o).attr('pbtnId').indexOf(btnPermitArr[j].tc_code) == -1) {
+					$(o).css({"display":"none"});
+				}else{
+					$(o).css({"display":""});
+					break;
+				}
+			}
+		});
+	}else{
+		$("[pbtnId^='pbtn_']").css({"display":"none"});
+	}
+}
+</script>

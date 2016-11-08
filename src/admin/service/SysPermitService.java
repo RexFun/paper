@@ -1,5 +1,6 @@
 package admin.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.SysPermitDao;
 import admin.dao.SysRolePermitMappingDao;
+import admin.entity.SysMenu;
 import admin.entity.SysPermit;
 import gwen.devwork.BaseDao;
 import gwen.devwork.BaseService;
@@ -38,5 +40,17 @@ public class SysPermitService extends BaseService<SysPermit,Long>
 	public List getByRoleId(Map<String, Object> m)
 	{
 		return sysPermitDao.getByRoleId(m);
+	}
+	
+	public List getBtnPermitByUserId(Long userId)
+	{
+		List<SysPermit> btnPermitData = sysPermitDao.getBtnPermitByUserId(userId);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(int i=0; i<btnPermitData.size(); i++)
+		{
+			SysPermit o = btnPermitData.get(i);
+			treeNodes.add(o.getM());
+		}
+		return treeNodes;
 	}
 }

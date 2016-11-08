@@ -14,7 +14,8 @@ var setting =
 {
 	check: 
 	{
-		enable: true
+		enable: true,
+		chkboxType: { "Y": "p", "N": "s" }
 	},
 	async: 
 	{

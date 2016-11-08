@@ -2,6 +2,7 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
@@ -53,16 +54,19 @@ function initTable(){
 	     {title:'操作', field:'operate', align:'center', valign:'middle', 
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter}
-	    ]
+	    ],
+	    onLoadSuccess:function(){
+	    	initBtnPermit(); //加载完后，执行按钮权限验证
+	    }
 	});
 }
 // 操作列
 function operateFormatter(value, row, index) {
     return [
-        '<button type="button" class="btn btn-default upd">',
+        '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
         '<i class="glyphicon glyphicon-edit"></i>',
         '</button>&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getById">',
+        '<button type="button" class="btn btn-default getById" pbtnId="pbtn_detail'+index+'">',
         '<i class="glyphicon glyphicon-info-sign"></i>',
         '</button>'
     ].join('');
@@ -98,6 +102,7 @@ $(function() {
 	initTable();
 	initToolbar();
 	initModalFormQuery();
+	initBtnPermit();
 });
 </script>
 </head>
@@ -110,11 +115,9 @@ $(function() {
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">
-<div class="btn-group">
-<button type="button" class="btn btn-default" id="b_add"><i class="glyphicon glyphicon-plus"></i></button>
-<button type="button" class="btn btn-default" id="b_del"><i class="glyphicon glyphicon-remove"></i></button>
-<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
-</div>
+<button type="button" class="btn btn-default" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
+<button type="button" class="btn btn-default" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
+<button type="button" class="btn btn-default" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
 </div>
 <!-- data list
 ======================================================================================================= -->

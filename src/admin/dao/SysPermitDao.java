@@ -22,4 +22,9 @@ public class SysPermitDao extends BaseDao<SysPermit,Long>
 	{
 		return this.getSqlSession().selectList(getStatementName("getByRoleId"), m);
 	}
+	
+	public List getBtnPermitByUserId(Long userId)
+	{
+		return this.getSqlSession().selectList(getStatementName("getBtnPermitByUserId"), userId);
+	}
 }

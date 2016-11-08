@@ -75,7 +75,7 @@ $gwen.form.callback = function(){
 </ol>
 <!-- form -->
 <form id="dataForm" role="form" action="add2.action" method="post">
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
 			<fieldset>

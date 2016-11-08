@@ -67,7 +67,7 @@ $(function(){
 	<li><a href="get.action">角色管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
 			<div class="form-group"><label for="id">角色ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>

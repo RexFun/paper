@@ -191,7 +191,12 @@ treeMenu.prototype={
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown">
+						<c:choose>
+						<c:when test="${sessionScope.COMMON_LOGIN_USER==null}">
+							<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
+						</c:when> 
+						<c:otherwise>
+						 	<li class="dropdown">
 				                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%=account%> <b class="caret"></b></a>
 				                <ul id="user-dropdown-menu" class="dropdown-menu">
 				                    <li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-file"></i> 个人资料 </a></li>
@@ -199,6 +204,8 @@ treeMenu.prototype={
 				                    <li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock"></i> 修改密码 </a></li>
 				                </ul>
 				            </li>
+						</c:otherwise> 
+						</c:choose>
 							<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
 						</ul>
 					</div>

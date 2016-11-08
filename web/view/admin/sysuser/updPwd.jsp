@@ -31,7 +31,7 @@ $(function(){
 </ol>
 <!-- form -->
 <form id="pwdForm" role="form" action="updPwd2.action" method="post">
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<fieldset>
@@ -46,7 +46,6 @@ $(function(){
 	</div>
 </div>
 </form>
-
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">

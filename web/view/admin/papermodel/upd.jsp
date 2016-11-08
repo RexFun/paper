@@ -22,7 +22,7 @@ $(function(){
 <!-- form -->
 <form id="dataForm" action="upd2.action" method="post">
 <div class="form-group">
-	<label for="pid">类别名：</label>
+	<label for="pid">所属类别：</label>
  	<select class="form-control" id="pid" name="po.m.pid">
 		<option value="">请选择</option>
 		<s:iterator var="c" value="result.data.catList">

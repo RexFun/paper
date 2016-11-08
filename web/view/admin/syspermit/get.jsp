@@ -173,7 +173,7 @@ $(function() {
 </div>
 <!-- data list
 ======================================================================================================= -->
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-10 column">
 			<fieldset>

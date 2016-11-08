@@ -58,7 +58,7 @@ $(function(){
 	<li><a href="get.action">菜单管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
 			<fieldset>

@@ -122,7 +122,13 @@ $(function() {
 </div>
 <!-- data list
 ======================================================================================================= -->
-<table id="tb_list"></table>
+<div class="wrapper">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<table id="tb_list"></table>
+		</div>
+	</div>
+</div>
 <!-- query form modal
 ======================================================================================================= -->
 <form id="form_query">

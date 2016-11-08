@@ -9,15 +9,8 @@
 	<li><a href="get.action">类别管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<dl class="dl-horizontal">
-				<dt>类别名：</dt><dd>${po.m.name}</dd>
-				<dt>排序号：</dt><dd>${po.m.sort}</dd>
-			</dl>
-		</div>
-	</div>
-</div>
+<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" id="name" name="po.m.name" value="${po.m.name}" readonly="readonly"/></div>
+<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control" id="sort" name="po.m.sort" value="${po.m.sort}" readonly="readonly"/></div>
+<input type="hidden" name="po.m.id" value="${po.m.id}" readonly="readonly">
 </body>
 </html>

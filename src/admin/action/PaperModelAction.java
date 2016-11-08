@@ -79,6 +79,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
+		getResult().put("catList", catService.get(null));
 		return "success";
 	}
 

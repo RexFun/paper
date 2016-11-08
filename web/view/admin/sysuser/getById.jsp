@@ -67,7 +67,7 @@ $(function(){
 	<li><a href="get.action">用户管理</a></li>
 	<li class="active">明细</li>
 </ol>
-<div class="container">
+<div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
 			<fieldset>

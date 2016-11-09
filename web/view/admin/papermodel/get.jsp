@@ -2,6 +2,7 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
@@ -10,10 +11,10 @@ $gwen.form.callback = function(){
 };
 /* 初始化toolbar */
 function initToolbar() {
-	$("#b_add").click(function(){
+	$("#bar_btn_add").click(function(){
 		location.href = "add1.action";
 	});
-	$("#b_del").click(function(){
+	$("#bar_btn_del").click(function(){
 		if(getIdSelections().length<1) {
 			alert("没选择");
 			return;
@@ -56,21 +57,24 @@ function initTable(){
 	     {title:'操作', field:'operate', align:'center', valign:'middle', 
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter}
-	    ]
+	    ],
+	    onLoadSuccess:function(){
+	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
+	    }
 	});
 }
 // 操作列
 function operateFormatter(value, row, index) {
     return [
-        '<button type="button" class="btn btn-default upd">',
+        '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
         '<i class="glyphicon glyphicon-edit"></i>',
         '</button>',
         '&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getById">',
+        '<button type="button" class="btn btn-default getById" pbtnId="pbtn_getById'+index+'">',
         '<i class="glyphicon glyphicon-info-sign"></i>',
         '</button>'
         ,'&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getImages">',
+        '<button type="button" class="btn btn-default getImages" pbtnId="pbtn_getImages'+index+'">',
         '<i class="glyphicon glyphicon-picture"></i>',
         '</button>'
     ].join('');
@@ -97,9 +101,9 @@ function getIdSelections() {
 function initModalFormQuery() {
 	$("#form_query").submit(function(e){
 		e.preventDefault();
-		$("#b_query").click();
+		$("#form_btn_query").click();
 	});
-	$("#b_query").click(function(){
+	$("#form_btn_query").click(function(){
 		$('#modal_form_query').modal('hide');
         $("#tb_list").bootstrapTable('refresh');
 	});
@@ -109,6 +113,7 @@ $(function() {
 	initTable();
 	initToolbar();
 	initModalFormQuery();
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 });
 </script>
 </head>
@@ -121,11 +126,9 @@ $(function() {
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">
-<div class="btn-group">
-<button type="button" class="btn btn-default" id="b_add"><i class="glyphicon glyphicon-plus"></i></button>
-<button type="button" class="btn btn-default" id="b_del"><i class="glyphicon glyphicon-remove"></i></button>
-<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
-</div>
+<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
+<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
+<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
 </div>
 <!-- data list
 ======================================================================================================= -->
@@ -158,7 +161,7 @@ $(function() {
 			<div class="modal-footer">
 			   <button type="reset" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i></button>
 			   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
-			   <button type="button" class="btn btn-primary" id="b_query"><i class="glyphicon glyphicon-ok"></i></button>
+			   <button type="button" class="btn btn-primary" id="form_btn_query"><i class="glyphicon glyphicon-ok"></i></button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->

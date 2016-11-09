@@ -52,6 +52,10 @@ public class AuthFilter implements Filter
 //				res.sendRedirect(req.getContextPath() + "/login.html");
 //				return;
 //			}
+			if(req.getParameter("menuPermitId") != null)
+			{
+				req.getSession().setAttribute("CUR_MENU_PERMIT_ID", req.getParameter("menuPermitId"));
+			}
 			
 			SysUser model = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_CurLoginUser);
 			//没有登录

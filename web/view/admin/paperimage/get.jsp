@@ -2,24 +2,28 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
 <script type="text/javascript">
-
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
 		location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	}
 };
-$(function(){
+/* 初始化按钮事件 */
+function initBtnEvent(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
-	$("button[name='b_add']").click(function(){
+	//$("button[name='b_add']").click(function(){
+	$("#bar_btn_add").click(function(){
 		location.href = "add1.action?pid=${pid}&ppid=${ppid}";
 	});
-	$("button[name='b_del']").click(function(){
+	//$("button[name='b_del']").click(function(){
+	$("#bar_btn_del").click(function(){
 		if(confirm("确认删除？")) $("#form_del").submit();
 	});
-	$("button[name='b_updSortBatch']").click(function(){
+	//$("button[name='b_updSortBatch']").click(function(){
+	$("#bar_btn_updSortBatch").click(function(){
 		var idArr = [];   
 		var i = 0;   
 		$("input[name='hidden_id']").each(function(){
@@ -43,16 +47,23 @@ $(function(){
 		    }  
 		});
 	});
-	$("button[name='b_back']").click(function(){
+	//$("button[name='b_back']").click(function(){
+	$("#bar_btn_back").click(function(){
 		location.href = "../papermodel/get.action";
 	});
-	$("input[name='btn_upd']").click(function(){
+	//$("input[name='btn_upd']").click(function(){
+	$("input[name='row_btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();
 		var _sort = $(this).siblings("input[name='text_sort']").val();
 		$.post("updSortById.action", {id:_id, sort:_sort}, function(data) {
 			  window.location.reload();
 		});
 	});
+}
+/* 全局函数 */
+$(function(){
+	initBtnEvent();
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 });
 </script>
 </head>
@@ -65,11 +76,11 @@ $(function(){
 </ul>
 <!-- toolbar
 ======================================================================================================= -->
-<div class="btn-group">
-	<button type="button" class="btn btn-default" name="b_add">新增</button>
-	<button type="button" class="btn btn-default" name="b_del">删除</button>
-	<button type="button" class="btn btn-default" name="b_updSortBatch" >修改排序号</button>
-	<button type="button" class="btn btn-default" name="b_back" >返回</button>
+<div id="toolbar">
+<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add">新增</button>
+<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del">删除</button>
+<button type="button" class="btn btn-default" id="bar_btn_updSortBatch" pbtnId="pbtn_updSortBath">修改排序号</button>
+<button type="button" class="btn btn-default" id="bar_btn_back" >返回</button>
 </div>
 <!-- data list
 ======================================================================================================= -->
@@ -85,7 +96,7 @@ $(function(){
 	</tr>
 	</thead>
 	<tbody>
-	<s:iterator var="o" value="result.data.resultList">
+	<s:iterator var="o" value="result.data.resultList" status="st">
 	<tr>
 		<td><input name="keyIndex" type="checkbox" value="${o.m.id}"/></td>
 		<td>${o.m.id}</td>
@@ -93,7 +104,7 @@ $(function(){
 		<td>
 			<input type="hidden" name="hidden_id" value="${o.m.id}" style="width:50px"/>
 			<input type="text" name="text_sort" value="${o.m.sort}" style="width:50px"/>
-			<input type="button" name="btn_upd" value="修改"/>
+			<input type="button" name="row_btn_upd" pbtnId="pbtn_upd#st.index" value="修改"/>
 		</td>
 		<td>
 			<a href="getById.action?id=${o.m.id}&ppid=${ppid}">

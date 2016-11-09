@@ -112,7 +112,7 @@ treeMenu.prototype={
         if(k>0) html = "\n<ul class=\"submenu\">\n";
         for(var i=0;i<a.length;i++){
         	if(a[i].tc_url != "")
-				html += "<li url=\"${ctx}"+a[i].tc_url+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
+				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
             else
 				html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
             		

@@ -8,6 +8,17 @@
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
+// 获取已选节点id集合
+function getCheckedNodesIds()
+{
+	var zTree = $.fn.zTree.getZTreeObj("permitTree")
+    var nodes = zTree.getCheckedNodes(true);
+	var ids = [];
+	for(var i=0; i<nodes.length; i++) {
+		ids.push(nodes[i].id);
+	}
+	return ids;
+}
 // zTree 的参数配置
 var zTreeObj;
 var setting = 
@@ -37,13 +48,7 @@ var setting =
 	},
 	callback: {
 		onCheck: function (event, treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("permitTree")
-		    var nodes = zTree.getCheckedNodes(true);
-	    	var ids = [];
-	    	for(var i=0; i<nodes.length; i++) {
-	    		ids.push(nodes[i].id);
-	    	}
-	    	$("#tc_sys_permit_ids").val(ids);
+	    	$("#tc_sys_permit_ids").val(getCheckedNodesIds());
 		}
 	}
 };
@@ -67,6 +72,7 @@ $(function(){
         }else{
         	zTree.checkAllNodes(false);
         }
+    	$("#tc_sys_permit_ids").val(getCheckedNodesIds());
     });
 });
 /**********************************************************/

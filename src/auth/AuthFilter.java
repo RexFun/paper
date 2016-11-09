@@ -40,30 +40,19 @@ public class AuthFilter implements Filter
 		//String currentUrl = req.getRequestURI().replaceAll(req.getContextPath(), "");// 取得当前路径
 		try
 		{
-//			Auth model = AuthLogin.getLoginUser(req, res);
-//			// 没有登录
-//			if(model == null || model.getAccount() == null)
-//			{
-//				if("XMLHttpRequest".equals(String.valueOf(req.getHeader("X-Requested-With"))))
-//				{
-//					res.getWriter().print("0:登录超时！");
-//					return;
-//				}
-//				res.sendRedirect(req.getContextPath() + "/login.html");
-//				return;
-//			}
-			if(req.getParameter("menuPermitId") != null)
-			{
-				req.getSession().setAttribute("CUR_MENU_PERMIT_ID", req.getParameter("menuPermitId"));
-			}
-			
-			SysUser model = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_CurLoginUser);
-			//没有登录
-			if (model == null || model.getString("tc_code") == null)
+			SysUser u = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_CurLoginUser);
+			// 没有登录
+			if (u == null || u.getString("tc_code") == null)
 			{
 				res.sendRedirect(req.getContextPath() + "/login.jsp");
 				return;
 			}
+			// 每次action都去更新当前菜单权限id
+			if(req.getParameter("menuPermitId") != null)
+			{
+				req.getSession().setAttribute("CUR_MENU_PERMIT_ID", req.getParameter("menuPermitId"));
+			}
+			// 验证action权限
 			chain.doFilter(requestWrapper, responseWraper);
 		}
 		catch(Exception e)

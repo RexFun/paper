@@ -11,56 +11,18 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<!-- navsidebar -->
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/normalize.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/default.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/css/styles.css">
-<!-- accordion-menu -->
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/htmleaf-demo.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/bs/navsidebar/accordion/css/jquery-accordion-menu.css"/>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
-<style type="text/css">
-    .content{width:300px;}
-	.filterinput{
-		background-color:rgba(249, 244, 244, 0);
-		border-radius:15px;
-		width:90%;
-		height:30px;
-		border:thin solid #FFF;
-		text-indent:0.5em;
-		font-weight:bold;
-		color:#FFF;
-	}
-	#nav-menu-list a{
-		overflow:hidden;
-		text-overflow:ellipsis;
-		-o-text-overflow:ellipsis;
-		white-space:nowrap;
-		width:100%;
-	}
-</style>
-<script src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/css/custom.min.css">
+<script type="text/javascript" src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js"></script>
 <script type="text/javascript">
 $(function(){
 	/* navsidebar */
-	$('.openMdNav').click(function () {
-	    $('body').toggleClass('navOpen');
-	    $('.mdNav').toggleClass('open');
-	    $('.wrapper').toggleClass('open');
-	    $(this).toggleClass('open');
-	});
-	/* accordion-menu */
 	var navMenuTreeHtml = new treeMenu(<%=navMenuTreeNodes%>).init(0);
-	$(".jquery-accordion-menu-header").after(navMenuTreeHtml);
-	$("#jquery-accordion-menu").jqueryAccordionMenu();
+	$(".menu_section h3").after(navMenuTreeHtml);
 	//导航菜单单击事件
-	$("#nav-menu-list li").click(function(){
-		$(this).addClass("active");
-		$(this).siblings().removeClass("active");
-		//$("#nav-menu-list li.active").removeClass("active");
+	$(".menu_section li").click(function(){
 		if(typeof($(this).attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).attr("url"));
-			$('.openMdNav').click();
 		}
 	});
 	//用户下拉菜单单击事件
@@ -107,14 +69,14 @@ treeMenu.prototype={
     */
     getDom:function(k,a){
         if(!a){return ""}
-        var html = "\n<ul id=\"nav-menu-list\">\n";
-        html += "<li url=\"${ctx}/home.jsp\"><a href=\"#\"><i class=\"fa fa-cog\"></i>首页 </a>";
-        if(k>0) html = "\n<ul class=\"submenu\">\n";
+        var html = "\n<ul class=\"nav side-menu\">\n";
+        html += "<li url=\"${ctx}/home.jsp\"><a href=\"#\"><i class=\"fa fa-home\"></i>首页 </a>";
+        if(k>0) html = "\n<ul class=\"nav child_menu\">\n";
         for(var i=0;i<a.length;i++){
-        	if(a[i].tc_url != "")
-				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
-            else
-				html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" </a>";
+        	if(a[i].tc_url == "") 
+				html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";// parent node
+            else 
+				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";// child node
             		
             html += this.getDom(a[i].id,this.groups[a[i].id]);
             html += "</li>\n";
@@ -156,62 +118,116 @@ treeMenu.prototype={
 			});
 		}
 		$(function() {
-			filterList($("#form"), $("#nav-menu-list"));
+			filterList($("#form"), $(".nav .side-menu"));
 		});
 		})(jQuery);
 </script>
 </head>
-<body>
-	<nav class="mdNav">
-		<div class="content">
-			<div id="jquery-accordion-menu" class="jquery-accordion-menu skyblue">
-				<div class="jquery-accordion-menu-header" id="form"></div>
-				<div class="jquery-accordion-menu-footer"></div>
-			</div>
-		</div>
-	</nav>
-	<div class="openMdNav">
-		<div class="icon"></div>
-	</div>
-	<div class="wrapper">
-		<!-- 主界面Head Bar
-		========================================================= -->
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<nav class="navbar navbar-default" role="navigation">
-					<div class="navbar-header">
-						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">后台管理系统</a>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<div class="left_col scroll-view">
+					<div class="navbar nav_title" style="border: 0;">
+						<a href="index.jsp" class="site_title"><i class="fa fa-paw"></i>
+							<span>Gentellela Alela!</span></a>
 					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					<div class="clearfix"></div>
+
+					<!-- menu profile quick info -->
+					<div class="profile">
+						<div class="profile_pic">
+							<img src="" alt="..."
+								class="img-circle profile_img">
+						</div>
+						<div class="profile_info">
+							<span>Welcome,</span>
+							<h2><%=account %></h2>
+						</div>
+					</div>
+					<!-- /menu profile quick info -->
+					
+					<br />
+					
+					<!-- sidebar menu -->
+					<div id="sidebar-menu"
+						class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+							<h3>General</h3>
+						</div>
+					</div>
+					<!-- /sidebar menu -->
+					
+					<!-- /menu footer buttons -->
+					<div class="sidebar-footer hidden-small">
+						<a data-toggle="tooltip" data-placement="top" title="Settings">
+							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
+							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+						</a> <a data-toggle="tooltip" data-placement="top" title="Logout">
+							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+						</a>
+					</div>
+					<!-- /menu footer buttons -->
+				</div>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<div class="nav_menu">
+					<nav>
+						<div class="nav toggle">
+							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+						</div>
 						<ul class="nav navbar-nav navbar-right">
-						<c:choose>
-						<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
-							<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
-						</c:when> 
-						<c:otherwise>
-						 	<li class="dropdown">
-				                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%=account%> <b class="caret"></b></a>
-				                <ul id="user-dropdown-menu" class="dropdown-menu">
-				                    <li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-file"></i> 个人资料 </a></li>
-				                    <li class="divider"></li>
-				                    <li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock"></i> 修改密码 </a></li>
-				                </ul>
-				            </li>
-						</c:otherwise> 
-						</c:choose>
-							<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
+							<c:choose>
+								<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
+									<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="">
+										<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+											<i class="glyphicon glyphicon-user"></i>
+											<%=account%> 
+											<span class=" fa fa-angle-down"></span>
+										</a>
+										<ul id="user-dropdown-menu" class="dropdown-menu dropdown-usermenu pull-right">
+											<li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-file"></i> 个人资料 </a></li>
+											<li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock"></i> 修改密码 </a></li>
+											<li class="divider"></li>
+											<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
+										</ul></li>
+								</c:otherwise>
+							</c:choose>
 						</ul>
-					</div>
-				</nav>
+					</nav>
+				</div>
 			</div>
-		</div>
-		<!-- 主界面
-		========================================================= -->
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="no"></iframe>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
+					width="100%"
+					onload="this.height=mainFrame.document.body.scrollHeight+65"
+					frameborder="0" scrolling="no"></iframe>
 			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Gentelella - Bootstrap Admin Template by <a
+						href="https://colorlib.com">Colorlib</a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
 		</div>
 	</div>
+	<script type="text/javascript" src="${ctx}/lib/gentelella/js/custom.min.js"></script>
 </body>
 </html>

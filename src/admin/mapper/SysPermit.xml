@@ -52,6 +52,8 @@
 	<sql id="dynamicWhere">
 		<where>
 			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
+			<if test="pid != null and pid != ''"> and PID  = #{pid} </if>
+			<if test="tc_type != null and tc_type != ''"> and TC_TYPE = #{tc_type} </if>
 		</where>
 	</sql>	
 	

@@ -97,7 +97,7 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"500",
+		height:"800",
 		striped:true,
 		pagination:true,
 		pageList:"[5,10,20]",

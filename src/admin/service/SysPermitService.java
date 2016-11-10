@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.dao.SysPermitDao;
-import admin.dao.SysRolePermitMappingDao;
-import admin.entity.SysMenu;
 import admin.entity.SysPermit;
 import gwen.devwork.BaseDao;
 import gwen.devwork.BaseService;
@@ -19,8 +17,6 @@ public class SysPermitService extends BaseService<SysPermit,Long>
 {
 	@Autowired
 	private SysPermitDao sysPermitDao;
-	@Autowired
-	private SysRolePermitMappingDao sysRolePermitMappingDao;
 
 	@Override
 	public BaseDao<SysPermit,Long> getEntityDao() {
@@ -32,7 +28,10 @@ public class SysPermitService extends BaseService<SysPermit,Long>
 	{
 		for(Long id:ids)
 		{
-			sysRolePermitMappingDao.delByPermitId(id);
+			// 删除菜单关联关系
+			// 删除角色关联关系
+			// 删除父子关联关系
+			// 删除主表记录
 			sysPermitDao.del(id);
 		}
 	}

@@ -58,7 +58,7 @@ $(function(){
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-        $("#tb_list").bootstrapTable('refresh');
+        $("#tb_list").bootstrapTable('refresh'); // 刷新table
 	}
 };
 /* 初始化toolbar */
@@ -73,7 +73,8 @@ function initToolbar() {
 		}
 		if(!confirm("确认删除？")) return;
 		$.post("del.action",{id:getIdSelections()},function(data){
-			$("#tb_list").bootstrapTable('refresh');
+	        $("#tb_list").bootstrapTable('refresh'); // 刷新table
+	        zTreeObj.reAsyncChildNodes(null, "refresh"); // 刷新zTree
 		});
 	});
 }

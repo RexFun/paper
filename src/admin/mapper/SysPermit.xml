@@ -15,7 +15,10 @@
     </insert>  
 	
 	<delete id="del" parameterType="admin.entity.SysPermit">
-		delete from sys_permit where id = #{id}
+		update sys_menu set tc_sys_permit_id = null where tc_sys_permit_id = #{id};
+		delete from sys_role_permit_mapping where tc_sys_permit_id = #{id};
+		delete from sys_permit where pid = #{id};
+		delete from sys_permit where id = #{id};
 	</delete>
 	
 	<update id="upd" parameterType="admin.entity.SysPermit">

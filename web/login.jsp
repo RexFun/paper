@@ -1,16 +1,10 @@
 <%@page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-String path = request.getContextPath();
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>登录</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%=path%>/lib/bs/css/bootstrap.min.css"/>
-<script type="text/javascript" src="<%=path%>/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/lib/bs/js/bootstrap.min.js"></script>
+<%@ include file="/common/inc_ctx.jsp"%>
+<%@ include file="/common/inc_css.jsp"%>
+<%@ include file="/common/inc_js.jsp"%>
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/vendors/animate.css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/vendors/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/css/custom.min.css">
 <script type="text/javascript">
 /* 
 if (window != top) top.location.href = location.href;  
@@ -25,7 +19,7 @@ $(function(){
 			{'auth.account':$("#inputAccount").val(),'auth.password':$("#inputPassword").val()},
 		  	function(data) {
 				if(data.success){
-					location.href = "<%=path%>/index.jsp";
+					location.href = "${ctx}/index.jsp";
 				}else{
 					$('#msgModalText').html(data.msg);
 					$('#msgModal').modal('show');
@@ -36,34 +30,80 @@ $(function(){
 });
 </script>
 </head>
-<body>
-<div class="container" style="padding: 40px;">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<form id="loginForm" class="form-horizontal" role="form" action ="${pageContext.request.contextPath}/auth/login.action" method="POST">
-				<div class="form-group">
-					 <label for="inputAccount" class="col-sm-2 control-label">账号</label>
-					<div class="col-sm-10">	
-						<input type ='text' value="" class="form-control input-lg" id="inputAccount" name='auth.account'/>
+<body class="login">
+<div>
+	<a class="hiddenanchor" id="signup"></a> 
+	<a class="hiddenanchor" id="signin"></a>
+	<div class="login_wrapper">
+		<div class="animate form login_form">
+			<section class="login_content">
+				<form id="loginForm" action ="${pageContext.request.contextPath}/auth/login.action" method="POST">
+					<h1>Login Form</h1>
+					<div>
+						<input type="text" class="form-control" placeholder="Username" id="inputAccount" name="auth.account" required="" />
 					</div>
-				</div>
-				<div class="form-group">
-					 <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control input-lg" id="inputPassword" name='auth.password'/>
+					<div>
+						<input type="password" class="form-control" id="inputPassword" name="auth.password" placeholder="Password" required="" />
 					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						 <button type="submit" class="btn btn-default btn-block btn-success btn-lg">登录</button>
-						 <button type="reset" class="btn btn-block btn-warning btn-lg">重置</button>
+					<div>
+						<button type="submit" class="btn btn-default submit">登录</button>
+						<a class="reset_pass" href="#">Lost your password?</a>
 					</div>
-				</div>
-			</form>
+					<div class="clearfix"></div>
+					<div class="separator">
+						<p class="change_link">
+							New to site? <a href="#signup" class="to_register"> Create Account </a>
+						</p>
+						<div class="clearfix"></div>
+						<br />
+						<div>
+							<h1>
+								<i class="fa fa-paw"></i> Gentelella Alela!
+							</h1>
+							<p>©2016 All Rights Reserved. Gentelella Alela! is a
+								Bootstrap 3 template. Privacy and Terms</p>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+
+		<div id="register" class="animate form registration_form">
+			<section class="login_content">
+				<form>
+					<h1>Create Account</h1>
+					<div>
+						<input type="text" class="form-control" placeholder="Username" required="" />
+					</div>
+					<div>
+						<input type="email" class="form-control" placeholder="Email" required="" />
+					</div>
+					<div>
+						<input type="password" class="form-control" placeholder="Password" required="" />
+					</div>
+					<div>
+						<a class="btn btn-default submit" href="index.html">Submit</a>
+					</div>
+					<div class="clearfix"></div>
+					<div class="separator">
+						<p class="change_link">
+							Already a member ? <a href="#signin" class="to_register"> Log in </a>
+						</p>
+						<div class="clearfix"></div>
+						<br />
+						<div>
+							<h1>
+								<i class="fa fa-paw"></i> Gentelella Alela!
+							</h1>
+							<p>©2016 All Rights Reserved. Gentelella Alela! is a
+								Bootstrap 3 template. Privacy and Terms</p>
+						</div>
+					</div>
+				</form>
+			</section>
 		</div>
 	</div>
 </div>
-
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">

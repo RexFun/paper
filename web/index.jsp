@@ -11,7 +11,7 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/vendors/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/css/custom.min.css">
 <script type="text/javascript">
 $(function(){
@@ -159,7 +159,7 @@ treeMenu.prototype={
 					<!-- menu profile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="" alt="..." class="img-circle profile_img">
+							<img src="${ctx}/lib/gentelella/image/user.png" alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>

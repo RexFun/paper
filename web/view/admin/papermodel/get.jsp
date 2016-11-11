@@ -37,10 +37,10 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"500",
+		height:"700",
 		striped:true,
 		pagination:true,
-		pageList:"[5,10,20]",
+		pageList:"[10,20,50]",
 	    queryParams: function (p) {
 	    	p.name = $("#f_name").val();
 	    	p.pid = $("#f_pid").val();

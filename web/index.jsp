@@ -13,7 +13,6 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_js.jsp"%>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
 <link rel="stylesheet" type="text/css" href="${ctx}/lib/gentelella/css/custom.min.css">
-<script type="text/javascript" src="${ctx}/lib/bs/navsidebar/accordion/js/jquery-accordion-menu.js"></script>
 <script type="text/javascript">
 $(function(){
 	/* navsidebar */
@@ -21,6 +20,8 @@ $(function(){
 	$(".menu_section h3").after(navMenuTreeHtml);
 	//导航菜单单击事件
 	$(".menu_section li").click(function(){
+		/* $(this).addClass("active");
+		$(this).siblings().removeClass("active"); */
 		if(typeof($(this).attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).attr("url"));
 		}
@@ -73,11 +74,31 @@ treeMenu.prototype={
         html += "<li url=\"${ctx}/home.jsp\"><a href=\"#\"><i class=\"fa fa-home\"></i>首页 </a>";
         if(k>0) html = "\n<ul class=\"nav child_menu\">\n";
         for(var i=0;i<a.length;i++){
-        	if(a[i].tc_url == "") 
-				html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";// parent node
-            else 
-				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";// child node
-            		
+        	if(this.groups[a[i].id] && this.groups[a[i].id].length > 0){ // 有子节点
+        		if(a[i].pid == 0){// 1级菜单
+        			if(a[i].tc_url == "")
+						html += "<li><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";
+					else
+						html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";
+        		}else{// 非1级菜单
+        			if(a[i].tc_url == "")
+						html += "<li><a href=\"#\">"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";
+					else
+						html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\">"+a[i].tc_name+" <span class=\"fa fa-chevron-down\"></span></a>";
+        		}
+        	}else{// 没有子节点
+        		if(a[i].pid == 0){// 1级菜单
+        			if(a[i].tc_url == "")
+        				html += "<li><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+       				else
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+        		}else{ // 非1级菜单
+        			if(a[i].tc_url == "")
+        				html += "<li><a href=\"#\">"+a[i].tc_name+" </a>";
+       				else
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\">"+a[i].tc_name+" </a>";
+        		}
+        	}
             html += this.getDom(a[i].id,this.groups[a[i].id]);
             html += "</li>\n";
         };
@@ -130,7 +151,7 @@ treeMenu.prototype={
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
 						<a href="index.jsp" class="site_title"><i class="fa fa-paw"></i>
-							<span>Gentellela Alela!</span></a>
+							<span>后台管理系统</span></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -138,8 +159,7 @@ treeMenu.prototype={
 					<!-- menu profile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="" alt="..."
-								class="img-circle profile_img">
+							<img src="" alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
@@ -154,7 +174,7 @@ treeMenu.prototype={
 					<div id="sidebar-menu"
 						class="main_menu_side hidden-print main_menu">
 						<div class="menu_section">
-							<h3>General</h3>
+							<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 						</div>
 					</div>
 					<!-- /sidebar menu -->
@@ -210,10 +230,12 @@ treeMenu.prototype={
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
-					width="100%"
-					onload="this.height=mainFrame.document.body.scrollHeight+65"
-					frameborder="0" scrolling="no"></iframe>
+				<div class="x_panel">
+					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
+						width="100%"
+						onload="this.height=mainFrame.document.body.scrollHeight+65"
+						frameborder="0" scrolling="no"></iframe>
+				</div>
 			</div>
 			<!-- /page content -->
 

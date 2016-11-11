@@ -97,7 +97,7 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"800",
+		height:"700",
 		striped:true,
 		pagination:true,
 		pageList:"[5,10,20]",
@@ -185,7 +185,7 @@ $(function() {
 	<div class="row clearfix">
 		<div class="col-md-10 column">
 			<fieldset>
-			<legend>权限列表</legend>
+			<legend>列表</legend>
 				<table id="tb_list"></table>
 			</fieldset>
 		</div>

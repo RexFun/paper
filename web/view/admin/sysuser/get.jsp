@@ -36,10 +36,10 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"500",
+		height:"700",
 		striped:true,
 		pagination:true,
-		pageList:"[5,10,20]",
+		pageList:"[10,20,50]",
 	    queryParams: function (p) {
 	    	p.tc_code = $("#f_tc_code").val();
 	    	p.tc_name = $("#f_tc_name").val();

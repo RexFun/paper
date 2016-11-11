@@ -15,6 +15,8 @@ function initBtnPermit(menuPermitId) {
 						$(o).css({"display":""});
 						break;
 					}
+				}else{
+					$(o).css({"display":"none"});
 				}
 			}
 		});

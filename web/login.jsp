@@ -47,12 +47,12 @@ $(function(){
 					</div>
 					<div>
 						<button type="submit" class="btn btn-default submit">登录</button>
-						<a class="reset_pass" href="#">Lost your password?</a>
+						<a class="reset_pass" href="#">忘记密码?</a>
 					</div>
 					<div class="clearfix"></div>
 					<div class="separator">
 						<p class="change_link">
-							New to site? <a href="#signup" class="to_register"> Create Account </a>
+							首次访问? <a href="#signup" class="to_register"> 创建账号 </a>
 						</p>
 						<div class="clearfix"></div>
 						<br />
@@ -71,7 +71,7 @@ $(function(){
 		<div id="register" class="animate form registration_form">
 			<section class="login_content">
 				<form>
-					<h1>Create Account</h1>
+					<h1>创建账号</h1>
 					<div>
 						<input type="text" class="form-control" placeholder="Username" required="" />
 					</div>
@@ -82,12 +82,12 @@ $(function(){
 						<input type="password" class="form-control" placeholder="Password" required="" />
 					</div>
 					<div>
-						<a class="btn btn-default submit" href="index.html">Submit</a>
+						<a class="btn btn-default submit" href="index.html">提交</a>
 					</div>
 					<div class="clearfix"></div>
 					<div class="separator">
 						<p class="change_link">
-							Already a member ? <a href="#signin" class="to_register"> Log in </a>
+							已有账号 ? <a href="#signin" class="to_register"> 登录 </a>
 						</p>
 						<div class="clearfix"></div>
 						<br />

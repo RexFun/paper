@@ -106,6 +106,7 @@ function initTable(){
 	     {title:'菜单代号', field:'m.tc_code', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单名称', field:'m.tc_name', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单URL', field:'m.tc_url', align:'center', valign:'middle', sortable:true},
+	     {title:'菜单排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单权限ID', field:'m.tc_sys_permit_id', align:'center', valign:'middle', sortable:true},
 	     {title:'操作', field:'operate', align:'center', valign:'middle', 
 	    	 events:operateEvents, 

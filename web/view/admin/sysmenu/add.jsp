@@ -84,6 +84,7 @@ $gwen.form.callback = function(){
 				<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
 				<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
 				<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" /></div>
+				<div class="form-group"><label for="tc_order">菜单排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order"/></div>
 				<div class="form-group"><label for="tc_sys_permit_id">菜单权限ID：</label><input type="text" class="form-control" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" readonly="readonly"/></div>
 				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
 				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>

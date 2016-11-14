@@ -52,4 +52,9 @@ public class SysPermitService extends BaseService<SysPermit,Long>
 		}
 		return treeNodes;
 	}
+	
+	public int getCountByUserIdAndActionUrl(Map m)
+	{
+		return sysPermitDao.getCountByUserIdAndActionUrl(m);
+	}
 }

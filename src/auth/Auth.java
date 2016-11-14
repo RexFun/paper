@@ -42,5 +42,4 @@ public class Auth
 		return "Auth [id=" + id + ", account=" + account + ", password="
 				+ password + "]";
 	}
-
 }

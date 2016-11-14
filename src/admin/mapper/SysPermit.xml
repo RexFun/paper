@@ -6,11 +6,15 @@
     <insert id="add" parameterType="admin.entity.SysPermit" useGeneratedKeys="true" keyProperty="id">  
        	insert into sys_permit(pid, 
 	       					   tc_code, 
-	       					   tc_name, 
+	       					   tc_name,
+	       					   tc_url,
+	       					   tc_order, 
 	       					   tc_type) 
        	values (<choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>0,</otherwise></choose>
        			#{m.tc_code},
        			#{m.tc_name},
+       			#{m.tc_url},
+       			#{m.tc_order},
        			<choose><when test="m.tc_type != null and m.tc_type != ''">#{m.tc_type}</when><otherwise>null</otherwise></choose>)  
     </insert>  
 	
@@ -26,6 +30,8 @@
 		  	   pid = <choose><when test="m.pid != null and m.pid != ''">#{m.pid}, </when><otherwise>0,</otherwise></choose>
 		  	   tc_code = #{m.tc_code},
 		  	   tc_name = #{m.tc_name},
+		  	   tc_url = #{m.tc_url},
+		  	   tc_order = #{m.tc_order},
 		  	   tc_type = <choose><when test="m.tc_type != null and m.tc_type != ''">#{m.tc_type}</when><otherwise>null</otherwise></choose>
 		 where id = #{m.id}
 	</update>
@@ -35,14 +41,16 @@
 		<result property="m.pid" column="pid"/>
 		<result property="m.tc_code" column="tc_code"/>
 		<result property="m.tc_name" column="tc_name"/>
+		<result property="m.tc_url" column="tc_url"/>
+		<result property="m.tc_order" column="tc_order"/>
 		<result property="m.tc_type" column="tc_type"/>
 	</resultMap>
   	
 	<sql id="columns">
-		ID, PID, TC_CODE, TC_NAME, TC_TYPE
+		ID, PID, TC_CODE, TC_NAME, TC_URL, TC_ORDER, TC_TYPE
 	</sql>
 	<sql id="columns1">
-		t1.ID, t1.PID, t1.TC_CODE, t1.TC_NAME, t1.TC_TYPE
+		t1.ID, t1.PID, t1.TC_CODE, t1.TC_NAME, t1.TC_URL, t1.TC_ORDER, t1.TC_TYPE
 	</sql>
 	
 	<sql id="page">
@@ -51,8 +59,10 @@
 	
 	<sql id="dynamicWhere">
 		<where>
-			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
 			<if test="pid != null and pid != ''"> and PID  = #{pid} </if>
+			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
+			<if test="tc_url != null and tc_url != ''"> and TC_URL like concat('%',#{tc_url},'%') </if>
+			<if test="tc_order != null and tc_order != ''"> and TC_ORDER = #{tc_order} </if>
 			<if test="tc_type != null and tc_type != ''"> and TC_TYPE = #{tc_type} </if>
 		</where>
 	</sql>	
@@ -63,13 +73,25 @@
 	
 	<select id="get" resultType="list" resultMap="result">
 		select <include refid="columns"/> from sys_permit
-		<include refid="dynamicWhere" /> order by 1
+		<include refid="dynamicWhere" /> order by tc_order
 		<include refid="page" />
 	</select>
 	
 	<select id="getCount" resultType="int">
 		select count(1) from sys_permit
 		<include refid="dynamicWhere" />
+	</select>
+	<select id="getCountByUserIdAndActionUrl" resultType="int">
+		select count(1)
+		  from paper.sys_permit t, 
+		  	   paper.sys_role_permit_mapping t1, 
+		  	   paper.sys_user_role_mapping t2, 
+		  	   paper.sys_user t3
+		 where t.id = t1.tc_sys_permit_id 
+		   and t1.tc_sys_role_id = t2.tc_sys_role_id
+		   and t2.tc_sys_user_id = t3.id
+		   and t3.id = #{tc_sys_user_id}
+		   and t.tc_url = #{tc_url};
 	</select>
 	
 	<select id="getByRoleId" resultType="list" resultMap="result">
@@ -85,6 +107,6 @@
 		 inner join sys_role_permit_mapping t2 on t1.id=t2.tc_sys_permit_id and t1.tc_type=1
 		 inner join sys_user_role_mapping t3 on t2.tc_sys_role_id=t3.tc_sys_role_id and t3.tc_sys_user_id=#{tc_sys_user_id}
 		 group by t1.id
-		 order by 1
+		 order by t1.tc_order
 	</select>
 </mapper>  

@@ -68,6 +68,7 @@ $(function(){
 				<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
+				<div class="form-group"><label for="tc_order">菜单排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_sys_permit_id">菜单权限ID：</label><input type="text" class="form-control" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" value="${po.m.tc_sys_permit_id}" readonly="readonly"/></div>
 			</fieldset>
 		</div>

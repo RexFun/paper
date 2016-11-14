@@ -1,6 +1,8 @@
 package auth;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import admin.SysFactory;
 import admin.entity.SysUser;
 import auth.action.AuthLoginAction;
 
@@ -47,12 +50,17 @@ public class AuthFilter implements Filter
 				res.sendRedirect(req.getContextPath() + "/login.jsp");
 				return;
 			}
+			// 校验用户action权限
+			if (!checkUserActionPermit(req, res, u))
+			{
+				res.sendRedirect(req.getContextPath() + "/permitError.jsp");
+				return;
+			}
 			// 每次action都去更新当前菜单权限id
 			if(req.getParameter("menuPermitId") != null)
 			{
 				req.getSession().setAttribute("CUR_MENU_PERMIT_ID", req.getParameter("menuPermitId"));
 			}
-			// 验证action权限
 			chain.doFilter(requestWrapper, responseWraper);
 		}
 		catch(Exception e)
@@ -63,5 +71,26 @@ public class AuthFilter implements Filter
 	@Override
 	public void destroy() 
 	{
+	}
+	
+	/**
+	 * 校验用户action权限
+	 * @param req
+	 * @param res
+	 * @param u
+	 * @return
+	 */
+	public boolean checkUserActionPermit(HttpServletRequest req, HttpServletResponse res, SysUser u)
+	{
+		boolean v = false;
+		String actionURL = req.getRequestURI().substring(req.getContextPath().length());
+		System.out.println("user id -> "+u.getLong("id"));
+		System.out.println("action's url -> "+actionURL);
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("tc_sys_user_id", u.getLong("id"));
+		m.put("tc_url", actionURL);
+		int count = SysFactory.getSysPermitService().getCountByUserIdAndActionUrl(m);
+		if (count > 0) v = true;
+		return v;
 	}
 }

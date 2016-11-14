@@ -115,9 +115,14 @@ $(function() {
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">
+<button type="button" class="btn btn-default" id="bar_btn_add"><i class="glyphicon glyphicon-plus"></i></button>
+<button type="button" class="btn btn-default" id="bar_btn_del"><i class="glyphicon glyphicon-remove"></i></button>
+<button type="button" class="btn btn-default" id="bar_btn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+<!-- 
 <button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
 <button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
 <button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+ -->
 </div>
 <!-- data list
 ======================================================================================================= -->

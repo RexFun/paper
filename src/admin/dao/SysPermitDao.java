@@ -27,4 +27,8 @@ public class SysPermitDao extends BaseDao<SysPermit,Long>
 	{
 		return this.getSqlSession().selectList(getStatementName("getBtnPermitByUserId"), userId);
 	}
+	
+	public int getCountByUserIdAndActionUrl(Map m){
+		return (Integer) this.getSqlSession().selectOne(getStatementName("getCountByUserIdAndActionUrl"), m);
+	}
 }

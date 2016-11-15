@@ -234,7 +234,7 @@ treeMenu.prototype={
 					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
 						width="100%"
 						onload="this.height=mainFrame.document.body.scrollHeight+65"
-						frameborder="0" scrolling="no"></iframe>
+						frameborder="0" scrolling="auto"></iframe>
 				</div>
 			</div>
 			<!-- /page content -->

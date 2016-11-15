@@ -112,7 +112,7 @@ $gwen.form.callback = function(){
 			<legend>权限</legend>
 				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 				<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
-				<ul id="roleTree" class="ztree"></ul>
+				<ul id="roleTree" class="ztree" style="height:700px; overflow:auto"></ul>
 			</fieldset>
 		</div>
 	</div>

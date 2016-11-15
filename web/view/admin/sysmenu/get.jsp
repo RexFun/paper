@@ -191,7 +191,7 @@ $(function() {
 			<fieldset>
 			<legend>预览</legend>
 				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-				<ul id="menuTree" class="ztree"></ul>
+				<ul id="menuTree" class="ztree" style="height:700px; overflow:auto"></ul>
 			</fieldset>
 		</div>
 	</div>

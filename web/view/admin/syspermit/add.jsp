@@ -5,7 +5,7 @@
 <script type="text/javascript">
 $gwen.form.callback = function(){
 	if($gwen.result.type == 1){
-		location.href = "get.action";
+		//location.href = "get.action";
 	}
 };
 </script>

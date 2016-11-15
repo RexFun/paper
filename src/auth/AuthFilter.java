@@ -86,11 +86,18 @@ public class AuthFilter implements Filter
 		String actionURL = req.getRequestURI().substring(req.getContextPath().length());
 		System.out.println("user id -> "+u.getLong("id"));
 		System.out.println("action's url -> "+actionURL);
-		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("tc_sys_user_id", u.getLong("id"));
-		m.put("tc_url", actionURL);
-		int count = SysFactory.getSysPermitService().getCountByUserIdAndActionUrl(m);
-		if (count > 0) v = true;
+		if (actionURL.equals("/index.jsp") || u.getString("tc_code").equals("root"))
+		{
+			v = true;
+		}
+		else
+		{
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("tc_sys_user_id", u.getLong("id"));
+			m.put("tc_url", actionURL);
+			int count = SysFactory.getSysPermitService().getCountByUserIdAndActionUrl(m);
+			if (count > 0) v = true;
+		}
 		return v;
 	}
 }

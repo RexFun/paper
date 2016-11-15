@@ -55,6 +55,8 @@
 	<filter-mapping>
 		<filter-name>authFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/home.jsp</url-pattern>
 	</filter-mapping>
 	
 	<!-- struts2 -->

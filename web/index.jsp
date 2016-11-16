@@ -23,11 +23,12 @@ $(function(){
 	var navMenuTreeHtml = new treeMenu(<%=navMenuTreeNodes%>).init(0);
 	$(".sidebar-form").after(navMenuTreeHtml);
 	//导航菜单单击事件
-	$(".sidebar li").click(function(){
-		$(this).addClass("active");
-		$(this).siblings().removeClass("active");
-		if(typeof($(this).attr("url"))!="undefined"){
-			$("#mainFrame").attr("src",$(this).attr("url"));
+ 	$(".sidebar li a").click(function(){
+ 		$(this).parent("li").siblings(".treeview").children(".treeview-menu").removeClass("menu-open").css({"display":"none"});
+		$(this).parent("li").siblings().removeClass("active");
+		$(this).parent("li").addClass("active");
+		if(typeof($(this).parent("li").attr("url"))!="undefined"){
+			$("#mainFrame").attr("src",$(this).parent("li").attr("url"));
 		}
 	});
 	//用户下拉菜单单击事件
@@ -75,32 +76,32 @@ treeMenu.prototype={
     getDom:function(k,a){
         if(!a){return ""}
         var html = "\n<ul class=\"sidebar-menu\">\n";
-        html += "<li class=\"active\" url=\"${ctx}/home.jsp\"><a href=\"#\"><i class=\"fa fa-home\"></i>首页 </a>";
-        if(k>0) html = "\n<ul class=\"treeview-menu\">\n";
+        html += "<li class=\"active\" url=\"${ctx}/home.jsp\"><a href=\"javascript:void(0)\"><i class=\"fa fa-home\"></i>首页 </a>";
+        if(k>0) html = "\n<ul class=\"treeview-menu\" style=\"display:none;\">\n";
         for(var i=0;i<a.length;i++){
         	if(this.groups[a[i].id] && this.groups[a[i].id].length > 0){ // 有子节点
         		if(a[i].pid == 0){// 1级菜单
         			if(a[i].tc_url == "")
-						html += "<li class=\"treeview\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
 					else
-						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
         		}else{// 非1级菜单
         			if(a[i].tc_url == "")
-						html += "<li class=\"treeview\"><a href=\"#\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
 					else
-						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
         		}
         	}else{// 没有子节点
         		if(a[i].pid == 0){// 1级菜单
         			if(a[i].tc_url == "")
-        				html += "<li><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
        				else
-        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
         		}else{ // 非1级菜单
         			if(a[i].tc_url == "")
-        				html += "<li><a href=\"#\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
        				else
-        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"#\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
         		}
         	}
             html += this.getDom(a[i].id,this.groups[a[i].id]);
@@ -174,13 +175,13 @@ treeMenu.prototype={
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -224,9 +225,9 @@ treeMenu.prototype={
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
+    <!-- sidebar:  左边导航栏 -->
     <section class="sidebar">
-      <!-- search form -->
+      <!-- search form: 菜单搜索form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -237,91 +238,7 @@ treeMenu.prototype={
         </div>
       </form>
       <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <!-- 
-      <ul class="sidebar-menu">
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Examples</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
-        </li>
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
-       -->
+      <!-- sidebar menu: 树状导航菜单，js动态生成 -->
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -374,187 +291,9 @@ treeMenu.prototype={
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
     </div>
   </aside>
   <!-- /.control-sidebar -->
@@ -567,7 +306,8 @@ treeMenu.prototype={
 
 <!-- AdminLTE App -->
 <script src="${ctx}/lib/AdminLTE/dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- Slimscroll -->
+<script src="${ctx}/lib/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctx}/lib/AdminLTE/dist/js/demo.js"></script>
 </body>

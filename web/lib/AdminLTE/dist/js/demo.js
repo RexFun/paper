@@ -41,9 +41,7 @@
       + "</a>");
 
   //Add the tab button to the right sidebar tabs
-  $("[href='#control-sidebar-home-tab']")
-      .parent()
-      .before(tab_button);
+  $(".control-sidebar-tabs").append(tab_button);
 
   //Create the menu
   var demo_settings = $("<div />");
@@ -59,7 +57,6 @@
       + "<input type='checkbox' data-layout='fixed' class='pull-right'/> "
       + "Fixed layout"
       + "</label>"
-      + "<p>Activate the fixed layout. You can't use fixed and boxed layouts together</p>"
       + "</div>"
         //Boxed layout
       + "<div class='form-group'>"
@@ -67,7 +64,6 @@
       + "<input type='checkbox' data-layout='layout-boxed'class='pull-right'/> "
       + "Boxed Layout"
       + "</label>"
-      + "<p>Activate the boxed layout</p>"
       + "</div>"
         //Sidebar Toggle
       + "<div class='form-group'>"
@@ -75,7 +71,6 @@
       + "<input type='checkbox' data-layout='sidebar-collapse' class='pull-right'/> "
       + "Toggle Sidebar"
       + "</label>"
-      + "<p>Toggle the left sidebar's state (open or collapse)</p>"
       + "</div>"
         //Sidebar mini expand on hover toggle
       + "<div class='form-group'>"
@@ -83,7 +78,6 @@
       + "<input type='checkbox' data-enable='expandOnHover' class='pull-right'/> "
       + "Sidebar Expand on Hover"
       + "</label>"
-      + "<p>Let the sidebar mini expand on hover</p>"
       + "</div>"
         //Control Sidebar Toggle
       + "<div class='form-group'>"
@@ -91,7 +85,6 @@
       + "<input type='checkbox' data-controlsidebar='control-sidebar-open' class='pull-right'/> "
       + "Toggle Right Sidebar Slide"
       + "</label>"
-      + "<p>Toggle between slide over content and push content effects</p>"
       + "</div>"
         //Control Sidebar Skin Toggle
       + "<div class='form-group'>"
@@ -99,7 +92,6 @@
       + "<input type='checkbox' data-sidebarskin='toggle' class='pull-right'/> "
       + "Toggle Right Sidebar Skin"
       + "</label>"
-      + "<p>Toggle between dark and light skins for the right sidebar</p>"
       + "</div>"
   );
   var skins_list = $("<ul />", {"class": 'list-unstyled clearfix'});
@@ -208,7 +200,7 @@
   demo_settings.append(skins_list);
 
   tab_pane.append(demo_settings);
-  $("#control-sidebar-home-tab").after(tab_pane);
+  $(".tab-content").append(tab_pane);
 
   setup();
 

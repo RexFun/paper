@@ -76,32 +76,32 @@ treeMenu.prototype={
     getDom:function(k,a){
         if(!a){return ""}
         var html = "\n<ul class=\"sidebar-menu\">\n";
-        html += "<li class=\"active\" url=\"${ctx}/home.jsp\"><a href=\"javascript:void(0)\"><i class=\"fa fa-home\"></i>首页 </a>";
+        html += "<li class=\"active\" url=\"${ctx}/home.jsp\"><a href=\"javascript:void(0)\"><i class=\"fa fa-home\"></i><span>首页</span></a>";
         if(k>0) html = "\n<ul class=\"treeview-menu\" style=\"display:none;\">\n";
         for(var i=0;i<a.length;i++){
         	if(this.groups[a[i].id] && this.groups[a[i].id].length > 0){ // 有子节点
         		if(a[i].pid == 0){// 1级菜单
         			if(a[i].tc_url == "")
-						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i><span>"+a[i].tc_name+"</span><span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
 					else
-						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-cog\"></i><span>"+a[i].tc_name+"</span><span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
         		}else{// 非1级菜单
         			if(a[i].tc_url == "")
-						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i><span>"+a[i].tc_name+"</span><span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
 					else
-						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" <span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
+						html += "<li class=\"treeview\" url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i><span>"+a[i].tc_name+"</span><span class=\"pull-right-container\"><i class=\"fa fa-angle-left pull-right\"></i></span></a>";
         		}
         	}else{// 没有子节点
         		if(a[i].pid == 0){// 1级菜单
         			if(a[i].tc_url == "")
-        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i><span>"+a[i].tc_name+"</span></a>";
        				else
-        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-list\"></i><span>"+a[i].tc_name+"</span></a>";
         		}else{ // 非1级菜单
         			if(a[i].tc_url == "")
-        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i><span>"+a[i].tc_name+"</span></a>";
        				else
-        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i>"+a[i].tc_name+" </a>";
+        				html += "<li url=\"${ctx}"+a[i].tc_url+"?menuPermitId="+a[i].tc_sys_permit_id+"\"><a href=\"javascript:void(0)\"><i class=\"fa fa-circle-o\"></i><span>"+a[i].tc_name+"</span></a>";
         		}
         	}
             html += this.getDom(a[i].id,this.groups[a[i].id]);
@@ -171,56 +171,37 @@ treeMenu.prototype={
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
+			<c:choose>
+			<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
+				<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
+			</c:when>
+			<c:otherwise>
+			<!-- Notifications: style can be found in dropdown.less -->
+			<li class="dropdown user user-menu notifications-menu">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	              <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+	              <span class="hidden-xs"> <%=account%> </span>
+	              <span class=" fa fa-angle-down"></span>
+	            </a>
+				<ul class="dropdown-menu" style="height:125px;">
+					<li>
+				 		<ul class="menu">
+							<li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="fa fa-user text-aqua"></i> 个人资料 </a></li>
+							<li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock text-aqua"></i> 修改密码 </a></li>
+							<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i> 登出</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			</c:otherwise>
+			</c:choose>
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
-
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -265,10 +246,7 @@ treeMenu.prototype={
             <div class="box-body">
               <div class="row">
                 <div class="col-md-12">
-					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
-						width="100%"
-						onload="this.height=mainFrame.document.body.scrollHeight+65"
-						frameborder="0" scrolling="auto"></iframe>
+					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="auto"></iframe>
                 </div>
               </div>
             </div>
@@ -300,7 +278,6 @@ treeMenu.prototype={
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
-
 </div>
 <!-- ./wrapper -->
 
@@ -311,114 +288,4 @@ treeMenu.prototype={
 <!-- AdminLTE for demo purposes -->
 <script src="${ctx}/lib/AdminLTE/dist/js/demo.js"></script>
 </body>
-<%-- 
-<body class="nav-md">
-	<div class="container body">
-		<div class="main_container">
-			<div class="col-md-3 left_col">
-				<div class="left_col scroll-view">
-					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.jsp" class="site_title"><i class="fa fa-paw"></i>
-							<span>后台管理系统</span></a>
-					</div>
-
-					<div class="clearfix"></div>
-
-					<!-- menu profile quick info -->
-					<div class="profile">
-						<div class="profile_pic">
-							<img src="${ctx}/lib/gentelella/image/user.png" alt="..." class="img-circle profile_img">
-						</div>
-						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2><%=account %></h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
-					
-					<br />
-					
-					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-						</div>
-					</div>
-					<!-- /sidebar menu -->
-					
-					<!-- /menu footer buttons -->
-					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Settings">
-							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
-							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Logout">
-							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-						</a>
-					</div>
-					<!-- /menu footer buttons -->
-				</div>
-			</div>
-
-			<!-- top navigation -->
-			<div class="top_nav">
-				<div class="nav_menu">
-					<nav>
-						<div class="nav toggle">
-							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-						</div>
-						<ul class="nav navbar-nav navbar-right">
-							<c:choose>
-								<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
-									<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="">
-										<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
-											<i class="glyphicon glyphicon-user"></i>
-											<%=account%> 
-											<span class=" fa fa-angle-down"></span>
-										</a>
-										<ul id="user-dropdown-menu" class="dropdown-menu dropdown-usermenu pull-right">
-											<li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-file"></i> 个人资料 </a></li>
-											<li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock"></i> 修改密码 </a></li>
-											<li class="divider"></li>
-											<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
-										</ul></li>
-								</c:otherwise>
-							</c:choose>
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<!-- /top navigation -->
-
-			<!-- page content -->
-			<div class="right_col" role="main">
-				<div class="x_panel">
-					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp"
-						width="100%"
-						onload="this.height=mainFrame.document.body.scrollHeight+65"
-						frameborder="0" scrolling="auto"></iframe>
-				</div>
-			</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a
-						href="https://colorlib.com">Colorlib</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
-		</div>
-	</div>
-	<script type="text/javascript" src="${ctx}/lib/gentelella/js/custom.min.js"></script>
-</body>
- --%>
 </html>

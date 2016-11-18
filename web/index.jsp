@@ -29,11 +29,13 @@ $(function(){
 		$(this).parent("li").addClass("active");
 		if(typeof($(this).parent("li").attr("url"))!="undefined"){
 			$("#mainFrame").attr("src",$(this).parent("li").attr("url"));
+			$("section[class='content-header'] h1").html($(this).children("span").html());
 		}
 	});
 	//用户下拉菜单单击事件
 	$("#user-dropdown-menu li").click(function(){
 		$("#mainFrame").attr("src",$(this).attr("url"));
+		$("section[class='content-header'] h1").html($(this).children("a").children("span").html());
 	});
 });
 </script>
@@ -144,140 +146,119 @@ treeMenu.prototype={
 			});
 		}
 		$(function() {
-			filterList($("#form"), $(".nav .side-menu"));
+			filterList($("#form"), $(".sidebar-menu"));
 		});
 		})(jQuery);
 </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<!-- 3种 sidebar布局  -->
+<!-- 
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+ -->
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<!--/ 3种 sidebar布局  -->
+
 <div class="wrapper">
-
-  <header class="main-header">
-
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
-    </a>
-
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-			<c:choose>
-			<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
-				<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i> 登录 </a></li>
-			</c:when>
-			<c:otherwise>
-			<!-- Notifications: style can be found in dropdown.less -->
-			<li class="dropdown user user-menu notifications-menu">
-	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	              <img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-	              <span class="hidden-xs"> <%=account%> </span>
-	              <span class=" fa fa-angle-down"></span>
-	            </a>
-				<ul class="dropdown-menu" style="height:125px;">
-					<li>
-				 		<ul class="menu">
-							<li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="fa fa-user text-aqua"></i> 个人资料 </a></li>
-							<li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock text-aqua"></i> 修改密码 </a></li>
-							<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i> 登出</a></li>
-						</ul>
-					</li>
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="javascript:void(0);return false;" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini"><b>A</b>SYS</span> <!-- logo for regular state and mobile devices -->
+			<span class="logo-lg"><b>Admin</b>SYSTEM</span>
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<!-- Sidebar toggle button-->
+			<a href="javascript:void(0);return false;" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
+			<!-- Navbar Right Menu -->
+			<div class="navbar-custom-menu">
+				<ul class="nav navbar-nav">
+					<c:choose>
+						<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
+							<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i>登录</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="dropdown user user-menu notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<span class="hidden-xs"> <%=account%></span><span class=" fa fa-angle-down"></span>
+								</a>
+								<ul class="dropdown-menu" style="height: 125px;">
+									<li>
+										<ul id="user-dropdown-menu" class="menu">
+											<li url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
+											<li url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
+											<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					<!-- Control Sidebar Toggle Button -->
+					<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 				</ul>
-			</li>
-			</c:otherwise>
-			</c:choose>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar:  左边导航栏 -->
-    <section class="sidebar">
-      <!-- search form: 菜单搜索form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: 树状导航菜单，js动态生成 -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Version 2.0</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
-					<iframe id="mainFrame" name="mainFrame" src="${ctx}/home.jsp" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="auto"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+			</div>
+		</nav>
+	</header>
+	<!-- Main Sidebar -->
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<!-- Search Form: 菜单搜索form -->
+			<form action="#" method="get" class="sidebar-form">
+				<div class="input-group">
+					<input type="text" name="q" class="form-control" placeholder="Search..."/>
+					<span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</form>
+			<!-- Sidebar Menu: 树状导航菜单，js动态生成 -->
+		</section>
+	</aside>
+	<!-- /.main-sidebar -->
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>首页</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-default">
+						<div class="box-body">
+							<iframe src="${ctx}/home.jsp" id="mainFrame" name="mainFrame" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="auto"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!-- /.content-wrapper -->
+	<!-- Main Footer -->
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+		<strong>Copyright &copy; 2014-2016 <a href="https://github.com/RexFun" target="blank">RexFun GitHub</a>.</strong> All rights reserved.
+	</footer>
+	<!-- /.main-footer -->
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Create the tabs -->
+		<ul class="nav nav-tabs nav-justified control-sidebar-tabs"></ul>
+		<!-- Tab panes -->
+		<div class="tab-content"></div>
+	</aside>
+	<!-- /.control-sidebar -->
+	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	<div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -285,6 +266,8 @@ treeMenu.prototype={
 <script src="${ctx}/lib/AdminLTE/dist/js/app.min.js"></script>
 <!-- Slimscroll -->
 <script src="${ctx}/lib/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="${ctx}/lib/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${ctx}/lib/AdminLTE/dist/js/demo.js"></script>
 </body>

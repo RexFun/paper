@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="auth.action.AuthLoginAction"%>
 <%@ page import="admin.entity.SysUser"%>
-<%@ page import="auth.Auth"%>
 <%
 SysUser o = (SysUser)session.getAttribute(AuthLoginAction.SessionName_CurLoginUser);
 String userId = o==null?"":o.getString("id");
@@ -16,6 +15,14 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/skins/_all-skins.min.css">
+<link type="text/css" href="${ctx}/lib/jquery/ui-bootstrap/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
+<!--[if IE 7]>
+<link rel="stylesheet" href="${ctx}/lib/jquery/ui-bootstrap/assets/css/font-awesome-ie7.min.css">
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="${ctx}/lib/jquery/ui-bootstrap/css/custom-theme/jquery.ui.1.10.0.ie.css"/>
+<![endif]-->
+<script type="text/javascript" src="${ctx}/lib/jquery/ui-bootstrap/jquery-ui-1.10.0.custom.min.js"></script>
 
 <script type="text/javascript">
 $(function(){
@@ -28,8 +35,9 @@ $(function(){
 		$(this).parent("li").siblings().removeClass("active");
 		$(this).parent("li").addClass("active");
 		if(typeof($(this).parent("li").attr("url"))!="undefined"){
-			$("#mainFrame").attr("src",$(this).parent("li").attr("url"));
-			$("section[class='content-header'] h1").html($(this).children("span").html());
+			//$("#mainFrame").attr("src",$(this).parent("li").attr("url"));
+			//$("section[class='content-header'] h1").html($(this).children("span").html());
+			addTab($(this).parent("li").attr("url"),$(this).children("span").html());
 		}
 	});
 	//用户下拉菜单单击事件
@@ -37,6 +45,8 @@ $(function(){
 		$("#mainFrame").attr("src",$(this).attr("url"));
 		$("section[class='content-header'] h1").html($(this).children("a").children("span").html());
 	});
+	// tab
+	$("#tabs").tabs();
 });
 </script>
 <script type="text/javascript">
@@ -150,6 +160,18 @@ treeMenu.prototype={
 		});
 		})(jQuery);
 </script>
+<script type="text/javascript">
+//Dynamic tabs
+var tabCounter = 2;
+function addTab(_tabUrl, _tabTitle) {
+	var tabHeader = "<li><a href=\"#tab_"+tabCounter+"\">"+_tabTitle+"</a> <span class=\"ui-icon ui-icon-close\">Remove Tab</span></li>";
+	var tabBody = "<div id=\"tab_" + tabCounter + "\"><iframe src=\""+_tabUrl+"\" width=\"100%\" height=\"700\" frameborder=\"0\" scrolling=\"auto\"></iframe></div>";
+	$("#tabs ul").append(tabHeader);
+	$("#tabs").append(tabBody);
+	$("#tabs").tabs("refresh");
+	tabCounter++;
+}
+</script>
 </head>
 <!-- 3种 sidebar布局  -->
 <!-- 
@@ -222,6 +244,7 @@ treeMenu.prototype={
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
+		<!-- 
 		<section class="content-header">
 			<h1>首页</h1>
 			<ol class="breadcrumb">
@@ -229,7 +252,20 @@ treeMenu.prototype={
 				<li class="active">Dashboard</li>
 			</ol>
 		</section>
+		 -->
 		<!-- Main content -->
+		<section class="content">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">首页</a></li>
+				</ul>
+				<div id="tabs-1">
+					<iframe src="${ctx}/home.jsp" id="mainFrame" name="mainFrame" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="auto"></iframe>
+				</div>
+       		</div>
+		</section>
+		
+<%-- 		
 		<section class="content">
 			<div class="row">
 				<div class="col-md-12">
@@ -241,6 +277,7 @@ treeMenu.prototype={
 				</div>
 			</div>
 		</section>
+		 --%>
 	</div>
 	<!-- /.content-wrapper -->
 	<!-- Main Footer -->

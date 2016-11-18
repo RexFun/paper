@@ -61,7 +61,7 @@ CREATE TABLE `sys_permit` (
   `tc_url` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tc_order` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `sys_permit` (
 
 LOCK TABLES `sys_permit` WRITE;
 /*!40000 ALTER TABLE `sys_permit` DISABLE KEYS */;
-INSERT INTO `sys_permit` VALUES (2,0,'Model management','模型管理',NULL,'/admin/papermodel/get.action','02'),(3,0,'System management','系统管理',NULL,'','03'),(4,3,'Menu management','菜单管理',NULL,'/admin/sysmenu/get.action','032'),(5,3,'Permit management','权限管理',NULL,'/admin/syspermit/get.action','031'),(6,3,'Role management','角色管理',NULL,'/admin/sysrole/get.action','033'),(7,3,'User management','用户管理',NULL,'/admin/sysuser/get.action','034'),(13,2,'pbtn_add','添加',1,'/admin/papermodel/add.action','021'),(14,2,'pbtn_del','删除',1,'/admin/papermodel/del.action','022'),(15,2,'pbtn_upd','修改',1,'/admin/papermodel/upd.action','023'),(16,2,'pbtn_query','查询',1,'/admin/papermodel/getJson.action','024'),(17,2,'pbtn_getById','明细',1,'/admin/papermodel/getById.action','025'),(18,2,'pbtn_getImages','图片',1,'/admin/papermodel/getImages.action','026'),(27,0,'Category management','分类管理',NULL,'/admin/papercategory/get.action','01'),(28,27,'pbtn_add','添加',1,'/admin/papercategory/add.action','011'),(29,27,'pbtn_del','删除',1,'/admin/papercategory/del.action','012'),(30,27,'pbtn_upd','修改',1,'/admin/papercategory/upd.action','013'),(31,27,'pbtn_query','查询',1,'/admin/papercategory/getJson.action','014'),(32,27,'pbtn_getById','明细',1,'/admin/papercategory/getById.action','015');
+INSERT INTO `sys_permit` VALUES (2,0,'Model management','模型管理',NULL,'/admin/papermodel/get.action','02'),(3,0,'System management','系统管理',NULL,'','03'),(4,3,'Menu management','菜单管理',NULL,'/admin/sysmenu/get.action','032'),(5,3,'Permit management','权限管理',NULL,'/admin/syspermit/get.action','031'),(6,3,'Role management','角色管理',NULL,'/admin/sysrole/get.action','033'),(7,3,'User management','用户管理',NULL,'/admin/sysuser/get.action','034'),(13,2,'pbtn_add','添加',1,'/admin/papermodel/add1.action','021'),(14,2,'pbtn_del','删除',1,'/admin/papermodel/del.action','022'),(15,2,'pbtn_upd','修改',1,'/admin/papermodel/upd1.action','023'),(16,2,'pbtn_query','查询',1,'/admin/papermodel/getJson.action','024'),(17,2,'pbtn_getById','明细',1,'/admin/papermodel/getById.action','025'),(18,2,'pbtn_getImages','图片',1,'/admin/papermodel/getImages.action','026'),(27,0,'Category management','分类管理',NULL,'/admin/papercategory/get.action','01'),(28,27,'pbtn_add','添加',1,'/admin/papercategory/add1.action','011'),(29,27,'pbtn_del','删除',1,'/admin/papercategory/del.action','012'),(30,27,'pbtn_upd','修改',1,'/admin/papercategory/upd1.action','013'),(31,27,'pbtn_query','查询',1,'/admin/papercategory/getJson.action','014'),(32,27,'pbtn_getById','明细',1,'/admin/papercategory/getById.action','015'),(33,5,'pbtn_add','添加',1,'/admin/syspermit/add1.action','0311'),(34,5,'pbtn_del','删除',1,'/admin/syspermit/del.action','0312'),(35,5,'pbtn_upd','修改',1,'/admin/syspermit/upd1.action','0313'),(36,5,'pbtn_query','查询',1,'/admin/syspermit/getJson.action','0314'),(37,5,'pbtn_getById','明细',1,'/admin/syspermit/getById.action','0315'),(38,4,'pbtn_add','添加',1,'/admin/sysmenu/add1.action','0321'),(39,4,'pbtn_del','删除',1,'/admin/sysmenu/del.action','0322'),(40,4,'pbtn_upd','修改',1,'/admin/sysmenu/upd1.action','0323'),(41,4,'pbtn_query','查询',1,'/admin/sysmenu/getJson.action','0324'),(42,4,'pbtn_getById','明细',1,'/admin/sysmenu/getById.action','0325'),(43,6,'pbtn_add','添加',1,'/admin/sysrole/add1.action','0331'),(44,6,'pbtn_del','删除',1,'/admin/sysrole/del.action','0332'),(45,6,'pbtn_upd','修改',1,'/admin/sysrole/upd1.action','0333'),(46,6,'pbtn_query','查询',1,'/admin/sysrole/getJson.action','0334'),(47,6,'pbtn_getById','明细',1,'/admin/sysrole/getById.action','0335'),(48,7,'pbtn_add','添加',1,'/admin/sysuser/add1.action','0341'),(49,7,'pbtn_del','删除',1,'/admin/sysuser/del.action','0342'),(50,7,'pbtn_upd','修改',1,'/admin/sysuser/upd1.action','0343'),(51,7,'pbtn_query','查询',1,'/admin/sysuser/getJson.action','0344'),(52,7,'pbtn_getById','明细',1,'/admin/sysuser/getById.action','0345');
 /*!40000 ALTER TABLE `sys_permit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +113,7 @@ CREATE TABLE `sys_role_permit_mapping` (
   PRIMARY KEY (`id`),
   KEY `fk_sys_permit` (`tc_sys_permit_id`),
   KEY `fk_sys_role` (`tc_sys_role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=441 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `sys_role_permit_mapping` (
 
 LOCK TABLES `sys_role_permit_mapping` WRITE;
 /*!40000 ALTER TABLE `sys_role_permit_mapping` DISABLE KEYS */;
-INSERT INTO `sys_role_permit_mapping` VALUES (50,31,3),(51,31,4),(53,32,3),(54,32,4),(55,32,2),(61,33,2),(275,28,8),(276,28,9),(277,28,10),(278,28,11),(279,28,2),(280,28,16),(281,28,17),(282,28,3),(283,28,7),(324,29,3),(325,29,4),(426,35,2),(427,35,13),(428,35,14),(429,35,15),(430,35,16),(431,35,17),(432,35,18),(433,35,3),(434,35,4),(435,35,5),(436,35,6),(437,35,7),(438,35,27),(439,35,31),(440,35,32);
+INSERT INTO `sys_role_permit_mapping` VALUES (50,31,3),(51,31,4),(53,32,3),(54,32,4),(55,32,2),(61,33,2),(324,29,3),(325,29,4),(476,35,27),(477,35,28),(478,35,29),(479,35,30),(480,35,31),(481,35,32),(482,35,2),(483,35,13),(484,35,14),(485,35,15),(486,35,16),(487,35,17),(488,35,18),(489,35,3),(490,35,5),(491,35,33),(492,35,34),(493,35,35),(494,35,36),(495,35,37),(496,35,4),(497,35,38),(498,35,39),(499,35,40),(500,35,41),(501,35,42),(502,35,6),(503,35,43),(504,35,44),(505,35,45),(506,35,46),(507,35,47),(508,35,7),(509,35,48),(510,35,49),(511,35,50),(512,35,51),(513,35,52),(542,28,2),(543,28,16),(544,28,17),(545,28,3),(546,28,5),(547,28,36),(548,28,37),(549,28,7),(550,28,51),(551,28,52);
 /*!40000 ALTER TABLE `sys_role_permit_mapping` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-14 18:23:29
+-- Dump completed on 2016-11-18 17:56:38

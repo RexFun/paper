@@ -162,14 +162,17 @@ treeMenu.prototype={
 </script>
 <script type="text/javascript">
 //Dynamic tabs
-var tabCounter = 2;
+var tabCounter = 1;
 function addTab(_tabUrl, _tabTitle) {
 	var tabHeader = "<li><a href=\"#tab_"+tabCounter+"\">"+_tabTitle+"</a> <span class=\"ui-icon ui-icon-close\">Remove Tab</span></li>";
 	var tabBody = "<div id=\"tab_" + tabCounter + "\"><iframe src=\""+_tabUrl+"\" width=\"100%\" height=\"700\" frameborder=\"0\" scrolling=\"auto\"></iframe></div>";
 	$("#tabs ul").append(tabHeader);
 	$("#tabs").append(tabBody);
 	$("#tabs").tabs("refresh");
+	$("#tabs").tabs({"active":tabCounter});
+	var active = $( "#tabs" ).tabs( "option", "active" );
 	tabCounter++;
+
 }
 </script>
 </head>
@@ -257,9 +260,9 @@ function addTab(_tabUrl, _tabTitle) {
 		<section class="content">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">首页</a></li>
+					<li><a href="#tabs-0">首页</a></li>
 				</ul>
-				<div id="tabs-1">
+				<div id="tabs-0">
 					<iframe src="${ctx}/home.jsp" width="100%" height="700" frameborder="0" scrolling="auto"></iframe>
 				</div>
        		</div>

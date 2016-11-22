@@ -260,7 +260,7 @@ function addTab(_tabUrl, _tabTitle) {
 					<li><a href="#tabs-1">首页</a></li>
 				</ul>
 				<div id="tabs-1">
-					<iframe src="${ctx}/home.jsp" id="mainFrame" name="mainFrame" width="100%" onload="this.height=mainFrame.document.body.scrollHeight+65" frameborder="0" scrolling="auto"></iframe>
+					<iframe src="${ctx}/home.jsp" width="100%" height="700" frameborder="0" scrolling="auto"></iframe>
 				</div>
        		</div>
 		</section>

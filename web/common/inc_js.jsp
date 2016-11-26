@@ -5,3 +5,4 @@
 <script type="text/javascript" src="${ctx}/lib/bs/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="${ctx}/lib/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/lib/gwen/form.js"></script>
+<script type="text/javascript">var $ctx="${ctx}";</script>

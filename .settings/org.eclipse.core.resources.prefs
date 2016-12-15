@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//web/common/inc_css.jsp=UTF-8
 encoding//web/common/inc_ctx.jsp=UTF-8
 encoding//web/common/inc_js_btn_permit.jsp=UTF-8
 encoding//web/permitError.jsp=UTF-8

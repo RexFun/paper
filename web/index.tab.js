@@ -24,7 +24,7 @@ var $tab = {
 	add : function(_menuId,_url, _title){
 		if(!this.isExisted(_menuId)){
 			var tabHeader = "<li><a href=\"#tab_"+_menuId+"\">"+_title+"</a> <span class=\"ui-icon ui-icon-close\" onclick=\"\">Remove Tab</span></li>";
-			var tabBody = "<div id=\"tab_"+_menuId+"\"><iframe src=\""+_url+"\" width=\"100%\" height=\"700\" frameborder=\"0\" scrolling=\"auto\"></iframe></div>";
+			var tabBody = "<div id=\"tab_"+_menuId+"\"><iframe src=\""+_url+"\" width=\"100%\" frameborder=\"0\" scrolling=\"auto\"></iframe></div>";
 			$("#tabs ul").append(tabHeader);
 			$("#tabs").append(tabBody);
 			$("#tabs").tabs("refresh");

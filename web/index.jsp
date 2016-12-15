@@ -27,13 +27,28 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <script type="text/javascript" src="${ctx}/index.nav.js"></script>
 <script type="text/javascript" src="${ctx}/index.tab.js"></script>
 <script type="text/javascript">
+/*重置全局Iframe高度*/
+function resetIframeHeight(){
+	var headerH = $("header").outerHeight();
+	var footerH = $("footer").outerHeight();
+	var winH = $(this).outerHeight();
+	var ifmH = winH - headerH - footerH - 125;
+	$("iframe").height(ifmH);
+}
 $(function(){
+	// 初始化重置全局Iframe高度
+	resetIframeHeight();
+	// 随浏览器窗口高度改变全局Iframe高度
+	$(window).resize(function() {
+		resetIframeHeight();
+	});
 	// tab
 	$tab.init();
 	// nav
 	$nav.init(<%=navMenuTreeNodes%>);
 	$nav.onItemClick(function(_menuId,_url,_title){
 		$tab.add(_menuId,_url,_title);
+		resetIframeHeight();
 	});
 	//用户下拉菜单单击事件
 	$("#user-dropdown-menu li").click(function(){
@@ -120,7 +135,7 @@ $(function(){
 					<li><a href="#tabs-0">首页</a></li>
 				</ul>
 				<div id="tabs-0">
-					<iframe src="${ctx}/home.jsp" width="100%" height="700" frameborder="0" scrolling="auto"></iframe>
+					<iframe src="${ctx}/home.jsp" width="100%" frameborder="0" scrolling="auto"></iframe>
 				</div>
        		</div>
 		</section>

@@ -4,6 +4,6 @@
 <%@ include file="/common/inc_js.jsp"%>
 </head>
 <body>
-  权限未开通。 <a href="javascript:void(0);window.history.back();">返回</a>
+  权限未开通。 <a href="javascript:void(0);location.reload();">刷新</a>
 </body>
 </html>

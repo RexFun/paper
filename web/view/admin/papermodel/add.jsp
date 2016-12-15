@@ -13,7 +13,6 @@ $gwen.form.callback = function(){
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="get.action">模型管理</a></li>
 	<li class="active">新增</li>
 </ol>
 <!-- form -->

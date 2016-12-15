@@ -59,10 +59,6 @@ $gwen.form.callback = function(){
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
-	<li class="active">个人资料</li>
-</ol>
 <!-- form -->
 <form id="dataForm" role="form" action="upd2.action" method="post">
 <div class="wrapper">

@@ -88,7 +88,6 @@ $gwen.form.callback = function(){
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="get.action">用户管理</a></li>
 	<li class="active">修改</li>
 </ol>
 <!-- form -->

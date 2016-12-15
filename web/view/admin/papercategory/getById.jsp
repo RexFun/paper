@@ -6,7 +6,6 @@
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="get.action">类别管理</a></li>
 	<li class="active">明细</li>
 </ol>
 <div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" id="name" name="po.m.name" value="${po.m.name}" readonly="readonly"/></div>

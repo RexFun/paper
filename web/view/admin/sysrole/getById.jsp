@@ -64,7 +64,6 @@ $(function(){
 <body>
 <!-- title -->
 <ol class="breadcrumb">
-	<li><a href="get.action">角色管理</a></li>
 	<li class="active">明细</li>
 </ol>
 <div class="wrapper">

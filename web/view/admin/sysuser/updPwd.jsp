@@ -13,7 +13,6 @@ $(function(){
 		  	function(data) {
 				if(data.success){
 					alert('密码修改成功');
-					location.href = "${ctx}/home.jsp";
 				}else{
 					$('#msgModalText').html(data.msg);
 					$('#msgModal').modal('show');
@@ -25,17 +24,12 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
-	<li class="active">修改密码</li>
-</ol>
 <!-- form -->
 <form id="pwdForm" role="form" action="updPwd2.action" method="post">
 <div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<fieldset>
-			<legend>基础信息</legend>
 				<div class="form-group"><label for="old_password">原密码：</label><input type="password" class="form-control" id="old_password" value=""/></div>
 				<div class="form-group"><label for="new_password">新密码：</label><input type="password" class="form-control" id="new_password" value=""/></div>
 				<input type="hidden" id="id" value="${po.m.id}"/>

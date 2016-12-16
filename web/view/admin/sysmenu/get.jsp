@@ -91,7 +91,6 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"700",
 		striped:true,
 		pagination:true,
 		pageList:"[10,20,50]",
@@ -102,6 +101,9 @@ function initTable(){
 	    columns:
 	    [
 	     {checkbox:true, align:'center', valign:'middle'},
+	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	    	 events:operateEvents, 
+	    	 formatter:operateFormatter},
 	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
 	     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单代号', field:'m.tc_code', align:'center', valign:'middle', sortable:true},
@@ -109,9 +111,6 @@ function initTable(){
 	     {title:'菜单URL', field:'m.tc_url', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:true},
 	     {title:'菜单权限ID', field:'m.tc_sys_permit_id', align:'center', valign:'middle', sortable:true},
-	     {title:'操作', field:'operate', align:'center', valign:'middle', 
-	    	 events:operateEvents, 
-	    	 formatter:operateFormatter}
 	    ],
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
@@ -121,12 +120,31 @@ function initTable(){
 // 操作列
 function operateFormatter(value, row, index) {
     return [
+    	'<div class="btn-group">',
+    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
+    	'<span class="caret"></span>',
+    	'</button>',
+    	'<ul class="dropdown-menu" role="menu">',
+    	'<li class="upd" pbtnId="pbtn_upd'+index+'">',
+    	'<a href="#">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+    	'</a>',
+    	'</li>',
+    	'<li class="getById" pbtnId="pbtn_getById'+index+'">',
+    	'<a href="#">',
+        '<i class="glyphicon glyphicon-info-sign"></i>',
+    	'</a>',
+    	'</li>',
+    	'</ul>',
+    	'</div>'
+    	/* 
         '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
         '<i class="glyphicon glyphicon-edit"></i>',
         '</button>&nbsp&nbsp&nbsp&nbsp',
         '<button type="button" class="btn btn-default getById" pbtnId="pbtn_getById'+index+'">',
         '<i class="glyphicon glyphicon-info-sign"></i>',
         '</button>'
+         */
     ].join('');
 }
 // 操作列事件

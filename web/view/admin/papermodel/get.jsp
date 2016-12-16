@@ -37,7 +37,6 @@ function initTable(){
         showToggle:true,
         showColumns:true,
         showExport:true,
-		height:"700",
 		striped:true,
 		pagination:true,
 		pageList:"[10,20,50]",
@@ -49,14 +48,14 @@ function initTable(){
 	    columns:
 	    [
 	     {checkbox:true, align:'center', valign:'middle'},
+	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	    	 events:operateEvents, 
+	    	 formatter:operateFormatter},
 	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
 	     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true, visible:false},
 	     {title:'类别名', field:'m.catname', align:'center', valign:'middle', sortable:true},
 	     {title:'模型名', field:'m.name', align:'center', valign:'middle', sortable:true},
 	     {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true},
-	     {title:'操作', field:'operate', align:'center', valign:'middle', 
-	    	 events:operateEvents, 
-	    	 formatter:operateFormatter}
 	    ],
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
@@ -66,6 +65,29 @@ function initTable(){
 // 操作列
 function operateFormatter(value, row, index) {
     return [
+    	'<div class="btn-group">',
+    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
+    	'<span class="caret"></span>',
+    	'</button>',
+    	'<ul class="dropdown-menu" role="menu">',
+    	'<li class="upd" pbtnId="pbtn_upd'+index+'">',
+    	'<a href="#">',
+        '<i class="glyphicon glyphicon-edit"></i>',
+    	'</a>',
+    	'</li>',
+    	'<li class="getById" pbtnId="pbtn_getById'+index+'">',
+    	'<a href="#">',
+        '<i class="glyphicon glyphicon-info-sign"></i>',
+    	'</a>',
+    	'</li>',
+    	'<li clas="getImages" pbtnId="pbtn_getImages'+index+'">',
+    	'<a href="#">',
+        '<i class="glyphicon glyphicon-picture"></i>',
+    	'</a>',
+    	'</li>',
+    	'</ul>',
+    	'</div>'
+    	/* 
         '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
         '<i class="glyphicon glyphicon-edit"></i>',
         '</button>',
@@ -77,6 +99,7 @@ function operateFormatter(value, row, index) {
         '<button type="button" class="btn btn-default getImages" pbtnId="pbtn_getImages'+index+'">',
         '<i class="glyphicon glyphicon-picture"></i>',
         '</button>'
+         */
     ].join('');
 }
 // 操作列事件

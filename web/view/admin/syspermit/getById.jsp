@@ -13,8 +13,11 @@
 		<div class="col-md-12 column">
 			<fieldset>
 			<legend>基础信息</legend>
+				<div class="form-group"><label for="pid">父ID：</label>
+					<input type="text" class="form-control" value="${po.m.tc_p_name}" readonly="readonly"/>
+					<input type="hidden" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}" readonly="readonly"/>
+				</div>
 				<div class="form-group"><label for="id">权限ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
-				<div class="form-group"><label for="pid">父ID：</label><input type="text" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_code">权限代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_name">权限名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_type">权限类型：</label><input type="text" class="form-control" id="tc_type" name="po.m.tc_type" value="${po.m.tc_type}" readonly="readonly"/></div>

@@ -1,6 +1,7 @@
 package admin.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,11 +109,29 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	@Action(value="getPermitTreeNodes")
 	public void getPermitTreeNodes()
 	{
-		List<SysPermit> resultData = service.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();
-		for(SysPermit o : resultData)
-		{
-			treeNodes.add(o.getM());
+		if(getReq().getLong("id")!=0)
+		{// 所有权限，且标记已选权限
+			SysPermit selectedPermitObj = service.getById(getReq().getLong("id"));
+			List<SysPermit> permitData = service.get(null);
+			for(int i=0; i<permitData.size(); i++)
+			{
+				SysPermit o = permitData.get(i);
+				if(o.getLong("id") == selectedPermitObj.getLong("id"))
+				{
+					o.set("checked", true);
+				}
+				treeNodes.add(o.getM());
+			}
+		}
+		else
+		{// 所有权限
+			List<SysPermit> permitData = service.get(null);
+			for(int i=0; i<permitData.size(); i++)
+			{
+				SysPermit o = permitData.get(i);
+				treeNodes.add(o.getM());
+			}
 		}
 		printJson(treeNodes);
 	}

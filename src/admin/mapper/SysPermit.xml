@@ -45,6 +45,16 @@
 		<result property="m.tc_order" column="tc_order"/>
 		<result property="m.tc_type" column="tc_type"/>
 	</resultMap>
+	<resultMap type="admin.entity.SysPermit" id="result1">
+		<id property="m.id" column="id"/>
+		<result property="m.pid" column="pid"/>
+		<result property="m.tc_p_name" column="tc_p_name"/>
+		<result property="m.tc_code" column="tc_code"/>
+		<result property="m.tc_name" column="tc_name"/>
+		<result property="m.tc_url" column="tc_url"/>
+		<result property="m.tc_order" column="tc_order"/>
+		<result property="m.tc_type" column="tc_type"/>
+	</resultMap>
   	
 	<sql id="columns">
 		ID, PID, TC_CODE, TC_NAME, TC_URL, TC_ORDER, TC_TYPE
@@ -67,8 +77,11 @@
 		</where>
 	</sql>	
 	
-	<select id="getById" resultMap="result">
-		select <include refid="columns"/> from sys_permit where id = #{id}
+	<select id="getById" resultMap="result1">
+		select <include refid="columns1"/>, t2.TC_NAME as TC_P_NAME
+		  from sys_permit t1
+		  left join sys_permit t2 on t1.pid = t2.id
+		 where t1.id = #{id}
 	</select>
 	
 	<select id="get" resultType="list" resultMap="result">

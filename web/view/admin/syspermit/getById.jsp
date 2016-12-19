@@ -20,6 +20,7 @@
 				<div class="form-group"><label for="tc_type">权限类型：</label><input type="text" class="form-control" id="tc_type" name="po.m.tc_type" value="${po.m.tc_type}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_url">权限URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_order">权限排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
+				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 	</div>

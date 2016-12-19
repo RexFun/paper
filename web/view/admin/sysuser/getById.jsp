@@ -76,6 +76,7 @@ $(function(){
 				<div class="form-group"><label for="tc_name">用户名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" value="${po.m.tc_email}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_add_time">创建时间：</label><input type="text" class="form-control" id="tc_add_time" name="po.m.tc_add_time" value="${po.m.tc_add_time}" readonly="readonly"/></div>
+				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 		<div class="col-md-6 column">

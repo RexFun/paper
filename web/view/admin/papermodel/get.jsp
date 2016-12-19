@@ -48,7 +48,7 @@ function initTable(){
 	    columns:
 	    [
 	     {checkbox:true, align:'center', valign:'middle'},
-	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	     {title:'操作', field:'operate', align:'center', valign:'middle', width:'50',
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter},
 	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
@@ -80,7 +80,7 @@ function operateFormatter(value, row, index) {
         '<i class="glyphicon glyphicon-info-sign"></i>',
     	'</a>',
     	'</li>',
-    	'<li clas="getImages" pbtnId="pbtn_getImages'+index+'">',
+    	'<li class="getImages" pbtnId="pbtn_getImages'+index+'">',
     	'<a href="#">',
         '<i class="glyphicon glyphicon-picture"></i>',
     	'</a>',

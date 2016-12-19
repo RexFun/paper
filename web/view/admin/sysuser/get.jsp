@@ -49,7 +49,7 @@ function initTable(){
 	    columns:
 	    [
 	     {checkbox:true, align:'center', valign:'middle'},
-	     {title:'操作', field:'operate', align:'center', valign:'middle', 
+	     {title:'操作', field:'operate', align:'center', valign:'middle', width:'50',
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter},
 	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},

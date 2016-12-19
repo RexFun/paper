@@ -81,7 +81,7 @@ $(function(){
 		</div>
 		<div class="col-md-6 column">
 			<fieldset>
-			<legend>权限</legend>
+			<legend>角色</legend>
 				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 				<ul id="roleTree" class="ztree" style="height:700px; overflow:auto"></ul>
 			</fieldset>

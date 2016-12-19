@@ -43,8 +43,9 @@ var setting =
 	}
 };
 // zTree的初始化
-$(function(){
+function initTree(){
     zTreeObj = $.fn.zTree.init($("#menuTree"), setting);
+    $("#menuTree").css({"height":getHeight("tree")});
     // 全部展开/折叠
     $("#expandAll").click(function(){
     	var zTree = $.fn.zTree.getZTreeObj("menuTree");
@@ -54,7 +55,7 @@ $(function(){
         	zTree.expandAll(false);
         }
     });
-});
+}
 </script>
 <script type="text/javascript">
 $gwen.form.callback = function(){
@@ -82,6 +83,7 @@ function initToolbar() {
 /* 初始化tb_list */
 function initTable(){
 	$('#tb_list').bootstrapTable({
+		height:getHeight("table"),
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJson.action',
@@ -137,14 +139,6 @@ function operateFormatter(value, row, index) {
     	'</li>',
     	'</ul>',
     	'</div>'
-    	/* 
-        '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
-        '<i class="glyphicon glyphicon-edit"></i>',
-        '</button>&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getById" pbtnId="pbtn_getById'+index+'">',
-        '<i class="glyphicon glyphicon-info-sign"></i>',
-        '</button>'
-         */
     ].join('');
 }
 // 操作列事件
@@ -175,10 +169,16 @@ function initModalFormQuery() {
 }
 /* 全局函数 */
 $(function() {
+	initTree();
 	initTable();
 	initToolbar();
 	initModalFormQuery();
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+	//随窗口resize 改变 高度
+    $(window).resize(function () {
+    	$('#tb_list').bootstrapTable('resetView', {height: getHeight("table")});
+    	$("#menuTree").css({"height":getHeight("tree")});
+    });
 });
 </script>
 </head>
@@ -196,13 +196,11 @@ $(function() {
 	<div class="row clearfix">
 		<div class="col-md-10 column">
 			<fieldset>
-			<legend>列表</legend>
 				<table id="tb_list"></table>
 			</fieldset>
 		</div>
 		<div class="col-md-2 column">
 			<fieldset>
-			<legend>预览</legend>
 				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 				<ul id="menuTree" class="ztree" style="height:700px; overflow:auto"></ul>
 			</fieldset>

@@ -28,6 +28,7 @@ function initToolbar() {
 /* 初始化tb_list */
 function initTable(){
 	$('#tb_list').bootstrapTable({
+		height:getHeight("table"),
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJson.action',
@@ -87,19 +88,6 @@ function operateFormatter(value, row, index) {
     	'</li>',
     	'</ul>',
     	'</div>'
-    	/* 
-        '<button type="button" class="btn btn-default upd" pbtnId="pbtn_upd'+index+'">',
-        '<i class="glyphicon glyphicon-edit"></i>',
-        '</button>',
-        '&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getById" pbtnId="pbtn_getById'+index+'">',
-        '<i class="glyphicon glyphicon-info-sign"></i>',
-        '</button>'
-        ,'&nbsp&nbsp&nbsp&nbsp',
-        '<button type="button" class="btn btn-default getImages" pbtnId="pbtn_getImages'+index+'">',
-        '<i class="glyphicon glyphicon-picture"></i>',
-        '</button>'
-         */
     ].join('');
 }
 // 操作列事件
@@ -137,6 +125,10 @@ $(function() {
 	initToolbar();
 	initModalFormQuery();
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+	//随窗口resize 改变 高度
+    $(window).resize(function () {
+    	$('#tb_list').bootstrapTable('resetView', {height: getHeight("table")});
+    });
 });
 </script>
 </head>

@@ -112,11 +112,28 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="getMenuTreeNodes")
 	public void getMenuTreeNodes()
 	{
-		List<SysMenu> resultData = service.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();
-		for(SysMenu o : resultData)
-		{
-			treeNodes.add(o.getM());
+		if(getReq().getLong("id")!=0)
+		{// 所有菜单，且标记已选菜单
+			SysMenu selectedMenuObj = service.getById(getReq().getLong("id"));
+			List<SysMenu> menuData = service.get(null);
+			for(int i=0; i<menuData.size(); i++)
+			{
+				SysMenu o = menuData.get(i);
+				if(o.getLong("id") == selectedMenuObj.getLong("id"))
+				{
+					o.set("checked", true);
+				}
+				treeNodes.add(o.getM());
+			}
+		}
+		else
+		{// 所有菜单
+			List<SysMenu> resultData = service.get(null);
+			for(SysMenu o : resultData)
+			{
+				treeNodes.add(o.getM());
+			}
 		}
 		printJson(treeNodes);
 	}
@@ -124,11 +141,28 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="getPermitTreeNodes")
 	public void getPermitTreeNodes()
 	{
-		List<SysPermit> resultData = permitService.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();
-		for(SysPermit o : resultData)
-		{
-			treeNodes.add(o.getM());
+		if(getReq().getLong("id")!=0)
+		{// 所有权限，且标记已选权限
+			SysPermit selectedPermitObj = permitService.getById(getReq().getLong("id"));
+			List<SysPermit> permitData = permitService.get(null);
+			for(int i=0; i<permitData.size(); i++)
+			{
+				SysPermit o = permitData.get(i);
+				if(o.getLong("id") == selectedPermitObj.getLong("id"))
+				{
+					o.set("checked", true);
+				}
+				treeNodes.add(o.getM());
+			}
+		}
+		else
+		{// 所有权限
+			List<SysPermit> resultData = permitService.get(null);
+			for(SysPermit o : resultData)
+			{
+				treeNodes.add(o.getM());
+			}
 		}
 		printJson(treeNodes);
 	}

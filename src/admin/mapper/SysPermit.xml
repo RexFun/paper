@@ -44,23 +44,12 @@
 		<result property="m.tc_url" column="tc_url"/>
 		<result property="m.tc_order" column="tc_order"/>
 		<result property="m.tc_type" column="tc_type"/>
-	</resultMap>
-	<resultMap type="admin.entity.SysPermit" id="result1">
-		<id property="m.id" column="id"/>
-		<result property="m.pid" column="pid"/>
+		<result property="m.tc_type_name" column="tc_type_name"/>
 		<result property="m.tc_p_name" column="tc_p_name"/>
-		<result property="m.tc_code" column="tc_code"/>
-		<result property="m.tc_name" column="tc_name"/>
-		<result property="m.tc_url" column="tc_url"/>
-		<result property="m.tc_order" column="tc_order"/>
-		<result property="m.tc_type" column="tc_type"/>
 	</resultMap>
   	
 	<sql id="columns">
-		ID, PID, TC_CODE, TC_NAME, TC_URL, TC_ORDER, TC_TYPE
-	</sql>
-	<sql id="columns1">
-		t1.ID, t1.PID, t1.TC_CODE, t1.TC_NAME, t1.TC_URL, t1.TC_ORDER, t1.TC_TYPE
+		t.ID, t.PID, t.TC_CODE, t.TC_NAME, t.TC_URL, t.TC_ORDER, t.TC_TYPE, case t.TC_TYPE when 1 then '按钮' else '默认' end TC_TYPE_NAME
 	</sql>
 	
 	<sql id="page">
@@ -69,37 +58,44 @@
 	
 	<sql id="dynamicWhere">
 		<where>
-			<if test="pid != null and pid != ''"> and PID  = #{pid} </if>
-			<if test="tc_name != null and tc_name != ''"> and TC_NAME like concat('%',#{tc_name},'%') </if>
-			<if test="tc_url != null and tc_url != ''"> and TC_URL like concat('%',#{tc_url},'%') </if>
-			<if test="tc_order != null and tc_order != ''"> and TC_ORDER = #{tc_order} </if>
-			<if test="tc_type != null and tc_type != ''"> and TC_TYPE = #{tc_type} </if>
+			<if test="pid != null and pid != ''"> and t.PID  = #{pid} </if>
+			<if test="tc_name != null and tc_name != ''"> and t.TC_NAME like concat('%',#{tc_name},'%') </if>
+			<if test="tc_url != null and tc_url != ''"> and t.TC_URL like concat('%',#{tc_url},'%') </if>
+			<if test="tc_order != null and tc_order != ''"> and t.TC_ORDER = #{tc_order} </if>
+			<if test="tc_type != null and tc_type != ''"> and t.TC_TYPE = #{tc_type} </if>
+			<if test="tc_p_name != null and tc_p_name != ''"> and tt.TC_NAME like concat('%',#{tc_p_name},'%') </if>
 		</where>
-	</sql>	
+	</sql>
 	
-	<select id="getById" resultMap="result1">
-		select <include refid="columns1"/>, t2.TC_NAME as TC_P_NAME
-		  from sys_permit t1
-		  left join sys_permit t2 on t1.pid = t2.id
-		 where t1.id = #{id}
+	<select id="getById" resultMap="result">
+		select <include refid="columns"/>, 
+			   tt.tc_name TC_P_NAME
+		  from sys_permit t
+		  left join sys_permit tt on t.pid = tt.id
+		 where t.id = #{id}
 	</select>
 	
 	<select id="get" resultType="list" resultMap="result">
-		select <include refid="columns"/> from sys_permit
-		<include refid="dynamicWhere" /> order by tc_order
+		select <include refid="columns"/>,  
+			   tt.tc_name TC_P_NAME
+		  from sys_permit t
+		  left join sys_permit tt on t.pid = tt.id
+		<include refid="dynamicWhere" /> order by t.tc_order
 		<include refid="page" />
 	</select>
 	
 	<select id="getCount" resultType="int">
-		select count(1) from sys_permit
+		select count(1) 
+		  from sys_permit t
+		  left join sys_permit tt on t.pid = tt.id
 		<include refid="dynamicWhere" />
 	</select>
 	<select id="getCountByUserIdAndActionUrl" resultType="int">
 		select count(1)
-		  from paper.sys_permit t, 
-		  	   paper.sys_role_permit_mapping t1, 
-		  	   paper.sys_user_role_mapping t2, 
-		  	   paper.sys_user t3
+		  from sys_permit t, 
+		  	   sys_role_permit_mapping t1, 
+		  	   sys_user_role_mapping t2, 
+		  	   sys_user t3
 		 where t.id = t1.tc_sys_permit_id 
 		   and t1.tc_sys_role_id = t2.tc_sys_role_id
 		   and t2.tc_sys_user_id = t3.id
@@ -108,18 +104,18 @@
 	</select>
 	
 	<select id="getByRoleId" resultType="list" resultMap="result">
-		select <include refid="columns1"/> 
-		  from sys_permit t1
-         inner join sys_role_permit_mapping t2 
-		    on t1.id = t2.tc_sys_permit_id 
-		   and t2.tc_sys_role_id=#{tc_sys_role_id};
+		select <include refid="columns"/> 
+		  from sys_permit t
+         inner join sys_role_permit_mapping t1
+		    on t.id = t1.tc_sys_permit_id 
+		   and t1.tc_sys_role_id=#{tc_sys_role_id};
 	</select>
 	
 	<select id="getBtnPermitByUserId" resultType="list" resultMap="result">
-		select <include refid="columns1"/>  from sys_permit t1
-		 inner join sys_role_permit_mapping t2 on t1.id=t2.tc_sys_permit_id and t1.tc_type=1
-		 inner join sys_user_role_mapping t3 on t2.tc_sys_role_id=t3.tc_sys_role_id and t3.tc_sys_user_id=#{tc_sys_user_id}
-		 group by t1.id
-		 order by t1.tc_order
+		select <include refid="columns"/>  from sys_permit t
+		 inner join sys_role_permit_mapping t1 on t.id=t1.tc_sys_permit_id and t.tc_type=1
+		 inner join sys_user_role_mapping t2 on t1.tc_sys_role_id=t2.tc_sys_role_id and t2.tc_sys_user_id=#{tc_sys_user_id}
+		 group by t.id
+		 order by t.tc_order
 	</select>
 </mapper>  

@@ -8,53 +8,53 @@
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
-// zTree 的参数配置
-var zTreeObj;
-var setting = 
-{
-	check: 
+//menuTree 的参数配置
+var menuSetting = {
+	async: 
 	{
 		enable: true,
-		chkStyle: "radio",
-		radioType: "all"
-	},
+		url:"getMenuTreeNodes.action"
+	} 
+};
+// permitTree 的参数配置
+var permitSetting = {
 	async: 
 	{
 		enable: true,
 		url:"getPermitTreeNodes.action"
-	},
-	data: 
-	{
-		key: 
-		{
-			name:"tc_name"
-		},
-		simpleData: 
-		{
-			idKey:"id",
-			pIdKey:"pid",
-			enable: true
-		}
-	},
-	callback: {
-		onCheck: function (event, treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("permitTree")
-		    var nodes = zTree.getCheckedNodes(true);
-			if (nodes.length>0) $("#tc_sys_permit_id").val(nodes[0].id);
-		}
 	}
 };
-// zTree的初始化
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
 $(function(){
-    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
-    // 全部展开/折叠
-    $("#expandAll").click(function(){
-    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
-        if($(this).prop("checked")==true){
-        	zTree.expandAll(true);
-        }else{
-        	zTree.expandAll(false);
-        }
+    var s1 = $("#modal_sel1").ztreeSelectorModal({treeid:"tree_menu",
+    											  title:"请选择上级菜单节点",
+    											  setting:menuSetting,
+    											  callback:{
+    												  onConfirm:function(modalObj,rtnVal){
+    													  console.info(rtnVal);
+    													  $("#sel_menu").val(rtnVal.vName);
+    													  $("#pid").val(rtnVal.vId);
+    												  }
+    											  }
+    });
+    var s2 = $("#modal_sel2").ztreeSelectorModal({treeid:"tree_permit",
+    											  title:"请选择权限节点",
+    											  setting:permitSetting,
+    											  callback:{
+    												  onConfirm:function(modalObj,rtnVal){
+    													  console.info(rtnVal);
+    													  $("#sel_permit").val(rtnVal.vName);
+    													  $("#tc_sys_permit_id").val(rtnVal.vId);
+    												  }
+    											  }
+    });
+    $("#sel_menu").click(function(){
+    	s1.modal("show");
+    });
+    $("#sel_permit").click(function(){
+    	s2.modal("show");
     });
 });
 /**********************************************************/
@@ -74,31 +74,24 @@ $gwen.form.callback = function(){
 </ol>
 <!-- form -->
 <form id="dataForm" role="form" action="add2.action" method="post">
-<div class="wrapper">
-	<div class="row clearfix">
-		<div class="col-md-6 column">
-			<fieldset>
-			<legend>基础信息</legend>
-				<div class="form-group"><label for="pid">父ID：</label><input type="text" class="form-control" id="pid" name="po.m.pid" /></div>
-				<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
-				<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
-				<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" /></div>
-				<div class="form-group"><label for="tc_order">菜单排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order"/></div>
-				<div class="form-group"><label for="tc_sys_permit_id">菜单权限ID：</label><input type="text" class="form-control" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" readonly="readonly"/></div>
-				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
-			</fieldset>
-		</div>
-		<div class="col-md-6 column">
-			<fieldset>
-			<legend>权限</legend>
-				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-				<ul id="permitTree" class="ztree" style="height:700px; overflow:auto"></ul>
-			</fieldset>
-		</div>
+	<div class="form-group"><label for="pid">父节点：</label>
+		<input type="text" class="form-control" id="sel_menu"/>
+		<input type="hidden" class="form-control" id="pid" name="po.m.pid"/>
 	</div>
-</div>
+	<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
+	<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
+	<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" /></div>
+	<div class="form-group"><label for="tc_order">菜单排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order"/></div>
+	<div class="form-group"><label for="tc_sys_permit_id">绑定权限：</label>
+		<input type="text" class="form-control" id="sel_permit"/>
+		<input type="hidden" class="form-control" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" />
+	</div>
+	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
+<!-- modal -->
+<div id="modal_sel1"></div>
+<div id="modal_sel2"></div>
 </body>
 </html>
 

@@ -104,7 +104,6 @@ function initTable(){
 		pagination:true,
 		pageList:"[5,10,20]",
 	    queryParams: function (p) {
-	    	if(typeof(p.sort) != "undefined") p.sort = p.sort.substr(2);
 	    	p.tc_p_name = $("#f_tc_p_name").val();
 	    	p.tc_name = $("#f_tc_name").val();
 	    	p.tc_type = $("#f_tc_type").val();

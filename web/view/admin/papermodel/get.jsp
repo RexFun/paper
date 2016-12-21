@@ -116,7 +116,7 @@ function initModalFormQuery() {
 	});
 	$("#form_btn_query").click(function(){
 		$('#modal_form_query').modal('hide');
-        $("#tb_list").bootstrapTable('refresh');
+        $("#tb_list").bootstrapTable('selectPage', 1);
 	});
 }
 /* 全局函数 */

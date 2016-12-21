@@ -19,7 +19,7 @@ var setting =
 	},
 	edit: 
 	{
-		enable: true//,
+		enable: false//,
 		/* editNameSelectAll: true,
 		showRemoveBtn: showRemoveBtn,
 		showRenameBtn: showRenameBtn */
@@ -104,7 +104,10 @@ function initTable(){
 		pagination:true,
 		pageList:"[5,10,20]",
 	    queryParams: function (p) {
+	    	if(typeof(p.sort) != "undefined") p.sort = p.sort.substr(2);
+	    	p.tc_p_name = $("#f_tc_p_name").val();
 	    	p.tc_name = $("#f_tc_name").val();
+	    	p.tc_type = $("#f_tc_type").val();
             return p;
 	    },
 	    columns:
@@ -113,13 +116,12 @@ function initTable(){
 	     {title:'操作', field:'operate', align:'center', valign:'middle', width:'50',
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter},
-	     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
-	     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true},
-	     {title:'权限代号', field:'m.tc_code', align:'center', valign:'middle', sortable:true},
-	     {title:'权限名称', field:'m.tc_name', align:'center', valign:'middle', sortable:true},
-	     {title:'权限URL', field:'m.tc_url', align:'center', valign:'middle', sortable:true},
-	     {title:'权限排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:true},
-	     {title:'权限类型', field:'m.tc_type', align:'center', valign:'middle', sortable:true},
+	     {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false},
+	     {title:'权限类型', field:'m.tc_type_name', align:'center', valign:'middle', sortable:false},
+	     {title:'权限代号', field:'m.tc_code', align:'center', valign:'middle', sortable:false},
+	     {title:'权限名称', field:'m.tc_name', align:'center', valign:'middle', sortable:false},
+	     {title:'权限URL', field:'m.tc_url', align:'center', valign:'middle', sortable:false},
+	     {title:'权限排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:false},
 	    ],
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
@@ -171,10 +173,12 @@ function initModalFormQuery() {
 	});
 	$("#form_query_btn").click(function(){
 		$('#modal_form_query').modal('hide');
-        $("#tb_list").bootstrapTable('refresh');
+        $("#tb_list").bootstrapTable('selectPage', 1);
 	});
 }
+/**********************************************************/
 /* 全局函数 */
+/**********************************************************/
 $(function() {
 	initTree();
 	initTable();
@@ -227,7 +231,14 @@ $(function() {
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
-					 <label for="f_tc_name">权限名称：</label><input type="text" class="form-control" id="f_tc_name"/>
+					<label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control" id="f_tc_p_name"/>
+					<label for="f_tc_name">权限名称：</label><input type="text" class="form-control" id="f_tc_name"/>
+					<label for="f_tc_type">权限类型：</label>
+					<select class="form-control" id="f_tc_type" name="po.m.tc_type">
+						<option value="">全部</option>
+						<option value="0">默认</option>
+						<option value="1">按钮</option>
+					</select>
 				</div>
 			</div>
 			<div class="modal-footer">

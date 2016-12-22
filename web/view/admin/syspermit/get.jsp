@@ -105,6 +105,7 @@ function initTable(){
 		pageList:"[5,10,20]",
 	    queryParams: function (p) {
 	    	p.tc_p_name = $("#f_tc_p_name").val();
+	    	p.tc_code = $("#f_tc_code").val();
 	    	p.tc_name = $("#f_tc_name").val();
 	    	p.tc_type = $("#f_tc_type").val();
             return p;
@@ -231,6 +232,7 @@ $(function() {
 				<!-- queryForm -->
 				<div class="form-group">
 					<label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control" id="f_tc_p_name"/>
+					<label for="f_tc_code">权限代号：</label><input type="text" class="form-control" id="f_tc_code"/>
 					<label for="f_tc_name">权限名称：</label><input type="text" class="form-control" id="f_tc_name"/>
 					<label for="f_tc_type">权限类型：</label>
 					<select class="form-control" id="f_tc_type" name="po.m.tc_type">

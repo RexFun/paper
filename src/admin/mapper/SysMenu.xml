@@ -58,7 +58,9 @@
 	
 	<sql id="dynamicWhere">
 		<where>
+			<if test="tc_code != null and tc_code != ''"> and t.TC_CODE like concat('%',#{tc_code},'%') </if>
 			<if test="tc_name != null and tc_name != ''"> and t.TC_NAME like concat('%',#{tc_name},'%') </if>
+			<if test="tc_p_name != null and tc_p_name != ''"> and tt.TC_NAME like concat('%',#{tc_p_name},'%') </if>
 		</where>
 	</sql>	
 	

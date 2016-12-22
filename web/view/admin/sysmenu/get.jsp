@@ -97,6 +97,8 @@ function initTable(){
 		pagination:true,
 		pageList:"[10,20,50]",
 	    queryParams: function (p) {
+	    	p.tc_p_name = $("#f_tc_p_name").val();
+	    	p.tc_code = $("#f_tc_code").val();
 	    	p.tc_name = $("#f_tc_name").val();
             return p;
 	    },
@@ -219,6 +221,8 @@ $(function() {
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
+					 <label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control" id="f_tc_p_name"/>
+					 <label for="f_tc_name">菜单代号：</label><input type="text" class="form-control" id="f_tc_code"/>
 					 <label for="f_tc_name">菜单名称：</label><input type="text" class="form-control" id="f_tc_name"/>
 				</div>
 			</div>

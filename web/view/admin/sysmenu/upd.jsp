@@ -72,10 +72,6 @@ $gwen.form.callback = function(){
 </ol>
 <!-- form -->
 <form id="dataForm" role="form" action="upd2.action" method="post">
-	<div class="form-group"><label for="pid">父节点：</label>
-		<input type="text" class="form-control" id="sel_menu" value="${po.m.tc_p_name}"/>
-		<input type="hidden" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}"/>
-	</div>
 	<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}"/></div>
 	<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}"/></div>
 	<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}"/></div>
@@ -83,6 +79,10 @@ $gwen.form.callback = function(){
 	<div class="form-group"><label for="tc_sys_permit_id">绑定权限：</label>
 		<input type="text" class="form-control" id="sel_permit" value="${po.m.tc_sys_permit_name}"/>
 		<input type="hidden" class="form-control" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" value="${po.m.tc_sys_permit_id}"/>
+	</div>
+	<div class="form-group"><label for="pid">父节点：</label>
+		<input type="text" class="form-control" id="sel_menu" value="${po.m.tc_p_name}"/>
+		<input type="hidden" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}"/>
 	</div>
 	<input type="hidden" name="po.m.id" value="${po.m.id}">
 	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>

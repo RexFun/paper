@@ -108,12 +108,12 @@ function initTable(){
 	     {title:'操作', field:'operate', align:'center', valign:'middle', width:'50',
 	    	 events:operateEvents, 
 	    	 formatter:operateFormatter},
-	     {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false},
 	     {title:'菜单代号', field:'m.tc_code', align:'center', valign:'middle', sortable:false},
 	     {title:'菜单名称', field:'m.tc_name', align:'center', valign:'middle', sortable:false},
 	     {title:'菜单URL', field:'m.tc_url', align:'center', valign:'middle', sortable:false},
 	     {title:'菜单排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:false},
 	     {title:'绑定权限', field:'m.tc_sys_permit_name', align:'center', valign:'middle', sortable:false},
+	     {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false}
 	    ],
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证

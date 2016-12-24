@@ -28,7 +28,6 @@ function initToolbar() {
 /* 初始化tb_list */
 function initTable(){
 	$('#tb_list').bootstrapTable({
-		height:getHeight("table"),
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJson.action',
@@ -118,10 +117,6 @@ $(function() {
 	initToolbar();
 	initModalFormQuery();
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
-	//随窗口resize 改变 高度
-    $(window).resize(function () {
-    	$('#tb_list').bootstrapTable('resetView', {height: getHeight("table")});
-    });
 });
 </script>
 </head>

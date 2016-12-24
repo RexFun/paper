@@ -9,10 +9,4 @@
 <script type="text/javascript" src="${ctx}/lib/gwen/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";
-function getHeight(type) {
-	if (type=='table')
-    	return $(window).height() - 115;
-	else if (type=='tree')
-		return $(window).height() - 35;
-}
 </script>

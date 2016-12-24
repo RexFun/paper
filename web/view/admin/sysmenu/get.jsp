@@ -45,7 +45,6 @@ var setting =
 // zTree的初始化
 function initTree(){
     zTreeObj = $.fn.zTree.init($("#menuTree"), setting);
-    $("#menuTree").css({"height":getHeight("tree")});
     // 全部展开/折叠
     $("#expandAll").click(function(){
     	var zTree = $.fn.zTree.getZTreeObj("menuTree");
@@ -83,7 +82,6 @@ function initToolbar() {
 /* 初始化tb_list */
 function initTable(){
 	$('#tb_list').bootstrapTable({
-		height:getHeight("table"),
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJson.action',
@@ -175,11 +173,6 @@ $(function() {
 	initToolbar();
 	initModalFormQuery();
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
-	//随窗口resize 改变 高度
-    $(window).resize(function () {
-    	$('#tb_list').bootstrapTable('resetView', {height: getHeight("table")});
-    	$("#menuTree").css({"height":getHeight("tree")});
-    });
 });
 </script>
 </head>
@@ -203,7 +196,7 @@ $(function() {
 		<div class="col-md-2 column">
 			<fieldset>
 				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-				<ul id="menuTree" class="ztree" style="height:700px; overflow:auto"></ul>
+				<ul id="menuTree" class="ztree" style="overflow:auto"></ul>
 			</fieldset>
 		</div>
 	</div>

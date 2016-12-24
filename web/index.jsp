@@ -29,11 +29,12 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <script type="text/javascript">
 /*重置全局Iframe高度*/
 function resetIframeHeight(){
+	var minH = 600;
 	var headerH = $("header").outerHeight();
 	var footerH = $("footer").outerHeight();
 	var winH = $(this).outerHeight();
 	var ifmH = winH - headerH - footerH - 125;
-	$("iframe").height(ifmH);
+	$("iframe").height(ifmH<minH?minH:ifmH);
 }
 $(function(){
 	// 初始化重置全局Iframe高度

@@ -35,7 +35,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	public PaperModel getPo() {return po;}
 	public void setPo(PaperModel po) {this.po = po;}
 	
-	@Action(value = "add1", results={@Result(name = "success", location = "/view/admin/papermodel/add.jsp")})
+	@Action(value = "add1", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/add.jsp")})
 	public String add1() 
 	{
 		getResult().put("catList", catService.get(null));
@@ -61,7 +61,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={@Result(name = "success", location = "/view/admin/papermodel/upd.jsp")})
+	@Action(value="upd1",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -75,7 +75,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		print("1");
 	}
 
-	@Action(value="getById",results={@Result(name = "success", location = "/view/admin/papermodel/getById.jsp")})
+	@Action(value="getById",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -83,7 +83,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 		return "success";
 	}
 
-	@Action(value="get", results={@Result(name = "success", location = "/view/admin/papermodel/get.jsp")})
+	@Action(value="get", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/get.jsp")})
 	public String get() 
 	{
 		Map<String, Object> m = getReq().getParameterValueMap(false, true);

@@ -40,7 +40,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	public SysUser getPo() {return po;}
 	public void setPo(SysUser po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/sysuser/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/add.jsp")})
 	public String add1() 
 	{
 		return "success";
@@ -68,7 +68,7 @@ public class SysUserAction extends BaseAction<SysUser>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/view/admin/sysuser/upd.jsp")})
+	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -81,7 +81,7 @@ public class SysUserAction extends BaseAction<SysUser>
 		print("1");
 	}
 	
-	@Action(value="updPwd1",results={ @Result(name = "success", location = "/view/admin/sysuser/updPwd.jsp")})
+	@Action(value="updPwd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/updPwd.jsp")})
 	public String updPwd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -113,21 +113,21 @@ public class SysUserAction extends BaseAction<SysUser>
 		printJson(getResult());
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/sysuser/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 	
-	@Action(value="getMyInfo",results={ @Result(name = "success", location = "/view/admin/sysuser/getMyInfo.jsp")})
+	@Action(value="getMyInfo",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getMyInfo.jsp")})
 	public String getMyInfo() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/sysuser/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/get.jsp")})
 	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);

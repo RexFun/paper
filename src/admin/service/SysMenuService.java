@@ -2,13 +2,13 @@ package admin.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.dao.SysMenuDao;
 import admin.entity.SysMenu;
-import admin.entity.SysPermit;
 import gwen.devwork.BaseDao;
 import gwen.devwork.BaseService;
 
@@ -23,9 +23,9 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 		return sysMenuDao;
 	}
 	
-	public List getByUserId(Long userId)
+	public List getByUserId(Map m)
 	{
-		List<SysMenu> menuData = sysMenuDao.getByUserId(userId);
+		List<SysMenu> menuData = sysMenuDao.getByUserId(m);
 		List<Object> treeNodes = new ArrayList<Object>();
 		for(int i=0; i<menuData.size(); i++)
 		{

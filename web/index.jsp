@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="auth.action.AuthLoginAction"%>
+<%@ page import="auth.action.AuthAction"%>
 <%@ page import="admin.entity.SysUser"%>
 <%
-SysUser o = (SysUser)session.getAttribute(AuthLoginAction.SessionName_CurLoginUser);
+SysUser o = (SysUser)session.getAttribute(AuthAction.SessionName_CurLoginUser);
 String userId = o==null?"":o.getString("id");
 String account = o==null?"":o.getString("tc_code");
 String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
@@ -51,11 +51,32 @@ $(function(){
 		$tab.add(_menuId,_url,_title);
 		resetIframeHeight();
 	});
+
+	$("#navSearchForm").submit(function(event) {
+		event.preventDefault();
+		var url = $("#navSearchForm").attr('action');
+		$.post(
+			url, 
+			{'navName':$("#navName").val()},
+		  	function(rv) {
+				if(rv.success){
+					$nav.init(JSON.parse(rv.data.navMenuTreeNodes));
+					$nav.onItemClick(function(_menuId,_url,_title){
+						$tab.add(_menuId,_url,_title);
+						resetIframeHeight();
+					});
+				}else{
+					alert(data.msg);
+				}
+			}
+		);
+	});
 	//用户下拉菜单单击事件
 	$("#user-dropdown-menu li").click(function(){
 		var menuId = $(this).attr("menuId");
 		var url = $(this).attr("url");
 		var title = $(this).children("a").children("span").html();
+		if(menuId=="loginout") return;// 登出不需创建tab页签
 		$tab.add(menuId,url,title);
 		resetIframeHeight();
 	});
@@ -77,11 +98,11 @@ $(function(){
 			<span class="logo-mini"><b>A</b>SYS</span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><b>Admin</b>SYSTEM</span>
 		</a>
-		<!-- Header Navbar: style can be found in header.less -->
+		<!-- 顶部导航栏 -->
 		<nav class="navbar navbar-static-top">
-			<!-- Sidebar toggle button-->
+			<!-- 左侧栏切换按钮-->
 			<a href="javascript:void(0);return false;" class="sidebar-toggle" data-toggle="offcanvas" role="button"></a>
-			<!-- Navbar Right Menu -->
+			<!-- 导航下拉菜单 -->
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<c:choose>
@@ -99,26 +120,26 @@ $(function(){
 										<ul id="user-dropdown-menu" class="menu">
 											<li menuId="myinfo" url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
 											<li menuId="updpwd" url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
-											<li><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
+											<li menuId="loginout"><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</c:otherwise>
 					</c:choose>
-					<!-- Control Sidebar Toggle Button -->
+					<!-- 右侧栏切换按钮 -->
 					<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 				</ul>
 			</div>
 		</nav>
 	</header>
-	<!-- Main Sidebar -->
+	<!-- 左侧栏 -->
 	<aside class="main-sidebar">
 		<section class="sidebar">
-			<!-- Search Form: 菜单搜索form -->
-			<form action="#" method="get" class="sidebar-form">
+			<!-- 菜单搜索form -->
+			<form id="navSearchForm" action="${pageContext.request.contextPath}/auth/getNavMenu.action" method="get" class="sidebar-form">
 				<div class="input-group">
-					<input type="text" name="q" class="form-control" placeholder="Search..."/>
+					<input type="text" id="navName" name="q" class="form-control" placeholder="Search..."/>
 					<span class="input-group-btn">
 						<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 							<i class="fa fa-search"></i>
@@ -126,11 +147,11 @@ $(function(){
 					</span>
 				</div>
 			</form>
-			<!-- Sidebar Menu: 树状导航菜单，js动态生成 -->
+			<!-- 树状导航菜单，后台数据动态生成 
+			-->
 		</section>
 	</aside>
-	<!-- /.main-sidebar -->
-	<!-- Content Wrapper. Contains page content -->
+	<!-- 主内容面板 -->
 	<div class="content-wrapper">
 		<!-- Main content -->
 		<section class="content">
@@ -144,25 +165,21 @@ $(function(){
        		</div>
 		</section>
 	</div>
-	<!-- /.content-wrapper -->
-	<!-- Main Footer -->
+	<!-- 底部栏 -->
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
 		<strong>Copyright &copy; 2014-2016 <a href="https://github.com/RexFun" target="blank">RexFun GitHub</a>.</strong> All rights reserved.
 	</footer>
-	<!-- /.main-footer -->
-	<!-- Control Sidebar -->
+	<!-- 右侧栏 -->
 	<aside class="control-sidebar control-sidebar-dark">
 		<!-- Create the tabs -->
 		<ul class="nav nav-tabs nav-justified control-sidebar-tabs"></ul>
 		<!-- Tab panes -->
 		<div class="tab-content"></div>
 	</aside>
-	<!-- /.control-sidebar -->
-	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	<!-- 右侧栏背景 -->
 	<div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
 <!-- AdminLTE App -->
 <script src="${ctx}/lib/AdminLTE/dist/js/app.min.js"></script>

@@ -56,7 +56,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
     public List<String> getMyFileContentType() { return myFileContentType; }
 	public void setMyFileContentType(List<String> myFileContentType) { this.myFileContentType = myFileContentType; }
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/paperimage/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/add.jsp")})
 	public String add1() 
 	{
 		put("pid",getReq().getLong("pid"));
@@ -109,7 +109,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/paperimage/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -119,7 +119,7 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/paperimage/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/get.jsp")})
 	public String get() 
 	{
 		Map<String, Object> m = getReq().getParameterValueMap(false, true);

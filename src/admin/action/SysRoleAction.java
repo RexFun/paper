@@ -39,7 +39,7 @@ public class SysRoleAction extends BaseAction<SysRole>
 	public SysRole getPo() {return po;}
 	public void setPo(SysRole po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/sysrole/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/add.jsp")})
 	public String add1() 
 	{
 		return "success";
@@ -67,7 +67,7 @@ public class SysRoleAction extends BaseAction<SysRole>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/view/admin/sysrole/upd.jsp")})
+	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -80,14 +80,14 @@ public class SysRoleAction extends BaseAction<SysRole>
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/sysrole/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/sysrole/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/get.jsp")})
 	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);

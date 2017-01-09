@@ -34,7 +34,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	public SysPermit getPo() {return po;}
 	public void setPo(SysPermit po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/syspermit/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/add.jsp")})
 	public String add1() 
 	{
 		return "success";
@@ -62,7 +62,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/view/admin/syspermit/upd.jsp")})
+	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -75,14 +75,14 @@ public class SysPermitAction extends BaseAction<SysPermit>
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/syspermit/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/syspermit/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/get.jsp")})
 	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);

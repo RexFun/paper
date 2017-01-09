@@ -37,7 +37,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	public SysMenu getPo() {return po;}
 	public void setPo(SysMenu po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/sysmenu/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/add.jsp")})
 	public String add1() 
 	{
 		return "success";
@@ -65,7 +65,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/view/admin/sysmenu/upd.jsp")})
+	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -78,14 +78,14 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/sysmenu/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/sysmenu/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/get.jsp")})
 	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);

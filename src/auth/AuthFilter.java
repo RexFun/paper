@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 import admin.SysFactory;
 import admin.entity.SysUser;
-import auth.action.AuthLoginAction;
+import auth.action.AuthAction;
 
 public class AuthFilter implements Filter 
 {
@@ -43,7 +43,7 @@ public class AuthFilter implements Filter
 		//String currentUrl = req.getRequestURI().replaceAll(req.getContextPath(), "");// 取得当前路径
 		try
 		{
-			SysUser u = (SysUser) req.getSession().getAttribute(AuthLoginAction.SessionName_CurLoginUser);
+			SysUser u = (SysUser) req.getSession().getAttribute(AuthAction.SessionName_CurLoginUser);
 			// 没有登录
 			if (u == null || u.getString("tc_code") == null)
 			{

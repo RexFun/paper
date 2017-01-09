@@ -32,7 +32,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	public PaperCategory getPo() {return po;}
 	public void setPo(PaperCategory po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/view/admin/papercategory/add.jsp")})
+	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/add.jsp")})
 	public String add1() 
 	{
 		return "success";
@@ -60,7 +60,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 		printJson(getResult());
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/view/admin/papercategory/upd.jsp")})
+	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/upd.jsp")})
 	public String upd1() 
 	{
 		po = service.getById(getReq().getLong("id"));
@@ -73,14 +73,14 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/view/admin/papercategory/getById.jsp")})
+	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/getById.jsp")})
 	public String getById() 
 	{
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/view/admin/papercategory/get.jsp")})
+	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/get.jsp")})
 	public String get() 
 	{
 		Map m = getReq().getParameterValueMap(false, true);

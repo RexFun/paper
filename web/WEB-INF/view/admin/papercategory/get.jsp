@@ -28,6 +28,7 @@ function initToolbar() {
 /* 初始化tb_list */
 function initTable(){
 	$('#tb_list').bootstrapTable({
+		height: getGlobalHeight("table"),
 		method:'post',
 		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
 	    url: 'getJson.action',
@@ -57,6 +58,10 @@ function initTable(){
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
 	    }
+	});
+	//随窗口resize 改变 高度
+	$(window).resize(function () {
+		$('#tb_list').bootstrapTable('resetView', {height: getGlobalHeight("table")});
 	});
 }
 // 操作列

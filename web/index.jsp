@@ -10,20 +10,8 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/skins/_all-skins.min.css">
-
-<link rel="stylesheet" href="${ctx}/lib/jquery/ui-bootstrap/jquery-ui-1.10.0.custom.css"/>
-<!--[if IE 7]>
-<link rel="stylesheet" href="${ctx}/lib/jquery/ui-bootstrap/assets/css/font-awesome-ie7.min.css">
-<![endif]-->
-<!--[if lt IE 9]>
-<link rel="stylesheet" type="text/css" href="${ctx}/lib/jquery/ui-bootstrap/css/custom-theme/jquery.ui.1.10.0.ie.css"/>
-<![endif]-->
-<script type="text/javascript" src="${ctx}/lib/jquery/ui-bootstrap/jquery-ui-1.10.0.custom.min.js"></script>
-
 <script type="text/javascript" src="${ctx}/index.nav.js"></script>
 <script type="text/javascript" src="${ctx}/index.tab.js"></script>
 <script type="text/javascript">

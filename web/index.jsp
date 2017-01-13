@@ -10,8 +10,8 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/AdminLTE.min.css">
-<link rel="stylesheet" href="${ctx}/lib/AdminLTE/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/skins/_all-skins.min.css">
 <script type="text/javascript" src="${ctx}/index.nav.js"></script>
 <script type="text/javascript" src="${ctx}/index.tab.js"></script>
 <script type="text/javascript">
@@ -100,7 +100,7 @@ $(function(){
 						<c:otherwise>
 							<li class="dropdown user user-menu notifications-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<img src="${ctx}/lib/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<img src="${ctx}/res/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
 									<span class="hidden-xs"> <%=account%></span><span class=" fa fa-angle-down"></span>
 								</a>
 								<ul class="dropdown-menu" style="height: 125px;">
@@ -170,12 +170,12 @@ $(function(){
 </div>
 
 <!-- AdminLTE App -->
-<script src="${ctx}/lib/AdminLTE/dist/js/app.min.js"></script>
+<script src="${ctx}/res/AdminLTE/dist/js/app.min.js"></script>
 <!-- Slimscroll -->
-<script src="${ctx}/lib/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="${ctx}/res/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="${ctx}/lib/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
+<script src="${ctx}/res/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="${ctx}/lib/AdminLTE/dist/js/demo.js"></script>
+<script src="${ctx}/res/AdminLTE/dist/js/demo.js"></script>
 </body>
 </html>

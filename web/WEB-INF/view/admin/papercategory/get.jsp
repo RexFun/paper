@@ -57,7 +57,8 @@ function initTable(){
 	    ],
 	    onLoadSuccess:function(){
 	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
-	    }
+	    },
+	    onLoadError:ajaxOnLoadError
 	});
 	//随窗口resize 改变 高度
 	$(window).resize(function () {

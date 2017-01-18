@@ -43,7 +43,7 @@ $(function(){
 						<input type="text" class="form-control" placeholder="Username" id="inputAccount" name="auth.account" required="" />
 					</div>
 					<div>
-						<input type="password" class="form-control" id="inputPassword" name="auth.password" placeholder="Password" required="" />
+						<input type="password" class="form-control" placeholder="Password" id="inputPassword" name="auth.password" required="" />
 					</div>
 					<div>
 						<button type="submit" class="btn btn-default submit">登录</button>

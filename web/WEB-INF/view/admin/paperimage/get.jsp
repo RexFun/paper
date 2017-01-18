@@ -14,15 +14,12 @@ function initBtnEvent(){
 	$("#ckb_all").click(function(){
 		$("input[name='keyIndex']").prop("checked",$(this).prop("checked"));
 	});
-	//$("button[name='b_add']").click(function(){
 	$("#bar_btn_add").click(function(){
 		location.href = "add1.action?pid=${pid}&ppid=${ppid}";
 	});
-	//$("button[name='b_del']").click(function(){
 	$("#bar_btn_del").click(function(){
 		if(confirm("确认删除？")) $("#form_del").submit();
 	});
-	//$("button[name='b_updSortBatch']").click(function(){
 	$("#bar_btn_updSortBatch").click(function(){
 		var idArr = [];   
 		var i = 0;   
@@ -47,11 +44,9 @@ function initBtnEvent(){
 		    }  
 		});
 	});
-	//$("button[name='b_back']").click(function(){
 	$("#bar_btn_back").click(function(){
 		location.href = "../papermodel/get.action";
 	});
-	//$("input[name='btn_upd']").click(function(){
 	$("input[name='row_btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();
 		var _sort = $(this).siblings("input[name='text_sort']").val();

@@ -46,7 +46,7 @@
 	</sql>
 	
 	<sql id="page">
-		<if test="rownum!=null and pagesize!=null"> limit #{rownum}, #{pagesize} </if>
+		<if test="offset!=null and limit!=null"> limit #{offset,javaType=String,jdbcType=NUMERIC}, #{limit,javaType=String,jdbcType=NUMERIC} </if>
 	</sql>
 	
 	<sql id="dynamicWhere">

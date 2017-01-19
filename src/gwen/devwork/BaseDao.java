@@ -14,6 +14,8 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 	 */
 	protected abstract Class getEntityClass();
 	private String _statement = null;
+	private static int DEFAULT_OFFSET = 1;
+	private static int DEFAULT_LIMIT = 5;
 	
 	/**
 	 * 返回命名空间的值
@@ -74,18 +76,20 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 	 */
 	public Page<T> getPage(int countPageEach, Map m)
 	{
-		int pageSize = Integer.parseInt(m.get("pageSize").toString());
-		int curPage = Integer.parseInt(m.get("page").toString());
+		int curPage = !m.containsKey("offset")?DEFAULT_OFFSET:Integer.parseInt(m.get("offset").toString());
+		int limit = !m.containsKey("limit")?DEFAULT_LIMIT:Integer.parseInt(m.get("limit").toString());
+		int offset = curPage*limit-(limit-1);
+		//总记录数
+		int totalCount = getCount(m);
+		//总页码
+		int countPage = totalCount%limit>0?totalCount/limit+1:totalCount/limit;
+		//mysql index 从0开始，所以要减一；oracle index 从1开始
+		offset--;
 		
-		int totalCount = getCount(m);//总记录数
-		int countPage = totalCount%pageSize>0?totalCount/pageSize+1:totalCount/pageSize;//总页码
-		int rownum = curPage*pageSize-(pageSize-1);
-		rownum--;//mysql index 从0开始，所以要减一；oracle index 从1开始
-		System.out.println("rownum:"+rownum);
-		m.put("rownum", rownum);
-		m.put("pagesize", pageSize);
+		m.put("offset", offset);
+		m.put("limit", limit);
 		List result = get(m);
-		return new Page<T>(curPage, countPage, countPageEach, pageSize, result);
+		return new Page<T>(curPage, countPage, countPageEach, limit, result);
 	}
 	
 	public List getMapPage(Map m)

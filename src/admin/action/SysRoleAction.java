@@ -90,13 +90,6 @@ public class SysRoleAction extends BaseAction<SysRole>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/get.jsp")})
 	public String get() 
 	{
-		Map m = getReq().getParameterValueMap(false, true);
-		m.put("page", getReq().getInt("page", 1));
-		m.put("pageSize", getReq().getInt("pageSize", 5));
-		
-		page = service.getPage(5, m);
-		pageNav = new PageNav<SysRole>(getReq(), page, "5,10,20");
-		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}
 	
@@ -104,8 +97,6 @@ public class SysRoleAction extends BaseAction<SysRole>
 	public void getJson()
 	{
 		Map m = getReq().getParameterValueMap(false, true);
-		m.put("rownum", Integer.parseInt(m.get("offset").toString()));
-		m.put("pagesize", Integer.parseInt(m.get("limit").toString()));
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());

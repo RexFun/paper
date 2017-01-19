@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class PageNav<T>
 {
 	private Page page;
-//	private String pageName;
 	private String pageSizeListStr;
 	private boolean isOutForm = false;
 	private static String LABEL_PAGE_LAST = "<";
@@ -25,12 +24,8 @@ public class PageNav<T>
 	{
 		super();
 		this.page = page;
-//		this.pageName=pageName;
-		this.page = page;
 		this.pageSizeListStr = pageSizeListStr;
 		formId = formId + System.currentTimeMillis();
-//		String pageName = page.getPageName();
-//		String pageSizeName = page.getPageSizeName();
 		try
 		{
 			StringBuilder sb = new StringBuilder();
@@ -57,8 +52,8 @@ public class PageNav<T>
 					+ "});"
 					+ "</script>\n");
 			sb.append("<form id=\"").append(formId).append("\" method=\"post\" style=\"display:none;\" action=\"").append(request.getRequestURI().toString()).append("\">");
-			sb.append("<input id=\"").append(formId).append("_page\" name=\"").append("page").append("\" type=\"hidden\" value=\"1\"/>\n");
-			sb.append("<input id=\"").append(formId).append("_pageSize\" name=\"").append("pageSize").append("\" type=\"hidden\" value=\"").append(page.getPageSize()).append("\"/>\n");
+			sb.append("<input id=\"").append(formId).append("_page\" name=\"").append("offset").append("\" type=\"hidden\" value=\"1\"/>\n");
+			sb.append("<input id=\"").append(formId).append("_pageSize\" name=\"").append("limit").append("\" type=\"hidden\" value=\"").append(page.getPageSize()).append("\"/>\n");
 			
 			@SuppressWarnings("all")
 			Enumeration e = request.getParameterNames();
@@ -67,8 +62,7 @@ public class PageNav<T>
 			while(e.hasMoreElements())
 			{
 				key = (String) e.nextElement();
-//				if(!key.equals(pageName) && !key.equals(pageSizeName))
-				if(!key.equals("page") && !key.equals("pageSize"))
+				if(!key.equals("offset") && !key.equals("limit"))
 				{
 					value = request.getParameterValues(key);
 					if(value == null || value.length == 0)

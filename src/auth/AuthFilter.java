@@ -40,7 +40,6 @@ public class AuthFilter implements Filter
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequestWrapper requestWrapper = new HttpServletRequestWrapper(req);
 		HttpServletResponseWrapper responseWraper = new HttpServletResponseWrapper(res);
-		//String currentUrl = req.getRequestURI().replaceAll(req.getContextPath(), "");// 取得当前路径
 		try
 		{
 			SysUser u = (SysUser) req.getSession().getAttribute(AuthAction.SessionName_CurLoginUser);

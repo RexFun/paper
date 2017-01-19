@@ -86,16 +86,6 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="get", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/get.jsp")})
 	public String get() 
 	{
-		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		m.put("page", getReq().getInt("page", 1));
-		m.put("pageSize", getReq().getInt("pageSize", 10));
-		
-		page = service.getPage(5, m);
-		pageNav = new PageNav<PaperModel>(getReq(), page);
-		
-		getResult().put("pid", m.get("pid"));
-		getResult().put("catList", catService.get(null));
-		getResult().put("resultList", pageNav.getResult());
 		return "success";
 	}
 	
@@ -103,8 +93,6 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	public void getJson()
 	{
 		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		m.put("rownum", Integer.parseInt(m.get("offset").toString()));
-		m.put("pagesize", Integer.parseInt(m.get("limit").toString()));
 		getResult().put("total",service.getCount(m));
 		getResult().put("rows",service.get(m));
 		printJson(getResult().getData());

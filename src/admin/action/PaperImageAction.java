@@ -123,8 +123,6 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	public String get() 
 	{
 		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		m.put("page", getReq().getInt("page", 1));
-		m.put("pageSize", getReq().getInt("pageSize", 5));
 		
 		page = service.getPage(5, m);
 		pageNav = new PageNav<PaperImage>(getReq(), page, "5,10,20");

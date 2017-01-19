@@ -86,8 +86,8 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 		//mysql index 从0开始，所以要减一；oracle index 从1开始
 		offset--;
 		
-		m.put("offset", offset);
-		m.put("limit", limit);
+		m.put("offset", String.valueOf(offset));
+		m.put("limit", String.valueOf(limit));
 		List result = get(m);
 		return new Page<T>(curPage, countPage, countPageEach, limit, result);
 	}

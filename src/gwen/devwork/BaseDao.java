@@ -94,8 +94,6 @@ public abstract class BaseDao<T,PK> extends SqlSessionDaoSupport
 	
 	public List getMapPage(Map m)
 	{
-		m.put("rownum", Integer.valueOf(m.get("rownum").toString()));
-		m.put("pagesize", Integer.valueOf(m.get("pagesize").toString()));
 		List result = getMap(m);
 		return result;
 	}

@@ -30,7 +30,7 @@
 	</sql>
 	
 	<sql id="page">
-		<if test="rownum!=null and pagesize!=null"> limit #{rownum}, #{pagesize} </if>
+		<if test="offset!=null and limit!=null"> limit #{offset,javaType=String,jdbcType=NUMERIC}, #{limit,javaType=String,jdbcType=NUMERIC} </if>
 	</sql>
 	
 	<sql id="dynamicWhere">
@@ -55,11 +55,11 @@
 		<include refid="page" />
 	</select>
 	<select id="getMapJoinCategory" resultType="java.util.HashMap">
-		select <include refid="columns"/>, t1.NAME NAV_NAME, t2.URL IMAGE_URL 
+		select <include refid="columns"/>, t1.NAME NAV_NAME, IFNULL(t2.URL,'') IMAGE_URL 
 		  from paper_model t 
 		 inner join paper_category t1 
 		 		 on t.pid = t1.id
-		  left join (select tt.id,tt.pid,tt.url,max(tt.sort) from paper.paper_image tt group by tt.pid) t2
+		  left join (select tt.id,tt.pid,tt.url,max(tt.sort) from paper_image tt group by tt.pid) t2
 		         on t.id = t2.pid
 		<include refid="dynamicWhere" /> order by t.sort 
 		<include refid="page" />

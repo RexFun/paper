@@ -20,8 +20,6 @@ public class PaperModelDao extends BaseDao<PaperModel,Long>
 	
 	public List getMapJoinCategoryPage(Map m)
 	{
-		m.put("rownum", Integer.valueOf(m.get("rownum").toString()));
-		m.put("pagesize", Integer.valueOf(m.get("pagesize").toString()));
 		List result = this.getSqlSession().selectList(getStatementName("getMapJoinCategory"), m);
 		return result;
 	}

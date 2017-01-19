@@ -2,13 +2,13 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel="stylesheet" href="<%=ctx%>/lib/bs/fileinput/css/fileinput.min.css"/>
-<script type="text/javascript" src="<%=ctx%>/lib/bs/fileinput/js/fileinput.min.js"></script>
+<link rel="stylesheet" href="${ctx}/res/bs/fileinput/css/fileinput.min.css"/>
+<script type="text/javascript" src="${ctx}/res/bs/fileinput/js/fileinput.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#myFile").fileinput({
 	    uploadUrl: "add2.action?pid=${pid}&ppid=${ppid}", // server upload action
-	    allowedFileExtensions : ['jpg', 'png','gif'],
+	    allowedFileExtensions : ['jpg','png','gif'],
 	    uploadAsync: false,
 	    minFileCount: 1,
 	    maxFileCount: 10

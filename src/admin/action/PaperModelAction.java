@@ -1,9 +1,5 @@
 package admin.action;
 
-import gwen.devwork.BaseAction;
-import gwen.devwork.PageNav;
-import gwen.util.CollectionUtil;
-
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -17,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import admin.entity.PaperModel;
 import admin.service.PaperCategoryService;
 import admin.service.PaperModelService;
+import rex.devwork.BaseAction;
+import rex.devwork.PageNav;
+import rex.util.CollectionUtil;
 
 
 @SuppressWarnings("serial")

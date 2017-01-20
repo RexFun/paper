@@ -1,7 +1,7 @@
 package admin;
 
 import admin.service.SysPermitService;
-import gwen.devwork.BeanFactory;
+import rex.devwork.BeanFactory;
 
 
 public class SysFactory {

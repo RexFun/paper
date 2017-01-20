@@ -1,13 +1,12 @@
 package admin.service;
 
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.dao.PaperCategoryDao;
 import admin.entity.PaperCategory;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
 
 @Service("paperCategoryService")
 public class PaperCategoryService extends BaseService<PaperCategory,Long>

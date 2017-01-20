@@ -1,7 +1,7 @@
 package admin;
 
-import gwen.devwork.BeanFactory;
 import admin.service.PaperImageService;
+import rex.devwork.BeanFactory;
 
 
 public class MyFactory {

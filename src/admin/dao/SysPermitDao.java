@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import admin.entity.SysPermit;
-import gwen.devwork.BaseDao;
+import rex.devwork.BaseDao;
 
 
 @Repository("sysPermitDao")

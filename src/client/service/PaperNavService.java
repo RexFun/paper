@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +11,8 @@ import com.google.gson.Gson;
 
 import client.dao.PaperCategoryDao;
 import client.entity.PaperCategory;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
 
 @Service("paperNavService")
 public class PaperNavService extends BaseService<PaperCategory,Long>

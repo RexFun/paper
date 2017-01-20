@@ -1,6 +1,6 @@
 package client.entity;
 
-import gwen.util.PropertiesUtil;
+import rex.util.PropertiesUtil;
 
 public class PaperImage1 
 {

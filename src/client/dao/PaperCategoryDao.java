@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import client.entity.PaperCategory;
-import gwen.devwork.BaseDao;
+import rex.devwork.BaseDao;
 
 @Repository("clientPaperCategoryDao")
 public class PaperCategoryDao extends BaseDao<PaperCategory,Long>

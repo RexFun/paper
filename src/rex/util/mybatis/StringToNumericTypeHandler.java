@@ -1,4 +1,4 @@
-package gwen.util.mybatis;
+package rex.util.mybatis;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

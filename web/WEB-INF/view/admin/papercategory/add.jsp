@@ -4,8 +4,8 @@
 <%@ include file="/common/inc_js.jsp"%>
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
 <script type="text/javascript">
-$gwen.form.callback = function(){
-	if($gwen.result.type == 1){
+$rex.form.callback = function(){
+	if($rex.result.type == 1){
 		location.href = "get.action";
 	}
 };

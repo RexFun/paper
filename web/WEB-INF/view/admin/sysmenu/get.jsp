@@ -57,8 +57,8 @@ function initTree(){
 }
 </script>
 <script type="text/javascript">
-$gwen.form.callback = function(){
-	if($gwen.result.type == 1){
+$rex.form.callback = function(){
+	if($rex.result.type == 1){
         $("#tb_list").bootstrapTable('refresh'); // 刷新table
 	}
 };

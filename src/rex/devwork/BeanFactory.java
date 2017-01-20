@@ -1,4 +1,4 @@
-package gwen.devwork;
+package rex.devwork;
 
 /**
  * 从ApplicationContext取得spring管理的类

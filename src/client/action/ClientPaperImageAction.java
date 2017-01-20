@@ -22,8 +22,8 @@ import client.entity.PaperImage;
 import client.entity.PaperImage1;
 import client.service.PaperImage1Service;
 import client.service.PaperImageService;
-import gwen.devwork.BaseAction;
-import gwen.util.PropertiesUtil;
+import rex.devwork.BaseAction;
+import rex.util.PropertiesUtil;
 
 @SuppressWarnings("serial")
 @Controller

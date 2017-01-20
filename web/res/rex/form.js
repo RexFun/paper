@@ -1,8 +1,8 @@
-$gwen = {};
-$gwen.form = {};
-$gwen.result = {type:"", msg:""};
-$gwen.checkResult = function(responseText){
-	$gwen.result = {type:"", msg:""};
+$rex = {};
+$rex.form = {};
+$rex.result = {type:"", msg:""};
+$rex.checkResult = function(responseText){
+	$rex.result = {type:"", msg:""};
 	try{
 		var _msg = "", _arr = (responseText + "").split(":");
 		if(_arr.length > 1){_msg = _arr[1];}
@@ -11,10 +11,10 @@ $gwen.checkResult = function(responseText){
 			case "1": _msg = "操作成功！";break;
 			default: _msg = (!isNaN(_arr[0]))?"":_arr[0];
 		}}
-		$gwen.result = {type:_arr[0], msg:_msg};
+		$rex.result = {type:_arr[0], msg:_msg};
 	}
-	catch(e){$gwen.result = {type:"", msg:""};}
-	return $gwen.result.msg;
+	catch(e){$rex.result = {type:"", msg:""};}
+	return $rex.result.msg;
 };
 $(function(){
 	$("#dataFormSave").click(function () {
@@ -25,8 +25,8 @@ $(function(){
             data: $("#dataForm").serialize(),
             enctype: $("#dataForm").attr("enctype"),
             success: function (data) {
-            	alert($gwen.checkResult(data));
-                $gwen.form.callback();
+            	alert($rex.checkResult(data));
+                $rex.form.callback();
             }
         };
         $("#dataForm").ajaxSubmit(options);
@@ -43,8 +43,8 @@ $(function(){
             dataType: 'text',
             data: $("#form_del").serialize(),
             success: function (data) {
-            	alert($gwen.checkResult(data));
-                $gwen.form.callback();
+            	alert($rex.checkResult(data));
+                $rex.form.callback();
             }
         };
         $.ajax(options);

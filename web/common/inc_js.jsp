@@ -6,8 +6,8 @@
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-fixed-columns.js"></script>
 <script type="text/javascript" src="${ctx}/res/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="${ctx}/res/gwen/form.js"></script>
-<script type="text/javascript" src="${ctx}/res/gwen/ztree-selector-modal.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/form.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";
 function getGlobalHeight(type) {

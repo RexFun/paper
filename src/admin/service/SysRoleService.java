@@ -11,9 +11,9 @@ import admin.dao.SysRolePermitMappingDao;
 import admin.dao.SysUserRoleMappingDao;
 import admin.entity.SysRole;
 import admin.entity.SysRolePermitMapping;
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-import gwen.util.CollectionUtil;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
+import rex.util.CollectionUtil;
 
 @Service("sysRoleService")
 public class SysRoleService extends BaseService<SysRole,Long>

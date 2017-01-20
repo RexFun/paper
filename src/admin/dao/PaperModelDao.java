@@ -1,10 +1,9 @@
 package admin.dao;
 
-import gwen.devwork.BaseDao;
-
 import org.springframework.stereotype.Repository;
 
 import admin.entity.PaperModel;
+import rex.devwork.BaseDao;
 
 @Repository("paperModelDao")
 public class PaperModelDao extends BaseDao<PaperModel,Long>

@@ -1,6 +1,6 @@
 package admin.entity;
 
-import gwen.devwork.BaseModel;
+import rex.devwork.BaseModel;
 
 public class SysRole extends BaseModel
 {

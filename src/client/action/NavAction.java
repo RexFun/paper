@@ -3,8 +3,6 @@ package client.action;
 import java.util.List;
 import java.util.Map;
 
-import gwen.devwork.BaseAction;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -17,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import client.entity.PaperCategory;
 import client.service.PaperNavService;
+import rex.devwork.BaseAction;
 
 @SuppressWarnings("serial")
 @Controller

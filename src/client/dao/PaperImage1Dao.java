@@ -1,10 +1,9 @@
 package client.dao;
 
-import gwen.devwork.BaseDao;
-
 import org.springframework.stereotype.Repository;
 
 import client.entity.PaperImage1;
+import rex.devwork.BaseDao;
 
 
 @Repository("clientPaperImage1Dao")

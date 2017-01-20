@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.SysPermitDao;
 import admin.entity.SysPermit;
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
 
 @Service("sysPermitService")
 public class SysPermitService extends BaseService<SysPermit,Long>

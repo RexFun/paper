@@ -3,7 +3,7 @@ package admin.dao;
 import org.springframework.stereotype.Repository;
 
 import admin.entity.SysRolePermitMapping;
-import gwen.devwork.BaseDao;
+import rex.devwork.BaseDao;
 
 
 @Repository("sysRolePermitDao")

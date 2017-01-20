@@ -1,9 +1,5 @@
 package admin.service;
 
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-import gwen.util.PropertiesUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.PaperImageDao;
 import admin.entity.PaperImage;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
+import rex.util.PropertiesUtil;
 
 @Service("paperImageService")
 public class PaperImageService extends BaseService<PaperImage,Long>

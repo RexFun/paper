@@ -51,8 +51,8 @@ $(function(){
 /**********************************************************/
 /* 界面回调函数 */
 /**********************************************************/
-$gwen.form.callback = function(){
-	if($gwen.result.type == 1){
+$rex.form.callback = function(){
+	if($rex.result.type == 1){
 		location.href = "getMyInfo.action?id=${po.m.id}";
 	}
 };

@@ -1,8 +1,5 @@
 package client.service;
 
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import client.dao.PaperCategoryDao;
 import client.entity.PaperCategory;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
 
 @Service("clientPaperCategoryService")
 public class PaperCategoryService extends BaseService<PaperCategory,Long>

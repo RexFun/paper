@@ -1,4 +1,4 @@
-package gwen.devwork;
+package rex.devwork;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

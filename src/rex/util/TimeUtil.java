@@ -1,4 +1,4 @@
-package gwen.util;
+package rex.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

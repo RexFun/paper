@@ -1,4 +1,4 @@
-package gwen.util;
+package rex.util;
 
 /**
  * 将long、int、float数组转化为Long、Integer、FLoat数组

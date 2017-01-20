@@ -1,13 +1,12 @@
 package client.service;
 
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import client.dao.PaperImage1Dao;
 import client.entity.PaperImage1;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
 
 
 @Service("clientPaperImage1Service")

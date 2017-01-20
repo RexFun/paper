@@ -16,9 +16,9 @@ import admin.entity.SysMenu;
 import admin.entity.SysPermit;
 import admin.service.SysMenuService;
 import admin.service.SysPermitService;
-import gwen.devwork.BaseAction;
-import gwen.devwork.PageNav;
-import gwen.util.CollectionUtil;
+import rex.devwork.BaseAction;
+import rex.devwork.PageNav;
+import rex.util.CollectionUtil;
 
 
 @SuppressWarnings("serial")

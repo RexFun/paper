@@ -14,9 +14,9 @@ import admin.dao.PaperImageDao;
 import admin.dao.PaperModelDao;
 import admin.entity.PaperImage;
 import admin.entity.PaperModel;
-import gwen.devwork.BaseDao;
-import gwen.devwork.BaseService;
-import gwen.util.PropertiesUtil;
+import rex.devwork.BaseDao;
+import rex.devwork.BaseService;
+import rex.util.PropertiesUtil;
 
 @Service("paperModelService")
 public class PaperModelService extends BaseService<PaperModel,Long>

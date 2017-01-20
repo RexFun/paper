@@ -30,7 +30,6 @@ public class AuthFilter implements Filter
 		catch(Exception e)
 		{
 		}
-		System.out.println("AuthFilter initialization");
 	}
 
 	@Override

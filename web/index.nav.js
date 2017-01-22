@@ -6,7 +6,8 @@ var $nav={
 	init : function(json){
 //		var navMenuTreeHtml = new treeMenu(json).init(0);
 		var navMenuTreeHtml = new treeMenu(json).init();
-		$(".sidebar-form").nextAll().empty();
+//		$(".sidebar-form").nextAll().empty();
+		$(".sidebar-menu").remove();
 		$(".sidebar-form").after(navMenuTreeHtml);
 	},
 	// 菜单单击事件

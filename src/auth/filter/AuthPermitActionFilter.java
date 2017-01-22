@@ -1,4 +1,4 @@
-package auth;
+package auth.filter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import admin.SysFactory;
+import com.google.gson.Gson;
+
 import admin.entity.SysUser;
 import auth.action.AuthAction;
+import factory.SysFactory;
 
-public class AuthFilter implements Filter 
+public class AuthPermitActionFilter implements Filter 
 {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException 
@@ -42,29 +44,11 @@ public class AuthFilter implements Filter
 		try
 		{
 			SysUser u = (SysUser) req.getSession().getAttribute(AuthAction.SessionName_CurLoginUser);
-			// 没有登录
-			if (u == null || u.getString("tc_code") == null)
-			{
-				if (req.getHeader("x-requested-with") != null && req.getHeader("x-requested-with").equals("XMLHttpRequest")) 
-				{ // ajax请求，通过js跳转至登录页
-					res.setStatus(0); // 标记0，代表session超时
-				}
-				else
-				{ // 非ajax请求，通过后台跳转至登录页
-					res.sendRedirect(req.getContextPath() + "/login.jsp");
-				}
-				return;
-			}
 			// 校验用户action权限
 			if (!checkUserActionPermit(req, res, u))
 			{
 				res.sendRedirect(req.getContextPath() + "/permitError.jsp");
 				return;
-			}
-			// 每次action都去更新当前菜单权限id，用于设置当前用户按钮权限
-			if(req.getParameter("menuPermitId") != null)
-			{
-				req.getSession().setAttribute("CUR_MENU_PERMIT_ID", req.getParameter("menuPermitId"));
 			}
 			chain.doFilter(requestWrapper, responseWraper);
 		}

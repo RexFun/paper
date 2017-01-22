@@ -23,9 +23,33 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 		return sysMenuDao;
 	}
 	
-	public List getByUserId(Map m)
+	public List getAll()
 	{
-		List<SysMenu> menuData = sysMenuDao.getByUserId(m);
+		List<SysMenu> menuData = sysMenuDao.get(null);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(int i=0; i<menuData.size(); i++)
+		{
+			SysMenu o = menuData.get(i);
+			treeNodes.add(o.getM());
+		}
+		return treeNodes;
+	}
+	
+	public List getByUserId(Long userId)
+	{
+		List<SysMenu> menuData = sysMenuDao.getByUserId(userId);
+		List<Object> treeNodes = new ArrayList<Object>();
+		for(int i=0; i<menuData.size(); i++)
+		{
+			SysMenu o = menuData.get(i);
+			treeNodes.add(o.getM());
+		}
+		return treeNodes;
+	}
+	
+	public List getByUserIdAndParams(Map m)
+	{
+		List<SysMenu> menuData = sysMenuDao.getByUserIdAndParams(m);
 		List<Object> treeNodes = new ArrayList<Object>();
 		for(int i=0; i<menuData.size(); i++)
 		{

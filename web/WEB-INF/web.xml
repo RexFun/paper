@@ -63,15 +63,47 @@
 	 
 	<!-- 自定义登录过滤器 -->
 	<filter>
-		<filter-name>authFilter</filter-name>
-		<filter-class>auth.AuthFilter</filter-class>
+		<filter-name>authLoginFilter</filter-name>
+		<filter-class>auth.filter.AuthLoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>authFilter</filter-name>
+		<filter-name>authLoginFilter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
 		<url-pattern>/index.jsp</url-pattern>
 		<url-pattern>/home.jsp</url-pattern>
 	</filter-mapping>
+	<!-- 自定义菜单权限过滤器 -->
+	<filter>
+		<filter-name>authPermitMenuFilter</filter-name>
+		<filter-class>auth.filter.AuthPermitMenuFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authPermitMenuFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/home.jsp</url-pattern>
+	</filter-mapping>
+	<!-- 自定义action权限过滤器 -->
+	<filter>
+		<filter-name>authPermitActionFilter</filter-name>
+		<filter-class>auth.filter.AuthPermitActionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authPermitActionFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+	</filter-mapping>
+	<!-- 自定义按钮权限过滤器 -->
+<!-- 	<filter>
+		<filter-name>authPermitButtonFilter</filter-name>
+		<filter-class>auth.filter.AuthPermitButtonFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authPermitButtonFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/index.jsp</url-pattern>
+		<url-pattern>/home.jsp</url-pattern>
+	</filter-mapping> -->
 	
 	<!-- struts2 -->
 	<filter>

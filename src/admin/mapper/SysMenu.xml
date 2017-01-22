@@ -85,6 +85,14 @@
 		select <include refid="columns"/>  from sys_menu t
 		 inner join sys_role_permit_mapping t1 on t.tc_sys_permit_id=t1.tc_sys_permit_id
 		 inner join sys_user_role_mapping t2 on t1.tc_sys_role_id=t2.tc_sys_role_id and t2.tc_sys_user_id=#{tc_sys_user_id}
+		 group by t.id
+		 order by t.tc_order
+	</select>
+	
+	<select id="getByUserIdAndParams" resultType="list" resultMap="result">
+		select <include refid="columns"/>  from sys_menu t
+		 inner join sys_role_permit_mapping t1 on t.tc_sys_permit_id=t1.tc_sys_permit_id
+		 inner join sys_user_role_mapping t2 on t1.tc_sys_role_id=t2.tc_sys_role_id and t2.tc_sys_user_id=#{tc_sys_user_id}
 		 <include refid="dynamicWhere" />
 		 group by t.id
 		 order by t.tc_order

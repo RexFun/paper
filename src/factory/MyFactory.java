@@ -1,4 +1,4 @@
-package admin;
+package factory;
 
 import admin.service.PaperImageService;
 import rex.devwork.BeanFactory;

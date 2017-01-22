@@ -5,6 +5,7 @@
  * */
 function initBtnPermit(menuPermitId) {
 	var btnPermitArr = ${sessionScope.CUR_LOGIN_USER.m.btn_permit_json};
+	if (!btnPermitArr) return;
 	if(btnPermitArr.length>0){
 		$.each($("[pbtnId^='pbtn_']"),function(i,o) {
 			for(var j=0; j<btnPermitArr.length; j++) {

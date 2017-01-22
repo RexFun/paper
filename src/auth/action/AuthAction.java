@@ -32,8 +32,6 @@ public class AuthAction extends BaseAction<Auth>
 	private SysUserService service;
 	@Autowired
 	private SysMenuService menuService;
-	@Autowired
-	private SysPermitService permitService;
 	
 	public static final String SessionName_CurLoginUser = "CUR_LOGIN_USER";
 	
@@ -69,11 +67,13 @@ public class AuthAction extends BaseAction<Auth>
 				}
 				else
 				{
-					m.put("tc_sys_user_id", u.getLong("id"));
-					u.set("menu_permit_json", new Gson().toJson(menuService.getByUserId(m)));
-					u.set("btn_permit_json", new Gson().toJson(permitService.getBtnPermitByUserId(u.getLong("id"))));
+					// 初始化菜单权限
+					u.set("menu_permit_json", new Gson().toJson(menuService.getAll()));
+					// 初始化按钮权限
+					u.set("btn_permit_json","null");
+					// session保存登录用户对象
 					getSession().setAttribute(SessionName_CurLoginUser, u);
-					System.out.println("btnPermitJson:"+u.getString("btn_permit_json"));
+					// 返回结果
 					getResult().setSuccess(true);
 				}
 			}
@@ -99,7 +99,7 @@ public class AuthAction extends BaseAction<Auth>
 		Map m = new HashMap();
 		m.put("tc_name",getReq().getString("navName"));
 		m.put("tc_sys_user_id", ((SysUser)getSession().getAttribute(SessionName_CurLoginUser)).getLong("id"));
-		getResult().put("navMenuTreeNodes", new Gson().toJson(menuService.getByUserId(m)));
+		getResult().put("navMenuTreeNodes", new Gson().toJson(menuService.getByUserIdAndParams(m)));
 		getResult().setSuccess(true);
 		printJson(getResult());
 	}

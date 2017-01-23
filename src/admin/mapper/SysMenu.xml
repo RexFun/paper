@@ -89,6 +89,7 @@
 		 order by t.tc_order
 	</select>
 	
+	<!-- 
 	<select id="getByUserIdAndParams" resultType="list" resultMap="result">
 		select <include refid="columns"/>  from sys_menu t
 		 inner join sys_role_permit_mapping t1 on t.tc_sys_permit_id=t1.tc_sys_permit_id
@@ -97,7 +98,11 @@
 		 group by t.id
 		 order by t.tc_order
 	</select>
-	
+	 -->
+	<select id="getByUserIdAndParams" resultType="list" resultMap="result">
+		{call p_get_menu(#{tc_sys_user_id},#{tc_name})}
+	</select>
+	 
 	<select id="getCount" resultType="int">
 		select count(1) from sys_menu t
 		  left join sys_menu tt on t.pid = tt.id

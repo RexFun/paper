@@ -45,7 +45,7 @@ $(function(){
 		var url = $("#navSearchForm").attr('action');
 		$.post(
 			url, 
-			{'navName':$("#navName").val()},
+			{'menuName':$("#menuName").val()},
 		  	function(rv) {
 				if(rv.success){
 					$nav.init(JSON.parse(rv.data.navMenuTreeNodes));
@@ -127,7 +127,7 @@ $(function(){
 			<!-- 菜单搜索form -->
 			<form id="navSearchForm" action="${pageContext.request.contextPath}/auth/getNavMenu.action" method="get" class="sidebar-form">
 				<div class="input-group">
-					<input type="text" id="navName" name="q" class="form-control" placeholder="Search..."/>
+					<input type="text" id="menuName" name="q" class="form-control" placeholder="Search..."/>
 					<span class="input-group-btn">
 						<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 							<i class="fa fa-search"></i>

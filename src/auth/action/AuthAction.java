@@ -97,9 +97,9 @@ public class AuthAction extends BaseAction<Auth>
 	public void getNavMenu()
 	{
 		Map m = new HashMap();
-		m.put("tc_name",getReq().getString("navName"));
-		m.put("tc_sys_user_id", ((SysUser)getSession().getAttribute(SessionName_CurLoginUser)).getLong("id"));
-		getResult().put("navMenuTreeNodes", new Gson().toJson(menuService.getByUserIdAndParams(m)));
+		m.put("menu_name",getReq().getString("menuName"));
+		m.put("user_id", ((SysUser)getSession().getAttribute(SessionName_CurLoginUser)).getLong("id"));
+		getResult().put("navMenuTreeNodes", new Gson().toJson(menuService.getByUserIdAndMenuName(m)));
 		getResult().setSuccess(true);
 		printJson(getResult());
 	}

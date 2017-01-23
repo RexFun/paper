@@ -22,8 +22,8 @@ public class SysMenuDao extends BaseDao<SysMenu,Long>
 		return this.getSqlSession().selectList(getStatementName("getByUserId"), userId);
 	}
 	
-	public List getByUserIdAndParams(Map m)
+	public List getByUserIdAndMenuName(Map m)
 	{
-		return this.getSqlSession().selectList(getStatementName("getByUserIdAndParams"), m);
+		return this.getSqlSession().selectList(getStatementName("getByUserIdAndMenuName"), m);
 	}
 }

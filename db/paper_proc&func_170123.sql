@@ -28,7 +28,7 @@
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `f_get_child_list`(rootId INT) RETURNS varchar(1000) CHARSET utf8 COLLATE utf8_unicode_ci
+CREATE DEFINER=`root`@`localhost` FUNCTION `f_get_child_list`(rootId varchar(1000)) RETURNS varchar(1000) CHARSET utf8 COLLATE utf8_unicode_ci
 begin
 	declare sChildList varchar(1000); 
 	declare sChildTemp varchar(1000);
@@ -63,7 +63,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `f_get_parent_list`(rootId INT) RETURNS varchar(1000) CHARSET utf8 COLLATE utf8_unicode_ci
+CREATE DEFINER=`root`@`localhost` FUNCTION `f_get_parent_list`(rootId varchar(1000)) RETURNS varchar(1000) CHARSET utf8 COLLATE utf8_unicode_ci
 begin
 	declare sParentList varchar(1000); 
 	declare sParentTemp varchar(1000);
@@ -88,7 +88,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `p_get_menu` */;
+/*!50003 DROP PROCEDURE IF EXISTS `p_menu_get_by_userId_and_menuName` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -98,69 +98,30 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_get_menu`(userId_in int,
-													   menuName_in varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_menu_get_by_userId_and_menuName`(i_userId   INT,
+																				i_menuName VARCHAR(100))
 BEGIN
-declare v_chk_count int;
-declare v_menuId int;
-
-SELECT 
-    COUNT(1)
-INTO v_chk_count FROM(
-select t.* from
-    sys_menu t
-        INNER JOIN
-    sys_role_permit_mapping t1 ON t.tc_sys_permit_id = t1.tc_sys_permit_id
-        INNER JOIN
-    sys_user_role_mapping t2 ON t1.tc_sys_role_id = t2.tc_sys_role_id
-        AND t2.tc_sys_user_id = userId_in
-WHERE
-    t.tc_name LIKE CONCAT('%', menuName_in, '%')
-GROUP BY t.id
-ORDER BY t.tc_order)t;
-
-if v_chk_count>1 then
-	SELECT 
-		t.*
-	 FROM
-		sys_menu t
-			INNER JOIN
-		sys_role_permit_mapping t1 ON t.tc_sys_permit_id = t1.tc_sys_permit_id
-			INNER JOIN
-		sys_user_role_mapping t2 ON t1.tc_sys_role_id = t2.tc_sys_role_id
-			AND t2.tc_sys_user_id = userId_in
-	WHERE
-		t.tc_name LIKE CONCAT('%', menuName_in, '%')
-	GROUP BY t.id
+	DECLARE v_menuId_set VARCHAR(1000);
+    -- 获取被搜索的菜单id集合
+	SELECT group_concat(t.id)
+	  INTO v_menuId_set 
+	  FROM sys_menu t
+	 INNER JOIN sys_role_permit_mapping t1 ON t.tc_sys_permit_id = t1.tc_sys_permit_id
+	 INNER JOIN sys_user_role_mapping t2 ON t1.tc_sys_role_id = t2.tc_sys_role_id
+			AND t2.tc_sys_user_id = i_userId
+	 WHERE t.tc_name LIKE CONCAT('%', i_menuName, '%');
+	-- 返回结果集
+    SELECT t.* FROM
+    (
+		SELECT t.*
+		  FROM sys_menu t
+		 WHERE FIND_IN_SET(t.id, F_GET_PARENT_LIST(v_menuId_set)) 
+		UNION 
+		SELECT t.*
+		  FROM sys_menu t
+		 WHERE FIND_IN_SET(t.id, F_GET_CHILD_LIST(v_menuId_set))
+	)t
 	ORDER BY t.tc_order;
-else
-	SELECT 
-		t.ID
-	INTO v_menuId FROM
-		sys_menu t
-			INNER JOIN
-		sys_role_permit_mapping t1 ON t.tc_sys_permit_id = t1.tc_sys_permit_id
-			INNER JOIN
-		sys_user_role_mapping t2 ON t1.tc_sys_role_id = t2.tc_sys_role_id
-			AND t2.tc_sys_user_id = userId_in
-	WHERE
-		t.tc_name LIKE CONCAT('%', menuName_in, '%')
-	GROUP BY t.id
-	ORDER BY t.tc_order;
-
-	SELECT 
-		t.*
-	FROM
-		sys_menu t
-	WHERE
-		FIND_IN_SET(t.id, F_GET_PARENT_LIST(v_menuId)) 
-	UNION SELECT 
-		t.*
-	FROM
-		sys_menu t
-	WHERE
-		FIND_IN_SET(t.id, F_GET_CHILD_LIST(v_menuId));
-end if;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -177,4 +138,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-23 14:05:51
+-- Dump completed on 2017-01-23 16:34:24

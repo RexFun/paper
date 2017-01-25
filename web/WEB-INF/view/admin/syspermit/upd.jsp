@@ -28,6 +28,7 @@ var permitSetting = {
 /* 全局函数 */
 /**********************************************************/
 $(function(){
+	$("#tc_type").val("${po.m.tc_type}");// 权限类型selection返回值
     var s = $("#modal_sel").ztreeSelectorModal({treeid:"tree_permit",
  											  	title:"请选择权限节点",
  											  	setting:permitSetting,

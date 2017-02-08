@@ -14,7 +14,6 @@ import admin.entity.PaperModel;
 import admin.service.PaperCategoryService;
 import admin.service.PaperModelService;
 import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
 import rex.util.CollectionUtil;
 
 
@@ -37,6 +36,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value = "add1", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/add.jsp")})
 	public String add1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		getResult().put("catList", catService.get(null));
 		return "success";
 	}
@@ -63,6 +63,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="upd1",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/upd.jsp")})
 	public String upd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		getResult().put("catList", catService.get(null));
 		return "success";
@@ -77,6 +78,7 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="getById",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/getById.jsp")})
 	public String getById() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		getResult().put("catList", catService.get(null));
 		return "success";
@@ -85,6 +87,8 @@ public class PaperModelAction extends BaseAction<PaperModel>
 	@Action(value="get", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
+		getResult().put("catList", catService.get(null));
 		return "success";
 	}
 	

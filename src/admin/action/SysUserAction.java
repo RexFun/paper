@@ -43,6 +43,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/add.jsp")})
 	public String add1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	@Action(value="add2")
@@ -71,6 +72,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/upd.jsp")})
 	public String upd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -84,6 +86,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="updPwd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/updPwd.jsp")})
 	public String updPwd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -116,6 +119,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getById.jsp")})
 	public String getById() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -123,6 +127,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="getMyInfo",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getMyInfo.jsp")})
 	public String getMyInfo() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -130,6 +135,7 @@ public class SysUserAction extends BaseAction<SysUser>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	

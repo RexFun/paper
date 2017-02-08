@@ -2,9 +2,48 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.upd.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
+/**********************************************************/
+/* 保存后回调函数 */
+/**********************************************************/
+$rex.form.callback = function(){
+	if($rex.result.type == 1){
+ 		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	}
+};
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function(){
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	// 初始化权限树
+    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
+    // 全选/全不选
+    $("#chkAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
+        if($(this).prop("checked")==true){
+        	zTree.checkAllNodes(true);
+        }else{
+        	zTree.checkAllNodes(false);
+        }
+    	$("#tc_sys_permit_ids").val(getCheckedNodesIds());
+    });
+});
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
@@ -52,37 +91,6 @@ var setting =
 		}
 	}
 };
-// zTree的初始化
-$(function(){
-    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
-    // 全部展开/折叠
-    $("#expandAll").click(function(){
-    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
-        if($(this).prop("checked")==true){
-        	zTree.expandAll(true);
-        }else{
-        	zTree.expandAll(false);
-        }
-    });
-    // 全选/全不选
-    $("#chkAll").click(function(){
-    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
-        if($(this).prop("checked")==true){
-        	zTree.checkAllNodes(true);
-        }else{
-        	zTree.checkAllNodes(false);
-        }
-    	$("#tc_sys_permit_ids").val(getCheckedNodesIds());
-    });
-});
-/**********************************************************/
-/* 界面回调函数 */
-/**********************************************************/
-$rex.form.callback = function(){
-	if($rex.result.type == 1){
-		location.href = "get.action";
-	}
-};
 </script>
 </head>
 <body>
@@ -102,7 +110,7 @@ $rex.form.callback = function(){
 				<input type="hidden" name="po.m.id" value="${po.m.id}">
 				<input type="hidden" id="tc_sys_permit_ids" name="po.m.tc_sys_permit_ids" value="${po.m.tc_sys_permit_ids}">
 				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+				<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 		<div class="col-md-6 column">

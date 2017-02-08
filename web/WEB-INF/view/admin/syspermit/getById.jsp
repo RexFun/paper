@@ -2,12 +2,18 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function(){
-	$("#tc_type").val("${po.m.tc_type}");// 权限类型selection返回值
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	// 权限类型selection返回值
+	$("#tc_type").val("${po.m.tc_type}");
 });
 </script>
 </head>
@@ -37,7 +43,7 @@ $(function(){
 					<input type="text" class="form-control" value="${po.m.tc_p_name}" readonly="readonly"/>
 					<input type="hidden" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}" readonly="readonly"/>
 				</div>
-				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+				<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 	</div>

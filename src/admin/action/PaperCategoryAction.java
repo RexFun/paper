@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import admin.entity.PaperCategory;
 import admin.service.PaperCategoryService;
 import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
 import rex.util.CollectionUtil;
 
 
@@ -34,6 +33,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/add.jsp")})
 	public String add1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	@Action(value="add2")
@@ -62,6 +62,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/upd.jsp")})
 	public String upd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -75,6 +76,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/getById.jsp")})
 	public String getById() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -82,6 +84,7 @@ public class PaperCategoryAction extends BaseAction<PaperCategory>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/papercategory/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	

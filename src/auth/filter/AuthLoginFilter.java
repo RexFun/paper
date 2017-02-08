@@ -1,8 +1,6 @@
 package auth.filter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 import admin.entity.SysUser;
 import auth.action.AuthAction;
-import factory.SysFactory;
 
 public class AuthLoginFilter implements Filter 
 {

@@ -17,7 +17,6 @@ import admin.entity.SysPermit;
 import admin.service.SysMenuService;
 import admin.service.SysPermitService;
 import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
 import rex.util.CollectionUtil;
 
 
@@ -40,6 +39,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/add.jsp")})
 	public String add1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	@Action(value="add2")
@@ -68,6 +68,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/upd.jsp")})
 	public String upd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -81,6 +82,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/getById.jsp")})
 	public String getById() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -88,6 +90,7 @@ public class SysMenuAction extends BaseAction<SysMenu>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	

@@ -2,9 +2,30 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.getById.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function(){
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	// zTree的初始化
+    zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("roleTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
+});
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
@@ -46,19 +67,6 @@ var setting =
 		}
 	}
 };
-// zTree的初始化
-$(function(){
-    zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
-    // 全部展开/折叠
-    $("#expandAll").click(function(){
-    	var zTree = $.fn.zTree.getZTreeObj("roleTree");
-        if($(this).prop("checked")==true){
-        	zTree.expandAll(true);
-        }else{
-        	zTree.expandAll(false);
-        }
-    });
-});
 </script>
 </head>
 <body>
@@ -76,7 +84,7 @@ $(function(){
 				<div class="form-group"><label for="tc_name">用户名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" value="${po.m.tc_email}" readonly="readonly"/></div>
 				<div class="form-group"><label for="tc_add_time">创建时间：</label><input type="text" class="form-control" id="tc_add_time" name="po.m.tc_add_time" value="${po.m.tc_add_time}" readonly="readonly"/></div>
-				<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+				<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 		<div class="col-md-6 column">

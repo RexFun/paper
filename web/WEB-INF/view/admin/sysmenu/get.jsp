@@ -5,7 +5,52 @@
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/view.get.js"></script>
 <script type="text/javascript">
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function() {
+	$rex.view.get.init.toolbar();
+	$rex.view.get.init.modalFormQuery();
+	$rex.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
+	initTree();
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+});
+/**********************************************************/
+/* 初始化配置 */
+/**********************************************************/
+$rex.view.get.config.setPreFormParams = function(){
+ 	$("#f_tc_p_name").val(typeof("${queryParams.f_tc_p_name}")=="undefined"?"":"${queryParams.f_tc_p_name}");
+	$("#f_tc_code").val(typeof("${queryParams.f_tc_code}")=="undefined"?"":"${queryParams.f_tc_code}");
+	$("#f_tc_name").val(typeof("${queryParams.f_tc_name}")=="undefined"?"":"${queryParams.f_tc_name}");
+};
+$rex.view.get.config.formParams = function(p){
+	p.tc_p_name = $("#f_tc_p_name").val();
+	p.tc_code = $("#f_tc_code").val();
+	p.tc_name = $("#f_tc_name").val();
+    return p;
+};
+$rex.view.get.config.urlParams = function(){
+	return {f_tc_p_name : $("#f_tc_p_name").val(),
+		   	f_tc_code : $("#f_tc_code").val(),
+		   	f_tc_name : $("#f_tc_name").val()};
+};
+$rex.view.get.config.tableColumns = 
+[
+    {title:'菜单代号', field:'m.tc_code', align:'center', valign:'middle', sortable:false},
+    {title:'菜单名称', field:'m.tc_name', align:'center', valign:'middle', sortable:false},
+    {title:'菜单URL', field:'m.tc_url', align:'center', valign:'middle', sortable:false},
+    {title:'菜单排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:false},
+    {title:'绑定权限', field:'m.tc_sys_permit_name', align:'center', valign:'middle', sortable:false},
+    {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false}
+];
+$rex.view.get.callback.delRows = function(){
+	zTreeObj.reAsyncChildNodes(null, "refresh"); // 刷新zTree
+};
+$rex.view.get.callback.onLoadSuccess = function(){
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+};
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
@@ -56,131 +101,6 @@ function initTree(){
     });
 }
 </script>
-<script type="text/javascript">
-$rex.form.callback = function(){
-	if($rex.result.type == 1){
-        $("#tb_list").bootstrapTable('refresh'); // 刷新table
-	}
-};
-/* 初始化toolbar */
-function initToolbar() {
-	$("#bar_btn_add").click(function(){
-		location.href = "add1.action";
-	});
-	$("#bar_btn_del").click(function(){
-		if(getIdSelections().length<1) {
-			alert("没选择");
-			return;
-		}
-		if(!confirm("确认删除？")) return;
-		$.post("del.action",{id:getIdSelections()},function(data){
-	        $("#tb_list").bootstrapTable('refresh'); // 刷新table
-	        zTreeObj.reAsyncChildNodes(null, "refresh"); // 刷新zTree
-		});
-	});
-}
-/* 初始化tb_list */
-function initTable(){
-	$('#tb_list').bootstrapTable({
-		height: getGlobalHeight("table"),
-		method:'post',
-		contentType:"application/x-www-form-urlencoded",//用post，必须采用此参数
-	    url: 'getJson.action',
-		sidePagination:"server",
-		toolbar:"#toolbar",
-        showRefresh:true,
-        showToggle:true,
-        showColumns:true,
-        showExport:true,
-		striped:true,
-		pagination:true,
-		pageList:"[10,20,50]",
-	    queryParams: function (p) {
-	    	p.tc_p_name = $("#f_tc_p_name").val();
-	    	p.tc_code = $("#f_tc_code").val();
-	    	p.tc_name = $("#f_tc_name").val();
-            return p;
-	    },
-	    columns:
-	    [
-	     {checkbox:true, align:'center', valign:'middle'},
-	     {title:'操作', field:'operate', align:'center', valign:'middle', width:'50',
-	    	 events:operateEvents, 
-	    	 formatter:operateFormatter},
-	     {title:'菜单代号', field:'m.tc_code', align:'center', valign:'middle', sortable:false},
-	     {title:'菜单名称', field:'m.tc_name', align:'center', valign:'middle', sortable:false},
-	     {title:'菜单URL', field:'m.tc_url', align:'center', valign:'middle', sortable:false},
-	     {title:'菜单排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:false},
-	     {title:'绑定权限', field:'m.tc_sys_permit_name', align:'center', valign:'middle', sortable:false},
-	     {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false}
-	    ],
-	    onLoadSuccess:function(){
-	    	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}"); //加载完后，执行按钮权限验证
-	    },
-	    onLoadError:ajaxOnLoadError
-	});
-	//随窗口resize 改变 高度
-	$(window).resize(function () {
-		$('#tb_list').bootstrapTable('resetView', {height: getGlobalHeight("table")});
-	});
-}
-// 操作列
-function operateFormatter(value, row, index) {
-    return [
-    	'<div class="btn-group">',
-    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
-    	'<span class="caret"></span>',
-    	'</button>',
-    	'<ul class="dropdown-menu" role="menu">',
-    	'<li class="upd" pbtnId="pbtn_upd'+index+'">',
-    	'<a href="javascript:void(0);">',
-        '<i class="glyphicon glyphicon-edit"></i>',
-    	'</a>',
-    	'</li>',
-    	'<li class="getById" pbtnId="pbtn_getById'+index+'">',
-    	'<a href="javascript:void(0);">',
-        '<i class="glyphicon glyphicon-info-sign"></i>',
-    	'</a>',
-    	'</li>',
-    	'</ul>',
-    	'</div>'
-    ].join('');
-}
-// 操作列事件
-window.operateEvents = {
-    'click .upd': function (e, value, row, index) {
-		location.href = "upd1.action?id="+row.m.id;
-    },
-    'click .getById': function (e, value, row, index) {
-		location.href = "getById.action?id="+row.m.id;
-    }
-};
-/* 获取列表已选行rowid */
-function getIdSelections() {
-    return $.map($("#tb_list").bootstrapTable('getSelections'), function (row) {
-        return row.m.id
-    });
-}
-/* 初始化modal_form_query */
-function initModalFormQuery() {
-	$("#form_query").submit(function(e){
-		e.preventDefault();
-		$("#form_query_btn").click();
-	});
-	$("#form_query_btn").click(function(){
-		$('#modal_form_query').modal('hide');
-        $("#tb_list").bootstrapTable('selectPage', 1);
-	});
-}
-/* 全局函数 */
-$(function() {
-	initTree();
-	initTable();
-	initToolbar();
-	initModalFormQuery();
-	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
-});
-</script>
 </head>
 <body>
 <!-- toolbar
@@ -227,7 +147,6 @@ $(function() {
 			</div>
 			<div class="modal-footer">
 			   <button type="reset" class="btn btn-default"><i class="glyphicon glyphicon-repeat"></i></button>
-			   <button type="button" class="btn btn-default" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
 			   <button type="button" class="btn btn-primary" id="form_query_btn"><i class="glyphicon glyphicon-ok"></i></button>
 			</div>
 		</div><!-- /.modal-content -->

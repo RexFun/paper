@@ -2,9 +2,18 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.upd.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
+/**********************************************************/
+/* 保存后回调函数 */
+/**********************************************************/
+$rex.form.callback = function(){
+	if($rex.result.type == 1){
+ 		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	}
+};
 /**********************************************************/
 /* zTree配置 */
 /**********************************************************/
@@ -26,12 +35,17 @@ var permitSetting = {
 };
 // zTree的初始化
 $(function(){
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	
     var s1 = $("#modal_sel1").ztreeSelectorModal({treeid:"tree_menu",
     											  title:"请选择上级菜单节点",
     											  setting:menuSetting,
     											  callback:{
     												  onConfirm:function(modalObj,rtnVal){
-    													  console.info(rtnVal);
+    													  //console.info(rtnVal);
     													  $("#sel_menu").val(rtnVal.vName);
     													  $("#pid").val(rtnVal.vId);
     												  }
@@ -42,7 +56,7 @@ $(function(){
     											  setting:permitSetting,
     											  callback:{
     												  onConfirm:function(modalObj,rtnVal){
-    													  console.info(rtnVal);
+    													  //console.info(rtnVal);
     													  $("#sel_permit").val(rtnVal.vName);
     													  $("#tc_sys_permit_id").val(rtnVal.vId);
     												  }
@@ -55,14 +69,6 @@ $(function(){
     	s2.modal("show");
     });
 });
-/**********************************************************/
-/* 界面回调函数 */
-/**********************************************************/
-$rex.form.callback = function(){
-	if($rex.result.type == 1){
-		location.href = "get.action";
-	}
-};
 </script>
 </head>
 <body>
@@ -86,7 +92,7 @@ $rex.form.callback = function(){
 	</div>
 	<input type="hidden" name="po.m.id" value="${po.m.id}">
 	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+	<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
 <!-- modal -->
 <div id="modal_sel1"></div>

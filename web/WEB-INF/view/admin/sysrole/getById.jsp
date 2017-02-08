@@ -6,6 +6,26 @@
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
 /**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function(){
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	// 初始化权限树
+    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
+    // 全部展开/折叠
+    $("#expandAll").click(function(){
+    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
+        if($(this).prop("checked")==true){
+        	zTree.expandAll(true);
+        }else{
+        	zTree.expandAll(false);
+        }
+    });
+});
+/**********************************************************/
 /* zTree配置 */
 /**********************************************************/
 // zTree 的参数配置
@@ -46,19 +66,6 @@ var setting =
 		}
 	}
 };
-// zTree的初始化
-$(function(){
-    zTreeObj = $.fn.zTree.init($("#permitTree"), setting);
-    // 全部展开/折叠
-    $("#expandAll").click(function(){
-    	var zTree = $.fn.zTree.getZTreeObj("permitTree");
-        if($(this).prop("checked")==true){
-        	zTree.expandAll(true);
-        }else{
-        	zTree.expandAll(false);
-        }
-    });
-});
 </script>
 </head>
 <body>
@@ -72,7 +79,7 @@ $(function(){
 			<div class="form-group"><label for="id">角色ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
 			<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
 			<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
-			<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+			<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 		</div>
 		<div class="col-md-6 column">
 			<fieldset>

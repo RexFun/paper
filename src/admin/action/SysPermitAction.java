@@ -1,7 +1,6 @@
 package admin.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import admin.entity.SysPermit;
 import admin.service.SysPermitService;
 import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
 import rex.util.CollectionUtil;
 
 
@@ -37,6 +35,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/add.jsp")})
 	public String add1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	@Action(value="add2")
@@ -65,6 +64,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/upd.jsp")})
 	public String upd1() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -78,6 +78,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/getById.jsp")})
 	public String getById() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		po = service.getById(getReq().getLong("id"));
 		return "success";
 	}
@@ -85,6 +86,7 @@ public class SysPermitAction extends BaseAction<SysPermit>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/syspermit/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		return "success";
 	}
 	

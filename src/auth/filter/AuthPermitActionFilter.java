@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import com.google.gson.Gson;
-
 import admin.entity.SysUser;
 import auth.action.AuthAction;
 import factory.SysFactory;
@@ -47,7 +45,8 @@ public class AuthPermitActionFilter implements Filter
 			// 校验用户action权限
 			if (!checkUserActionPermit(req, res, u))
 			{
-				res.sendRedirect(req.getContextPath() + "/permitError.jsp");
+				res.setContentType("text/html;charset=UTF-8"); 
+				res.getWriter().print("操作失败，没有权限！");
 				return;
 			}
 			chain.doFilter(requestWrapper, responseWraper);

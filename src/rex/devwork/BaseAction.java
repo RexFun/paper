@@ -2,6 +2,7 @@ package rex.devwork;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class BaseAction<T> extends ActionSupport 
 {
+	//持久化表单查询参数
+	private Map<String,Object> queryParams;
+	public Map<String,Object> getQueryParams() {return queryParams;}
+	public void setQueryParams(Map<String,Object> queryParams) {this.queryParams = queryParams;}
+	
 	protected PrintWriter out;
 	
 	public HttpServletRequest getBaseReq()

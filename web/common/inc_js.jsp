@@ -6,7 +6,9 @@
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-fixed-columns.js"></script>
 <script type="text/javascript" src="${ctx}/res/jquery/jquery.form.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/base.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/form.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/view.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";
@@ -19,7 +21,7 @@ function getGlobalHeight(type) {
 function ajaxOnLoadError(status, data) {
     if(status == '0') {  
         if (confirm('会话已过期, 请重新登录。')) {  
-            window.location.href = 'login.jsp';              
+            window.location.href = $ctx+'/login.jsp';              
         }  
     } 
 }

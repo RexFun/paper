@@ -2,6 +2,18 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.getById.js"></script>
+<script type="text/javascript">
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function(){
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+});
+</script>
 </head>
 <body>
 <!-- title -->

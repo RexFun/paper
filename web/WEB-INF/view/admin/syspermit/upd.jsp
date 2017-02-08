@@ -2,6 +2,7 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/view.upd.js"></script>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript">
@@ -10,25 +11,20 @@
 /**********************************************************/
 $rex.form.callback = function(){
 	if($rex.result.type == 1){
-		location.href = "get.action";
-	}
-};
-/**********************************************************/
-/* zTree配置 */
-/**********************************************************/
-// permitTree 的参数配置
-var permitSetting = {
-	async: 
-	{
-		enable: true,
-		url:"getPermitTreeNodes.action?id=${po.m.pid}"
+ 		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
 	}
 };
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function(){
-	$("#tc_type").val("${po.m.tc_type}");// 权限类型selection返回值
+	// 返回列表页
+	$("#back").click(function(){
+		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+	});
+	// 权限类型selection返回值
+	$("#tc_type").val("${po.m.tc_type}");
+	
     var s = $("#modal_sel").ztreeSelectorModal({treeid:"tree_permit",
  											  	title:"请选择权限节点",
  											  	setting:permitSetting,
@@ -43,9 +39,21 @@ $(function(){
     	s.modal("show");
     });
 });
+/**********************************************************/
+/* zTree配置 */
+/**********************************************************/
+// permitTree 的参数配置
+var permitSetting = {
+	async: 
+	{
+		enable: true,
+		url:"getPermitTreeNodes.action?id=${po.m.pid}"
+	}
+};
 </script>
 </head>
 <body>
+<s:debug />
 <!-- title -->
 <ol class="breadcrumb">
 	<li class="active">修改</li>
@@ -69,7 +77,7 @@ $(function(){
 	</div>
 	<input type="hidden" name="po.m.id" value="${po.m.id}">
 	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-	<button type="button" class="btn btn-default" id="back" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+	<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
 <!-- modal -->
 <div id="modal_sel"></div>

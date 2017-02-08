@@ -1,4 +1,3 @@
-$rex = {};
 $rex.form = {};
 $rex.result = {type:"", msg:""};
 $rex.checkResult = function(responseText){

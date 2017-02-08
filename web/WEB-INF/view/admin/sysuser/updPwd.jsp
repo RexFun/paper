@@ -34,7 +34,6 @@ $(function(){
 				<div class="form-group"><label for="new_password">新密码：</label><input type="password" class="form-control" id="new_password" value=""/></div>
 				<input type="hidden" id="id" value="${po.m.id}"/>
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-floppy-save"></i></button>
-				<button type="button" class="btn btn-default" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 	</div>

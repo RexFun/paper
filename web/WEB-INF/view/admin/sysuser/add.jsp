@@ -94,12 +94,18 @@ var setting =
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
-	<li class="active">新增</li>
-</ol>
-<!-- form -->
-<form id="dataForm" role="form" action="add2.action" method="post">
+<!-- toolbar
+======================================================================================================= -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-plus"></i></a></div>
+<button type="button" class="btn btn-default navbar-btn back" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+<button type="submit" class="btn btn-default navbar-btn dataFormSave" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+</div>
+</nav>
+<!-- form
+======================================================================================================= -->
+<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
 <div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
@@ -110,8 +116,6 @@ var setting =
 				<div class="form-group"><label for="tc_email">用户邮箱：</label><input type="text" class="form-control" id="tc_email" name="po.m.tc_email" value=""/></div>
 				<div class="form-group"><label for="tc_password">用户密码：</label><input type="text" class="form-control" id="tc_password" name="po.m.tc_password" value="123456"/></div>
 				<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="">
-				<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-				<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 			</fieldset>
 		</div>
 		<div class="col-md-6 column">

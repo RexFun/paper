@@ -16,6 +16,13 @@ $rex.checkResult = function(responseText){
 	return $rex.result.msg;
 };
 $(function(){
+	$('input:text:first').focus(); //把焦点放在第一个文本框
+	$('input').keypress(function (e) { //这里给function一个事件参数命名为e，叫event也行，随意的，e就是IE窗口发生的事件。
+	    var key = e.which; //e.which是按键的值
+	    if (key == 13) {
+	    	$("#dataFormSave").click();
+	    }
+	});
 	$("#dataFormSave").click(function () {
         var options = {
             url: $("#dataForm").attr("action"),

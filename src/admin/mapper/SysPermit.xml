@@ -41,6 +41,7 @@
 		<result property="m.pid" column="pid"/>
 		<result property="m.tc_code" column="tc_code"/>
 		<result property="m.tc_name" column="tc_name"/>
+		<result property="m.tc_name2" column="tc_name2"/>
 		<result property="m.tc_url" column="tc_url"/>
 		<result property="m.tc_order" column="tc_order"/>
 		<result property="m.tc_type" column="tc_type"/>
@@ -49,7 +50,8 @@
 	</resultMap>
   	
 	<sql id="columns">
-		t.ID, t.PID, t.TC_CODE, t.TC_NAME, t.TC_URL, t.TC_ORDER, t.TC_TYPE, case t.TC_TYPE when 1 then '按钮' else '默认' end TC_TYPE_NAME
+		t.ID, t.PID, t.TC_CODE, t.TC_NAME, t.TC_URL, t.TC_ORDER, t.TC_TYPE, case t.TC_TYPE when 1 then '按钮' else '默认' end TC_TYPE_NAME,
+		concat(t.TC_NAME, ' [', CASE t.TC_TYPE WHEN 1 THEN '按钮' ELSE '默认' END, ']') as TC_NAME2
 	</sql>
 	
 	<sql id="page">

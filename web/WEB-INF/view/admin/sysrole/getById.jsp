@@ -45,7 +45,7 @@ var setting =
 	{
 		key: 
 		{
-			name:"tc_name"
+			name:"tc_name2"
 		},
 		simpleData: 
 		{
@@ -69,17 +69,23 @@ var setting =
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
-	<li class="active">明细</li>
-</ol>
+<!-- toolbar
+======================================================================================================= -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a></div>
+<button type="button" class="btn btn-default navbar-btn back" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+</div>
+</nav>
+<!-- form
+======================================================================================================= -->
+<form class="dataForm" id="dataForm" role="form">
 <div class="wrapper">
 	<div class="row clearfix">
 		<div class="col-md-6 column">
 			<div class="form-group"><label for="id">角色ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
 			<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
 			<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
-			<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 		</div>
 		<div class="col-md-6 column">
 			<fieldset>
@@ -90,5 +96,6 @@ var setting =
 		</div>
 	</div>
 </div>
+</form>
 </body>
 </html>

@@ -73,12 +73,18 @@ $(function(){
 </script>
 </head>
 <body>
-<!-- title -->
-<ol class="breadcrumb">
-	<li class="active">新增</li>
-</ol>
-<!-- form -->
-<form id="dataForm" role="form" action="add2.action" method="post">
+<!-- toolbar
+======================================================================================================= -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-plus"></i></a></div>
+<button type="button" class="btn btn-default navbar-btn back" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+<button type="submit" class="btn btn-default navbar-btn dataFormSave" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+</div>
+</nav>
+<!-- form
+======================================================================================================= -->
+<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
 	<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
 	<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
 	<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" /></div>
@@ -91,8 +97,6 @@ $(function(){
 		<input type="text" class="form-control" id="sel_menu"/>
 		<input type="hidden" class="form-control" id="pid" name="po.m.pid"/>
 	</div>
-	<button type="submit" class="btn btn-default" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-	<button type="button" class="btn btn-default" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 </form>
 <!-- modal -->
 <div id="modal_sel1"></div>

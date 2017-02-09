@@ -43,9 +43,9 @@ $rex.view.get.config.tableColumns =
 [
 	{title:'权限代号', field:'m.tc_code', align:'center', valign:'middle', sortable:false},
     {title:'权限名称', field:'m.tc_name', align:'center', valign:'middle', sortable:false},
+    {title:'权限类型', field:'m.tc_type_name', align:'center', valign:'middle', sortable:false},
     {title:'权限URL', field:'m.tc_url', align:'center', valign:'middle', sortable:false},
     {title:'权限排序号', field:'m.tc_order', align:'center', valign:'middle', sortable:false},
-    {title:'权限类型', field:'m.tc_type_name', align:'center', valign:'middle', sortable:false},
     {title:'父节点', field:'m.tc_p_name', align:'center', valign:'middle', sortable:false}
 ];
 $rex.view.get.callback.delRows = function(){
@@ -85,7 +85,7 @@ var setting =
 	{
 		key: 
 		{
-			name:"tc_name"
+			name:"tc_name2"
 		},
 		simpleData: 
 		{

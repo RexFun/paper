@@ -24,6 +24,10 @@ $(function(){
 	    }
 	});
 	$("#dataFormSave").click(function () {
+		if(!$rex.validator.check()) {
+			alert("表单信息不完整！");
+			return;
+		}
         var options = {
             url: $("#dataForm").attr("action"),
             type: 'post',

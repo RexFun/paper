@@ -14,6 +14,21 @@ $rex.form.callback = function(){
 	}
 };
 /**********************************************************/
+/* 表单验证 */
+/**********************************************************/
+/* $rex.form.validate = function(){
+	var v = true;
+	$("[required]").each(function(){
+		if($(this).val().length<1){
+			$(this).parent().addClass("has-error");
+		}
+	});
+	$("[required]").each(function(){
+		if($(this).parent().hasClass("has-error")) v = false;
+	});
+	return v;
+}; */
+/**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function(){
@@ -37,8 +52,8 @@ $(function(){
 <!-- form
 ======================================================================================================= -->
 <form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
-	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" id="name" name="po.m.name" /></div>
-	<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control" id="sort" name="po.m.sort" /></div>
+	<div class="form-group"><label class="control-label" for="name">类别名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required validate-rule-inputType="email" validate-msg="错误"/></div>
+	<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-required validate-rule-inputType="number" validate-msg="错"/></div>
 </form>
 </body>
 </html>

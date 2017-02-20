@@ -2,7 +2,7 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/view.getById.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
@@ -17,7 +17,7 @@ $(function(){
 });
 </script>
 </head>
-<body>
+<body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

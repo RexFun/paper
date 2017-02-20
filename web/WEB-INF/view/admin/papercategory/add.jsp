@@ -3,7 +3,7 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/view.add.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.add.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 保存后回调函数 */
@@ -24,7 +24,7 @@ $(function(){
 });
 </script>
 </head>
-<body>
+<body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

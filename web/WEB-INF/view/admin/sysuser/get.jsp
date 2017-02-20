@@ -3,7 +3,7 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/view.get.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
@@ -48,7 +48,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 };
 </script>
 </head>
-<body>
+<body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">

@@ -61,7 +61,7 @@ var setting =
 };
 </script>
 </head>
-<body>
+<body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

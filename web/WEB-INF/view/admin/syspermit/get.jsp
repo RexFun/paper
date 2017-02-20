@@ -5,7 +5,7 @@
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/view.get.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
@@ -112,7 +112,7 @@ function initTree() {
 }
 </script>
 </head>
-<body>
+<body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">

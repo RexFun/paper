@@ -3,7 +3,7 @@
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
 </head>
-<body>
+<body class="body-content">
 <!-- title
 ======================================================================================================= -->
 <ul class="breadcrumb">

@@ -6,11 +6,11 @@
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-fixed-columns.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/base.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/validator.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/form.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/view.js"></script>
-<script type="text/javascript" src="${ctx}/res/rex/ztree-selector-modal.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/base.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/validator.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/form.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";
 function getGlobalHeight(type) {

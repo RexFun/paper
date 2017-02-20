@@ -46,8 +46,8 @@ $(function(){
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<fieldset>
-				<div class="form-group"><label for="old_password">原密码：</label><input type="password" class="form-control input-sm" id="old_password" value="" validate validate-rule-required/></div>
-				<div class="form-group"><label for="new_password">新密码：</label><input type="password" class="form-control input-sm" id="new_password" value="" validate validate-rule-required/></div>
+				<div class="form-group"><label class="control-label" for="old_password">原密码：</label><input type="password" class="form-control input-sm" id="old_password" value="" validate validate-rule-required/></div>
+				<div class="form-group"><label class="control-label" for="new_password">新密码：</label><input type="password" class="form-control input-sm" id="new_password" value="" validate validate-rule-required/></div>
 				<input type="hidden" id="id" value="${po.m.id}"/>
 			</fieldset>
 		</div>

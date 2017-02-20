@@ -86,15 +86,15 @@ $(function(){
 <!-- form
 ======================================================================================================= -->
 <form class="dataForm" id="dataForm" role="form" action="upd2.action" method="post">
-	<div class="form-group"><label for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" validate validate-rule-required/></div>
-	<div class="form-group"><label for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" validate validate-rule-required/></div>
-	<div class="form-group"><label for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" validate validate-rule-required/></div>
-	<div class="form-group"><label for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" validate validate-rule-inputType="integer"/></div>
-	<div class="form-group"><label for="tc_sys_permit_id">绑定权限：</label>
+	<div class="form-group"><label class="control-label" for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" validate validate-rule-required/></div>
+	<div class="form-group"><label class="control-label" for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" validate validate-rule-required/></div>
+	<div class="form-group"><label class="control-label" for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" validate validate-rule-required/></div>
+	<div class="form-group"><label class="control-label" for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" validate validate-rule-inputType="integer"/></div>
+	<div class="form-group"><label class="control-label" for="tc_sys_permit_id">绑定权限：</label>
 		<input type="text" class="form-control input-sm" id="sel_permit" value="${po.m.tc_sys_permit_name}"/>
 		<input type="hidden" class="form-control input-sm" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" value="${po.m.tc_sys_permit_id}"/>
 	</div>
-	<div class="form-group"><label for="pid">父节点：</label>
+	<div class="form-group"><label class="control-label" for="pid">父节点：</label>
 		<input type="text" class="form-control input-sm" id="sel_menu" value="${po.m.tc_p_name}"/>
 		<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid" value="${po.m.pid}"/>
 	</div>

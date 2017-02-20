@@ -47,8 +47,8 @@ $(function(){
 		</s:iterator>
 	</select>
 </div>
-<div class="form-group"><label for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required/></div>
-<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-inputType="integer"/></div>
+<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required/></div>
+<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-inputType="integer"/></div>
 </form>
 </body>
 </html>

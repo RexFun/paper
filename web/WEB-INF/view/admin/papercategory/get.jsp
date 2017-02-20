@@ -64,7 +64,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
-					 <label for="f_name">类别名：</label><input type="text" class="form-control" id="f_name"/>
+					 <label for="f_name">类别名：</label><input type="text" class="form-control input-sm" id="f_name"/>
 				</div>
 			</div>
 			<div class="modal-footer">

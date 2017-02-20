@@ -34,21 +34,21 @@ $(function(){
 		<div class="col-md-12 column">
 			<fieldset>
 			<legend>基础信息</legend>
-				<div class="form-group"><label for="id">权限ID：</label><input type="text" class="form-control" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
-				<div class="form-group"><label for="tc_code">权限代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
-				<div class="form-group"><label for="tc_name">权限名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
+				<div class="form-group"><label for="id">权限ID：</label><input type="text" class="form-control input-sm" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
+				<div class="form-group"><label for="tc_code">权限代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
+				<div class="form-group"><label for="tc_name">权限名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
 				<div class="form-group">
 					<label for="tc_type">权限类型：</label>
-					<select class="form-control" id="tc_type" name="po.m.tc_type" readonly="readonly">
+					<select class="form-control input-sm" id="tc_type" name="po.m.tc_type" readonly="readonly">
 						<option value="0">默认</option>
 						<option value="1">按钮</option>
 					</select>
 				</div>
-				<div class="form-group"><label for="tc_url">权限URL：</label><input type="text" class="form-control" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
-				<div class="form-group"><label for="tc_order">权限排序号：</label><input type="text" class="form-control" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
+				<div class="form-group"><label for="tc_url">权限URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
+				<div class="form-group"><label for="tc_order">权限排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
 				<div class="form-group"><label for="pid">父节点：</label>
-					<input type="text" class="form-control" value="${po.m.tc_p_name}" readonly="readonly"/>
-					<input type="hidden" class="form-control" id="pid" name="po.m.pid" value="${po.m.pid}" readonly="readonly"/>
+					<input type="text" class="form-control input-sm" value="${po.m.tc_p_name}" readonly="readonly"/>
+					<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid" value="${po.m.pid}" readonly="readonly"/>
 				</div>
 			</fieldset>
 		</div>

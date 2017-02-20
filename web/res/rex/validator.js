@@ -33,7 +33,6 @@ $rex.validator = {
 			idno:function(v){
 			},
 			url:function(v){
-				
 			}
 		},
 		/**
@@ -42,8 +41,8 @@ $rex.validator = {
 		 */
 		msgs:{
 			"required":"必填",
-			"minLength":"字符串长度不足",
-			"maxLength":"字符串长度过大",
+			"minLength":"字符串长度不足，最小{0}个字符",
+			"maxLength":"字符串长度过大，最大{0}个字符",
 			"number":"输入类型必须为数字",
 			"integer":"输入类型必须为整数",
 			"email":"email邮箱格式不合法",
@@ -59,6 +58,7 @@ $rex.validator = {
 		$e.parent().addClass("has-error");
 		var msg = $rex.validator.rules.msgs[ruleName];
 		if(typeof($e.attr("validate-msg"))!="undefined") msg = $e.attr("validate-msg");
+		msg = msg.replace("{0}", $e.attr("validate-rule-"+ruleName));
 		if($e.next(".control-label").length>0){
 			$e.next(".control-label").text(msg);
 		}
@@ -84,6 +84,7 @@ $rex.validator = {
 		var a = [];
 		//遍历验证每个被标记为“validate”的表单元素
 		$("[validate]").each(function(i){
+			// 验证-必填
 			if(typeof($(this).attr("validate-rule-required"))!="undefined"){
 				var ruleName = "required";
 				var inputValue = $(this).val();
@@ -96,7 +97,8 @@ $rex.validator = {
 					a[i] = true;
 				}
 			}
-			if(typeof($(this).attr("validate-rule-inputType"))!="undefined"){
+			// 验证-输入类型
+			if(typeof($(this).attr("validate-rule-inputType"))!="undefined" && $(this).val().length>0){
 				var ruleName = $(this).attr("validate-rule-inputType");
 				var inputValue = $(this).val();
 				if(!$rex.validator.rules.fn[ruleName](inputValue)){
@@ -108,11 +110,12 @@ $rex.validator = {
 					a[i] = true;
 				}
 			}
-			if(typeof($(this).attr("validate-rule-minLength"))!="undefined"){
+			// 验证-最小长度
+			if(typeof($(this).attr("validate-rule-minLength"))!="undefined" && $(this).val().length>0){
 				var ruleName = "minLength";
 				var inputValue = $(this).val();
-				var referValue = $(this).attr("validate-rule-minLength");
-				if(!$rex.validator.rules.fn[ruleName](inputValue, referValue)){
+				var attrValue = $(this).attr("validate-rule-minLength");
+				if(!$rex.validator.rules.fn[ruleName](inputValue, attrValue)){
 					$rex.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;
@@ -121,11 +124,12 @@ $rex.validator = {
 					a[i] = true;
 				}
 			}
-			if(typeof($(this).attr("validate-rule-maxLength"))!="undefined"){
+			// 验证-最大长度
+			if(typeof($(this).attr("validate-rule-maxLength"))!="undefined" && $(this).val().length>0){
 				var ruleName = "maxLength";
 				var inputValue = $(this).val();
-				var referValue = $(this).attr("validate-rule-maxLength");
-				if(!$rex.validator.rules.fn[ruleName](inputValue, referValue)){
+				var attrValue = $(this).attr("validate-rule-maxLength");
+				if(!$rex.validator.rules.fn[ruleName](inputValue, attrValue)){
 					$rex.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;

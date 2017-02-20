@@ -70,7 +70,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
-					 <label for="f_tc_name">角色名称：</label><input type="text" class="form-control" id="f_tc_name"/>
+					 <label for="f_tc_name">角色名称：</label><input type="text" class="form-control input-sm" id="f_tc_name"/>
 				</div>
 			</div>
 			<div class="modal-footer">

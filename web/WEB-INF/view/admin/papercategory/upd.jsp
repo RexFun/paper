@@ -36,8 +36,8 @@ $(function(){
 <!-- form
 ======================================================================================================= -->
 <form class="dataForm" id="dataForm" role="form" action="upd2.action" method="post">
-	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control" id="name" name="po.m.name" value="${po.m.name}"/></div>
-	<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control" id="sort" name="po.m.sort" value="${po.m.sort}"/></div>
+	<div class="form-group"><label for="name">类别名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" value="${po.m.name}" validate validate-rule-required/></div>
+	<div class="form-group"><label for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" value="${po.m.sort}" validate validate-rule-inputType="integer"/></div>
 	<input type="hidden" name="po.m.id" value="${po.m.id}">
 </form>
 </body>

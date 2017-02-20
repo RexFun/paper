@@ -108,7 +108,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 				<!-- queryForm -->
 				<div class="form-group">
 					<label for="f_pid">类别名：</label>
-				 	<select class="form-control" id="f_pid">
+				 	<select class="form-control input-sm" id="f_pid">
 						<option value="">请选择</option>
 						<s:iterator var="c" value="result.data.catList">
 						<option value="${c.m.id}">${c.m.name}</option>
@@ -116,7 +116,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="f_name">模型名：</label><input type="text" class="form-control" id="f_name"/>
+					<label for="f_name">模型名：</label><input type="text" class="form-control input-sm" id="f_name"/>
 				</div>
 			</div>
 			<div class="modal-footer">

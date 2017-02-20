@@ -111,8 +111,8 @@ var setting =
 		<div class="col-md-6 column">
 			<fieldset>
 			<legend>基础信息</legend>
-				<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control" id="tc_code" name="po.m.tc_code" /></div>
-				<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control" id="tc_name" name="po.m.tc_name" /></div>
+				<div class="form-group"><label for="tc_code">角色代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" validate validate-rule-required /></div>
+				<div class="form-group"><label for="tc_name">角色名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" validate validate-rule-required /></div>
 				<input type="hidden" id="tc_sys_permit_ids" name="po.m.tc_sys_permit_ids" value="">
 			</fieldset>
 		</div>

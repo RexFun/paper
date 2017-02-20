@@ -4,8 +4,14 @@
 <%@ include file="/common/inc_js.jsp"%>
 <script type="text/javascript">
 $(function(){
-	$("#pwdForm").submit(function(event) {
-		event.preventDefault();
+	$('input').keypress(function (e) { //这里给function一个事件参数命名为e，叫event也行，随意的，e就是IE窗口发生的事件。
+	    var key = e.which; //e.which是按键的值
+	    if (key == 13) {
+	    	$("#save").click();
+	    }
+	});
+	$("#save").click(function(){
+		if(!$rex.validator.check()) return; 
 		var url = $("#pwdForm").attr('action');
 		$.post(
 			url, 
@@ -29,7 +35,7 @@ $(function(){
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container-fluid">
 <div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a></div>
-<button type="submit" class="btn btn-default navbar-btn dataFormSave" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+<button type="button" class="btn btn-default navbar-btn dataFormSave" id="save"><i class="glyphicon glyphicon-floppy-save"></i></button>
 </div>
 </nav>
 <!-- form -->
@@ -38,8 +44,8 @@ $(function(){
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<fieldset>
-				<div class="form-group"><label for="old_password">原密码：</label><input type="password" class="form-control" id="old_password" value=""/></div>
-				<div class="form-group"><label for="new_password">新密码：</label><input type="password" class="form-control" id="new_password" value=""/></div>
+				<div class="form-group"><label for="old_password">原密码：</label><input type="password" class="form-control input-sm" id="old_password" value="" validate validate-rule-required/></div>
+				<div class="form-group"><label for="new_password">新密码：</label><input type="password" class="form-control input-sm" id="new_password" value="" validate validate-rule-required/></div>
 				<input type="hidden" id="id" value="${po.m.id}"/>
 			</fieldset>
 		</div>

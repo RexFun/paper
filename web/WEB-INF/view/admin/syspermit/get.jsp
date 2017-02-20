@@ -146,11 +146,11 @@ function initTree() {
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
-					<label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control" id="f_tc_p_name"/>
-					<label for="f_tc_code">权限代号：</label><input type="text" class="form-control" id="f_tc_code"/>
-					<label for="f_tc_name">权限名称：</label><input type="text" class="form-control" id="f_tc_name"/>
+					<label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control input-sm" id="f_tc_p_name"/>
+					<label for="f_tc_code">权限代号：</label><input type="text" class="form-control input-sm" id="f_tc_code"/>
+					<label for="f_tc_name">权限名称：</label><input type="text" class="form-control input-sm" id="f_tc_name"/>
 					<label for="f_tc_type">权限类型：</label>
-					<select class="form-control" id="f_tc_type" name="po.m.tc_type">
+					<select class="form-control input-sm" id="f_tc_type" name="po.m.tc_type">
 						<option value="">全部</option>
 						<option value="0">默认</option>
 						<option value="1">按钮</option>

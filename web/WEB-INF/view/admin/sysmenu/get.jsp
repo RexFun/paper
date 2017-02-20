@@ -140,9 +140,9 @@ function initTree(){
 			<div class="modal-body">
 				<!-- queryForm -->
 				<div class="form-group">
-					 <label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control" id="f_tc_p_name"/>
-					 <label for="f_tc_name">菜单代号：</label><input type="text" class="form-control" id="f_tc_code"/>
-					 <label for="f_tc_name">菜单名称：</label><input type="text" class="form-control" id="f_tc_name"/>
+					 <label for="f_tc_p_name">父节点名称：</label><input type="text" class="form-control input-sm" id="f_tc_p_name"/>
+					 <label for="f_tc_name">菜单代号：</label><input type="text" class="form-control input-sm" id="f_tc_code"/>
+					 <label for="f_tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="f_tc_name"/>
 				</div>
 			</div>
 			<div class="modal-footer">

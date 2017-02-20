@@ -21,7 +21,7 @@ function resetIframeHeight(){
 	var headerH = $("header").outerHeight();
 	var footerH = $("footer").outerHeight();
 	var winH = $(this).outerHeight();
-	var ifmH = winH - headerH - footerH - 125;
+	var ifmH = winH - headerH - footerH - 75;
 	$("iframe").height(ifmH<minH?minH:ifmH);
 }
 $(function(){

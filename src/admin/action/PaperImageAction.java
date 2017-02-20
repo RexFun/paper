@@ -122,11 +122,10 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/get.jsp")})
 	public String get() 
 	{
+		setQueryParams(getReq().getParameterValueMap(false, true));
 		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		
 		page = service.getPage(5, m);
 		pageNav = new PageNav<PaperImage>(getReq(), page, "5,10,20");
-		
 		put("pid", getReq().getLong("pid"));
 		put("ppid", getReq().getLong("ppid"));
 		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));

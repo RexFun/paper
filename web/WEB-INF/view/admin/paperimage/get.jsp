@@ -4,11 +4,6 @@
 <%@ include file="/common/inc_js.jsp"%>
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
 <script type="text/javascript">
-$rex.form.callback = function(){
-	if($rex.result.type == 1){
-		location.href = "get.action?pid=${pid}&ppid=${ppid}";
-	}
-};
 /* 初始化按钮事件 */
 function initBtnEvent(){
 	$("#ckb_all").click(function(){
@@ -44,8 +39,8 @@ function initBtnEvent(){
 		    }  
 		});
 	});
-	$("#bar_btn_back").click(function(){
-		location.href = "../papermodel/get.action";
+	$("#back").click(function(){
+		location.href = "../papermodel/get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
 	});
 	$("input[name='row_btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();
@@ -63,19 +58,22 @@ $(function(){
 </script>
 </head>
 <body class="body-content">
-<!-- title
+<!-- toolbar1
 ======================================================================================================= -->
-<ul class="breadcrumb">
-	<li><a href="../papermodel/get.action">模型管理</a></li>
-	<li class="active">图片管理 - ${modelName}</li>
-</ul>
-<!-- toolbar
+<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
+	<div class="navbar-header navbar-header-extend">
+		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i> 图片库 - ${modelName}</a>
+		<div class="navbar-header-btn-right">
+			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+		</div>
+	</div>
+</nav>
+<!-- toolbar2
 ======================================================================================================= -->
-<div id="toolbar">
+<div id="toolbar" class="dataForm">
 <button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add">新增</button>
 <button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del">删除</button>
 <button type="button" class="btn btn-default" id="bar_btn_updSortBatch" pbtnId="pbtn_updSortBath">修改排序号</button>
-<button type="button" class="btn btn-default" id="bar_btn_back" >返回</button>
 </div>
 <!-- data list
 ======================================================================================================= -->

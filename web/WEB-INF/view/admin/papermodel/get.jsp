@@ -34,8 +34,8 @@ $rex.view.get.config.tableColumns =
 [
     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true, visible:false},
-    {title:'类别名', field:'m.catname', align:'center', valign:'middle', sortable:true},
     {title:'模型名', field:'m.name', align:'center', valign:'middle', sortable:true},
+    {title:'分类名', field:'m.catname', align:'center', valign:'middle', sortable:true},
     {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true}
 ];
 //配置行菜单

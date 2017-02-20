@@ -71,11 +71,13 @@ var setting =
 <body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container-fluid">
-<div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a></div>
-<button type="button" class="btn btn-default navbar-btn back" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
+	<div class="navbar-header navbar-header-extend">
+		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a>
+		<div class="navbar-header-btn-right">
+			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+		</div>
+	</div>
 </nav>
 <!-- form
 ======================================================================================================= -->

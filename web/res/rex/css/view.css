@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 /* 所有iframe内容去除横向滚动条 */
 html {overflow-x:hidden;}
-.body-content{padding-left:10px;padding-right:10px;}
-.dataForm {margin-top:60px;}
-.dataFormSave {float:right;}
-.back {float:right;margin-left:5px;}
+.body-content {padding-left:10px;padding-right:10px;}
+.navbar-fixed-top-extend {margin:10px 10px;border-radius:4px;border: 1px solid transparent;}
+.navbar-header-extend {width:100%;}
+.navbar-header-btn-right {float:right;padding-right:5px}
+.dataForm {margin-top:70px;}

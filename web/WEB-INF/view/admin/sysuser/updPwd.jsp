@@ -32,11 +32,13 @@ $(function(){
 <body class="body-content">
 <!-- toolbar
 ======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container-fluid">
-<div class="navbar-header"><a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a></div>
-<button type="button" class="btn btn-default navbar-btn dataFormSave" id="save"><i class="glyphicon glyphicon-floppy-save"></i></button>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
+	<div class="navbar-header navbar-header-extend">
+		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a>
+		<div class="navbar-header-btn-right">
+			<button type="submit" class="btn btn-default navbar-btn" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+		</div>
+	</div>
 </nav>
 <!-- form -->
 <form class="dataForm" id="pwdForm" role="form" action="updPwd2.action" method="post">

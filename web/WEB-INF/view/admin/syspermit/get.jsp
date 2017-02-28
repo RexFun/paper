@@ -122,17 +122,17 @@ function initTree() {
 </div>
 <!-- data list
 ======================================================================================================= -->
-<div class="wrapper">
-	<div class="row clearfix">
-		<div class="col-md-10 column">
-			<table id="tb_list"></table>
-		</div>
-		<div class="col-md-2 column">
-			<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-			<ul id="permitTree" class="ztree" style="overflow:auto"></ul>
-		</div>
-	</div>
-</div>
+<table>
+<tr>
+<td valign="top">
+	<table id="tb_list"></table>
+</td>
+<td valign="top" width="20%" style="padding:10px">
+	<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+	<ul id="permitTree" class="ztree" style="overflow:auto;padding-left:0px"></ul>
+</td>
+</tr>
+</table>
 <!-- query form modal
 ======================================================================================================= -->
 <form id="form_query">

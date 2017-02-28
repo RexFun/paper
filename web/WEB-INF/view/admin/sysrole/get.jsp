@@ -50,13 +50,7 @@ $rex.view.get.callback.onLoadSuccess = function(){
 </div>
 <!-- data list
 ======================================================================================================= -->
-<div class="wrapper">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<table id="tb_list"></table>
-		</div>
-	</div>
-</div>
+<table id="tb_list"></table>
 <!-- query form modal
 ======================================================================================================= -->
 <form id="form_query">

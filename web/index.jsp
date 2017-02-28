@@ -39,7 +39,7 @@ $(function(){
 		$tab.add(_menuId,_url,_title);
 		resetIframeHeight();
 	});
-
+	// 导航菜单查询
 	$("#navSearchForm").submit(function(event) {
 		event.preventDefault();
 		var url = $("#navSearchForm").attr('action');
@@ -147,7 +147,7 @@ $(function(){
 				<ul>
 					<li><a href="#tabs-0">首页</a></li>
 				</ul>
-				<div id="tabs-0">
+				<div id="tabs-0" class="scroll-wrapper">
 					<iframe src="${ctx}/home.jsp" width="100%" frameborder="0" scrolling="auto"></iframe>
 				</div>
        		</div>

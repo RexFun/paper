@@ -7,23 +7,7 @@ var $nav={
 		var navMenuTreeHtml = new treeMenu(json).init();
 		$(".sidebar-menu").remove();
 		$(".sidebar-form").after(navMenuTreeHtml);
-	}//,
-	// 菜单单击事件
-//	onItemClick : function(callback){
-//	 	$(".sidebar li a").click(function(){
-//	 		$(this).parent("li").siblings(".treeview").children(".treeview-menu").removeClass("menu-open").css({"display":"none"});
-//			$(this).parent("li").siblings().removeClass("active");
-//			$(this).parent("li").addClass("active");
-//			if(typeof($(this).parent("li").attr("url"))!="undefined"){
-//				if (typeof callback === "function"){
-//					var menuId = $(this).parent("li").attr("menuId");
-//					var url = $(this).parent("li").attr("url");
-//					var title = $(this).children("span").html();
-//		            callback(menuId,url,title); 
-//		        }
-//			}
-//		});
-//	}
+	}
 };
 /**
  * treeMenu 用于生成HTML菜单元素
@@ -48,14 +32,6 @@ treeMenu.prototype={
         }  
         return this.getDom(k,this.groups[k]);
     },
-   	/*
-     * 初始化(旧版)
-	 * pid : json对象中的pid值，默认传0
-	 */
-//    init:function(pid){
-//    	this.group();
-//      return this.getDom(pid,this.groups[pid]);
-//    },
     /*
      * 按pid为key分类存放菜单数组，如：Object {0: Array[3], 3: Array[1]}
      */

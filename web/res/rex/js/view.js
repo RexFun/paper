@@ -19,10 +19,14 @@ $rex.view.fn.getUrlParams = function(queryParams){
 $rex.view.fn.selectSidebarMenu = function(menuId){
 	$rex.view.menuId = menuId;
 	$(".sidebar-menu li").each(function(){
+		$(this).removeClass("active");
 		if($(this).attr("menuId")==menuId){
+			//
 	 		$(this).siblings(".treeview").children(".treeview-menu").removeClass("menu-open").css({"display":"none"});
-			$(this).siblings().removeClass("active");
+			//
 			$(this).addClass("active");
+			$(this).parents(".treeview").addClass("active");
+			$(this).parents(".treeview-menu").addClass("menu-open").css({"display":""});
 		}
 	});
 };

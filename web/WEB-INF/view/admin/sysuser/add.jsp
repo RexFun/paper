@@ -1,10 +1,49 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/inc_ctx.jsp"%>
-<%@ include file="/common/inc_css.jsp"%>
-<%@ include file="/common/inc_js.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.add.js"></script>
+<%@ include file="/common/inc_header.jsp"%>
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title"><i class="glyphicon glyphicon-plus"></i></h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+							<fieldset>
+							<legend>基础信息</legend>
+								<div class="form-group"><label class="control-label" for="tc_code">用户代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="" validate validate-rule-required/></div>
+								<div class="form-group"><label class="control-label" for="tc_name">用户名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="" validate validate-rule-required/></div>
+								<div class="form-group"><label class="control-label" for="tc_email">用户邮箱：</label><input type="text" class="form-control input-sm" id="tc_email" name="po.m.tc_email" value="" validate validate-rule-inputType="email"/></div>
+								<div class="form-group"><label class="control-label" for="tc_password">用户密码：</label><input type="text" class="form-control input-sm" id="tc_password" name="po.m.tc_password" value="123456" validate validate-rule-required/></div>
+								<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="">
+							</fieldset>
+						</div>
+						<div class="col-md-6 column">
+							<fieldset>
+							<legend>角色</legend>
+								<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+								<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
+								<ul id="roleTree" class="ztree" style="overflow:auto"></ul>
+							</fieldset>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<button type="submit" class="btn btn-block btn-success btn-flat pull-right" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+	</div>
+</div>
+<%@ include file="/common/inc_footer.jsp"%>
+<!-- ======================================================================================================= -->
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.add.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 保存后回调函数 */
@@ -18,6 +57,7 @@ $rex.form.callback = function(){
 /* 全局函数 */
 /**********************************************************/
 $(function(){
+	$rex.view.fn.selectSidebarMenu("${param.menuId}");
 	// 返回列表页
 	$("#back").click(function(){
 		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
@@ -92,44 +132,3 @@ var setting =
 	}
 };
 </script>
-</head>
-<body class="body-content">
-<!-- toolbar
-======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
-	<div class="navbar-header navbar-header-extend">
-		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-plus"></i></a>
-		<div class="navbar-header-btn-right">
-			<button type="submit" class="btn btn-default navbar-btn" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-		</div>
-	</div>
-</nav>
-<!-- form
-======================================================================================================= -->
-<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
-<div class="wrapper">
-	<div class="row clearfix">
-		<div class="col-md-6 column">
-			<fieldset>
-			<legend>基础信息</legend>
-				<div class="form-group"><label class="control-label" for="tc_code">用户代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="" validate validate-rule-required/></div>
-				<div class="form-group"><label class="control-label" for="tc_name">用户名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="" validate validate-rule-required/></div>
-				<div class="form-group"><label class="control-label" for="tc_email">用户邮箱：</label><input type="text" class="form-control input-sm" id="tc_email" name="po.m.tc_email" value="" validate validate-rule-inputType="email"/></div>
-				<div class="form-group"><label class="control-label" for="tc_password">用户密码：</label><input type="text" class="form-control input-sm" id="tc_password" name="po.m.tc_password" value="123456" validate validate-rule-required/></div>
-				<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="">
-			</fieldset>
-		</div>
-		<div class="col-md-6 column">
-			<fieldset>
-			<legend>角色</legend>
-				<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-				<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
-				<ul id="roleTree" class="ztree" style="height:700px; overflow:auto"></ul>
-			</fieldset>
-		</div>
-	</div>
-</div>
-</form>
-</body>
-</html>

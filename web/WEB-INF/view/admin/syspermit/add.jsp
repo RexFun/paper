@@ -1,10 +1,47 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/inc_ctx.jsp"%>
-<%@ include file="/common/inc_css.jsp"%>
-<%@ include file="/common/inc_js.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.add.js"></script>
+<%@ include file="/common/inc_header.jsp"%>
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title"><i class="glyphicon glyphicon-plus"></i></h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
+					<div class="form-group"><label class="control-label" for="tc_code">权限代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" validate validate-rule-required /></div>
+					<div class="form-group"><label class="control-label" for="tc_name">权限名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" validate validate-rule-required /></div>
+					<div class="form-group">
+						<label for="tc_type">权限类型：</label>
+						<select class="form-control input-sm" id="tc_type" name="po.m.tc_type">
+							<option value="0">默认</option>
+							<option value="1">按钮</option>
+						</select>
+					</div>
+					<div class="form-group"><label class="control-label" for="tc_url">权限URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" /></div>
+					<div class="form-group"><label class="control-label" for="tc_order">权限排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" validate validate-rule-inputType="integer" /></div>
+					<div class="form-group"><label class="control-label" for="pid">父节点：</label>
+						<input type="text" class="form-control input-sm" id="sel_permit"/>
+						<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid"/>
+					</div>
+				</form>
+				<!-- modal -->
+				<div id="modal_sel"></div>
+			</div>
+		</div>
+	</div>
+	<div class="box-footer">
+		<button type="submit" class="btn btn-block btn-success btn-flat pull-right" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
+	</div>
+</div>
+<%@ include file="/common/inc_footer.jsp"%>
+<!-- ======================================================================================================= -->
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.add.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 保存后回调函数 */
@@ -18,6 +55,7 @@ $rex.form.callback = function(){
 /* 全局函数 */
 /**********************************************************/
 $(function(){
+	$rex.view.fn.selectSidebarMenu("${param.menuId}");
 	// 返回列表页
 	$("#back").click(function(){
 		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
@@ -48,40 +86,3 @@ var permitSetting = {
 	}
 };
 </script>
-</head>
-<body class="body-content">
-<!-- toolbar
-======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
-	<div class="navbar-header navbar-header-extend">
-		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-plus"></i></a>
-		<div class="navbar-header-btn-right">
-			<button type="submit" class="btn btn-default navbar-btn" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>
-			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-		</div>
-	</div>
-</nav>
-<!-- form
-======================================================================================================= -->
-<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
-	<div class="form-group"><label class="control-label" for="tc_code">权限代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" validate validate-rule-required /></div>
-	<div class="form-group"><label class="control-label" for="tc_name">权限名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" validate validate-rule-required /></div>
-	<div class="form-group">
-		<label for="tc_type">权限类型：</label>
-		<select class="form-control input-sm" id="tc_type" name="po.m.tc_type">
-			<option value="0">默认</option>
-			<option value="1">按钮</option>
-		</select>
-	</div>
-	<div class="form-group"><label class="control-label" for="tc_url">权限URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" /></div>
-	<div class="form-group"><label class="control-label" for="tc_order">权限排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" validate validate-rule-inputType="integer" /></div>
-	<div class="form-group"><label class="control-label" for="pid">父节点：</label>
-		<input type="text" class="form-control input-sm" id="sel_permit"/>
-		<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid"/>
-	</div>
-</form>
-<!-- modal -->
-<div id="modal_sel"></div>
-</body>
-</html>
-

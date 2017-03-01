@@ -1,46 +1,9 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/inc_ctx.jsp"%>
-<%@ include file="/common/inc_css.jsp"%>
-<%@ include file="/common/inc_js.jsp"%>
-<%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
-<script type="text/javascript">
-/**********************************************************/
-/* 全局函数 */
-/**********************************************************/
-$(function() {
-	$rex.view.get.init.toolbar();
-	$rex.view.get.init.modalFormQuery();
-	$rex.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
-	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
-});
-/**********************************************************/
-/* 初始化配置 */
-/**********************************************************/
-$rex.view.get.config.setPreFormParams = function(){
-	$("#f_name").val(typeof("${queryParams.f_name}")=="undefined"?"":"${queryParams.f_name}");
-};
-$rex.view.get.config.formParams = function(p){
-	p.name = $("#f_name").val();
-    return p;
-};
-$rex.view.get.config.urlParams = function(){
-	return {f_name : $("#f_name").val()};
-};
-$rex.view.get.config.tableColumns = 
-[
-    {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
-    {title:'类别名', field:'m.name', align:'center', valign:'middle', sortable:true},
-    {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true}
-];
-$rex.view.get.callback.delRows = function(){
-};
-$rex.view.get.callback.onLoadSuccess = function(){
-	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
-};
-</script>
-</head>
-<body class="body-content">
+<%@ include file="/common/inc_header.jsp"%>
+<div class="box box-default">
+<div class="box-body">
+<div class="row">
+<div class="col-md-12">
 <!-- toolbar
 ======================================================================================================= -->
 <div id="toolbar">
@@ -75,5 +38,47 @@ $rex.view.get.callback.onLoadSuccess = function(){
 	</div><!-- /.modal -->
 </div>
 </form>
-</body>
-</html>
+</div>
+</div>
+</div>
+</div>
+<%@ include file="/common/inc_footer.jsp"%>
+<!-- ======================================================================================================= -->
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
+<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
+<script type="text/javascript">
+/**********************************************************/
+/* 全局函数 */
+/**********************************************************/
+$(function() {
+	$rex.view.fn.selectSidebarMenu("${param.menuId}");
+	$rex.view.get.init.toolbar();
+	$rex.view.get.init.modalFormQuery();
+	$rex.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+});
+/**********************************************************/
+/* 初始化配置 */
+/**********************************************************/
+$rex.view.get.config.setPreFormParams = function(){
+	$("#f_name").val(typeof("${queryParams.f_name}")=="undefined"?"":"${queryParams.f_name}");
+};
+$rex.view.get.config.formParams = function(p){
+	p.name = $("#f_name").val();
+    return p;
+};
+$rex.view.get.config.urlParams = function(){
+	return {f_name : $("#f_name").val()};
+};
+$rex.view.get.config.tableColumns = 
+[
+    {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
+    {title:'类别名', field:'m.name', align:'center', valign:'middle', sortable:true},
+    {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true}
+];
+$rex.view.get.callback.delRows = function(){
+};
+$rex.view.get.callback.onLoadSuccess = function(){
+	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
+};
+</script>

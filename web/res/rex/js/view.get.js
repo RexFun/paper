@@ -147,7 +147,8 @@ $rex.view.get.fn.getColumns = function(){
 // 获取url表单参数字符串
 $rex.view.get.fn.getUrlParams = function(){
 	var params = $rex.view.get.config.urlParams();
-	params = $.extend(params, {f_page     : $rex.view.get.config.curPageNum,
+	params = $.extend(params, {menuId	  : $rex.view.menuId,
+							   f_page     : $rex.view.get.config.curPageNum,
 							   f_pageSize : $rex.view.get.config.curPageSize});
 	var paramsStr = "";
 	$.map(params, function(value, key){

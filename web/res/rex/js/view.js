@@ -1,4 +1,5 @@
 $rex.view = {};
+$rex.view.menuId = 0;
 $rex.view.fn = {};
 //获取url表单参数字符串
 $rex.view.fn.getUrlParams = function(queryParams){
@@ -13,4 +14,15 @@ $rex.view.fn.getUrlParams = function(queryParams){
 	}
 	paramsStr = paramsStr.substr(0,paramsStr.length-1);//去除最后一个&号
 	return paramsStr;
+};
+// 选中侧栏菜单
+$rex.view.fn.selectSidebarMenu = function(menuId){
+	$rex.view.menuId = menuId;
+	$(".sidebar-menu li").each(function(){
+		if($(this).attr("menuId")==menuId){
+	 		$(this).siblings(".treeview").children(".treeview-menu").removeClass("menu-open").css({"display":"none"});
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+		}
+	});
 };

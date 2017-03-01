@@ -117,7 +117,7 @@ function initTree(){
 <td valign="top">
 	<table id="tb_list"></table>
 </td>
-<td valign="top" width="20%" style="padding:10px">
+<td valign="top" width="20%" style="padding:10px;">
 	<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
 	<ul id="menuTree" class="ztree" style="overflow:auto;padding-left:0px"></ul>
 </td>

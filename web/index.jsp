@@ -24,12 +24,22 @@ function resetIframeHeight(){
 	var ifmH = winH - headerH - footerH - 63;
 	$("iframe").height(ifmH<minH?minH:ifmH);
 }
+/*重置全局Iframe宽度*/
+/* function resetIframeWidth(){
+	var minW = 320;
+	var sidebarW = $(".main-sidebar").outerWidth();
+	var winW = $(this).outerWidth();
+	var ifmW = winW - sidebarW - 63;
+	$("iframe").width(ifmW<minW?minW:ifmW);
+} */
 $(function(){
 	// 初始化重置全局Iframe高度
 	resetIframeHeight();
+	//resetIframeWidth();
 	// 随浏览器窗口高度改变全局Iframe高度
 	$(window).resize(function() {
 		resetIframeHeight();
+		//resetIframeWidth();
 	});
 	// tab
 	$tab.init();
@@ -38,6 +48,7 @@ $(function(){
 	$nav.onItemClick(function(_menuId,_url,_title){
 		$tab.add(_menuId,_url,_title);
 		resetIframeHeight();
+		//resetIframeWidth();
 	});
 	// 导航菜单查询
 	$("#navSearchForm").submit(function(event) {
@@ -52,6 +63,7 @@ $(function(){
 					$nav.onItemClick(function(_menuId,_url,_title){
 						$tab.add(_menuId,_url,_title);
 						resetIframeHeight();
+						//resetIframeWidth();
 					});
 				}else{
 					alert(data.msg);
@@ -67,6 +79,7 @@ $(function(){
 		if(menuId=="loginout") return;// 登出不需创建tab页签
 		$tab.add(menuId,url,title);
 		resetIframeHeight();
+		//resetIframeWidth();
 	});
 });
 </script>
@@ -155,7 +168,7 @@ $(function(){
 	</div>
 	<!-- 底部栏 -->
 	<footer class="main-footer">
-		<div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+		<div class="pull-right hidden-xs"><b>Version</b> 2.0.0</div>
 		<strong>Copyright &copy; 2016-2017 <a href="https://github.com/RexFun" target="blank">RexFun GitHub</a>.</strong> All rights reserved.
 	</footer>
 	<!-- 右侧栏 -->

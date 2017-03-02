@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/inc_header.jsp"%>
-<div class="box box-default">
+<div class="box box-widget">
 	<div class="box-header with-border">
 		<h3 class="box-title"><i class="glyphicon glyphicon-info-sign"></i></h3>
 		<div class="box-tools pull-right">

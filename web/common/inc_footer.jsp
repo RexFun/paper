@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-</section>
+		</section>
 	</div>
 	<!-- 底部栏 -->
 	<footer class="main-footer">

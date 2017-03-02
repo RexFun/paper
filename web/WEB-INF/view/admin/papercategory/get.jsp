@@ -1,19 +1,25 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/inc_header.jsp"%>
-<div class="box box-default">
-<div class="box-body">
 <div class="row">
 <div class="col-md-12">
-<!-- toolbar
-======================================================================================================= -->
-<div id="toolbar">
-<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
-<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
-<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+<div class="box box-widget">
+<div class="box-header with-border"><i class="glyphicon glyphicon-th-list"></i></div>
+<div class="box-body">
+	<!-- toolbar
+	======================================================================================================= -->
+	<div id="toolbar">
+	<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
+	<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
+	<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+	</div>
+	<!-- data list
+	======================================================================================================= -->
+	<table id="tb_list"></table>
 </div>
-<!-- data list
-======================================================================================================= -->
-<table id="tb_list"></table>
+</div>
+</div>
+</div>
+</div>
 <!-- query form modal
 ======================================================================================================= -->
 <form id="form_query">
@@ -38,10 +44,6 @@
 	</div><!-- /.modal -->
 </div>
 </form>
-</div>
-</div>
-</div>
-</div>
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->
 <%@ include file="/common/inc_js_btn_permit.jsp"%>

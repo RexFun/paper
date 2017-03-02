@@ -15,7 +15,7 @@
 var $ctx="${ctx}";
 function getGlobalHeight(type) {
 	if (type=='table')
-	   	return $(window).height() - 265;
+	   	return $(window).height() - 330;
 	else if (type=='tree')
 		return $(window).height() - 35;
 }

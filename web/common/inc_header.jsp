@@ -10,7 +10,7 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/AdminLTE.css">
+<link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/skins/_all-skins.min.css">
 <script type="text/javascript" src="${ctx}/index.nav.js"></script>
 <script type="text/javascript">

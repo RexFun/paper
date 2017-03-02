@@ -148,6 +148,7 @@ $rex.view.get.fn.getColumns = function(){
 $rex.view.get.fn.getUrlParams = function(){
 	var params = $rex.view.get.config.urlParams();
 	params = $.extend(params, {menuId	  : $rex.view.menuId,
+							   menuName	  : $rex.view.menuName,
 							   f_page     : $rex.view.get.config.curPageNum,
 							   f_pageSize : $rex.view.get.config.curPageSize});
 	var paramsStr = "";

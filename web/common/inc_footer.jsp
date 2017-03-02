@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-		</section>
-	</div>
 	<!-- 底部栏 -->
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs"><b>Version</b> 2.0.0</div>

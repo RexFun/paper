@@ -14,10 +14,14 @@
 <script type="text/javascript">
 var $ctx="${ctx}";
 function getGlobalHeight(type) {
-	if (type=='table')
-	   	return $(window).height() - 373;
-	else if (type=='tree')
+	if (type=='table') {
+		var minH = 300;
+		var newH = $(window).height() - 373;
+	   	return newH<minH?minH:newH;
+	}
+	else if (type=='tree') {
 		return $(window).height() - 35;
+	}
 }
 function ajaxOnLoadError(status, data) {
     if(status == '0') {  

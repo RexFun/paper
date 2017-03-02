@@ -53,7 +53,7 @@ treeMenu.prototype={
     getDom:function(k,a){
         if(!a){return ""}
         var html = "\n<ul class=\"sidebar-menu\">\n";
-        html += "<li class=\"active\"><a href=\""+$ctx+"/index.jsp?menuId=0&menuName=首页\"><i class=\"fa fa-home\"></i><span>首页</span></a>";
+        html += "<li class=\"active\" menuId=\"0\"><a href=\""+$ctx+"/index.jsp?menuId=0&menuName=首页\"><i class=\"fa fa-home\"></i><span>首页</span></a>";
         if(k>0) html = "\n<ul class=\"treeview-menu\" style=\"display:none\">\n";
         for(var i=0;i<a.length;i++){
         	if(this.groups[a[i].id] && this.groups[a[i].id].length > 0){ // 有子节点

@@ -8,32 +8,28 @@
 		</div>
 	</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-				<form class="dataForm" id="dataForm" role="form" action="upd2.action" method="post">
-					<div class="row clearfix">
-						<div class="col-md-6 column">
-							<fieldset>
-							<legend>基础信息</legend>
-								<div class="form-group"><label class="control-label" for="tc_code">用户代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" validate validate-rule-required/></div>
-								<div class="form-group"><label class="control-label" for="tc_name">用户名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" validate validate-rule-required/></div>
-								<div class="form-group"><label class="control-label" for="tc_email">用户邮箱：</label><input type="text" class="form-control input-sm" id="tc_email" name="po.m.tc_email" value="${po.m.tc_email}" validate validate-rule-inputType="email"/></div>
-								<input type="hidden" name="po.m.id" value="${po.m.id}">
-								<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="${po.m.tc_sys_role_ids}">
-							</fieldset>
-						</div>
-						<div class="col-md-6 column">
-							<fieldset>
-							<legend>角色</legend>
-								<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-								<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
-								<ul id="roleTree" class="ztree" style="overflow:auto"></ul>
-							</fieldset>
-						</div>
-					</div>
-				</form>
+		<form class="dataForm" id="dataForm" role="form" action="upd2.action" method="post">
+			<div class="row">
+				<div class="col-md-6 column">
+					<fieldset>
+					<legend>基础信息</legend>
+						<div class="form-group"><label class="control-label" for="tc_code">用户代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" validate validate-rule-required/></div>
+						<div class="form-group"><label class="control-label" for="tc_name">用户名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" validate validate-rule-required/></div>
+						<div class="form-group"><label class="control-label" for="tc_email">用户邮箱：</label><input type="text" class="form-control input-sm" id="tc_email" name="po.m.tc_email" value="${po.m.tc_email}" validate validate-rule-inputType="email"/></div>
+						<input type="hidden" name="po.m.id" value="${po.m.id}">
+						<input type="hidden" id="tc_sys_role_ids" name="po.m.tc_sys_role_ids" value="${po.m.tc_sys_role_ids}">
+					</fieldset>
+				</div>
+				<div class="col-md-6 column">
+					<fieldset>
+					<legend>角色</legend>
+						<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+						<input type="checkbox" id="chkAll"/><label for="chkAll">&nbsp;全选</label>
+						<ul id="roleTree" class="ztree" style="overflow:auto"></ul>
+					</fieldset>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	<div class="box-footer">
 		<button type="submit" class="btn btn-block btn-success btn-flat pull-right" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>

@@ -8,23 +8,19 @@
 		</div>
 	</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-				<form class="dataForm" id="dataForm" action="add2.action" method="post">
-				<div class="form-group">
-					<label for="pid">所属分类：</label>
-				 	<select class="form-control input-sm" id="pid" name="po.m.pid" validate validate-rule-required>
-						<option value="">请选择</option>
-						<s:iterator var="c" value="result.data.catList">
-						<option value="${c.m.id}">${c.m.name}</option>
-						</s:iterator>
-					</select>
-				</div>
-				<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required/></div>
-				<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-inputType="integer"/></div>
-				</form>
+		<form class="dataForm" id="dataForm" action="add2.action" method="post">
+			<div class="form-group">
+				<label for="pid">所属分类：</label>
+			 	<select class="form-control input-sm" id="pid" name="po.m.pid" validate validate-rule-required>
+					<option value="">请选择</option>
+					<s:iterator var="c" value="result.data.catList">
+					<option value="${c.m.id}">${c.m.name}</option>
+					</s:iterator>
+				</select>
 			</div>
-		</div>
+			<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required/></div>
+			<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-inputType="integer"/></div>
+		</form>
 	</div>
 	<div class="box-footer">
 		<button type="submit" class="btn btn-block btn-success btn-flat pull-right" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>

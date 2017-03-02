@@ -33,14 +33,6 @@ $(function(){
 			}
 		);
 	});
-	//用户下拉菜单单击事件
-	$("#user-dropdown-menu li").click(function(){
-		var menuId = $(this).attr("menuId");
-		var url = $(this).attr("url");
-		var title = $(this).children("a").children("span").html();
-		if(menuId=="loginout") return;// 登出不需创建tab页签
-		// 跳转
-	});
 });
 </script>
 </head>
@@ -79,8 +71,8 @@ $(function(){
 								<ul class="dropdown-menu" style="height: 125px;">
 									<li>
 										<ul id="user-dropdown-menu" class="menu">
-											<li menuId="myinfo" url="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><a href="#"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
-											<li menuId="updpwd" url="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><a href="#"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
+											<li menuId="myinfo"><a href="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
+											<li menuId="updpwd"><a href="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
 											<li menuId="loginout"><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
 										</ul>
 									</li>
@@ -109,6 +101,7 @@ $(function(){
 				</div>
 			</form>
 			<!-- 树状导航菜单，后台数据动态生成 
+			...
 			-->
 		</section>
 	</aside>

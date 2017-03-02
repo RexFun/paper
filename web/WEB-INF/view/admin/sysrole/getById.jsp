@@ -8,35 +8,32 @@
 		</div>
 	</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-				<form class="dataForm" id="dataForm" role="form">
-					<div class="row clearfix">
-						<div class="col-md-6 column">
-							<fieldset>
-							<legend>基础信息</legend>
-								<div class="form-group"><label class="control-label" for="id">角色ID：</label><input type="text" class="form-control input-sm" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
-								<div class="form-group"><label class="control-label" for="tc_code">角色代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
-								<div class="form-group"><label class="control-label" for="tc_name">角色名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
-							</fieldset>
-						</div>
-						<div class="col-md-6 column">
-							<fieldset>
-							<legend>权限</legend>
-								<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
-								<ul id="permitTree" class="ztree" style="overflow:auto"></ul>
-							</fieldset>
-						</div>
-					</div>
-				</form>
+		<form class="dataForm" id="dataForm" role="form">
+			<div class="row">
+				<div class="col-md-6 column">
+					<fieldset>
+					<legend>基础信息</legend>
+						<div class="form-group"><label class="control-label" for="id">角色ID：</label><input type="text" class="form-control input-sm" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
+						<div class="form-group"><label class="control-label" for="tc_code">角色代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
+						<div class="form-group"><label class="control-label" for="tc_name">角色名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
+					</fieldset>
+				</div>
+				<div class="col-md-6 column">
+					<fieldset>
+					<legend>权限</legend>
+						<input type="checkbox" id="expandAll"/><label for="expandAll">&nbsp;展开</label>
+						<ul id="permitTree" class="ztree" style="overflow:auto"></ul>
+					</fieldset>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	<div class="box-footer">
 	&nbsp;
 	</div>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
+<!-- ======================================================================================================= -->
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/js/view.getById.js"></script>

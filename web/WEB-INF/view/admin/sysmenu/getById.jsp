@@ -8,19 +8,15 @@
 		</div>
 	</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-				<form class="dataForm" id="dataForm" role="form">
-					<div class="form-group"><label class="control-label" for="id">菜单ID：</label><input type="text" class="form-control input-sm" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_sys_permit_name">绑定权限：</label><input type="text" class="form-control input-sm" id="tc_sys_permit_name" name="po.m.tc_sys_permit_name" value="${po.m.tc_sys_permit_name}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="tc_p_name">父节点：</label><input type="text" class="form-control input-sm" id="tc_p_name" name="po.m.tc_p_name" value="${po.m.tc_p_name}" readonly="readonly"/></div>
-				</form>
-			</div>
-		</div>
+		<form class="dataForm" id="dataForm" role="form">
+			<div class="form-group"><label class="control-label" for="id">菜单ID：</label><input type="text" class="form-control input-sm" id="id" name="po.m.id" value="${po.m.id}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" value="${po.m.tc_code}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" value="${po.m.tc_name}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" value="${po.m.tc_url}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" value="${po.m.tc_order}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_sys_permit_name">绑定权限：</label><input type="text" class="form-control input-sm" id="tc_sys_permit_name" name="po.m.tc_sys_permit_name" value="${po.m.tc_sys_permit_name}" readonly="readonly"/></div>
+			<div class="form-group"><label class="control-label" for="tc_p_name">父节点：</label><input type="text" class="form-control input-sm" id="tc_p_name" name="po.m.tc_p_name" value="${po.m.tc_p_name}" readonly="readonly"/></div>
+		</form>
 	</div>
 	<div class="box-footer">
 	&nbsp;

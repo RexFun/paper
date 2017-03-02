@@ -8,27 +8,23 @@
 		</div>
 	</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
-				<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
-					<div class="form-group"><label class="control-label" for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" validate validate-rule-required /></div>
-					<div class="form-group"><label class="control-label" for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" validate validate-rule-required /></div>
-					<div class="form-group"><label class="control-label" for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" validate validate-rule-required /></div>
-					<div class="form-group"><label class="control-label" for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" validate validate-rule-inputType="integer"/></div>
-					<div class="form-group"><label class="control-label" for="tc_sys_permit_id">绑定权限：</label>
-						<input type="text" class="form-control input-sm" id="sel_permit"/>
-						<input type="hidden" class="form-control input-sm" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" />
-					</div>
-					<div class="form-group"><label class="control-label" for="pid">父节点：</label>
-						<input type="text" class="form-control input-sm" id="sel_menu"/>
-						<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid"/>
-					</div>
-				</form>
-				<!-- modal -->
-				<div id="modal_sel1"></div>
-				<div id="modal_sel2"></div>
+		<form class="dataForm" id="dataForm" role="form" action="add2.action" method="post">
+			<div class="form-group"><label class="control-label" for="tc_code">菜单代号：</label><input type="text" class="form-control input-sm" id="tc_code" name="po.m.tc_code" validate validate-rule-required /></div>
+			<div class="form-group"><label class="control-label" for="tc_name">菜单名称：</label><input type="text" class="form-control input-sm" id="tc_name" name="po.m.tc_name" validate validate-rule-required /></div>
+			<div class="form-group"><label class="control-label" for="tc_url">菜单URL：</label><input type="text" class="form-control input-sm" id="tc_url" name="po.m.tc_url" validate validate-rule-required /></div>
+			<div class="form-group"><label class="control-label" for="tc_order">菜单排序号：</label><input type="text" class="form-control input-sm" id="tc_order" name="po.m.tc_order" validate validate-rule-inputType="integer"/></div>
+			<div class="form-group"><label class="control-label" for="tc_sys_permit_id">绑定权限：</label>
+				<input type="text" class="form-control input-sm" id="sel_permit"/>
+				<input type="hidden" class="form-control input-sm" id="tc_sys_permit_id" name="po.m.tc_sys_permit_id" />
 			</div>
-		</div>
+			<div class="form-group"><label class="control-label" for="pid">父节点：</label>
+				<input type="text" class="form-control input-sm" id="sel_menu"/>
+				<input type="hidden" class="form-control input-sm" id="pid" name="po.m.pid"/>
+			</div>
+		</form>
+		<!-- modal -->
+		<div id="modal_sel1"></div>
+		<div id="modal_sel2"></div>
 	</div>
 	<div class="box-footer">
 		<button type="submit" class="btn btn-block btn-success btn-flat pull-right" id="dataFormSave"><i class="glyphicon glyphicon-floppy-save"></i></button>

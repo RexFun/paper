@@ -5,7 +5,7 @@
 	<section class="content-header">
 		<h1>${param.menuName}</h1>
 		<ol class="breadcrumb">
-			<li><a href="${ctx}/index.jsp?menuId=0&menuName=首页"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li><a href="${ctx}/index.jsp"><i class="fa fa-dashboard"></i> 首页</a></li>
 			<li class="active">${param.menuName}</li>
 		</ol>
 	</section>

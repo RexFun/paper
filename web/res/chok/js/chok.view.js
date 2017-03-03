@@ -33,7 +33,7 @@ $chok.view.fn.selectSidebarMenu = function(menuId,menuName){
 		}
 	});
 	// set left title
-	$(".content-header h1").html(menuName);
+//	$(".content-header h1").html(menuName);
 	// set right title
-	$(".content-header ol li[class='active']").html(menuName);
+//	$(".content-header ol li[class='active']").html(menuName);
 };

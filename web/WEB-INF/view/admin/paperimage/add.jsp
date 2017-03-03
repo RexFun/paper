@@ -2,31 +2,32 @@
 <%@ include file="/common/inc_header.jsp"%>
 <!-- 主内容面板 -->
 <div class="content-wrapper">
-<section class="content-header">
-	<h1>&nbsp;</h1>
-	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active"></li>
-	</ol>
-</section>
-<section class="content">
-	<div class="box box-default">
-		<div class="box-header with-border">
-			<h3 class="box-title"><small><i class="glyphicon glyphicon-plus"></i></small></h3>
-			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+	<section class="content-header">
+		<h1>${param.menuName}<small>${modelName}</small></h1>
+		<ol class="breadcrumb">
+			<li><a href="${ctx}/index.jsp?menuId=0&menuName=首页"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li><a href="../papermodel/get.action?menuId=${param.menuId}&menuName=${param.menuName}">${param.menuName}</a></li>
+			<li class="active">${modelName}</li>
+		</ol>
+	</section>
+	<section class="content	>
+		<div class="box box-default">
+			<di	 class="box-header with-border">
+				<h3 class="box-title"><small><i class="glyphicon 	lyphicon-plus"></i></small></h3>
+				<	iv class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon gl	phicon-ar	ow-left"	</i></button>
+				</div>
 			</div>
+			<div class="box-body">
+				<form class="dataForm">
+					<input id="myFile" name="myFile" type="fil		 multiple class="file-loading">
+					<div id="kv-error-2" style="mar		n-top:10px;display:none"></div>
+					<div id="kv-success-2" class="alert alert-success fade in" style="mar	in-top:10p	;display	none"></div>
+				</form>
+			</div>
+			<div class="box-footer">&nbsp;</div>
 		</div>
-		<div class="box-body">
-			<form class="dataForm">
-				<input id="myFile" name="myFile" type="file" multiple class="file-loading">
-				<div id="kv-error-2" style="margin-top:10px;display:none"></div>
-				<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
-			</form>
-		</div>
-		<div class="box-footer">&nbsp;</div>
-	</div>
-</section>
+	</section>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->

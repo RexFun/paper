@@ -3,10 +3,10 @@
 <!-- 主内容面板 -->
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>&nbsp;</h1>
+		<h1>${param.menuName}</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"></li>
+			<li><a href="${ctx}/index.jsp?menuId=0&menuName=首页"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li class="active">${param.menuName}</li>
 		</ol>
 	</section>
 	<section class="content">

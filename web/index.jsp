@@ -2,14 +2,14 @@
 <%@ include file="/common/inc_header.jsp"%>
 <!-- 主内容面板 -->
 <div class="content-wrapper">
-<section class="content-header">
-<h1>&nbsp;</h1>
-<ol class="breadcrumb">
-	<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-</ol>
-</section>
-<section class="content">
-</section>
+	<section class="content-header">
+		<h1>${param.menuName}</h1>
+		<ol class="breadcrumb">
+			<li class="active"><i class="fa fa-dashboard"></i>${param.menuName}</li>
+		</ol>
+	</section>
+	<section class="content">
+	</section>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
 <script type="text/javascript">

@@ -3,10 +3,11 @@
 <!-- 主内容面板 -->
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>权限管理<small><i class="glyphicon glyphicon-edit"></i></small></h1>
+		<h1>${param.menuName}<small>修改</small></h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">权限管理</li>
+			<li><a href="${ctx}/index.jsp?menuId=0&menuName=首页"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li><a href="get.action?menuId=${param.menuId}&menuName=${param.menuName}">${param.menuName}</a></li>
+			<li class="active">修改</li>
 		</ol>
 	</section>
 	<section class="content">

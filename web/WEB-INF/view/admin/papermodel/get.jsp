@@ -2,36 +2,36 @@
 <%@ include file="/common/inc_header.jsp"%>
 <!-- 主内容面板 -->
 <div class="content-wrapper">
-<section class="content-header">
-	<h1>&nbsp;</h1>
-	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active"></li>
-	</ol>
-</section>
-<section class="content">
-	<div class="row">
-	<div class="col-md-12">
-	<div class="box box-default">
-	<div class="box-header with-border">
-		<h3 class="box-title"><small><i class="glyphicon glyphicon-th-list"></i></small></h3>
-	</div>
-	<div class="box-body">
-		<!-- toolbar
-		======================================================================================================= -->
-		<div id="toolbar">
-		<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
-		<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
-		<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+	<section class="content-header">
+		<h1>${param.menuName}</h1>
+		<ol class="breadcrumb">
+			<li><a href="${ctx}/index.jsp?menuId=0&menuName=首页"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li class="active">${param.menuName}</li>
+		</ol>
+	</section>
+	<section class="content">
+		<div class="row">
+		<div class="col-md-12">
+		<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title"><small><i class="glyphicon glyphicon-th-list"></i></small></h3>
 		</div>
-		<!-- data list
-		======================================================================================================= -->
-		<table id="tb_list"></table>
-	</div>
-	</div>
-	</div>
-	</div>
-</section>
+		<div class="box-body">
+			<!-- toolbar
+			======================================================================================================= -->
+			<div id="toolbar">
+			<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
+			<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
+			<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
+			</div>
+			<!-- data list
+			======================================================================================================= -->
+			<table id="tb_list"></table>
+		</div>
+		</div>
+		</div>
+		</div>
+	</section>
 </div>
 <!-- query form modal
 ======================================================================================================= -->

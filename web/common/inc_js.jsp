@@ -10,6 +10,7 @@
 <script type="text/javascript" src="${ctx}/res/rex/js/validator.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/js/form.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/js/view.js"></script>
+<script type="text/javascript" src="${ctx}/res/rex/js/nav.js"></script>
 <script type="text/javascript" src="${ctx}/res/rex/js/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";

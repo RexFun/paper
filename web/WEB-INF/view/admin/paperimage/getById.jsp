@@ -1,35 +1,37 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/inc_ctx.jsp"%>
-<%@ include file="/common/inc_css.jsp"%>
-<%@ include file="/common/inc_js.jsp"%>
+<%@ include file="/common/inc_header.jsp"%>
+<!-- 主内容面板 -->
+<div class="content-wrapper">
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active"></li>
+	</ol>
+</section>
+<section class="content">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title"><small><i class="glyphicon glyphicon-info-sign"></i></small></h3>
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+			</div>
+		</div>
+		<div class="box-body">
+			<form class="dataForm"><img src="${imagePath}${po.m.url}" alt="图片"/></form>
+		</div>
+		<div class="box-footer">&nbsp;</div>
+	</div>
+</section>
+</div>
+<%@ include file="/common/inc_footer.jsp"%>
 <script type="text/javascript" src="${ctx}/res/chok/js/chok.view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function(){
-	// 返回列表页
-	$("#back").click(function(){
-		location.href = "get.action?pid=${po.m.pid}&ppid=${ppid}";
-	});
+	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");// 标记当前菜单
+	$("#back").click(function(){history.back();});// 返回列表页
 });
 </script>
-</head>
-<body class="body-content">
-<!-- toolbar
-======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
-	<div class="navbar-header navbar-header-extend">
-		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-info-sign"></i></a>
-		<div class="navbar-header-btn-right">
-			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-		</div>
-	</div>
-</nav>
-<!-- form
-======================================================================================================= -->
-<form class="dataForm">
-<img src="${imagePath}${po.m.url}" alt="图片"/>
-</form>
-</body>
-</html>

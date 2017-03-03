@@ -11,18 +11,20 @@ $chok.view.get.config.urlParams = function(){return {};};//配置url表单参数
 $chok.view.get.config.tableColumns = [];//配置表格列
 //配置行菜单
 $chok.view.get.config.operateFormatter = function(value, row, index){
+	var url_upd1 = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
+	var url_getById = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
     return ['<div class="btn-group">',
 	    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
 	    	'<span class="caret"></span>',
 	    	'</button>',
 	    	'<ul class="dropdown-menu" role="menu">',
 	    	'<li class="upd" pbtnId="pbtn_upd'+index+'">',
-	    	'<a href="javascript:void(0);">',
+	    	'<a href="'+url_upd1+'">',
 	        '<i class="glyphicon glyphicon-edit"></i>',
 	    	'</a>',
 	    	'</li>',
 	    	'<li class="getById" pbtnId="pbtn_getById'+index+'">',
-	    	'<a href="javascript:void(0);">',
+	    	'<a href="'+url_getById+'">',
 	        '<i class="glyphicon glyphicon-info-sign"></i>',
 	    	'</a>',
 	    	'</li>',
@@ -33,10 +35,10 @@ $chok.view.get.config.operateFormatter = function(value, row, index){
 //配置行菜单事件
 $chok.view.get.config.operateEvents = {
     'click .upd': function (e, value, row, index) {
-		location.href = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
+//		location.href = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
     },
     'click .getById': function (e, value, row, index) {
-		location.href = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
+//		location.href = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
     }
 };
 /* *

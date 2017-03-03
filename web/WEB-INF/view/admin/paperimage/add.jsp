@@ -1,14 +1,45 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/inc_ctx.jsp"%>
-<%@ include file="/common/inc_css.jsp"%>
-<%@ include file="/common/inc_js.jsp"%>
+<%@ include file="/common/inc_header.jsp"%>
+<!-- 主内容面板 -->
+<div class="content-wrapper">
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active"></li>
+	</ol>
+</section>
+<section class="content">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title"><small><i class="glyphicon glyphicon-plus"></i></small></h3>
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
+			</div>
+		</div>
+		<div class="box-body">
+			<form class="dataForm">
+				<input id="myFile" name="myFile" type="file" multiple class="file-loading">
+				<div id="kv-error-2" style="margin-top:10px;display:none"></div>
+				<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
+			</form>
+		</div>
+		<div class="box-footer">&nbsp;</div>
+	</div>
+</section>
+</div>
+<%@ include file="/common/inc_footer.jsp"%>
+<!-- ======================================================================================================= -->
+<%@ include file="/common/inc_js_btn_permit.jsp"%>
 <link rel="stylesheet" href="${ctx}/res/bs/fileinput/css/fileinput.min.css"/>
 <script type="text/javascript" src="${ctx}/res/bs/fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.add.js"></script>
 <script type="text/javascript">
 $(function(){
+	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
 	// 返回列表页
 	$("#back").click(function(){
-		location.href = "get.action?pid=${pid}&ppid=${ppid}";
+		history.back();
 	});
 	//
 	$("#myFile").fileinput({
@@ -40,29 +71,8 @@ $(function(){
 	    $('#kv-success-2 ul').append(out);
 	    $('#kv-success-2').show();
 	    alert("上传图片成功！");
-		location.href = "get.action?pid=${pid}&ppid=${ppid}";
+	    history.back();
+		//location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	});
 });
 </script>
-</head>
-<body class="body-content">
-<!-- toolbar
-======================================================================================================= -->
-<nav class="navbar navbar-default navbar-fixed-top navbar-fixed-top-extend" role="navigation">
-	<div class="navbar-header navbar-header-extend">
-		<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-plus"></i></a>
-		<div class="navbar-header-btn-right">
-			<button type="button" class="btn btn-default navbar-btn" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-		</div>
-	</div>
-</nav>
-<!-- upload input
-======================================================================================================= -->
-<form class="dataForm">
-<input id="myFile" name="myFile" type="file" multiple class="file-loading">
-<div id="kv-error-2" style="margin-top:10px;display:none"></div>
-<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
-</form>
-</body>
-</html>
-

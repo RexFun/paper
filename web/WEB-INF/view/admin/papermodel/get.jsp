@@ -2,36 +2,36 @@
 <%@ include file="/common/inc_header.jsp"%>
 <!-- 主内容面板 -->
 <div class="content-wrapper">
-	<section class="content-header">
-		<h1>&nbsp;</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active"></li>
-		</ol>
-	</section>
-	<section class="content">
-		<div class="row">
-		<div class="col-md-12">
-		<div class="box box-default">
-		<div class="box-header with-border">
-			<h3 class="box-title"><small><i class="glyphicon glyphicon-th-list"></i></small></h3>
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active"></li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row">
+	<div class="col-md-12">
+	<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title"><small><i class="glyphicon glyphicon-th-list"></i></small></h3>
+	</div>
+	<div class="box-body">
+		<!-- toolbar
+		======================================================================================================= -->
+		<div id="toolbar">
+		<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
+		<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
+		<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
 		</div>
-		<div class="box-body">
-			<!-- toolbar
-			======================================================================================================= -->
-			<div id="toolbar">
-			<button type="button" class="btn btn-default" id="bar_btn_add" pbtnId="pbtn_add"><i class="glyphicon glyphicon-plus"></i></button>
-			<button type="button" class="btn btn-default" id="bar_btn_del" pbtnId="pbtn_del"><i class="glyphicon glyphicon-remove"></i></button>
-			<button type="button" class="btn btn-default" id="bar_btn_query" pbtnId="pbtn_query" data-toggle="modal" data-target="#modal_form_query"><i class="glyphicon glyphicon-search"></i></button>
-			</div>
-			<!-- data list
-			======================================================================================================= -->
-			<table id="tb_list"></table>
-		</div>
-		</div>
-		</div>
-		</div>
-	</section>
+		<!-- data list
+		======================================================================================================= -->
+		<table id="tb_list"></table>
+	</div>
+	</div>
+	</div>
+	</div>
+</section>
 </div>
 <!-- query form modal
 ======================================================================================================= -->
@@ -106,41 +106,32 @@ $chok.view.get.config.tableColumns =
 ];
 //配置行菜单
 $chok.view.get.config.operateFormatter = function(value, row, index){
+	var url_upd1 = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
+	var url_getById = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
+	var url_getImages = "../paperimage/get.action?pid="+row.m.id+"&ppid="+row.m.pid+"&"+$chok.view.get.fn.getUrlParams();
     return ['<div class="btn-group">',
 	    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
 	    	'<span class="caret"></span>',
 	    	'</button>',
 	    	'<ul class="dropdown-menu" role="menu">',
 	    	'<li class="upd" pbtnId="pbtn_upd'+index+'">',
-	    	'<a href="javascript:void(0);">',
+	    	'<a href="'+url_upd1+'">',
 	        '<i class="glyphicon glyphicon-edit"></i>',
 	    	'</a>',
 	    	'</li>',
 	    	'<li class="getById" pbtnId="pbtn_getById'+index+'">',
-	    	'<a href="javascript:void(0);">',
+	    	'<a href="'+url_getById+'">',
 	        '<i class="glyphicon glyphicon-info-sign"></i>',
 	    	'</a>',
 	    	'</li>',
 	    	'<li class="getImages" pbtnId="pbtn_getImages'+index+'">',
-	    	'<a href="javascript:void(0);">',
+	    	'<a href="'+url_getImages+'">',
 	        '<i class="glyphicon glyphicon-picture"></i>',
 	    	'</a>',
 	    	'</li>',
 	    	'</ul>',
 	    	'</div>'
 		    ].join('');
-};
-//配置行菜单事件
-$chok.view.get.config.operateEvents = {
-    'click .upd': function (e, value, row, index) {
-		location.href = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
-    },
-    'click .getById': function (e, value, row, index) {
-		location.href = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
-    },
-    'click .getImages': function (e, value, row, index) {
-		location.href = "../paperimage/get.action?pid="+row.m.id+"&ppid="+row.m.pid+"&"+$chok.view.get.fn.getUrlParams();
-    }
 };
 $chok.view.get.callback.delRows = function(){
 };

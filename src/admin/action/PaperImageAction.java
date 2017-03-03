@@ -114,7 +114,6 @@ public class PaperImageAction extends BaseAction<PaperImage>
 	{
 		po = service.getById(getReq().getLong("id"));
 		put("po",po);
-		put("ppid",getReq().getLong("ppid"));
 		put("modelName", modelService.getById(po.getLong("pid")).get("name"));
 		return "success";
 	}

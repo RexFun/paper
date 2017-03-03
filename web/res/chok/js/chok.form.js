@@ -1,4 +1,5 @@
 $chok.form = {};
+$chok.form.callback = function(){};
 $chok.result = {type:"", msg:""};
 $chok.checkResult = function(responseText){
 	$chok.result = {type:"", msg:""};

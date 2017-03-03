@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import admin.entity.SysPermit;
-import rex.devwork.BaseDao;
+import chok.devwork.BaseDao;
 
 
 @Repository("sysPermitDao")

@@ -1,7 +1,7 @@
 package factory;
 
 import admin.service.PaperImageService;
-import rex.devwork.BeanFactory;
+import chok.devwork.BeanFactory;
 
 
 public class MyFactory {

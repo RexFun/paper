@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.PaperCategoryDao;
 import admin.entity.PaperCategory;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
 
 @Service("paperCategoryService")
 public class PaperCategoryService extends BaseService<PaperCategory,Long>

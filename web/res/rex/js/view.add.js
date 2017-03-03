@@ -1,1 +1,0 @@
-$rex.view.add = {};

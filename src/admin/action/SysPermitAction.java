@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 
 import admin.entity.SysPermit;
 import admin.service.SysPermitService;
-import rex.devwork.BaseAction;
-import rex.util.CollectionUtil;
+import chok.devwork.BaseAction;
+import chok.util.CollectionUtil;
 
 
 @SuppressWarnings("serial")

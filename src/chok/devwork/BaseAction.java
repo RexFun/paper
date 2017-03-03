@@ -1,4 +1,4 @@
-package rex.devwork;
+package chok.devwork;
 
 import java.io.PrintWriter;
 import java.util.List;

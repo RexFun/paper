@@ -109,7 +109,7 @@ function initBtnEvent(){
 		});
 	});
 	$("#back").click(function(){
-		location.href = "../papermodel/get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+		location.href = "../papermodel/get.action?"+$chok.view.fn.getUrlParams("${queryParams}");
 	});
 	$("input[name='row_btn_upd']").click(function(){
 		var _id = $(this).siblings("input[name='hidden_id']").val();

@@ -1,6 +1,6 @@
 package client.entity;
 
-import rex.util.PropertiesUtil;
+import chok.util.PropertiesUtil;
 
 public class PaperImage 
 {

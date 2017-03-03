@@ -17,10 +17,10 @@ import admin.entity.SysRole;
 import admin.entity.SysUser;
 import admin.service.SysRoleService;
 import admin.service.SysUserService;
-import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
-import rex.util.CollectionUtil;
-import rex.util.EncryptionUtil;
+import chok.devwork.BaseAction;
+import chok.devwork.PageNav;
+import chok.util.CollectionUtil;
+import chok.util.EncryptionUtil;
 
 
 @SuppressWarnings("serial")

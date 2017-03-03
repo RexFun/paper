@@ -3,7 +3,7 @@ package admin.dao;
 import org.springframework.stereotype.Repository;
 
 import admin.entity.SysUser;
-import rex.devwork.BaseDao;
+import chok.devwork.BaseDao;
 
 
 @Repository("sysUserDao")

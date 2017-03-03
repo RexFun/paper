@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import admin.entity.SysMenu;
-import rex.devwork.BaseDao;
+import chok.devwork.BaseDao;
 
 
 @Repository("sysMenuDao")

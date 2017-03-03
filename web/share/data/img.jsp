@@ -13,4 +13,4 @@ if(id > 0)
 }
 %><%@page language="java" pageEncoding="UTF-8"
 import="
-rex.devwork.MyReq,admin.MyFactory"%>
+chok.devwork.MyReq,admin.MyFactory"%>

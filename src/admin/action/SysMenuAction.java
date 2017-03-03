@@ -16,8 +16,8 @@ import admin.entity.SysMenu;
 import admin.entity.SysPermit;
 import admin.service.SysMenuService;
 import admin.service.SysPermitService;
-import rex.devwork.BaseAction;
-import rex.util.CollectionUtil;
+import chok.devwork.BaseAction;
+import chok.util.CollectionUtil;
 
 
 @SuppressWarnings("serial")

@@ -46,7 +46,7 @@
 <!-- ======================================================================================================= -->
 <script type="text/javascript">
 $(function(){
-	$rex.view.fn.selectSidebarMenu("","${param.menuName}");
+	$chok.view.fn.selectSidebarMenu("","${param.menuName}");
 	$('input').keypress(function (e) { //这里给function一个事件参数命名为e，叫event也行，随意的，e就是IE窗口发生的事件。
 	    var key = e.which; //e.which是按键的值
 	    if (key == 13) {
@@ -54,7 +54,7 @@ $(function(){
 	    }
 	});
 	$("#save").click(function(){
-		if(!$rex.validator.check()) return; 
+		if(!$chok.validator.check()) return; 
 		var url = $("#pwdForm").attr('action');
 		$.post(
 			url, 

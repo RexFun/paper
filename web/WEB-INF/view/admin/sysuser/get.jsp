@@ -61,38 +61,38 @@
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/view.get.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function() {
-	$rex.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
-	$rex.view.get.init.toolbar();
-	$rex.view.get.init.modalFormQuery();
-	$rex.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
+	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
+	$chok.view.get.init.toolbar();
+	$chok.view.get.init.modalFormQuery();
+	$chok.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 });
 /**********************************************************/
 /* 初始化配置 */
 /**********************************************************/
-$rex.view.get.config.setPreFormParams = function(){
+$chok.view.get.config.setPreFormParams = function(){
 	$("#f_tc_code").val(typeof("${queryParams.f_tc_code}")=="undefined"?"":"${queryParams.f_tc_code}");
 	$("#f_tc_name").val(typeof("${queryParams.f_tc_name}")=="undefined"?"":"${queryParams.f_tc_name}");
 	$("#f_tc_email").val(typeof("${queryParams.f_tc_email}")=="undefined"?"":"${queryParams.f_tc_email}"); 
 };
-$rex.view.get.config.formParams = function(p){
+$chok.view.get.config.formParams = function(p){
 	p.tc_code = $("#f_tc_code").val();
 	p.tc_name = $("#f_tc_name").val();
 	p.tc_email = $("#f_tc_email").val();
     return p;
 };
-$rex.view.get.config.urlParams = function(){
+$chok.view.get.config.urlParams = function(){
 	return {f_tc_code : $("#f_tc_code").val(),
 		   	f_tc_name : $("#f_tc_name").val(),
 		   	f_tc_email : $("#f_tc_email").val()};
 };
-$rex.view.get.config.tableColumns = 
+$chok.view.get.config.tableColumns = 
 [
     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
     {title:'用户代号', field:'m.tc_code', align:'center', valign:'middle', sortable:true},
@@ -100,9 +100,9 @@ $rex.view.get.config.tableColumns =
     {title:'用户邮箱', field:'m.tc_email', align:'center', valign:'middle', sortable:true},
     {title:'创建时间', field:'m.tc_add_time', align:'center', valign:'middle', sortable:true}
 ];
-$rex.view.get.callback.delRows = function(){
+$chok.view.get.callback.delRows = function(){
 };
-$rex.view.get.callback.onLoadSuccess = function(){
+$chok.view.get.callback.onLoadSuccess = function(){
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 };
 </script>

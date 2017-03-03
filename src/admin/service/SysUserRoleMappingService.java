@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.SysUserRoleMappingDao;
 import admin.entity.SysUserRoleMapping;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
 
 @Service("sysUserRoleService")
 public class SysUserRoleMappingService extends BaseService<SysUserRoleMapping,Long>

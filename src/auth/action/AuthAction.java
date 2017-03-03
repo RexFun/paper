@@ -15,11 +15,10 @@ import com.google.gson.Gson;
 
 import admin.entity.SysUser;
 import admin.service.SysMenuService;
-import admin.service.SysPermitService;
 import admin.service.SysUserService;
 import auth.Auth;
-import rex.devwork.BaseAction;
-import rex.util.EncryptionUtil;
+import chok.devwork.BaseAction;
+import chok.util.EncryptionUtil;
 
 @SuppressWarnings("serial")
 @Controller

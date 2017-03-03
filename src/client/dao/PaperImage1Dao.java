@@ -2,8 +2,8 @@ package client.dao;
 
 import org.springframework.stereotype.Repository;
 
+import chok.devwork.BaseDao;
 import client.entity.PaperImage1;
-import rex.devwork.BaseDao;
 
 
 @Repository("clientPaperImage1Dao")

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.PaperImageDao;
 import admin.entity.PaperImage;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
-import rex.util.PropertiesUtil;
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
+import chok.util.PropertiesUtil;
 
 @Service("paperImageService")
 public class PaperImageService extends BaseService<PaperImage,Long>

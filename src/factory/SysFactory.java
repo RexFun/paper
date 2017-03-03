@@ -2,7 +2,7 @@ package factory;
 
 import admin.service.SysMenuService;
 import admin.service.SysPermitService;
-import rex.devwork.BeanFactory;
+import chok.devwork.BeanFactory;
 
 
 public class SysFactory {

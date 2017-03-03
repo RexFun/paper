@@ -35,16 +35,16 @@
 	</section>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.getById.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function(){
-	$rex.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
+	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
 	// 返回列表页
 	$("#back").click(function(){
-		location.href = "get.action?"+$rex.view.fn.getUrlParams("${queryParams}");
+		location.href = "get.action?"+$chok.view.fn.getUrlParams("${queryParams}");
 	});
 });
 </script>

@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import admin.entity.PaperImage;
-import rex.devwork.BaseDao;
+import chok.devwork.BaseDao;
 
 @Repository("paperImageDao")
 public class PaperImageDao extends BaseDao<PaperImage,Long>

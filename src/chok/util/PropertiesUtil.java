@@ -1,4 +1,4 @@
-package rex.util;
+package chok.util;
 
 import java.io.IOException;
 import java.util.Properties;

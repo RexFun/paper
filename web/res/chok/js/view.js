@@ -1,9 +1,9 @@
-$rex.view = {};
-$rex.view.menuId = 0;
-$rex.view.menuName = "首页";
-$rex.view.fn = {};
+$chok.view = {};
+$chok.view.menuId = 0;
+$chok.view.menuName = "首页";
+$chok.view.fn = {};
 //获取url表单参数字符串
-$rex.view.fn.getUrlParams = function(queryParams){
+$chok.view.fn.getUrlParams = function(queryParams){
 	queryParams = queryParams.slice(1,queryParams.length-1);
 	var paramsStr = "";
 	var queryParamArr = queryParams.split(",");
@@ -17,9 +17,9 @@ $rex.view.fn.getUrlParams = function(queryParams){
 	return paramsStr;
 };
 // 选中侧栏菜单
-$rex.view.fn.selectSidebarMenu = function(menuId,menuName){
-	$rex.view.menuId = menuId;
-	$rex.view.menuName = menuName;
+$chok.view.fn.selectSidebarMenu = function(menuId,menuName){
+	$chok.view.menuId = menuId;
+	$chok.view.menuName = menuName;
 	// set current menu
 	$(".sidebar-menu li").each(function(){
 		$(this).removeClass("active");

@@ -3,6 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeHandlers>
-		<typeHandler javaType="String" jdbcType="NUMERIC" handler="rex.util.mybatis.StringToNumericTypeHandler" />
+		<typeHandler javaType="String" jdbcType="NUMERIC" handler="chok.util.mybatis.StringToNumericTypeHandler" />
 	</typeHandlers>
 </configuration>

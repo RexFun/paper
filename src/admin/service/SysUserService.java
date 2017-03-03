@@ -7,10 +7,10 @@ import admin.dao.SysUserDao;
 import admin.dao.SysUserRoleMappingDao;
 import admin.entity.SysUser;
 import admin.entity.SysUserRoleMapping;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
-import rex.util.CollectionUtil;
-import rex.util.EncryptionUtil;
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
+import chok.util.CollectionUtil;
+import chok.util.EncryptionUtil;
 
 @Service("sysUserService")
 public class SysUserService extends BaseService<SysUser,Long>

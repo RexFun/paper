@@ -1,7 +1,7 @@
-$rex.form = {};
-$rex.result = {type:"", msg:""};
-$rex.checkResult = function(responseText){
-	$rex.result = {type:"", msg:""};
+$chok.form = {};
+$chok.result = {type:"", msg:""};
+$chok.checkResult = function(responseText){
+	$chok.result = {type:"", msg:""};
 	try{
 		var _msg = "", _arr = (responseText + "").split(":");
 		if(_arr.length > 1){_msg = _arr[1];}
@@ -10,10 +10,10 @@ $rex.checkResult = function(responseText){
 			case "1": _msg = "操作成功！";break;
 			default: _msg = (!isNaN(_arr[0]))?"":_arr[0];
 		}}
-		$rex.result = {type:_arr[0], msg:_msg};
+		$chok.result = {type:_arr[0], msg:_msg};
 	}
-	catch(e){$rex.result = {type:"", msg:""};}
-	return $rex.result.msg;
+	catch(e){$chok.result = {type:"", msg:""};}
+	return $chok.result.msg;
 };
 $(function(){
 	$('input:text:first').focus(); //把焦点放在第一个文本框
@@ -24,7 +24,7 @@ $(function(){
 	    }
 	});
 	$("#dataFormSave").click(function () {
-		if(!$rex.validator.check()) {
+		if(!$chok.validator.check()) {
 			alert("表单信息不完整！");
 			return;
 		}
@@ -35,8 +35,8 @@ $(function(){
             data: $("#dataForm").serialize(),
             enctype: $("#dataForm").attr("enctype"),
             success: function (data) {
-            	alert($rex.checkResult(data));
-                $rex.form.callback();
+            	alert($chok.checkResult(data));
+                $chok.form.callback();
             }
         };
         $("#dataForm").ajaxSubmit(options);
@@ -53,8 +53,8 @@ $(function(){
             dataType: 'text',
             data: $("#form_del").serialize(),
             success: function (data) {
-            	alert($rex.checkResult(data));
-                $rex.form.callback();
+            	alert($chok.checkResult(data));
+                $chok.form.callback();
             }
         };
         $.ajax(options);

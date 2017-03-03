@@ -1,6 +1,6 @@
 package admin.entity;
 
-import rex.devwork.BaseModel;
+import chok.devwork.BaseModel;
 
 public class SysRole extends BaseModel
 {

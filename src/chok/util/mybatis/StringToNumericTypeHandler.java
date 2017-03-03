@@ -1,4 +1,4 @@
-package rex.util.mybatis;
+package chok.util.mybatis;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

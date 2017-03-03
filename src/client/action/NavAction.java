@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import chok.devwork.BaseAction;
 import client.entity.PaperCategory;
 import client.service.PaperNavService;
-import rex.devwork.BaseAction;
 
 @SuppressWarnings("serial")
 @Controller

@@ -51,8 +51,8 @@
 /**********************************************************/
 /* 保存后回调函数 */
 /**********************************************************/
-$rex.form.callback = function(){
-	if($rex.result.type == 1){
+$chok.form.callback = function(){
+	if($chok.result.type == 1){
 		location.href = "getMyInfo.action?id=${po.m.id}";
 	}
 };
@@ -60,7 +60,7 @@ $rex.form.callback = function(){
 /* 全局函数 */
 /**********************************************************/
 $(function(){
-	$rex.view.fn.selectSidebarMenu("","${param.menuName}");
+	$chok.view.fn.selectSidebarMenu("","${param.menuName}");
 	// zTree的初始化
     zTreeObj = $.fn.zTree.init($("#roleTree"), setting);
     // 全部展开/折叠

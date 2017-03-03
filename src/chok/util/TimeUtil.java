@@ -1,4 +1,4 @@
-package rex.util;
+package chok.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

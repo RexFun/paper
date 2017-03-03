@@ -1,4 +1,4 @@
-package rex.devwork;
+package chok.devwork;
 
 /**
  * 从ApplicationContext取得spring管理的类

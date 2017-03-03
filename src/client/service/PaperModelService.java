@@ -6,10 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
 import client.dao.PaperModelDao;
 import client.entity.PaperModel;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
 
 @Service("clientPaperModelService")
 public class PaperModelService extends BaseService<PaperModel,Long>

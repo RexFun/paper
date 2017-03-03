@@ -17,6 +17,6 @@
 /* 全局函数 */
 /**********************************************************/
 $(function() {
-	$rex.view.fn.selectSidebarMenu("0","首页");
+	$chok.view.fn.selectSidebarMenu("0","首页");
 });
 </script>

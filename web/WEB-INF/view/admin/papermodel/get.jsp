@@ -68,35 +68,35 @@
 </form>
 <%@ include file="/common/inc_footer.jsp"%>
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/rex/js/view.get.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/view.get.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */
 /**********************************************************/
 $(function() {
-	$rex.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
-	$rex.view.get.init.toolbar();
-	$rex.view.get.init.modalFormQuery();
-	$rex.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
+	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
+	$chok.view.get.init.toolbar();
+	$chok.view.get.init.modalFormQuery();
+	$chok.view.get.init.table("${queryParams.f_page}","${queryParams.f_pageSize}");
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 });
 /**********************************************************/
 /* 初始化配置 */
 /**********************************************************/
-$rex.view.get.config.setPreFormParams = function(){
+$chok.view.get.config.setPreFormParams = function(){
 	$("#f_name").val(typeof("${queryParams.f_name}")=="undefined"?"":"${queryParams.f_name}");
 	$("#f_pid").val(typeof("${queryParams.f_pid}")=="undefined"?"":"${queryParams.f_pid}");
 };
-$rex.view.get.config.formParams = function(p){
+$chok.view.get.config.formParams = function(p){
 	p.name = $("#f_name").val();
 	p.pid = $("#f_pid").val();
     return p;
 };
-$rex.view.get.config.urlParams = function(){
+$chok.view.get.config.urlParams = function(){
 	return {f_name : $("#f_name").val(),
 			f_pid  : $("#f_pid").val()};
 };
-$rex.view.get.config.tableColumns = 
+$chok.view.get.config.tableColumns = 
 [
     {title:'ID', field:'m.id', align:'center', valign:'middle', sortable:true},
     {title:'PID', field:'m.pid', align:'center', valign:'middle', sortable:true, visible:false},
@@ -105,7 +105,7 @@ $rex.view.get.config.tableColumns =
     {title:'排序号', field:'m.sort', align:'center', valign:'middle', sortable:true}
 ];
 //配置行菜单
-$rex.view.get.config.operateFormatter = function(value, row, index){
+$chok.view.get.config.operateFormatter = function(value, row, index){
     return ['<div class="btn-group">',
 	    	'<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">',
 	    	'<span class="caret"></span>',
@@ -131,20 +131,20 @@ $rex.view.get.config.operateFormatter = function(value, row, index){
 		    ].join('');
 };
 //配置行菜单事件
-$rex.view.get.config.operateEvents = {
+$chok.view.get.config.operateEvents = {
     'click .upd': function (e, value, row, index) {
-		location.href = "upd1.action?id="+row.m.id+"&"+$rex.view.get.fn.getUrlParams();
+		location.href = "upd1.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
     },
     'click .getById': function (e, value, row, index) {
-		location.href = "getById.action?id="+row.m.id+"&"+$rex.view.get.fn.getUrlParams();
+		location.href = "getById.action?id="+row.m.id+"&"+$chok.view.get.fn.getUrlParams();
     },
     'click .getImages': function (e, value, row, index) {
-		location.href = "../paperimage/get.action?pid="+row.m.id+"&ppid="+row.m.pid+"&"+$rex.view.get.fn.getUrlParams();
+		location.href = "../paperimage/get.action?pid="+row.m.id+"&ppid="+row.m.pid+"&"+$chok.view.get.fn.getUrlParams();
     }
 };
-$rex.view.get.callback.delRows = function(){
+$chok.view.get.callback.delRows = function(){
 };
-$rex.view.get.callback.onLoadSuccess = function(){
+$chok.view.get.callback.onLoadSuccess = function(){
 	initBtnPermit("${sessionScope.CUR_MENU_PERMIT_ID}");
 };
 </script>

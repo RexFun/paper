@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import chok.devwork.BaseDao;
 import client.entity.PaperModel;
-import rex.devwork.BaseDao;
 
 @Repository("clientPaperModelDao")
 public class PaperModelDao extends BaseDao<PaperModel,Long>

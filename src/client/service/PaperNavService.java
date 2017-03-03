@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
 import client.dao.PaperCategoryDao;
 import client.entity.PaperCategory;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
 
 @Service("paperNavService")
 public class PaperNavService extends BaseService<PaperCategory,Long>

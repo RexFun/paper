@@ -19,11 +19,11 @@ import org.springframework.stereotype.Controller;
 import admin.entity.PaperImage;
 import admin.service.PaperImageService;
 import admin.service.PaperModelService;
-import rex.devwork.BaseAction;
-import rex.devwork.PageNav;
-import rex.util.CollectionUtil;
-import rex.util.PropertiesUtil;
-import rex.util.UniqueId;
+import chok.devwork.BaseAction;
+import chok.devwork.PageNav;
+import chok.util.CollectionUtil;
+import chok.util.PropertiesUtil;
+import chok.util.UniqueId;
 
 
 @SuppressWarnings("serial")

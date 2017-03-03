@@ -1,4 +1,4 @@
-package rex.devwork;
+package chok.devwork;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

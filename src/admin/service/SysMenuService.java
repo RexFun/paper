@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import admin.dao.SysMenuDao;
 import admin.entity.SysMenu;
-import rex.devwork.BaseDao;
-import rex.devwork.BaseService;
+import chok.devwork.BaseDao;
+import chok.devwork.BaseService;
 
 @Service("sysMenuService")
 public class SysMenuService extends BaseService<SysMenu,Long>

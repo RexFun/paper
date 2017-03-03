@@ -1,4 +1,4 @@
-$rex.validator = {
+$chok.validator = {
 	/**
 	 * prop
 	 * 定义规则算法 
@@ -56,7 +56,7 @@ $rex.validator = {
 	 */
 	addMsg:function(ruleName, $e){
 		$e.parent().addClass("has-error");
-		var msg = $rex.validator.rules.msgs[ruleName];
+		var msg = $chok.validator.rules.msgs[ruleName];
 		if(typeof($e.attr("validate-msg"))!="undefined") msg = $e.attr("validate-msg");
 		msg = msg.replace("{0}", $e.attr("validate-rule-"+ruleName));
 		if($e.next(".control-label").length>0){
@@ -88,12 +88,12 @@ $rex.validator = {
 			if(typeof($(this).attr("validate-rule-required"))!="undefined"){
 				var ruleName = "required";
 				var inputValue = $(this).val();
-				if(!$rex.validator.rules.fn[ruleName](inputValue)){
-					$rex.validator.addMsg(ruleName,$(this));
+				if(!$chok.validator.rules.fn[ruleName](inputValue)){
+					$chok.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;
 				}else{
-					$rex.validator.removeMsg($(this));
+					$chok.validator.removeMsg($(this));
 					a[i] = true;
 				}
 			}
@@ -101,12 +101,12 @@ $rex.validator = {
 			if(typeof($(this).attr("validate-rule-inputType"))!="undefined" && $(this).val().length>0){
 				var ruleName = $(this).attr("validate-rule-inputType");
 				var inputValue = $(this).val();
-				if(!$rex.validator.rules.fn[ruleName](inputValue)){
-					$rex.validator.addMsg(ruleName,$(this));
+				if(!$chok.validator.rules.fn[ruleName](inputValue)){
+					$chok.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;
 				}else{
-					$rex.validator.removeMsg($(this));
+					$chok.validator.removeMsg($(this));
 					a[i] = true;
 				}
 			}
@@ -115,12 +115,12 @@ $rex.validator = {
 				var ruleName = "minLength";
 				var inputValue = $(this).val();
 				var attrValue = $(this).attr("validate-rule-minLength");
-				if(!$rex.validator.rules.fn[ruleName](inputValue, attrValue)){
-					$rex.validator.addMsg(ruleName,$(this));
+				if(!$chok.validator.rules.fn[ruleName](inputValue, attrValue)){
+					$chok.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;
 				}else{
-					$rex.validator.removeMsg($(this));
+					$chok.validator.removeMsg($(this));
 					a[i] = true;
 				}
 			}
@@ -129,12 +129,12 @@ $rex.validator = {
 				var ruleName = "maxLength";
 				var inputValue = $(this).val();
 				var attrValue = $(this).attr("validate-rule-maxLength");
-				if(!$rex.validator.rules.fn[ruleName](inputValue, attrValue)){
-					$rex.validator.addMsg(ruleName,$(this));
+				if(!$chok.validator.rules.fn[ruleName](inputValue, attrValue)){
+					$chok.validator.addMsg(ruleName,$(this));
 					a[i] = false;
 					return;
 				}else{
-					$rex.validator.removeMsg($(this));
+					$chok.validator.removeMsg($(this));
 					a[i] = true;
 				}
 			}

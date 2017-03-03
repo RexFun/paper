@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import admin.entity.PaperModel;
 import admin.service.PaperCategoryService;
 import admin.service.PaperModelService;
-import rex.devwork.BaseAction;
-import rex.util.CollectionUtil;
+import chok.devwork.BaseAction;
+import chok.util.CollectionUtil;
 
 
 @SuppressWarnings("serial")

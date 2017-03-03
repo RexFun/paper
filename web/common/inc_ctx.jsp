@@ -1,4 +1,4 @@
-<%@ page import="rex.util.PropertiesUtil" %>
+<%@ page import="chok.util.PropertiesUtil" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%

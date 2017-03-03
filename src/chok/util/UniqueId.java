@@ -1,4 +1,4 @@
-package rex.util;
+package chok.util;
 
 import java.util.Calendar;
 import java.util.UUID;

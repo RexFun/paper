@@ -9,13 +9,6 @@
 </ol>
 </section>
 <section class="content">
-<div class="row">
-<div class="col-md-12">
-<div class="box box-default">
-	&nbsp;
-</div>
-</div>
-</div>
 </section>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
@@ -24,6 +17,6 @@
 /* 全局函数 */
 /**********************************************************/
 $(function() {
-	$rex.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");
+	$rex.view.fn.selectSidebarMenu("0","首页");
 });
 </script>

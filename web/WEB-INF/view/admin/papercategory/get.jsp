@@ -60,7 +60,7 @@
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/chok/js/view.get.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.get.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */

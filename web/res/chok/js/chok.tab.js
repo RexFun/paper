@@ -1,7 +1,7 @@
 /**
  * Dynamic tabs
  */
-var $tab = {
+$chok.tab = {
 	counter : 1,
 	openTabs : [0],
 	init : function(){

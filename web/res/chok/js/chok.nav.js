@@ -1,7 +1,7 @@
 /**
- * $nav 导航类
+ * $chok.nav 导航类
  */
-var $nav={
+$chok.nav={
 	// 生成菜单
 	init : function(json){
 		var navMenuTreeHtml = new treeMenu(json).init();

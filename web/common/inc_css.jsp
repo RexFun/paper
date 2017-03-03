@@ -6,4 +6,4 @@
 <link rel="stylesheet" href="${ctx}/res/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="${ctx}/res/AdminLTE/dist/css/skins/_all-skins.min.css">
-<link rel="stylesheet" href="${ctx}/res/chok/css/view.css">
+<link rel="stylesheet" href="${ctx}/res/chok/css/chok.view.css">

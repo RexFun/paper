@@ -13,7 +13,7 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <script type="text/javascript">
 $(function(){
 	// nav
-	$nav.init(<%=navMenuTreeNodes%>);
+	$chok.nav.init(<%=navMenuTreeNodes%>);
 	// 导航菜单查询
 	$("#navSearchForm").submit(function(event) {
 		event.preventDefault();
@@ -23,7 +23,7 @@ $(function(){
 			{'menuName':$("#menuName").val()},
 		  	function(rv) {
 				if(rv.success){
-					$nav.init(JSON.parse(rv.data.navMenuTreeNodes));
+					$chok.nav.init(JSON.parse(rv.data.navMenuTreeNodes));
 				}else{
 					alert(data.msg);
 				}

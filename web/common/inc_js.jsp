@@ -6,11 +6,11 @@
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="${ctx}/res/bs/js/bootstrap-table-fixed-columns.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/base.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/validator.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/form.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/view.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/nav.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.base.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.validator.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.form.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.nav.js"></script>
 <script type="text/javascript" src="${ctx}/res/chok/js/ztree-selector-modal.js"></script>
 <script type="text/javascript">
 var $ctx="${ctx}";

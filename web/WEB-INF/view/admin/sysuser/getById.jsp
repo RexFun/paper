@@ -50,7 +50,7 @@
 <!-- ======================================================================================================= -->
 <link rel="stylesheet" type="text/css" href="${ctx}/res/ztree/css/zTreeStyle/zTreeStyle.css" />
 <script type="text/javascript" src="${ctx}/res/ztree/js/jquery.ztree.all.min.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/view.getById.js"></script>
+<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */

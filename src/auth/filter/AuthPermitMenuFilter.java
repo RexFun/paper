@@ -1,6 +1,9 @@
 package auth.filter;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.google.gson.Gson;
 
+import admin.entity.SysMenu;
 import admin.entity.SysUser;
 import auth.action.AuthAction;
 import factory.SysFactory;
@@ -42,7 +46,9 @@ public class AuthPermitMenuFilter implements Filter
 		try
 		{
 			SysUser u = (SysUser) req.getSession().getAttribute(AuthAction.SessionName_CurLoginUser);
-			u.set("menu_permit_json", new Gson().toJson(SysFactory.getSysMenuService().getByUserId(u.getLong("id"))));
+			Map m = new HashMap();
+			m.put("tc_sys_user_id", u.getLong("id"));
+			u.set("menu_permit_json", new Gson().toJson(SysFactory.getSysMenuService().getByUserId(m)));
 			// 每次action都去更新当前菜单权限id，用于设置当前用户按钮权限
 			if(req.getParameter("menuPermitId") != null)
 			{

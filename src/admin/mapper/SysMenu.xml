@@ -58,6 +58,8 @@
 	
 	<sql id="dynamicWhere">
 		<where>
+			<if test="id != null and id != ''"> and t.ID = #{id}</if>
+			<if test="pid != null and pid != ''"> and t.PID = #{pid}</if>
 			<if test="tc_code != null and tc_code != ''"> and t.TC_CODE like concat('%',#{tc_code},'%') </if>
 			<if test="tc_name != null and tc_name != ''"> and t.TC_NAME like concat('%',#{tc_name},'%') </if>
 			<if test="tc_p_name != null and tc_p_name != ''"> and tt.TC_NAME like concat('%',#{tc_p_name},'%') </if>
@@ -85,6 +87,7 @@
 		select <include refid="columns"/>  from sys_menu t
 		 inner join sys_role_permit_mapping t1 on t.tc_sys_permit_id=t1.tc_sys_permit_id
 		 inner join sys_user_role_mapping t2 on t1.tc_sys_role_id=t2.tc_sys_role_id and t2.tc_sys_user_id=#{tc_sys_user_id}
+		 <include refid="dynamicWhere" />
 		 group by t.id
 		 order by t.tc_order
 	</select>
@@ -92,7 +95,7 @@
 	<select id="getByUserIdAndMenuName" resultType="list" resultMap="result">
 		{call p_menu_get_by_userId_and_menuName(#{user_id},#{menu_name})}
 	</select>
-	 
+	
 	<select id="getCount" resultType="int">
 		select count(1) from sys_menu t
 		  left join sys_menu tt on t.pid = tt.id

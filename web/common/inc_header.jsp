@@ -5,7 +5,7 @@
 SysUser o = (SysUser)session.getAttribute(AuthAction.SessionName_CurLoginUser);
 String userId = o==null?"":o.getString("id");
 String account = o==null?"":o.getString("tc_code");
-String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
+String menuPermitJson = o==null?"":o.getString("menuPermitJson");
 %>
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
@@ -13,7 +13,7 @@ String navMenuTreeNodes = o==null?"":o.getString("menu_permit_json");
 <script type="text/javascript">
 $(function(){
 	// nav
-	$chok.nav.init(<%=navMenuTreeNodes%>);
+	$chok.nav.init(<%=menuPermitJson%>);
 	// 导航菜单查询
 	$("#navSearchForm").submit(function(event) {
 		event.preventDefault();
@@ -23,7 +23,7 @@ $(function(){
 			{'menuName':$("#menuName").val()},
 		  	function(rv) {
 				if(rv.success){
-					$chok.nav.init(JSON.parse(rv.data.navMenuTreeNodes));
+					$chok.nav.init(JSON.parse(rv.data.menuPermitJson));
 				}else{
 					alert(data.msg);
 				}

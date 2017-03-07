@@ -52,14 +52,16 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 		if (m.containsKey("tc_name") && m.get("tc_name").toString().length()>0)
 		{
 			// 2.1 递归检索父菜单
+			List<Long> pids = new ArrayList<Long>(); // 缓存所有父节点id
 			for(SysMenu o : targetMenus)
 			{
-				menuIds.addAll(getParentMenus(userid, o.getLong("pid")));
+				menuIds.addAll(getParentMenus(userid, o.getLong("pid"), pids));
 			}
 			// 2.2 递归检索子菜单
+			List<Long> cids = new ArrayList<Long>(); // 缓存所有子节点id
 			for(SysMenu o : targetMenus)
 			{
-				menuIds.addAll(getChildMenus(userid, o.getLong("id")));
+				menuIds.addAll(getChildMenus(userid, o.getLong("id"), cids));
 			}
 		}
 		// 3. 合并菜单集合
@@ -85,9 +87,8 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 	}
 	
 	// 递归检索父菜单id集合
-	public List<Long> getParentMenus(Long userid, Long pid)
+	public List<Long> getParentMenus(Long userid, Long pid, List<Long> pids)
 	{
-		List<Long> pids = new ArrayList<Long>();
 		Map m = new HashMap();
 		m.put("tc_sys_user_id", userid);
 		m.put("id",pid);
@@ -96,15 +97,14 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 		if(parentMenus.size()==1)
 		{
 			pids.add(parentMenus.get(0).getLong("id"));
-			getParentMenus(userid, parentMenus.get(0).getLong("pid"));
+			getParentMenus(userid, parentMenus.get(0).getLong("pid"), pids);
 		}
 		return pids;
 	}
 	
 	// 递归检索子菜单id集合
-	public List<Long> getChildMenus(Long userid, Long id)
+	public List<Long> getChildMenus(Long userid, Long id, List<Long> cids)
 	{
-		List<Long> cids = new ArrayList<Long>();
 		Map m = new HashMap();
 		m.put("tc_sys_user_id", userid);
 		m.put("pid",id);
@@ -115,7 +115,7 @@ public class SysMenuService extends BaseService<SysMenu,Long>
 			for (int i=0; i<childMenus.size(); i++)
 			{
 				cids.add(childMenus.get(i).getLong("id"));
-				getChildMenus(userid, childMenus.get(i).getLong("id"));
+				getChildMenus(userid, childMenus.get(i).getLong("id"), cids);
 			}
 		}
 		return cids;

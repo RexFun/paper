@@ -4,7 +4,7 @@
  * menuPermitId : 菜单权限id
  * */
 function initBtnPermit(menuPermitId) {
-	var btnPermitArr = ${sessionScope.CUR_LOGIN_USER.m.btn_permit_json};
+	var btnPermitArr = ${sessionScope.CUR_LOGIN_USER.m.btnPermitJson};
 	if (!btnPermitArr) return;
 	if(btnPermitArr.length>0){
 		$.each($("[pbtnId^='pbtn_']"),function(i,o) {

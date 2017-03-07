@@ -67,9 +67,11 @@ public class AuthAction extends BaseAction<Auth>
 				else
 				{
 					// 初始化菜单权限
-					u.set("menu_permit_json", new Gson().toJson(menuService.getAll()));
+					m.clear();
+					m.put("tc_sys_user_id", u.getLong("id"));
+					u.set("menuPermitJson", new Gson().toJson(menuService.getByUserId(m)));
 					// 初始化按钮权限
-					u.set("btn_permit_json","null");
+					u.set("btnPermitJson","null");
 					// session保存登录用户对象
 					getSession().setAttribute(SessionName_CurLoginUser, u);
 					// 返回结果
@@ -81,6 +83,7 @@ public class AuthAction extends BaseAction<Auth>
 		{
 			getResult().setSuccess(false);
 			getResult().setMsg(e.getMessage());
+			e.printStackTrace();
 		}
 		printJson(getResult());
 	}
@@ -96,9 +99,14 @@ public class AuthAction extends BaseAction<Auth>
 	public void getNavMenu()
 	{
 		Map m = new HashMap();
-		m.put("tc_name",getReq().getString("menuName"));
+		m.put("tc_name", getReq().getString("menuName"));
 		m.put("tc_sys_user_id", ((SysUser)getSession().getAttribute(SessionName_CurLoginUser)).getLong("id"));
-		getResult().put("navMenuTreeNodes", new Gson().toJson(menuService.getByUserId(m)));
+		String menuPermitJson = new Gson().toJson(menuService.getByUserId(m));
+		// 更新用户session
+		SysUser u = ((SysUser)getSession().getAttribute(SessionName_CurLoginUser));
+		u.set("menuPermitJson", menuPermitJson);
+		// 返回
+		getResult().put("menuPermitJson", menuPermitJson);
 		getResult().setSuccess(true);
 		printJson(getResult());
 	}

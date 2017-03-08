@@ -1,1 +1,1 @@
-# 界面布局采用响应式设计
+# struts2 转 spring mvc

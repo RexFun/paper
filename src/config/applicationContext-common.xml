@@ -24,9 +24,12 @@
 	<!-- 使用 annotation 自动注册bean,并检查@Controller, @Service, @Repository注解已被注入，也可以分开注释，或者固定某个目录下 -->
 	<!-- 特别说明：base-package内的action类路径必须放在名为'action'的包内 才能扫描到，
 		  如：auth/action/LoginAction.java-->
-	<context:component-scan base-package="admin" />
-	<context:component-scan base-package="client" />
-	<context:component-scan base-package="auth" />
+	<context:component-scan base-package="admin.service" />
+	<context:component-scan base-package="admin.dao" />
+	<context:component-scan base-package="auth.service" />
+	<context:component-scan base-package="auth.dao" />
+	<context:component-scan base-package="client.service" />
+	<context:component-scan base-package="client.dao" />
 	
 	<!-- properties -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -84,15 +87,30 @@
 	</bean> 
 	
 	<!-- 配置事务的传播特性 -->
-	<bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
-		<property name="transactionManager" ref="transactionManager" />
-	    <property name="transactionAttributes">
-	        <props>
-	            <prop key="add*">PROPAGATION_REQUIRED</prop>
-	            <prop key="upd*">PROPAGATION_REQUIRED</prop>
-	            <prop key="del*">PROPAGATION_REQUIRED</prop>
-	            <prop key="*">readOnly</prop>
-	        </props>
-	    </property>
-	</bean> 
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="get*">PROPAGATION_NEVER,readOnly</prop>
+				<prop key="query*">PROPAGATION_NEVER,readOnly</prop>
+				<prop key="*">PROPAGATION_NEVER,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="proxyTargetClass" value="true"/>
+		<property name="beanNames">
+			<list>
+				<value>*Service</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
 </beans>

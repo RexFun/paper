@@ -42,7 +42,7 @@ public class AuthPermitButtonFilter implements Filter
 		try
 		{
 			SysUser u = (SysUser) req.getSession().getAttribute(AuthAction.SessionName_CurLoginUser);
-			u.set("btn_permit_json", new Gson().toJson(SysFactory.getSysPermitService().getBtnPermitByUserId(u.getLong("id"))));
+			u.set("btnPermitJson", new Gson().toJson(SysFactory.getSysPermitService().getBtnPermitByUserId(u.getLong("id"))));
 			req.getSession().setAttribute(AuthAction.SessionName_CurLoginUser, u);
 			chain.doFilter(requestWrapper, responseWraper);
 		}

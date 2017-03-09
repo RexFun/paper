@@ -12,7 +12,7 @@ import admin.entity.SysPermit;
 import chok.devwork.BaseDao;
 import chok.devwork.BaseService;
 
-@Service("sysPermitService")
+@Service
 public class SysPermitService extends BaseService<SysPermit,Long>
 {
 	@Autowired

@@ -42,7 +42,7 @@
 					</tr>
 					</thead>
 					<tbody>
-					<s:iterator var="o" value="result.data.resultList" status="st">
+					<c:forEach var="o" items="${resultList}" varStatus="st">
 					<tr>
 						<td><input name="keyIndex" type="checkbox" value="${o.m.id}"/></td>
 						<td>${o.m.id}</td>
@@ -50,7 +50,7 @@
 						<td>
 							<input type="hidden" name="hidden_id" value="${o.m.id}" style="width:50px"/>
 							<input type="text" name="text_sort" value="${o.m.sort}" style="width:50px"/>
-							<input type="button" name="row_btn_upd" pbtnId="pbtn_upd#st.index" value="修改"/>
+							<input type="button" name="row_btn_upd" pbtnId="pbtn_upd${st.index}" value="修改"/>
 						</td>
 						<td>
 							<a href="getById.action?id=${o.m.id}">
@@ -58,7 +58,7 @@
 							</a>
 						</td>
 					</tr>
-					</s:iterator>
+					</c:forEach>
 					</tbody>
 				</table>
 				<input name="page" type="hidden" value="${page.curPage}" />

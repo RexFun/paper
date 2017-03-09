@@ -49,9 +49,9 @@
 					<label for="f_pid">类别名：</label>
 				 	<select class="form-control input-sm" id="f_pid">
 						<option value="">请选择</option>
-						<s:iterator var="c" value="result.data.catList">
+						<c:forEach var="c" items="${catList}">
 						<option value="${c.m.id}">${c.m.name}</option>
-						</s:iterator>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="form-group">

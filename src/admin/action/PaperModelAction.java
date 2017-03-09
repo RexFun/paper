@@ -2,102 +2,93 @@ package admin.action;
 
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.entity.PaperModel;
 import admin.service.PaperCategoryService;
 import admin.service.PaperModelService;
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
 import chok.util.CollectionUtil;
 
 
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/admin/papermodel")
-public class PaperModelAction extends BaseAction<PaperModel>
+@Controller
+@RequestMapping("/admin/papermodel")
+public class PaperModelAction extends BaseController<PaperModel>
 {
 	@Autowired
 	private PaperModelService service;
 	@Autowired
 	private PaperCategoryService catService;
-	//实体类
-	private PaperModel po;
-	public PaperModel getPo() {return po;}
-	public void setPo(PaperModel po) {this.po = po;}
 	
-	@Action(value = "add1", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/add.jsp")})
+	@RequestMapping("/add1")
 	public String add1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		getResult().put("catList", catService.get(null));
-		return "success";
+		put("catList", catService.get(null));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/papermodel/add.jsp";
 	}
-	@Action(value = "add2")
-	public void add2() 
+	@RequestMapping("/add2")
+	public void add2(PaperModel po) 
 	{
 		service.add(po);
 		print("1");
 	}
 	
-	@Action(value="del")
+	@RequestMapping("/del")
 	public void del()
 	{
 		try{
-			service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
-			getResult().setSuccess(true);
+			service.delBatch(CollectionUtil.toLongArray(req.getLongArray("id[]", 0l)));
+			result.setSuccess(true);
 		}catch(Exception e){
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 	
-	@Action(value="upd1",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/upd.jsp")})
+	@RequestMapping("/upd1")
 	public String upd1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		getResult().put("catList", catService.get(null));
-		return "success";
+		put("po", service.getById(req.getLong("id")));
+		put("catList", catService.get(null));
+		put("queryParams", req.getParameterValueMap(false, true));
+		return "/admin/papermodel/upd.jsp";
 	}
-	@Action(value="upd2")
-	public void upd2() 
+	@RequestMapping("/upd2")
+	public void upd2(PaperModel po) 
 	{
 		service.upd(po);
 		print("1");
 	}
 
-	@Action(value="getById",results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/getById.jsp")})
+	@RequestMapping("/getById")
 	public String getById() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		getResult().put("catList", catService.get(null));
-		return "success";
+		put("po", service.getById(req.getLong("id")));
+		put("catList", catService.get(null));
+		put("queryParams", req.getParameterValueMap(false, true));
+		return "/admin/papermodel/getById.jsp";
 	}
 
-	@Action(value="get", results={@Result(name = "success", location = "/WEB-INF/view/admin/papermodel/get.jsp")})
+	@RequestMapping("/get")
 	public String get() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		getResult().put("catList", catService.get(null));
-		return "success";
+		put("catList", catService.get(null));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/papermodel/get.jsp";
 	}
 	
-	@Action(value="getJson")
+	@RequestMapping("/getJson")
 	public void getJson()
 	{
-		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		getResult().put("total",service.getCount(m));
-		getResult().put("rows",service.get(m));
-		printJson(getResult().getData());
+		Map<String, Object> m = req.getParameterValueMap(false, true);
+		result.put("total",service.getCount(m));
+		result.put("rows",service.get(m));
+		printJson(result.getData());
 	}
 }

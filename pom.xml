@@ -22,7 +22,9 @@
 		<dependency><groupId>ognl</groupId><artifactId>ognl</artifactId><version>3.1.10</version></dependency>
 		<dependency><groupId>com.alibaba</groupId><artifactId>fastjson</artifactId><version>1.2.4</version></dependency>
 		<dependency><groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>1.2</version></dependency>
-		<dependency><groupId>commons-net</groupId><artifactId>commons-net</artifactId><version>3.4</version></dependency> 
+		<dependency><groupId>commons-net</groupId><artifactId>commons-net</artifactId><version>3.4</version></dependency>
+		<dependency><groupId>commons-io</groupId><artifactId>commons-io</artifactId><version>2.5</version></dependency>
+		<dependency><groupId>commons-fileupload</groupId><artifactId>commons-fileupload</artifactId><version>1.3.2</version></dependency>
 		<dependency><groupId>xml-apis</groupId><artifactId>xml-apis</artifactId><version>1.4.01</version></dependency>
 		<dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><version>4.0.0-b01</version></dependency>
 		<dependency><groupId>jstl</groupId><artifactId>jstl</artifactId><version>1.2</version></dependency>
@@ -37,12 +39,13 @@
 		<!-- log4j -->
 		<dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api </artifactId><version>${log4j.version}</version></dependency>
 		<dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core</artifactId><version>${log4j.version}</version></dependency>
-		<!-- strut2 -->
-		<dependency><groupId>org.apache.struts</groupId><artifactId>struts2-core</artifactId><version>${struts2.version}</version></dependency>
-		<dependency><groupId>org.apache.struts</groupId><artifactId>struts2-convention-plugin</artifactId><version>${struts2.version}</version></dependency>
-		<dependency><groupId>org.apache.struts</groupId><artifactId>struts2-config-browser-plugin</artifactId><version>${struts2.version}</version></dependency>
-		<dependency><groupId>org.apache.struts</groupId><artifactId>struts2-json-plugin</artifactId><version>${struts2.version}</version></dependency>
-		<dependency><groupId>org.apache.struts</groupId><artifactId>struts2-spring-plugin</artifactId><version>${struts2.version}</version></dependency>
+		<!-- spring mvc -->
+		<dependency><groupId>org.springframework</groupId><artifactId>spring-web			</artifactId><version>${spring.version}</version></dependency>
+		<dependency><groupId>org.springframework</groupId><artifactId>spring-core			</artifactId><version>${spring.version}</version></dependency>    
+        <dependency><groupId>org.springframework</groupId><artifactId>spring-tx				</artifactId><version>${spring.version}</version></dependency>    
+        <dependency><groupId>org.springframework</groupId><artifactId>spring-jdbc			</artifactId><version>${spring.version}</version></dependency>    
+        <dependency><groupId>org.springframework</groupId><artifactId>spring-aop			</artifactId><version>${spring.version}</version></dependency>    
+        <dependency><groupId>org.springframework</groupId><artifactId>spring-context-support</artifactId><version>${spring.version}</version></dependency>    
 		<!-- spring -->
 		<dependency><groupId>org.springframework</groupId><artifactId>spring-webmvc</artifactId><version>${spring.version}</version></dependency>
 		<dependency><groupId>org.springframework</groupId><artifactId>spring-orm   </artifactId><version>${spring.version}</version></dependency>

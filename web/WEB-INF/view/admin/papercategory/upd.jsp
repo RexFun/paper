@@ -20,9 +20,9 @@
 			</div>
 			<div class="box-body">
 				<form class="dataForm" id="dataForm" role="form" action="upd2.action" method="post">
-					<div class="form-group"><label class="control-label" for="name">类别名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" value="${po.m.name}" validate validate-rule-required/></div>
-					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" value="${po.m.sort}" validate validate-rule-inputType="integer"/></div>
-					<input type="hidden" name="po.m.id" value="${po.m.id}">
+					<div class="form-group"><label class="control-label" for="name">类别名：</label><input type="text" class="form-control input-sm" id="name" name="m['name']" value="${po.m.name}" validate validate-rule-required/></div>
+					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="m['sort']" value="${po.m.sort}" validate validate-rule-inputType="integer"/></div>
+					<input type="hidden" name="m['id']" value="${po.m.id}">
 				</form>
 			</div>
 			<div class="box-footer">

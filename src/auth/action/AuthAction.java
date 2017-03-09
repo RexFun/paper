@@ -3,13 +3,10 @@ package auth.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 
@@ -17,15 +14,13 @@ import admin.entity.SysUser;
 import admin.service.SysMenuService;
 import admin.service.SysUserService;
 import auth.Auth;
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
 import chok.util.EncryptionUtil;
 
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/auth")
-public class AuthAction extends BaseAction<Auth> 
+@Controller
+@RequestMapping("/auth")
+public class AuthAction extends BaseController<Auth> 
 {
 	@Autowired
 	private SysUserService service;
@@ -44,25 +39,25 @@ public class AuthAction extends BaseAction<Auth>
 		this.auth = auth;
 	}
 	
-	@Action(value = "login")
+	@RequestMapping("/login")
 	public void login()
 	{
 		try 
 		{
 			Map m = new HashMap();
-			m.put("login_account", auth.getAccount());
+			m.put("login_account", req.getString("auth.account"));
 			if(service.getCount(m)<1)
 			{
-				getResult().setSuccess(false);
-				getResult().setMsg("账号不存在");
+				result.setSuccess(false);
+				result.setMsg("账号不存在");
 			}
 			else
 			{
 				SysUser u = (SysUser)service.get(m).get(0);
-				if(!EncryptionUtil.getMD5(auth.getPassword()).equals(u.getString("tc_password")))
+				if(!EncryptionUtil.getMD5(req.getString("auth.password")).equals(u.getString("tc_password")))
 				{
-					getResult().setSuccess(false);
-					getResult().setMsg("密码不正确");
+					result.setSuccess(false);
+					result.setMsg("密码不正确");
 				}
 				else
 				{
@@ -73,41 +68,41 @@ public class AuthAction extends BaseAction<Auth>
 					// 初始化按钮权限
 					u.set("btnPermitJson","null");
 					// session保存登录用户对象
-					getSession().setAttribute(SessionName_CurLoginUser, u);
+					session.setAttribute(SessionName_CurLoginUser, u);
 					// 返回结果
-					getResult().setSuccess(true);
+					result.setSuccess(true);
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 			e.printStackTrace();
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 	
-	@Action(value="logout", results={@Result(name = "success", location = "/login.jsp")})
+	@RequestMapping("/logout")
 	public String logout()
 	{
-		getSession().removeAttribute(SessionName_CurLoginUser);
-		return SUCCESS;
+		session.removeAttribute(SessionName_CurLoginUser);
+		return "redirect:/login.jsp";
 	}
 	
-	@Action(value="getNavMenu")
+	@RequestMapping("/getNavMenu")
 	public void getNavMenu()
 	{
 		Map m = new HashMap();
-		m.put("tc_name", getReq().getString("menuName"));
-		m.put("tc_sys_user_id", ((SysUser)getSession().getAttribute(SessionName_CurLoginUser)).getLong("id"));
+		m.put("tc_name", req.getString("menuName"));
+		m.put("tc_sys_user_id", ((SysUser)session.getAttribute(SessionName_CurLoginUser)).getLong("id"));
 		String menuPermitJson = new Gson().toJson(menuService.getByUserId(m));
 		// 更新用户session
-		SysUser u = ((SysUser)getSession().getAttribute(SessionName_CurLoginUser));
+		SysUser u = ((SysUser)session.getAttribute(SessionName_CurLoginUser));
 		u.set("menuPermitJson", menuPermitJson);
 		// 返回
-		getResult().put("menuPermitJson", menuPermitJson);
-		getResult().setSuccess(true);
-		printJson(getResult());
+		result.put("menuPermitJson", menuPermitJson);
+		result.setSuccess(true);
+		printJson(result);
 	}
 }

@@ -5,150 +5,138 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.entity.SysRole;
 import admin.entity.SysUser;
 import admin.service.SysRoleService;
 import admin.service.SysUserService;
-import chok.devwork.BaseAction;
-import chok.devwork.PageNav;
+import chok.devwork.BaseController;
 import chok.util.CollectionUtil;
 import chok.util.EncryptionUtil;
 
-
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/admin/sysuser")
-public class SysUserAction extends BaseAction<SysUser>
+@Controller
+@RequestMapping("/admin/sysuser")
+public class SysUserAction extends BaseController<SysUser>
 {
 	@Autowired
 	private SysUserService service;
 	@Autowired
 	private SysRoleService roleService;
 	
-	//实体类
-	private SysUser po;
-	public SysUser getPo() {return po;}
-	public void setPo(SysUser po) {this.po = po;}
-	
-	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/add.jsp")})
+	@RequestMapping("/add1")
 	public String add1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/add.jsp";
 	}
-	@Action(value="add2")
-	public void add2() 
+	@RequestMapping("/add2")
+	public void add2(SysUser po) 
 	{
 		service.add(po);
 		print("1");
 	}
 	
-	@Action(value="del")
+	@RequestMapping("/del")
 	public void del() 
 	{
 		try
 		{
-			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
-			getResult().setSuccess(true);
+			service.del(CollectionUtil.toLongArray(req.getLongArray("id[]", 0l)));
+			result.setSuccess(true);
 		}
 		catch(Exception e)
 		{
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/upd.jsp")})
+	@RequestMapping("/upd1")
 	public String upd1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/upd.jsp";
 	}
-	@Action(value="upd2")
-	public void upd2() 
+	@RequestMapping("/upd2")
+	public void upd2(SysUser po) 
 	{
 		service.upd(po);
 		print("1");
 	}
 	
-	@Action(value="updPwd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/updPwd.jsp")})
+	@RequestMapping("/updPwd1")
 	public String updPwd1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/updPwd.jsp";
 	}
-	@Action(value="updPwd2")
+	@RequestMapping("/updPwd2")
 	public void updPwd2() 
 	{
 		try 
 		{
-			po = service.getById(getReq().getLong("id"));
-			if(!EncryptionUtil.getMD5(getReq().getString("old_password")).equals(po.getString("tc_password")))
+			SysUser po = service.getById(req.getLong("id"));
+			if(!EncryptionUtil.getMD5(req.getString("old_password")).equals(po.getString("tc_password")))
 			{
-				getResult().setSuccess(false);
-				getResult().setMsg("原密码不正确");
+				result.setSuccess(false);
+				result.setMsg("原密码不正确");
 			}
 			else
 			{
-				po.set("tc_password", EncryptionUtil.getMD5(getReq().getString("new_password")));
+				po.set("tc_password", EncryptionUtil.getMD5(req.getString("new_password")));
 				service.updPwd(po);
-				getResult().setSuccess(true);
+				result.setSuccess(true);
 			}
 		}
 		catch (Exception e)
 		{
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getById.jsp")})
+	@RequestMapping("/getById")
 	public String getById() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/getById.jsp";
 	}
 	
-	@Action(value="getMyInfo",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/getMyInfo.jsp")})
+	@RequestMapping("/getMyInfo")
 	public String getMyInfo() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/getMyInfo.jsp";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysuser/get.jsp")})
+	@RequestMapping("/get")
 	public String get() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysuser/get.jsp";
 	}
 	
-	@Action(value="getJson")
+	@RequestMapping("/getJson")
 	public void getJson()
 	{
-		Map m = getReq().getParameterValueMap(false, true);
-		getResult().put("total",service.getCount(m));
-		getResult().put("rows",service.get(m));
-		printJson(getResult().getData());
+		Map m = req.getParameterValueMap(false, true);
+		result.put("total",service.getCount(m));
+		result.put("rows",service.get(m));
+		printJson(result.getData());
 	}
 	
-	@Action(value="getRoleTreeNodes")
+	@RequestMapping("/getRoleTreeNodes")
 	public void getRoleTreeNodes()
 	{
 		List<SysRole> resultData = roleService.get(null);
@@ -160,11 +148,11 @@ public class SysUserAction extends BaseAction<SysUser>
 		printJson(treeNodes);
 	}
 	
-	@Action(value="getRoleTreeNodesByUser")
+	@RequestMapping("/getRoleTreeNodesByUser")
 	public void getRoleTreeNodesByUser()
 	{
 		Map m = new HashMap();
-		m.put("tc_sys_user_id", getReq().getLong("id"));
+		m.put("tc_sys_user_id", req.getLong("id"));
 		List<SysRole> userRoleData = roleService.getByUserId(m);
 		List<SysRole> roleData = roleService.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();

@@ -3,35 +3,31 @@ package client.action;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
 import client.entity.PaperCategory;
 import client.service.PaperNavService;
 
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/client/nav")
-public class NavAction extends BaseAction<PaperCategory>
+@Controller
+@RequestMapping("/client/nav")
+public class NavAction extends BaseController<PaperCategory>
 {
 	@Autowired
 	private PaperNavService paperNavService;
 
-	@Action(value="getNavDataJson")
+	@RequestMapping("/getNavDataJson")
 	public void getNavDataJson()
 	{
-		getBaseResp().setContentType("application/json");
-		Map m = getReq().getParameterValueMap(false, true);
+		response.setContentType("application/json");
+		Map<String, Object> m = req.getParameterValueMap(false, true);
 		String result = paperNavService.getNavDataJson(m);
 		print(result);
 	}

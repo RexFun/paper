@@ -22,16 +22,16 @@
 				<form class="dataForm" id="dataForm" role="form">
 					<div class="form-group">
 						<label for="pid">所属类别：</label>
-					 	<select class="form-control input-sm" id="pid" name="po.m.pid" disabled="disabled">
+					 	<select class="form-control input-sm" id="pid" name="m['pid']" disabled="disabled">
 							<option value="">请选择</option>
-							<s:iterator var="c" value="result.data.catList">
+							<c:forEach var="c" items="${catList}">
 							<option value="${c.m.id}">${c.m.name}</option>
-							</s:iterator>
+							</c:forEach>
 						</select>
 					</div>
-					<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" value="${po.m.name}" readonly="readonly"/></div>
-					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" value="${po.m.sort}" readonly="readonly"/></div>
-					<input type="hidden" name="po.m.id" value="${po.m.id}" readonly="readonly">
+					<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="m['name']" value="${po.m.name}" readonly="readonly"/></div>
+					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="m['sort']" value="${po.m.sort}" readonly="readonly"/></div>
+					<input type="hidden" name="m['id']" value="${po.m.id}" readonly="readonly">
 				</form>
 			</div>
 			<div class="box-footer">

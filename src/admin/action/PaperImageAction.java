@@ -6,42 +6,30 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.convention.annotation.InterceptorRefs;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.entity.PaperImage;
 import admin.service.PaperImageService;
 import admin.service.PaperModelService;
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
+import chok.devwork.Page;
 import chok.devwork.PageNav;
 import chok.util.CollectionUtil;
 import chok.util.PropertiesUtil;
 import chok.util.UniqueId;
 
-
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/admin/paperimage")
-@InterceptorRefs(value = { @InterceptorRef("fileUploadStack") })
-public class PaperImageAction extends BaseAction<PaperImage>
+@Controller
+@RequestMapping("/admin/paperimage")
+public class PaperImageAction extends BaseController<PaperImage>
 {
 	@Autowired
 	private PaperImageService service;
 	@Autowired
 	private PaperModelService modelService;
-	//Model
-	private PaperImage po;
-	public PaperImage getPaperImage() { return po; }
-	public void setPaperImage(PaperImage po) { this.po = po; }
 	
 	//上传文件file属性（多个）
 	private List<File> myFile;
@@ -56,15 +44,15 @@ public class PaperImageAction extends BaseAction<PaperImage>
     public List<String> getMyFileContentType() { return myFileContentType; }
 	public void setMyFileContentType(List<String> myFileContentType) { this.myFileContentType = myFileContentType; }
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/add.jsp")})
+	@RequestMapping("/add1")
 	public String add1() 
 	{
-		put("pid",getReq().getLong("pid"));
-		put("ppid",getReq().getLong("ppid"));
-		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));
-		return "success";
+		put("pid",req.getLong("pid"));
+		put("ppid",req.getLong("ppid"));
+		put("modelName", modelService.getById(req.getLong("pid")).get("name"));
+		return "/admin/paperimage/add.jsp";
 	}
-	@Action(value="add2")
+	@RequestMapping("/add2")
 	public void add2() throws Exception
 	{
 		List<PaperImage> poList = new ArrayList<PaperImage>();
@@ -73,8 +61,8 @@ public class PaperImageAction extends BaseAction<PaperImage>
 			//保存到硬盘
 			FileUtils.copyFile(myFile.get(i), new File(PropertiesUtil.getImageUploadPath(), __imgName));
 			//保存到db
-			po = new PaperImage();
-			po.set("pid", getReq().getLong("pid"));
+			PaperImage po = new PaperImage();
+			po.set("pid", req.getLong("pid"));
 			po.set("url", __imgName);
 			poList.add(po);
 		}
@@ -82,53 +70,55 @@ public class PaperImageAction extends BaseAction<PaperImage>
 		print("1");
 	}
 	
-	@Action(value="updSortById")
+	@RequestMapping("/updSortById")
 	public void updSortById() 
 	{
-		long id = getReq().getLong("id");
-		int sort = getReq().getInt("sort", 0);
-		po = new PaperImage();
+		long id = req.getLong("id");
+		int sort = req.getInt("sort", 0);
+		PaperImage po = new PaperImage();
 		po.set("id",id);
 		po.set("sort",sort);
 		service.updSortById(po);
 		print("1");
 	}
 	
-	@Action(value="updSortBatch")
+	@RequestMapping("/updSortBatch")
 	public void updSortBatch() 
 	{
-		service.updSortBatch(CollectionUtil.toLongArray(getReq().getLongArray("id", 0l)), 
-							 CollectionUtil.toIntegerArray(getReq().getIntArray("sort", 0)));
+		service.updSortBatch(CollectionUtil.toLongArray(req.getLongArray("id", 0l)), 
+							 CollectionUtil.toIntegerArray(req.getIntArray("sort", 0)));
 		print("1");
 	}
 	
-	@Action(value="del")
+	@RequestMapping("/del")
 	public void del() 
 	{
-		service.delBatch(CollectionUtil.toLongArray(getReq().getLongArray("keyIndex", 0l)));
+		service.delBatch(CollectionUtil.toLongArray(req.getLongArray("keyIndex", 0l)));
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/getById.jsp")})
+	@RequestMapping("/getById")
 	public String getById() 
 	{
-		po = service.getById(getReq().getLong("id"));
-		put("po",po);
+		PaperImage po = service.getById(req.getLong("id"));
+		put("po", po);
 		put("modelName", modelService.getById(po.getLong("pid")).get("name"));
-		return "success";
+		return "/admin/paperimage/getById.jsp";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/paperimage/get.jsp")})
+	@RequestMapping("/get")
 	public String get() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		Map<String, Object> m = getReq().getParameterValueMap(false, true);
-		page = service.getPage(5, m);
-		pageNav = new PageNav<PaperImage>(getReq(), page, "5,10,20");
-		put("pid", getReq().getLong("pid"));
-		put("ppid", getReq().getLong("ppid"));
-		put("modelName", modelService.getById(getReq().getLong("pid")).get("name"));
-		getResult().put("resultList", pageNav.getResult());
-		return "success";
+		Map<String, Object> m = req.getParameterValueMap(false, true);
+		Page<PaperImage>page = service.getPage(5, m);
+		PageNav<PaperImage> pageNav = new PageNav<PaperImage>(req, page, "5,10,20");
+		put("pid", req.getLong("pid"));
+		put("ppid", req.getLong("ppid"));
+		put("modelName", modelService.getById(req.getLong("pid")).get("name"));
+		put("queryParams", req.getParameterValueMap(false, true));
+		put("page", page);
+		put("pageNav", pageNav);
+		put("resultList", pageNav.getResult());
+		return "/admin/paperimage/get.jsp";
 	}
 }

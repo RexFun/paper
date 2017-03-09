@@ -5,107 +5,97 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.entity.SysPermit;
 import admin.entity.SysRole;
 import admin.service.SysPermitService;
 import admin.service.SysRoleService;
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
 import chok.util.CollectionUtil;
 
 
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/admin/sysrole")
-public class SysRoleAction extends BaseAction<SysRole>
+@Controller
+@RequestMapping("/admin/sysrole")
+public class SysRoleAction extends BaseController<SysRole>
 {
 	@Autowired
 	private SysRoleService service;
 	@Autowired
 	private SysPermitService permitService;
 	
-	//实体类
-	private SysRole po;
-	public SysRole getPo() {return po;}
-	public void setPo(SysRole po) {this.po = po;}
-	
-	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/add.jsp")})
+	@RequestMapping("/add1")
 	public String add1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysrole/add.jsp";
 	}
-	@Action(value="add2")
-	public void add2() 
+	@RequestMapping("/add2")
+	public void add2(SysRole po) 
 	{
 		service.add(po);
 		print("1");
 	}
 	
-	@Action(value="del")
+	@RequestMapping("/del")
 	public void del() 
 	{
 		try
 		{
-			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
-			getResult().setSuccess(true);
+			service.del(CollectionUtil.toLongArray(req.getLongArray("id[]", 0l)));
+			result.setSuccess(true);
 		}
 		catch(Exception e)
 		{
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/upd.jsp")})
+	@RequestMapping("/upd1")
 	public String upd1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysrole/upd.jsp";
 	}
-	@Action(value="upd2")
-	public void upd2() 
+	@RequestMapping("/upd2")
+	public void upd2(SysRole po) 
 	{
 		service.upd(po);
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/getById.jsp")})
+	@RequestMapping("/getById")
 	public String getById() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po",service.getById(req.getLong("id")));
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysrole/getById.jsp";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysrole/get.jsp")})
+	@RequestMapping("/get")
 	public String get() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysrole/get.jsp";
 	}
 	
-	@Action(value="getJson")
+	@RequestMapping("getJson")
 	public void getJson()
 	{
-		Map m = getReq().getParameterValueMap(false, true);
-		getResult().put("total",service.getCount(m));
-		getResult().put("rows",service.get(m));
-		printJson(getResult().getData());
+		Map m = req.getParameterValueMap(false, true);
+		result.put("total",service.getCount(m));
+		result.put("rows",service.get(m));
+		printJson(result.getData());
 	}
 	
-	@Action(value="getPermitTreeNodes")
+	@RequestMapping("/getPermitTreeNodes")
 	public void getPermitTreeNodes()
 	{
 		List<SysPermit> resultData = permitService.get(null);
@@ -117,11 +107,11 @@ public class SysRoleAction extends BaseAction<SysRole>
 		printJson(treeNodes);
 	}
 	
-	@Action(value="getPermitTreeNodesByRole")
+	@RequestMapping("/getPermitTreeNodesByRole")
 	public void getPermitTreeNodesByRole()
 	{
-		Map m = new HashMap();
-		m.put("tc_sys_role_id", getReq().getLong("id"));
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("tc_sys_role_id", req.getLong("id"));
 		List<SysPermit> rolePermitData = permitService.getByRoleId(m);
 		List<SysPermit> permitData = permitService.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();

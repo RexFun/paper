@@ -22,15 +22,15 @@
 				<form class="dataForm" id="dataForm" action="add2.action" method="post">
 					<div class="form-group">
 						<label for="pid">所属分类：</label>
-					 	<select class="form-control input-sm" id="pid" name="po.m.pid" validate validate-rule-required>
+					 	<select class="form-control input-sm" id="pid" name="m['pid']" validate validate-rule-required>
 							<option value="">请选择</option>
-							<s:iterator var="c" value="result.data.catList">
+							<c:forEach var="c" items="${catList}">
 							<option value="${c.m.id}">${c.m.name}</option>
-							</s:iterator>
+							</c:forEach>
 						</select>
 					</div>
-					<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="po.m.name" validate validate-rule-required/></div>
-					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="po.m.sort" validate validate-rule-inputType="integer"/></div>
+					<div class="form-group"><label class="control-label" for="name">模型名：</label><input type="text" class="form-control input-sm" id="name" name="m['name']" validate validate-rule-required/></div>
+					<div class="form-group"><label class="control-label" for="sort">排序号：</label><input type="text" class="form-control input-sm" id="sort" name="m['sort']" validate validate-rule-inputType="integer"/></div>
 				</form>
 			</div>
 			<div class="box-footer">

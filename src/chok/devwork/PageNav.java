@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PageNav<T>
 {
-	private Page page;
+	private Page<T> page;
 	private String pageSizeListStr;
 	private boolean isOutForm = false;
 	private static String LABEL_PAGE_LAST = "<";
 	private static String LABEL_PAGE_NEXT = ">";
-	private static String PAGEFORMID = "rexPageForm";
+	private static String PAGEFORMID = "chokPageForm";
 	private String formId = PAGEFORMID;
 	private String formString = "";
 	
-	public PageNav(HttpServletRequest request, Page page)
+	public PageNav(HttpServletRequest request, Page<T> page)
 	{
 		this(request, page, "10,20,50,100");
 	}
-	public PageNav(HttpServletRequest request, Page page, String pageSizeListStr)
+	public PageNav(HttpServletRequest request, Page<T> page, String pageSizeListStr)
 	{
 		super();
 		this.page = page;
@@ -30,8 +30,8 @@ public class PageNav<T>
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append("<script type=\"text/javascript\">"
-					+ "if(typeof($jsrex)!=\"object\"){$jsrex={};}"
-					+ "$jsrex.page={"
+					+ "if(typeof($jschok)!=\"object\"){$jschok={};}"
+					+ "$jschok.page={"
 					+ "		go:function(formID,page){"
 					+ "			page=parseInt(page)||1;page=(page<1)?1:page;"
 					+ "			$(\"#\"+formID+\"_page\").val(page);"
@@ -194,7 +194,7 @@ public class PageNav<T>
 		{
 			if(curPage>1)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			}
 			for(int i=1;i<=countPage;i++){
 				if(curPage==i)
@@ -202,11 +202,11 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			if(curPage<countPage)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			}
 		}
 		/*样式②*/
@@ -219,12 +219,12 @@ public class PageNav<T>
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
 				{
-					strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+					strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 				}
 			}
 			else if(curPage>1 && curPage<countPageEach)
 			{//上一页 1 2 3 【4】 5  ... 16 下一页
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 				startPage=1;
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
@@ -234,12 +234,12 @@ public class PageNav<T>
 						strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 						continue;
 					}
-					strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+					strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 				}
 			}
 			strHtml.append("<li>...</li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式③ 上一页 1 ... 3 4 【5】 6 7  ... 16 下一页*/
 		else if(curPage>(countPageEach/2)+2 && curPage <= (countPage - countPageEach+1))
@@ -251,8 +251,8 @@ public class PageNav<T>
 				endPage=countPage;
 			}
 
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
@@ -261,11 +261,11 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			strHtml.append("<li>...</li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			
 		}
 		/*样式④ 上一页 1 ... 12 13 14 【15】 16 下一页*/
@@ -273,8 +273,8 @@ public class PageNav<T>
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage;
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
@@ -283,21 +283,21 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式⑤ 上一页 1 ...12 13 14 15 【16】 */
 		else if(curPage==countPage)
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage-1;
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			strHtml.append("<li class=\"active\"><a href=\"#\">"+countPage+"</a></li>");
 		}
@@ -313,7 +313,7 @@ public class PageNav<T>
 		{
 			if(curPage>1)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 			}
 			for(int i=1;i<=countPage;i++)
 			{
@@ -322,11 +322,11 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			if(curPage<countPage)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			}
 		}
 		/*样式②*/
@@ -338,12 +338,12 @@ public class PageNav<T>
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
 				{
-					strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+					strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 				}
 			}
 			else if(curPage>1 && curPage<countPageEach)
 			{//上一页 1 2 3 【4】 5  ... 16 下一页
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
 				startPage=1;
 				endPage=countPageEach;
 				for(int i=startPage;i<=endPage;i++)
@@ -353,12 +353,12 @@ public class PageNav<T>
 						strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 						continue;
 					}
-					strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+					strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 				}
 			}
 			strHtml.append("<li>...</li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式③ 上一页 1 ... 3 4 【5】 6 7  ... 16 下一页*/
 		else if(curPage>(countPageEach/2)+1 && curPage <= (countPage - countPageEach+1))
@@ -366,8 +366,8 @@ public class PageNav<T>
 			startPage = (curPage - countPageEach / 2) + 1;
 			endPage = curPage + countPageEach / 2 ;
 
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
@@ -376,11 +376,11 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			strHtml.append("<li>...</li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+countPage+"');return false;\" href=\"#\">"+countPage+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 			
 		}
 		/*样式④ 上一页 1 ... 12 13 14 【15】 16 下一页*/
@@ -388,8 +388,8 @@ public class PageNav<T>
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage;
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
@@ -398,21 +398,21 @@ public class PageNav<T>
 					strHtml.append("<li class=\"active\"><a href=\"#\">"+i+"</a href=\"#\"></li>");
 					continue;
 				}
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage+1)+"');return false;\" href=\"#\">"+LABEL_PAGE_NEXT+"</a></li>");
 		}
 		/*样式⑤ 上一页 1 ...12 13 14 15 【16】 */
 		else if(curPage==countPage)
 		{
 			startPage=countPage-countPageEach+1;
 			endPage=countPage-1;
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
-			strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+(curPage-1)+"');return false;\" href=\"#\">"+LABEL_PAGE_LAST+"</a></li>");
+			strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+1+"');return false;\" href=\"#\">1</a></li>");
 			strHtml.append("<li>...</li>");
 			for(int i=startPage;i<=endPage;i++)
 			{
-				strHtml.append("<li><a onclick=\"$jsrex.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
+				strHtml.append("<li><a onclick=\"$jschok.page.go('" + formId+ "', '"+i+"');return false;\" href=\"#\">"+i+"</a></li>");
 			}
 			strHtml.append("<li class=\"active\"><a href=\"#\">"+countPage+"</a></li>");
 		}		

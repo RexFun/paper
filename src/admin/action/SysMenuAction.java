@@ -4,112 +4,103 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.entity.SysMenu;
 import admin.entity.SysPermit;
 import admin.service.SysMenuService;
 import admin.service.SysPermitService;
-import chok.devwork.BaseAction;
+import chok.devwork.BaseController;
 import chok.util.CollectionUtil;
 
 
-@SuppressWarnings("serial")
-@Controller
 @Scope("prototype")
-@ParentPackage(value="struts-default")
-@Namespace("/admin/sysmenu")
-public class SysMenuAction extends BaseAction<SysMenu>
+@Controller
+@RequestMapping("/admin/sysmenu")
+public class SysMenuAction extends BaseController<SysMenu>
 {
 	@Autowired
 	private SysMenuService service;
 	@Autowired
 	private SysPermitService permitService;
-	//实体类
-	private SysMenu po;
-	public SysMenu getPo() {return po;}
-	public void setPo(SysMenu po) {this.po = po;}
 	
-	@Action(value="add1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/add.jsp")})
+	@RequestMapping("/add1")
 	public String add1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams", req.getParameterValueMap(false, true));
+		return "/admin/sysmenu/add.jsp";
 	}
-	@Action(value="add2")
-	public void add2() 
+	@RequestMapping("/add2")
+	public void add2(SysMenu po) 
 	{
 		service.add(po);
 		print("1");
 	}
 	
-	@Action(value="del")
+	@RequestMapping("/del")
 	public void del() 
 	{
 		try
 		{
-			service.del(CollectionUtil.toLongArray(getReq().getLongArray("id[]", 0l)));
-			getResult().setSuccess(true);
+			service.del(CollectionUtil.toLongArray(req.getLongArray("id[]", 0l)));
+			result.setSuccess(true);
 		}
 		catch(Exception e)
 		{
-			getResult().setSuccess(false);
-			getResult().setMsg(e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		printJson(getResult());
+		printJson(result);
 	}
 	
-	@Action(value="upd1",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/upd.jsp")})
+	@RequestMapping("/upd1")
 	public String upd1() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po", service.getById(req.getLong("id")));
+		put("queryParams", req.getParameterValueMap(false, true));
+		return "/admin/sysmenu/upd.jsp";
 	}
-	@Action(value="upd2")
-	public void upd2() 
+	@RequestMapping("/upd2")
+	public void upd2(SysMenu po) 
 	{
 		service.upd(po);
 		print("1");
 	}
 
-	@Action(value="getById",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/getById.jsp")})
+	@RequestMapping("/getById")
 	public String getById() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		po = service.getById(getReq().getLong("id"));
-		return "success";
+		put("po", service.getById(req.getLong("id")));
+		put("queryParams", req.getParameterValueMap(false, true));
+		return "/admin/sysmenu/getById.jsp";
 	}
 
-	@Action(value="get",results={ @Result(name = "success", location = "/WEB-INF/view/admin/sysmenu/get.jsp")})
+	@RequestMapping("/get")
 	public String get() 
 	{
-		setQueryParams(getReq().getParameterValueMap(false, true));
-		return "success";
+		put("queryParams",req.getParameterValueMap(false, true));
+		return "/admin/sysmenu/get.jsp";
 	}
 	
-	@Action(value="getJson")
+	@RequestMapping("/getJson")
 	public void getJson()
 	{
-		Map m = getReq().getParameterValueMap(false, true);
-		getResult().put("total",service.getCount(m));
-		getResult().put("rows",service.get(m));
-		printJson(getResult().getData());
+		Map<String, Object> m = req.getParameterValueMap(false, true);
+		result.put("total", service.getCount(m));
+		result.put("rows", service.get(m));
+		printJson(result.getData());
 	}
 	
-	@Action(value="getMenuTreeNodes")
+	@RequestMapping("/getMenuTreeNodes")
 	public void getMenuTreeNodes()
 	{
 		List<Object> treeNodes = new ArrayList<Object>();
-		if(getReq().getLong("id")!=0)
+		if(req.getLong("id")!=0)
 		{// 所有菜单，且标记已选菜单
-			SysMenu selectedMenuObj = service.getById(getReq().getLong("id"));
+			SysMenu selectedMenuObj = service.getById(req.getLong("id"));
 			List<SysMenu> menuData = service.get(null);
 			for(int i=0; i<menuData.size(); i++)
 			{
@@ -132,13 +123,13 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		printJson(treeNodes);
 	}
 	
-	@Action(value="getPermitTreeNodes")
+	@RequestMapping("/getPermitTreeNodes")
 	public void getPermitTreeNodes()
 	{
 		List<Object> treeNodes = new ArrayList<Object>();
-		if(getReq().getLong("id")!=0)
+		if(req.getLong("id")!=0)
 		{// 所有权限，且标记已选权限
-			SysPermit selectedPermitObj = permitService.getById(getReq().getLong("id"));
+			SysPermit selectedPermitObj = permitService.getById(req.getLong("id"));
 			List<SysPermit> permitData = permitService.get(null);
 			for(int i=0; i<permitData.size(); i++)
 			{
@@ -161,10 +152,10 @@ public class SysMenuAction extends BaseAction<SysMenu>
 		printJson(treeNodes);
 	}
 	
-	@Action(value="getPermitTreeNodesByMenu")
+	@RequestMapping("/getPermitTreeNodesByMenu")
 	public void getPermitTreeNodesByMenu()
 	{
-		po = service.getById(getReq().getLong("id"));
+		SysMenu po = service.getById(req.getLong("id"));
 		
 		List<SysPermit> permitData = permitService.get(null);
 		List<Object> treeNodes = new ArrayList<Object>();

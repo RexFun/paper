@@ -1,8 +1,6 @@
 package auth.filter;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,12 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
-
-import com.google.gson.Gson;
-
-import admin.entity.SysUser;
-import auth.action.AuthAction;
-import factory.SysFactory;
 
 public class AuthPermitMenuFilter implements Filter 
 {

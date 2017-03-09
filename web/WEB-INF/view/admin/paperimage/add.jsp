@@ -10,19 +10,19 @@
 			<li class="active">${modelName}</li>
 		</ol>
 	</section>
-	<section class="content	>
+	<section class="content">
 		<div class="box box-default">
-			<di	 class="box-header with-border">
-				<h3 class="box-title"><small><i class="glyphicon 	lyphicon-plus"></i></small></h3>
-				<	iv class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon gl	phicon-ar	ow-left"	</i></button>
+			<div class="box-header with-border">
+				<h3 class="box-title"><small><i class="glyphicon glyphicon-plus"></i></small></h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" id="back"><i class="glyphicon glyphicon-arrow-left"></i></button>
 				</div>
 			</div>
 			<div class="box-body">
 				<form class="dataForm">
-					<input id="myFile" name="myFile" type="fil		 multiple class="file-loading">
-					<div id="kv-error-2" style="mar		n-top:10px;display:none"></div>
-					<div id="kv-success-2" class="alert alert-success fade in" style="mar	in-top:10p	;display	none"></div>
+					<input id="myFile" name="myFile" type="file" multiple class="file-loading"/>
+					<div id="kv-error-2" style="margin-top:10px;display:none"></div>
+					<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10p;display:none"></div>
 				</form>
 			</div>
 			<div class="box-footer">&nbsp;</div>
@@ -72,8 +72,8 @@ $(function(){
 	    $('#kv-success-2 ul').append(out);
 	    $('#kv-success-2').show();
 	    alert("上传图片成功！");
-	    history.back();
-		//location.href = "get.action?pid=${pid}&ppid=${ppid}";
+	    //history.back();
+		location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	});
 });
 </script>

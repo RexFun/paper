@@ -1,1 +1,1 @@
-# 界面布局采用传统的tab+iframe设计
+# iframe式 + struts2 + spring + mybatis

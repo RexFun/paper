@@ -1,1 +1,1 @@
-# struts2 转 spring mvc
+# 响应式 + spring mvc + spring + mybatis

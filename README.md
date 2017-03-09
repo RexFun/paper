@@ -1,1 +1,1 @@
-# 界面布局采用响应式设计
+# 响应式 + struts2 + spring + mybatis

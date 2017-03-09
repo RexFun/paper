@@ -53,7 +53,7 @@
 /**********************************************************/
 $chok.form.callback = function(){
 	if($chok.result.type == 1){
-		location.href = "getMyInfo.action?id=${po.m.id}";
+		location.href = "getMyInfo.action?id=${po.m.id}&menuName=个人资料";
 	}
 };
 /**********************************************************/

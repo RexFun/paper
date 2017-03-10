@@ -37,8 +37,16 @@ public class SysUserAction extends BaseController<SysUser>
 	@RequestMapping("/add2")
 	public void add2(SysUser po) 
 	{
-		service.add(po);
-		print("1");
+		try
+		{
+			service.add(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/del")
@@ -67,8 +75,16 @@ public class SysUserAction extends BaseController<SysUser>
 	@RequestMapping("/upd2")
 	public void upd2(SysUser po) 
 	{
-		service.upd(po);
-		print("1");
+		try
+		{
+			service.upd(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/updPwd1")

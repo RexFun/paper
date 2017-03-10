@@ -29,8 +29,16 @@ public class PaperCategoryAction extends BaseController<PaperCategory>
 	@RequestMapping("/add2")
 	public void add2(PaperCategory po) 
 	{
-		service.add(po);
-		print("1");
+		try
+		{
+			service.add(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/del")
@@ -59,8 +67,16 @@ public class PaperCategoryAction extends BaseController<PaperCategory>
 	@RequestMapping("/upd2")
 	public void upd2(PaperCategory po) 
 	{
-		service.upd(po);
-		print("1");
+		try
+		{
+			service.upd(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 
 	@RequestMapping("/getById")

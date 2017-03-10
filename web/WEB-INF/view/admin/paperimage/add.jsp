@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="box-body">
-				<form class="dataForm">
+				<form class="dataForm" enctype="multipart/form-data">
 					<input id="myFile" name="myFile" type="file" multiple class="file-loading"/>
 					<div id="kv-error-2" style="margin-top:10px;display:none"></div>
 					<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10p;display:none"></div>
@@ -72,8 +72,8 @@ $(function(){
 	    $('#kv-success-2 ul').append(out);
 	    $('#kv-success-2').show();
 	    alert("上传图片成功！");
-	    history.back();
-		//location.href = "get.action?pid=${pid}&ppid=${ppid}";
+	    //history.back();
+		location.href = "get.action?pid=${pid}&ppid=${ppid}";
 	});
 });
 </script>

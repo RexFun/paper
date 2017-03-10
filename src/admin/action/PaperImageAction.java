@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import admin.entity.PaperImage;
 import admin.service.PaperImageService;
@@ -31,19 +34,6 @@ public class PaperImageAction extends BaseController<PaperImage>
 	@Autowired
 	private PaperModelService modelService;
 	
-	//上传文件file属性（多个）
-	private List<File> myFile;
-	public List<File> getMyFile() { return myFile; }
-	public void setMyFile(List<File> myFile) { this.myFile = myFile; }
-	//封装上传文件名的属性 （包含后缀名，如：hello.jpg）
-	private List<String> myFileFileName;
-	public List<String> getMyFileFileName() { return myFileFileName; }
-	public void setMyFileFileName(List<String> myFileFileName) { this.myFileFileName = myFileFileName; }
-    //封装上传文件类型的属性  （如：image/jpeg）
-    private List<String> myFileContentType;
-    public List<String> getMyFileContentType() { return myFileContentType; }
-	public void setMyFileContentType(List<String> myFileContentType) { this.myFileContentType = myFileContentType; }
-	
 	@RequestMapping("/add1")
 	public String add1() 
 	{
@@ -53,13 +43,15 @@ public class PaperImageAction extends BaseController<PaperImage>
 		return "/admin/paperimage/add.jsp";
 	}
 	@RequestMapping("/add2")
-	public void add2() throws Exception
+	public void add2(@RequestParam("myFile") CommonsMultipartFile files[]) throws Exception
 	{
 		List<PaperImage> poList = new ArrayList<PaperImage>();
-		for(int i=0; i<myFile.size(); i++){
+		for(int i=0; i<files.length; i++){
 			String __imgName = UniqueId.genGuid();
 			//保存到硬盘
-			FileUtils.copyFile(myFile.get(i), new File(PropertiesUtil.getImageUploadPath(), __imgName));
+			File srcFile = ((DiskFileItem)files[i].getFileItem()).getStoreLocation();
+			File destFile = new File(PropertiesUtil.getImageUploadPath(), __imgName);
+			FileUtils.copyFile(srcFile, destFile);
 			//保存到db
 			PaperImage po = new PaperImage();
 			po.set("pid", req.getLong("pid"));
@@ -73,28 +65,52 @@ public class PaperImageAction extends BaseController<PaperImage>
 	@RequestMapping("/updSortById")
 	public void updSortById() 
 	{
-		long id = req.getLong("id");
-		int sort = req.getInt("sort", 0);
-		PaperImage po = new PaperImage();
-		po.set("id",id);
-		po.set("sort",sort);
-		service.updSortById(po);
-		print("1");
+		try
+		{
+			long id = req.getLong("id");
+			int sort = req.getInt("sort", 0);
+			PaperImage po = new PaperImage();
+			po.set("id",id);
+			po.set("sort",sort);
+			service.updSortById(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/updSortBatch")
 	public void updSortBatch() 
 	{
-		service.updSortBatch(CollectionUtil.toLongArray(req.getLongArray("id", 0l)), 
-							 CollectionUtil.toIntegerArray(req.getIntArray("sort", 0)));
-		print("1");
+		try
+		{
+			service.updSortBatch(CollectionUtil.toLongArray(req.getLongArray("id", 0l)), 
+								 CollectionUtil.toIntegerArray(req.getIntArray("sort", 0)));
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/del")
 	public void del() 
 	{
-		service.delBatch(CollectionUtil.toLongArray(req.getLongArray("keyIndex", 0l)));
-		print("1");
+		try
+		{
+			service.delBatch(CollectionUtil.toLongArray(req.getLongArray("keyIndex", 0l)));
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 
 	@RequestMapping("/getById")

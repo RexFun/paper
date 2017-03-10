@@ -36,8 +36,16 @@ public class SysMenuAction extends BaseController<SysMenu>
 	@RequestMapping("/add2")
 	public void add2(SysMenu po) 
 	{
-		service.add(po);
-		print("1");
+		try
+		{
+			service.add(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 	
 	@RequestMapping("/del")
@@ -66,8 +74,16 @@ public class SysMenuAction extends BaseController<SysMenu>
 	@RequestMapping("/upd2")
 	public void upd2(SysMenu po) 
 	{
-		service.upd(po);
-		print("1");
+		try
+		{
+			service.upd(po);
+			print("1");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:" + e.getMessage());
+		}
 	}
 
 	@RequestMapping("/getById")

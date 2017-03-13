@@ -36,7 +36,7 @@
 	</section>
 </div>
 <%@ include file="/common/inc_footer.jsp"%>
-<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.getById.js"></script>
+<script type="text/javascript" src="/static/res/chok/js/chok.view.getById.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 全局函数 */

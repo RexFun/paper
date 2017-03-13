@@ -32,9 +32,9 @@
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<link rel="stylesheet" href="${ctx}/res/bs/fileinput/css/fileinput.min.css"/>
-<script type="text/javascript" src="${ctx}/res/bs/fileinput/js/fileinput.min.js"></script>
-<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.add.js"></script>
+<link rel="stylesheet" href="/static/res/bs/fileinput/css/fileinput.min.css"/>
+<script type="text/javascript" src="/static/res/bs/fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript" src="/static/res/chok/js/chok.view.add.js"></script>
 <script type="text/javascript">
 $(function(){
 	$chok.view.fn.selectSidebarMenu("${param.menuId}","${param.menuName}");

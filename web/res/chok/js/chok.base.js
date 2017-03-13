@@ -1,2 +1,0 @@
-$chok = {};
-$chok.base = {};

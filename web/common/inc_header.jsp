@@ -57,20 +57,20 @@ $(function(){
 				<ul class="nav navbar-nav">
 					<c:choose>
 						<c:when test="${sessionScope.CUR_LOGIN_USER==null}">
-							<li><a href="${ctx}/login.jsp"><i class="glyphicon glyphicon-log-in"></i>登录</a></li>
+							<li><a href="/static/login.jsp"><i class="glyphicon glyphicon-log-in"></i>登录</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="dropdown user user-menu notifications-menu">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<img src="${ctx}/res/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+									<img src="/static/res/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
 									<span class="hidden-xs"> <%=account%></span><span class=" fa fa-angle-down"></span>
 								</a>
 								<ul class="dropdown-menu" style="height: 125px;">
 									<li>
 										<ul id="user-dropdown-menu" class="menu">
-											<li menuId="myinfo"><a href="${ctx}/admin/sysuser/getMyInfo.action?id=<%=userId%>&menuName=个人资料"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
-											<li menuId="updpwd"><a href="${ctx}/admin/sysuser/updPwd1.action?id=<%=userId%>&menuName=修改密码"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
-											<li menuId="loginout"><a href="${ctx}/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
+											<li menuId="myinfo"><a href="/static/admin/sysuser/getMyInfo.action?id=<%=userId%>&menuName=个人资料"><i class="fa fa-user text-aqua"></i> <span>个人资料</span></a></li>
+											<li menuId="updpwd"><a href="/static/admin/sysuser/updPwd1.action?id=<%=userId%>&menuName=修改密码"><i class="glyphicon glyphicon-lock text-aqua"></i><span>修改密码</span></a></li>
+											<li menuId="loginout"><a href="/static/auth/logout.action"><i class="glyphicon glyphicon-log-out text-red"></i><span>登出</span></a></li>
 										</ul>
 									</li>
 								</ul>

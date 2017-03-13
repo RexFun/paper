@@ -42,7 +42,7 @@
 <%@ include file="/common/inc_footer.jsp"%>
 <!-- ======================================================================================================= -->
 <%@ include file="/common/inc_js_btn_permit.jsp"%>
-<script type="text/javascript" src="${ctx}/res/chok/js/chok.view.add.js"></script>
+<script type="text/javascript" src="/static/res/chok/js/chok.view.add.js"></script>
 <script type="text/javascript">
 /**********************************************************/
 /* 保存后回调函数 */

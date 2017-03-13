@@ -2,9 +2,9 @@
 <%@ include file="/common/inc_ctx.jsp"%>
 <%@ include file="/common/inc_css.jsp"%>
 <%@ include file="/common/inc_js.jsp"%>
-<link rel="stylesheet" type="text/css" href="${ctx}/res/gentelella/vendors/animate.css/animate.min.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/res/gentelella/vendors/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="${ctx}/res/gentelella/css/custom.min.css">
+<link rel="stylesheet" type="text/css" href="/static/res/gentelella/vendors/animate.css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/static/res/gentelella/vendors/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/static/res/gentelella/css/custom.min.css">
 <script type="text/javascript">
 /* 
 if (window != top) top.location.href = location.href;  

@@ -16,12 +16,12 @@
 </div>
 
 <!-- AdminLTE App -->
-<script src="${ctx}/res/AdminLTE/dist/js/app.min.js"></script>
+<script src="/static/res/AdminLTE/dist/js/app.min.js"></script>
 <!-- Slimscroll -->
-<script src="${ctx}/res/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="/static/res/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="${ctx}/res/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
+<script src="/static/res/AdminLTE/plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="${ctx}/res/AdminLTE/dist/js/demo.js"></script>
+<script src="/static/res/AdminLTE/dist/js/demo.js"></script>
 </body>
 </html>
